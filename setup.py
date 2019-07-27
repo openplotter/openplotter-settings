@@ -29,4 +29,7 @@ setup (
 	author_email='info@sailoog.com',
 	url='https://github.com/openplotter/openplotter-settings',
 	packages=['openplotterSettings'],
+	classifiers = ['Natural Language :: English',
+	'Operating System :: POSIX :: Linux',
+	'Programming Language :: Python :: 3'],
 	)
