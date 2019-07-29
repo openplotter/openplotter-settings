@@ -1,0 +1,168 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: openplotter-sdr-ais\n"
+"POT-Creation-Date: 2019-07-26 18:43+0200\n"
+"PO-Revision-Date: 2019-07-27 17:37+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"X-Poedit-Basepath: ../../..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: SDR_AIS_fine_cal.py:38
+msgid "Fine calibration"
+msgstr "Calibratge fi"
+
+#: SDR_AIS_fine_cal.py:45
+msgid "Error"
+msgstr ""
+
+#: SDR_AIS_fine_cal.py:51
+msgid "Initial PPM: "
+msgstr "PPM inicial"
+
+#: SDR_AIS_fine_cal.py:55
+msgid "Close"
+msgstr ""
+
+#: SDR_AIS_fine_cal.py:58
+msgid "Start"
+msgstr ""
+
+#: SDR_AIS_fine_cal.py:62
+msgid ""
+"Press Start and wait for the system to calculate the PPM value.\n"
+"Round the resulting PPM to the nearest integer and copy it into \"PPM\" "
+"field.\n"
+"Estimated time: 1 min."
+msgstr ""
+
+#: SDR_AIS_fine_cal.py:63
+msgid "channel: "
+msgstr ""
+
+#: SDR_AIS_fine_cal.py:65
+msgid ""
+"Press Start and wait for the system to check the band.\n"
+"Write down the strongest channel (power).\n"
+"If you do not find any channel try another band.\n"
+"Estimated time: 5 min."
+msgstr ""
+
+#: SDR_AIS_fine_cal.py:66
+msgid "band: "
+msgstr ""
+
+#: SDR_AIS_fine_cal.py:73
+msgid "Working..."
+msgstr ""
+
+#: SDR_AIS_fine_cal.py:77 SDR_AIS_fine_cal.py:80
+msgid "Error: "
+msgstr ""
+
+#: SDR_AIS_fine_cal.py:82
+msgid "Finished"
+msgstr ""
+
+#: openplotter-sdr-ais.py:32
+msgid "SDR receiver"
+msgstr "Receptor SDR"
+
+#: openplotter-sdr-ais.py:40
+msgid " Calibration "
+msgstr ""
+
+#: openplotter-sdr-ais.py:42
+msgid "Initial PPM"
+msgstr ""
+
+#: openplotter-sdr-ais.py:45
+msgid "Band"
+msgstr ""
+
+#: openplotter-sdr-ais.py:48
+msgid "Get channel"
+msgstr ""
+
+#: openplotter-sdr-ais.py:50
+msgid "Channel"
+msgstr ""
+
+#: openplotter-sdr-ais.py:52
+msgid "Get PPM"
+msgstr ""
+
+#: openplotter-sdr-ais.py:55
+msgid "PPM"
+msgstr ""
+
+#: openplotter-sdr-ais.py:58
+msgid "Save PPM"
+msgstr ""
+
+#: openplotter-sdr-ais.py:63
+msgid "Enable"
+msgstr ""
+
+#: openplotter-sdr-ais.py:66
+msgid "Check AIS frequency"
+msgstr ""
+
+#: openplotter-sdr-ais.py:69
+msgid " Radio "
+msgstr ""
+
+#: openplotter-sdr-ais.py:70
+msgid "Load defaults"
+msgstr ""
+
+#: openplotter-sdr-ais.py:73
+msgid "Channel 16"
+msgstr ""
+
+#: openplotter-sdr-ais.py:76
+msgid "Channel 9"
+msgstr ""
+
+#: openplotter-sdr-ais.py:80
+msgid "Frequency"
+msgstr ""
+
+#: openplotter-sdr-ais.py:188 openplotter-sdr-ais.py:279
+msgid "Failed. Wrong PPM"
+msgstr ""
+
+#: openplotter-sdr-ais.py:193
+msgid "SDR-AIS reception enabled"
+msgstr ""
+
+#: openplotter-sdr-ais.py:197
+msgid "SDR-AIS reception disabled"
+msgstr ""
+
+#: openplotter-sdr-ais.py:203
+msgid ""
+"Wait for \"cumulative PPM\" value to stabilize and copy it into \"PPM\" field"
+msgstr ""
+
+#: openplotter-sdr-ais.py:212
+msgid "Select the GSM band used in your country to get the strongest channel"
+msgstr ""
+
+#: openplotter-sdr-ais.py:220
+msgid "Failed. Wrong channel"
+msgstr ""
+
+#: openplotter-sdr-ais.py:225
+msgid "Use the strongest channel to calculate the final PPM"
+msgstr ""
+
+#: openplotter-sdr-ais.py:291
+msgid "Saved PPM"
+msgstr ""

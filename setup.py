@@ -14,16 +14,14 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Openplotter. If not, see <http://www.gnu.org/licenses/>.
-try:
-	from setuptools import setup
-except ImportError:
-	from distutils.core import setup
+
+from setuptools import setup
 from openplotterSettings import version
 
 setup (
 	name = 'openplotterSettings',
 	version = version.version,
-	description = 'Shared modules for openplotter tools',
+	description = 'Main openplotter app',
 	license = 'GPLv3',
 	author="Sailoog",
 	author_email='info@sailoog.com',
@@ -32,4 +30,6 @@ setup (
 	classifiers = ['Natural Language :: English',
 	'Operating System :: POSIX :: Linux',
 	'Programming Language :: Python :: 3'],
+	include_package_data=True,
+	entry_points={'console_scripts': ['openplotter-settings=openplotterSettings.openplotterSettings:main']},
 	)

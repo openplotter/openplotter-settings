@@ -16,11 +16,13 @@
 # along with Openplotter. If not, see <http://www.gnu.org/licenses/>.
 
 import gettext
+import os
 
 class Language:
 	def __init__(self, module, language):
 		self.available = [['Català','ca'],['Deutsch','de'],['ελληνικά','el'],['English','en'],['Español','es'],['Euskara','eu'],['Suomi','fi'],['Français','fr'],['Galego','gl'],['Italiano','it'],['Dutch','nl']]
-		locale_folder ='locale'
+		currentdir = os.path.dirname(__file__)
+		locale_folder =currentdir+'/locale'
 		gettext.install(module, locale_folder, False)
 		try: presLan = gettext.translation(module, locale_folder, languages=[language])
 		except: presLan = gettext.translation(module, locale_folder, languages=['en'])

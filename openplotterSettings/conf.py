@@ -34,8 +34,8 @@ class Conf:
 		self.conf_file = self.conf_folder+'/openplotter.conf'
 		if not os.path.exists(self.conf_file):
 			print('openplotter.conf not found, creating', self.conf_file)
-			fo = open(self.conf_file, "wb")
-			fo.write( '[GENERAL]\nlang = en\nversion = '+version.version+'\nstate = '+version.state+'\n')
+			fo = open(self.conf_file, "w")
+			fo.write( '[GENERAL]\nlang = en\nversion = '+version+'\ncodeName = '+codeName+'\nstate = '+state+'\n')
 			fo.close()
 		self.read()
 
