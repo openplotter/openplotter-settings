@@ -1,2 +1,2 @@
 # openplotter-settings
-Shared modules for openplotter tools
+Main OpenPlotter app
