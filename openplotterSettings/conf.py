@@ -48,14 +48,15 @@ class Conf:
 
 	def get(self, section, item):
 		self.read()
-		result = ''
-		if self.data_conf.has_section(section):
-			if self.data_conf.has_option(section,item):
-				result = self.data_conf.get(section, item)
-		if result == '':
+		write = False
+		if not self.data_conf.has_section(section):
+			self.data_conf.add_section(section)
+			write = True
+		if not self.data_conf.has_option(section,item):
 			self.data_conf.set(section, item, '')
-			self.write()
-		return result
+			write = True
+		if write: self.write()
+		return self.data_conf.get(section, item)
 
 	def set(self, section, item, value):
 		self.read()

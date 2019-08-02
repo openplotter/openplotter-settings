@@ -25,6 +25,7 @@ from .platform import Platform
 class MyFrame(wx.Frame):
 	def __init__(self):
 		self.conf = Conf()
+		self.home = self.conf.home
 		platform = Platform()
 		self.isRPI = platform.isRPI
 		self.currentdir = os.path.dirname(__file__)
@@ -40,14 +41,11 @@ class MyFrame(wx.Frame):
 		toolHelp = self.toolbar1.AddTool(101, _('Help'), wx.Bitmap(self.currentdir+"/data/help.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolHelp, toolHelp)
 		self.toolbar1.AddSeparator()
-		langList = []
-		for i in self.language.available:
-			langList.append(i[0])
-		self.languageList = wx.ComboBox(self.toolbar1, 102, _('Language'), choices=langList, size=(150,-1), style=wx.CB_DROPDOWN)
-		toolLanguage = self.toolbar1.AddControl(self.languageList)
-		self.Bind(wx.EVT_COMBOBOX, self.OnToolLanguage, toolLanguage)
-		toolTranslate = self.toolbar1.AddTool(103, _('Translate'), wx.Bitmap(self.currentdir+"/data/crowdin.png"))
-		self.Bind(wx.EVT_TOOL, self.OnToolTranslate, toolTranslate)
+		toolStartup = self.toolbar1.AddCheckTool(102, _('Autostart'), wx.Bitmap(self.currentdir+"/data/autostart.png"))
+		self.Bind(wx.EVT_TOOL, self.OnToolStartup, toolStartup)
+		if self.conf.get('GENERAL', 'autostart') == '1': self.toolbar1.ToggleTool(102,True)
+		toolCheck = self.toolbar1.AddTool(103, _('Check System'), wx.Bitmap(self.currentdir+"/data/check.png"))
+		self.Bind(wx.EVT_TOOL, self.OnToolCheck, toolCheck)
 		self.toolbar1.AddSeparator()
 		toolUpdate = self.toolbar1.AddTool(104, _('Update Packages Data'), wx.Bitmap(self.currentdir+"/data/package.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolUpdate, toolUpdate)
@@ -89,6 +87,7 @@ class MyFrame(wx.Frame):
 		self.pageApps()
 		self.onListAppsDeselected()
 		self.pageOutput()
+		self.pageGeneral()
 
 	def ShowStatusBar(self, w_msg, colour):
 		self.GetStatusBar().SetForegroundColour(colour)
@@ -133,6 +132,40 @@ class MyFrame(wx.Frame):
 			if name == i[0]: short = i[1]
 		self.conf.set('GENERAL', 'lang', short)
 		wx.MessageBox(_('Close and open again the window to see changes.'), _('Info'), wx.OK | wx.ICON_INFORMATION)
+
+	def pageGeneral(self):
+		self.toolbar3 = wx.ToolBar(self.genSettings, style=wx.TB_TEXT)
+		langList = []
+		for i in self.language.available:
+			langList.append(i[0])
+		self.languageList = wx.ComboBox(self.toolbar3, 301, _('Language'), choices=langList, size=(150,-1), style=wx.CB_DROPDOWN)
+		toolLanguage = self.toolbar3.AddControl(self.languageList)
+		self.Bind(wx.EVT_COMBOBOX, self.OnToolLanguage, toolLanguage)
+		toolTranslate = self.toolbar3.AddTool(302, _('Translate'), wx.Bitmap(self.currentdir+"/data/crowdin.png"))
+		self.Bind(wx.EVT_TOOL, self.OnToolTranslate, toolTranslate)
+		self.toolbar3.AddSeparator()
+
+		sizer = wx.BoxSizer(wx.VERTICAL)
+		sizer.Add(self.toolbar3, 0, wx.EXPAND, 0)
+		self.genSettings.SetSizer(sizer)
+
+	def OnToolStartup(self, e):
+		autostartFolder = self.home+'/.config/autostart'
+		if not os.path.exists(autostartFolder):
+			print('creating autostart directory', autostartFolder)
+			os.mkdir(autostartFolder)
+		self.autostartFile = self.home+'/.config/autostart/openplotter-startup.desktop'
+		if self.toolbar1.GetToolState(102):
+			os.system('cp -f '+self.currentdir+'/data/openplotter-startup.desktop '+autostartFolder)
+			self.conf.set('GENERAL', 'autostart', '1')
+			self.ShowStatusBarGREEN(_('Autostart enabled'))
+		else: 
+			os.system('rm -f '+self.autostartFile)
+			self.conf.set('GENERAL', 'autostart', '0')
+			self.ShowStatusBarRED(_('Autostart disabled. Most features will not work!'))
+
+	def OnToolCheck(self, e):
+		subprocess.call(['openplotter-startup', 'check'])
 
 	def pageApps(self):
 		self.listApps = wx.ListCtrl(self.apps, -1, style=wx.LC_REPORT | wx.LC_SINGLE_SEL | wx.LC_HRULES, size=(-1,200))
@@ -223,9 +256,7 @@ class MyFrame(wx.Frame):
 			self.logger.WriteText(line)
 			self.ShowStatusBarYELLOW(_('Reading changelog, please wait... ')+line)
 		self.notebook.ChangeSelection(1)
-		self.logger.ShowPosition(self.logger.GetLastPosition())
 		self.ShowStatusBarGREEN(_('Done'))
-
 
 	def OnOpenButton(self,e):
 		index = self.listApps.GetFirstSelected()
@@ -233,7 +264,6 @@ class MyFrame(wx.Frame):
 		apps = list(reversed(self.apps))
 		entryPoint = apps[index]['entryPoint']
 		popen = subprocess.Popen(entryPoint, shell=True)
-
 
 	def readApps(self):
 		self.listApps.DeleteAllItems()

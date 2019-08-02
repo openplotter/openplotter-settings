@@ -31,5 +31,5 @@ setup (
 	'Operating System :: POSIX :: Linux',
 	'Programming Language :: Python :: 3'],
 	include_package_data=True,
-	entry_points={'console_scripts': ['openplotter-settings=openplotterSettings.openplotterSettings:main']},
+	entry_points={'console_scripts': ['openplotter-settings=openplotterSettings.openplotterSettings:main','openplotter-startup=openplotterSettings.startup:main']},
 	)
