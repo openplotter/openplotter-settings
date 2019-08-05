@@ -32,7 +32,7 @@ class MyFrame(wx.Frame):
 		currentLanguage = self.conf.get('GENERAL', 'lang')
 		self.language = Language(self.currentdir,'openplotter-settings',currentLanguage)
 
-		wx.Frame.__init__(self, None, title='OpenPlotter Settings', size=(800,444))
+		wx.Frame.__init__(self, None, title=_('OpenPlotter Settings'), size=(800,444))
 		self.SetFont(wx.Font(10, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
 		icon = wx.Icon(self.currentdir+"/data/48x48.png", wx.BITMAP_TYPE_PNG)
 		self.SetIcon(icon)
@@ -296,7 +296,7 @@ class MyFrame(wx.Frame):
 		'platform': 'rpi',
 		'package': 'openplotter-network',
 		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'yes',
+		'dev': 'no',
 		'entryPoint': 'openplotter-network',
 		'postInstallation': '',
 		}

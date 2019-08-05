@@ -73,12 +73,14 @@ class MyFrame(wx.Frame):
 				self.logger.WriteText(self.logger_data)
 			if isinstance(self.logger_data, dict):
 				if self.logger_data['green']:
+					self.logger.WriteText(' | ')
 					self.logger.BeginTextColour((0, 255, 0))
-					self.logger.WriteText('   '+self.logger_data['green'])
+					self.logger.WriteText(self.logger_data['green'])
 					self.logger.EndTextColour()
 				if self.logger_data['black']:
+					self.logger.WriteText(' | ')
 					self.logger.BeginTextColour((55, 55, 55))
-					self.logger.WriteText('   '+self.logger_data['black'])
+					self.logger.WriteText(self.logger_data['black'])
 					self.logger.EndTextColour()
 				if self.logger_data['red']:
 					self.warnings_flag = True
@@ -123,6 +125,11 @@ class MyFrame(wx.Frame):
 		except:pass
 		if startup: self.processApp(startup)
 
+		startup = False
+		try:
+			from openplotterNetwork import startup
+		except:pass
+		if startup: self.processApp(startup)
 
 		self.autoclose=time.time() + 60
 
