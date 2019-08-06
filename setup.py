@@ -32,5 +32,5 @@ setup (
 	'Programming Language :: Python :: 3'],
 	include_package_data=True,
 	entry_points={'console_scripts': ['openplotter-settings=openplotterSettings.openplotterSettings:main','openplotter-startup=openplotterSettings.startup:main']},
-	data_files=[('share/applications', ['openplotterSettings/data/openplotter-settings.desktop']),('share/pixmaps', ['openplotterSettings/data/openplotter-48.png']),],
+	data_files=[('share/applications', ['openplotterSettings/data/openplotter-settings.desktop']),('share/pixmaps', ['openplotterSettings/data/openplotter-settings.png']),],
 	)

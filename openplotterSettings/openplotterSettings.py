@@ -26,20 +26,21 @@ class MyFrame(wx.Frame):
 	def __init__(self):
 		self.conf = Conf()
 		self.home = self.conf.home
-		platform = Platform()
-		self.isRPI = platform.isRPI
+		self.platform = Platform()
+		self.isRPI = self.platform.isRPI
 		self.currentdir = os.path.dirname(__file__)
 		currentLanguage = self.conf.get('GENERAL', 'lang')
 		self.language = Language(self.currentdir,'openplotter-settings',currentLanguage)
 
 		wx.Frame.__init__(self, None, title=_('OpenPlotter Settings'), size=(800,444))
 		self.SetFont(wx.Font(10, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
-		icon = wx.Icon(self.currentdir+"/data/openplotter-48.png", wx.BITMAP_TYPE_PNG)
+		icon = wx.Icon(self.currentdir+"/data/openplotter-settings.png", wx.BITMAP_TYPE_PNG)
 		self.SetIcon(icon)
 
 		self.toolbar1 = wx.ToolBar(self, style=wx.TB_TEXT)
 		toolHelp = self.toolbar1.AddTool(101, _('Help'), wx.Bitmap(self.currentdir+"/data/help.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolHelp, toolHelp)
+		if not self.platform.isInstalled('openplotter-doc'): self.toolbar1.EnableTool(101,False)
 		self.toolbar1.AddSeparator()
 		toolStartup = self.toolbar1.AddCheckTool(102, _('Autostart'), wx.Bitmap(self.currentdir+"/data/autostart.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolStartup, toolStartup)
@@ -317,7 +318,7 @@ class MyFrame(wx.Frame):
 		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
 		'dev': 'no',
 		'entryPoint': 'openplotter-network',
-		'postInstallation': '',
+		'postInstallation': 'sudo networkPostInstallation',
 		}
 		self.apps.append(app)
 
@@ -416,7 +417,7 @@ class MyFrame(wx.Frame):
 
 			self.listApps.SetItem(item, 1, installed)
 			self.listApps.SetItem(item, 2, candidate)
-			if installed: self.installedFlag = True
+			if installed and i['package'] != 'openplotter-settings': self.installedFlag = True
 
 	def pageOutput(self):
 		self.logger = rt.RichTextCtrl(self.output, style=wx.TE_MULTILINE|wx.TE_READONLY|wx.TE_DONTWRAP|wx.LC_SORT_ASCENDING)
@@ -435,7 +436,8 @@ class MyFrame(wx.Frame):
 			self.toolbar2.EnableTool(201,True)
 			self.toolbar2.EnableTool(202,True)
 			if self.listApps.GetItemText(i, 1) != '':
-				self.toolbar2.EnableTool(203,True)
+				if i != 0:
+					self.toolbar2.EnableTool(203,True)
 				self.toolbar2.EnableTool(204,True)
 
 	def onListAppsDeselected(self, event=0):

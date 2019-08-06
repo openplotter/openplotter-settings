@@ -14,6 +14,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Openplotter. If not, see <http://www.gnu.org/licenses/>.
+import subprocess
 
 class Platform:
 	def __init__(self):
@@ -24,3 +25,14 @@ class Platform:
 			modelfile.close()
 			if 'Raspberry' in rpimodel: self.isRPI = True
 		except: pass
+
+	def isInstalled(self,package):
+		installed = False
+		command = 'LANG=C apt-cache policy '+package
+		popen = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
+		for line in popen.stdout:
+			if 'Installed:' in line:
+				if not '(none)' in line: installed = True
+		return installed
+
+			
