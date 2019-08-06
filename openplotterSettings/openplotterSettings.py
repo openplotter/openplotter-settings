@@ -34,7 +34,7 @@ class MyFrame(wx.Frame):
 
 		wx.Frame.__init__(self, None, title=_('OpenPlotter Settings'), size=(800,444))
 		self.SetFont(wx.Font(10, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
-		icon = wx.Icon(self.currentdir+"/data/48x48.png", wx.BITMAP_TYPE_PNG)
+		icon = wx.Icon(self.currentdir+"/data/openplotter-48.png", wx.BITMAP_TYPE_PNG)
 		self.SetIcon(icon)
 
 		self.toolbar1 = wx.ToolBar(self, style=wx.TB_TEXT)
@@ -47,35 +47,36 @@ class MyFrame(wx.Frame):
 		toolCheck = self.toolbar1.AddTool(103, _('Check System'), wx.Bitmap(self.currentdir+"/data/check.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolCheck, toolCheck)
 		self.toolbar1.AddSeparator()
-		toolUpdate = self.toolbar1.AddTool(104, _('Update Packages Data'), wx.Bitmap(self.currentdir+"/data/package.png"))
+		toolSources = self.toolbar1.AddTool(105, _('Add sources'), wx.Bitmap(self.currentdir+"/data/sources.png"))
+		self.Bind(wx.EVT_TOOL, self.OnToolSources, toolSources)
+		toolUpdate = self.toolbar1.AddTool(104, _('Update Data'), wx.Bitmap(self.currentdir+"/data/update.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolUpdate, toolUpdate)
 		
 		self.notebook = wx.Notebook(self)
 		self.apps = wx.Panel(self.notebook)
 		self.genSettings = wx.Panel(self.notebook)
+		self.raspSettings = wx.Panel(self.notebook)
 		self.output = wx.Panel(self.notebook)
 		self.notebook.AddPage(self.apps, _('OpenPlotter Apps'))
-		self.notebook.AddPage(self.output, _('Output'))
 		self.notebook.AddPage(self.genSettings, _('General Settings'))
+		self.notebook.AddPage(self.raspSettings, _('Raspberry Settings'))
+		self.notebook.AddPage(self.output, _('Output'))
+
 		self.il = wx.ImageList(24, 24)
-		img0 = self.il.Add(wx.Bitmap(self.currentdir+"/data/24x24.png", wx.BITMAP_TYPE_PNG))
-		img1 = self.il.Add(wx.Bitmap(self.currentdir+"/data/output.png", wx.BITMAP_TYPE_PNG))
-		img2 = self.il.Add(wx.Bitmap(self.currentdir+"/data/debian.png", wx.BITMAP_TYPE_PNG))
-		img3 = self.il.Add(wx.Bitmap(self.currentdir+"/data/rpi.png", wx.BITMAP_TYPE_PNG))
+		img0 = self.il.Add(wx.Bitmap(self.currentdir+"/data/openplotter-24.png", wx.BITMAP_TYPE_PNG))
+		img1 = self.il.Add(wx.Bitmap(self.currentdir+"/data/debian.png", wx.BITMAP_TYPE_PNG))
+		img2 = self.il.Add(wx.Bitmap(self.currentdir+"/data/rpi.png", wx.BITMAP_TYPE_PNG))
+		img3 = self.il.Add(wx.Bitmap(self.currentdir+"/data/output.png", wx.BITMAP_TYPE_PNG))
 		self.notebook.AssignImageList(self.il)
 		self.notebook.SetPageImage(0, img0)
 		self.notebook.SetPageImage(1, img1)
 		self.notebook.SetPageImage(2, img2)
+		self.notebook.SetPageImage(3, img3)
 
 		vbox = wx.BoxSizer(wx.VERTICAL)
 		vbox.Add(self.toolbar1, 0, wx.EXPAND)
 		vbox.Add(self.notebook, 1, wx.EXPAND)
 		self.SetSizer(vbox)
-
-		if self.isRPI:
-			self.raspSettings = wx.Panel(self.notebook)
-			self.notebook.AddPage(self.raspSettings, _('Raspberry Settings'))
-			self.notebook.SetPageImage(3, img3)
 
 		self.CreateStatusBar()
 		font_statusBar = self.GetStatusBar().GetFont()
@@ -86,8 +87,9 @@ class MyFrame(wx.Frame):
 
 		self.pageApps()
 		self.onListAppsDeselected()
-		self.pageOutput()
 		self.pageGeneral()
+		self.pageRpi()
+		self.pageOutput()
 
 	def ShowStatusBar(self, w_msg, colour):
 		self.GetStatusBar().SetForegroundColour(colour)
@@ -113,18 +115,29 @@ class MyFrame(wx.Frame):
 		url = "https://crowdin.com/project/openplotter"
 		webbrowser.open(url, new=2)
 
-	def OnToolUpdate(self, event):
+	def OnToolUpdate(self, event=0):
 		self.logger.Clear()
+		self.notebook.ChangeSelection(3)
 		command = 'sudo apt update'
 		popen = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
 		for line in popen.stdout:
 			self.logger.WriteText(line)
 			self.ShowStatusBarYELLOW(_('Updating packages data, please wait... ')+line)
-		self.notebook.ChangeSelection(1)
-		self.logger.ShowPosition(self.logger.GetLastPosition())
+			self.logger.ShowPosition(self.logger.GetLastPosition())
 		self.ShowStatusBarGREEN(_('Done. Now you can check if there are available updates'))
 		self.readApps()
-		
+
+	def OnToolSources(self, e):
+		self.ShowStatusBarYELLOW(_('Adding packages sources, please wait... '))
+		os.system('sudo cp -f '+self.currentdir+'/data/sources/openplotter.list /etc/apt/sources.list.d')
+		os.system('sudo cp -f '+self.currentdir+'/data/sources/preferences /etc/apt/preferences.d')
+		os.system('sudo apt-key add - < '+self.currentdir+'/data/sources/opencpn.gpg.key')
+		os.system('sudo apt-key add - < '+self.currentdir+'/data/sources/openplotter.gpg.key')
+		os.system('sudo apt-key add - < '+self.currentdir+'/data/sources/grafana.gpg.key')
+		os.system('sudo apt-key add - < '+self.currentdir+'/data/sources/influxdb.gpg.key')
+		os.system('sudo apt-key add - < '+self.currentdir+'/data/sources/nodesource.gpg.key')
+		self.OnToolUpdate()
+
 	def OnToolLanguage(self, event): 
 		short = 'en'
 		name = self.languageList.GetValue()
@@ -148,6 +161,11 @@ class MyFrame(wx.Frame):
 		sizer = wx.BoxSizer(wx.VERTICAL)
 		sizer.Add(self.toolbar3, 0, wx.EXPAND, 0)
 		self.genSettings.SetSizer(sizer)
+
+	def pageRpi(self):
+		pass
+		#TODO disable is not on RPI
+		#if self.isRPI:
 
 	def OnToolStartup(self, e):
 		autostartFolder = self.home+'/.config/autostart'
@@ -177,9 +195,9 @@ class MyFrame(wx.Frame):
 		self.listApps.SetImageList(self.il, wx.IMAGE_LIST_SMALL)
 
 		self.toolbar2 = wx.ToolBar(self.apps, style=wx.TB_TEXT | wx.TB_VERTICAL)
-		self.installButton = self.toolbar2.AddTool(201, _('Install'), wx.Bitmap(self.currentdir+"/data/add.png"))
+		self.installButton = self.toolbar2.AddTool(201, _('Install'), wx.Bitmap(self.currentdir+"/data/install.png"))
 		self.Bind(wx.EVT_TOOL, self.OnInstallButton, self.installButton)
-		self.uninstallButton = self.toolbar2.AddTool(202, _('Uninstall'), wx.Bitmap(self.currentdir+"/data/remove.png"))
+		self.uninstallButton = self.toolbar2.AddTool(202, _('Uninstall'), wx.Bitmap(self.currentdir+"/data/uninstall.png"))
 		self.Bind(wx.EVT_TOOL, self.OnUninstallButton, self.uninstallButton)
 		self.toolbar2.AddSeparator()
 		self.openButton = self.toolbar2.AddTool(203, _('Open'), wx.Bitmap(self.currentdir+"/data/open.png"))
@@ -203,19 +221,20 @@ class MyFrame(wx.Frame):
 		dlg = wx.MessageDialog(None, msg, _('Question'), wx.YES_NO | wx.NO_DEFAULT | wx.ICON_EXCLAMATION)
 		if dlg.ShowModal() == wx.ID_YES:
 			self.logger.Clear()
+			self.notebook.ChangeSelection(3)
 			command = 'sudo apt -y install '+package
 			popen = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
 			for line in popen.stdout:
 				self.logger.WriteText(line)
 				self.ShowStatusBarYELLOW(_('Installing package, please wait... ')+line)
-			self.notebook.ChangeSelection(1)
+				self.logger.ShowPosition(self.logger.GetLastPosition())
 			postInstallation = apps[index]['postInstallation']
 			if postInstallation:
 				popen = subprocess.Popen(postInstallation, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
 				for line in popen.stdout:
 					self.logger.WriteText(line)
 					self.ShowStatusBarYELLOW(_('Running post-installation scripts, please wait... ')+line)
-			self.logger.ShowPosition(self.logger.GetLastPosition())	
+					self.logger.ShowPosition(self.logger.GetLastPosition())	
 			self.ShowStatusBarGREEN(_('Done'))
 			dlg.Destroy()
 			self.readApps()
@@ -233,13 +252,13 @@ class MyFrame(wx.Frame):
 		dlg = wx.MessageDialog(None, msg, _('Question'), wx.YES_NO | wx.NO_DEFAULT | wx.ICON_EXCLAMATION)
 		if dlg.ShowModal() == wx.ID_YES:
 			self.logger.Clear()
+			self.notebook.ChangeSelection(3)
 			command = 'sudo apt -y autoremove '+package
 			popen = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
 			for line in popen.stdout:
 				self.logger.WriteText(line)
 				self.ShowStatusBarYELLOW(_('Uninstalling packages, please wait... ')+line)
-			self.notebook.ChangeSelection(1)
-			self.logger.ShowPosition(self.logger.GetLastPosition())
+				self.logger.ShowPosition(self.logger.GetLastPosition())
 			self.ShowStatusBarGREEN(_('Done'))
 			dlg.Destroy()
 			self.readApps()
@@ -250,12 +269,12 @@ class MyFrame(wx.Frame):
 		if index == -1: return
 		apps = list(reversed(self.apps))
 		self.logger.Clear()
+		self.notebook.ChangeSelection(3)
 		command = 'apt changelog '+apps[index]['package']
 		popen = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
 		for line in popen.stdout:
 			self.logger.WriteText(line)
 			self.ShowStatusBarYELLOW(_('Reading changelog, please wait... ')+line)
-		self.notebook.ChangeSelection(1)
 		self.ShowStatusBarGREEN(_('Done'))
 
 	def OnOpenButton(self,e):
@@ -303,6 +322,17 @@ class MyFrame(wx.Frame):
 		self.apps.append(app)
 
 		app = {
+		'name': _('Signal K Installer'),
+		'platform': 'both',
+		'package': 'openplotter-signalk-installer',
+		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu','https://deb.nodesource.com/node_10.x'],
+		'dev': 'no',
+		'entryPoint': 'openplotter-signalk-installer',
+		'postInstallation': 'signalkPostInstallation',
+		}
+		self.apps.append(app)
+
+		app = {
 		'name': _('OpenCPN Installer'),
 		'platform': 'both',
 		'package': 'openplotter-opencpn-installer',
@@ -338,8 +368,8 @@ class MyFrame(wx.Frame):
 		self.installedFlag = False
 		for i in self.apps:
 			item = self.listApps.InsertItem(0, i['name'])
-			if i['platform'] == 'rpi': self.listApps.SetItemImage(item, 3)
-			else: self.listApps.SetItemImage(item, 2)
+			if i['platform'] == 'rpi': self.listApps.SetItemImage(item, 2)
+			else: self.listApps.SetItemImage(item, 1)
 
 			installed = ''
 			candidate = ''
@@ -364,7 +394,9 @@ class MyFrame(wx.Frame):
 				for line in popen.stdout:
 					if ii in line: exists = True
 				if not exists: missing = ii
-			if missing: candidate = _('missing source: ')+missing
+			if missing: 
+				candidate = _('missing source: ')+missing
+				self.listApps.SetItemBackgroundColour(item,(200,200,200))
 
 			if i['dev'] == 'yes': 
 				candidate = _('coming soon')
@@ -378,6 +410,9 @@ class MyFrame(wx.Frame):
 				if i['platform'] == 'rpi': 
 					self.listApps.SetItemBackgroundColour(item,(200,200,200))
 					candidate = _('app only for Raspberry machines')
+			
+			if not candidate:
+				self.listApps.SetItemBackgroundColour(item,(200,200,200))
 
 			self.listApps.SetItem(item, 1, installed)
 			self.listApps.SetItem(item, 2, candidate)
