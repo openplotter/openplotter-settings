@@ -40,7 +40,6 @@ class MyFrame(wx.Frame):
 		self.toolbar1 = wx.ToolBar(self, style=wx.TB_TEXT)
 		toolHelp = self.toolbar1.AddTool(101, _('Help'), wx.Bitmap(self.currentdir+"/data/help.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolHelp, toolHelp)
-		if not self.platform.isInstalled('openplotter-doc'): self.toolbar1.EnableTool(101,False)
 		self.toolbar1.AddSeparator()
 		toolStartup = self.toolbar1.AddCheckTool(102, _('Autostart'), wx.Bitmap(self.currentdir+"/data/autostart.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolStartup, toolStartup)
@@ -245,7 +244,7 @@ class MyFrame(wx.Frame):
 		index = self.listApps.GetFirstSelected()
 		if index == -1: return
 		apps = list(reversed(self.apps))
-		package = apps[index]['package']
+		package = apps[index]['uninstall']
 		if self.installedFlag and package == 'openplotter-settings':
 			wx.MessageBox(_('You have to uninstall the rest of apps before uninstalling openplotter-settings.'), _('Info'), wx.OK | wx.ICON_INFORMATION)
 			return
@@ -293,6 +292,7 @@ class MyFrame(wx.Frame):
 		'name': _('Fake app only for desktops'),
 		'platform': 'debian',
 		'package': 'openplotter-fake',
+		'uninstall': 'openplotter-fake',
 		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
 		'dev': 'no',
 		'entryPoint': 'openplotter-fake',
@@ -304,6 +304,7 @@ class MyFrame(wx.Frame):
 		'name': _('Fake app with missing source'),
 		'platform': 'both',
 		'package': 'openplotter-fake2',
+		'uninstall': 'openplotter-fake2',
 		'sources': ['http://ppa.launchpad.net/openplotter/xxxxx/ubuntu'],
 		'dev': 'no',
 		'entryPoint': 'openplotter-fake2',
@@ -315,6 +316,7 @@ class MyFrame(wx.Frame):
 		'name': _('Network'),
 		'platform': 'rpi',
 		'package': 'openplotter-network',
+		'uninstall': 'openplotter-network',
 		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
 		'dev': 'no',
 		'entryPoint': 'openplotter-network',
@@ -326,6 +328,7 @@ class MyFrame(wx.Frame):
 		'name': _('Signal K Installer'),
 		'platform': 'both',
 		'package': 'openplotter-signalk-installer',
+		'uninstall': 'openplotter-signalk-installer',
 		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu','https://deb.nodesource.com/node_10.x'],
 		'dev': 'no',
 		'entryPoint': 'openplotter-signalk-installer',
@@ -337,10 +340,11 @@ class MyFrame(wx.Frame):
 		'name': _('OpenCPN Installer'),
 		'platform': 'both',
 		'package': 'openplotter-opencpn-installer',
+		'uninstall': 'openplotter-opencpn-installer opencpn',
 		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu','http://ppa.launchpad.net/opencpn/opencpn/ubuntu'],
 		'dev': 'no',
 		'entryPoint': 'openplotter-opencpn-installer',
-		'postInstallation': 'opencpnPostInstallation',
+		'postInstallation': '',
 		}
 		self.apps.append(app)
 
@@ -348,6 +352,7 @@ class MyFrame(wx.Frame):
 		'name': _('Documentation'),
 		'platform': 'both',
 		'package': 'openplotter-doc',
+		'uninstall': 'openplotter-doc',
 		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
 		'dev': 'no',
 		'entryPoint': 'x-www-browser /usr/share/openplotter-doc/index.html',
@@ -359,6 +364,7 @@ class MyFrame(wx.Frame):
 		'name': _('Settings'),
 		'platform': 'both',
 		'package': 'openplotter-settings',
+		'uninstall': 'openplotter-settings',
 		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
 		'dev': 'no',
 		'entryPoint': 'openplotter-settings',
@@ -367,6 +373,7 @@ class MyFrame(wx.Frame):
 		self.apps.append(app)
 
 		self.installedFlag = False
+		sources = subprocess.check_output(['apt-cache', 'policy']).decode()
 		for i in self.apps:
 			item = self.listApps.InsertItem(0, i['name'])
 			if i['platform'] == 'rpi': self.listApps.SetItemImage(item, 2)
@@ -389,12 +396,7 @@ class MyFrame(wx.Frame):
 
 			missing = False
 			for ii in i['sources']:
-				command = 'apt-cache policy'
-				popen = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
-				exists = False
-				for line in popen.stdout:
-					if ii in line: exists = True
-				if not exists: missing = ii
+				if not ii in sources:  missing = ii
 			if missing: 
 				candidate = _('missing source: ')+missing
 				self.listApps.SetItemBackgroundColour(item,(200,200,200))
@@ -419,6 +421,9 @@ class MyFrame(wx.Frame):
 			self.listApps.SetItem(item, 2, candidate)
 			if installed and i['package'] != 'openplotter-settings': self.installedFlag = True
 
+		if not self.platform.isInstalled('openplotter-doc'): self.toolbar1.EnableTool(101,False)
+		else:self.toolbar1.EnableTool(101,True)
+	
 	def pageOutput(self):
 		self.logger = rt.RichTextCtrl(self.output, style=wx.TE_MULTILINE|wx.TE_READONLY|wx.TE_DONTWRAP|wx.LC_SORT_ASCENDING)
 		self.logger.SetMargins((10,10))

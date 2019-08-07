@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=Settings
+Name=OpenPlotter Settings
 Exec=openplotter-settings
 Icon=openplotter-settings
 StartupNotify=true

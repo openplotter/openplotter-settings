@@ -18,11 +18,14 @@ import wx, os, sys, time, threading, subprocess
 import wx.richtext as rt
 from .conf import Conf
 from .language import Language
+from .platform import Platform
 
 class MyFrame(wx.Frame):
 	def __init__(self, mode):
 		self.conf = Conf()
 		self.mode = mode
+		self.platform = Platform()
+		self.isRPI = self.platform.isRPI
 		currentLanguage = self.conf.get('GENERAL', 'lang')
 		self.currentdir = os.path.dirname(__file__)
 		self.language = Language(self.currentdir,'openplotter-settings',currentLanguage)
@@ -119,15 +122,32 @@ class MyFrame(wx.Frame):
 		else:
 			self.add_logger_data({'green':_('enabled'),'black':'','red':''})
 
+		if self.isRPI:
+			self.add_logger_data(_('Checking user "pi" password...'))
+			out = subprocess.check_output(['sudo', '-n', 'grep', '-E', '^pi:', '/etc/shadow']).decode()
+			tmp = out.split(':')
+			passw_a = tmp[1]
+			tmp = passw_a.split('$')
+			salt = tmp[2]
+			passw_b = subprocess.check_output(['mkpasswd', '-msha-512', 'raspberry', salt]).decode()
+			if passw_a.rstrip() == passw_b.rstrip():
+				self.add_logger_data({'green':'','black':'','red':_('Security warning: You are using the default password for "pi" user.\nPlease change password in Menu > Preferences > Raspberry Pi Configuration.')})
+			else: self.add_logger_data({'green':_('changed'),'black':'','red':''})
+
+		self.add_logger_data(_('Checking OpenPlotter packages source...'))
+		sources = subprocess.check_output(['apt-cache', 'policy']).decode()
+		if 'http://ppa.launchpad.net/openplotter/openplotter/ubuntu' in sources:
+			self.add_logger_data({'green':_('added'),'black':'','red':''})
+
 		startup = False
 		try:
-			from openplotterOpencpnInstaller import startup
+			from openplotterNetwork import startup
 		except:pass
 		if startup: self.processApp(startup)
 
 		startup = False
 		try:
-			from openplotterNetwork import startup
+			from openplotterOpencpnInstaller import startup
 		except:pass
 		if startup: self.processApp(startup)
 
