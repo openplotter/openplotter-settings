@@ -26,6 +26,15 @@ class Ports:
 
 		ports = False
 		try:
+			from openplotterSignalkInstaller import ports
+		except:pass
+		if ports: 
+			target = ports.Ports(self.conf)
+			for i in target.usedPorts:
+				usedPorts.append(i)
+				
+		ports = False
+		try:
 			from openplotterOpencpnInstaller import ports
 		except:pass
 		if ports: 

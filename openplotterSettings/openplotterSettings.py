@@ -332,7 +332,7 @@ class MyFrame(wx.Frame):
 		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu','https://deb.nodesource.com/node_10.x'],
 		'dev': 'no',
 		'entryPoint': 'openplotter-signalk-installer',
-		'postInstallation': 'signalkPostInstallation',
+		'postInstallation': 'sudo signalkPostInstallation',
 		}
 		self.apps.append(app)
 

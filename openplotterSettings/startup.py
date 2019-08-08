@@ -141,6 +141,12 @@ class MyFrame(wx.Frame):
 
 		startup = False
 		try:
+			from openplotterSignalkInstaller import startup
+		except:pass
+		if startup: self.processApp(startup)
+		
+		startup = False
+		try:
 			from openplotterNetwork import startup
 		except:pass
 		if startup: self.processApp(startup)

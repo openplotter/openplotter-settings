@@ -19,11 +19,26 @@ import subprocess
 class Platform:
 	def __init__(self):
 		self.isRPI = False
+		self.skPort = False
+		self.skDir = False
+		
 		try:
 			modelfile = open('/sys/firmware/devicetree/base/model', 'r', 2000)
 			rpimodel = modelfile.read()
 			modelfile.close()
 			if 'Raspberry' in rpimodel: self.isRPI = True
+		except: pass
+
+		try: 
+			service = '/etc/systemd/system/signalk.service'
+			with open(service) as data:
+				for line in data:
+					if 'Environment=EXTERNALPORT=' in line:
+						lineList = line.split('=')
+						self.skPort = lineList[2]
+					if 'WorkingDirectory=' in line:
+						lineList = line.split('=')
+						self.skDir = lineList[1]
 		except: pass
 
 	def isInstalled(self,package):
