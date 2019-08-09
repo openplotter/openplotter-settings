@@ -26,9 +26,9 @@ class MyFrame(wx.Frame):
 		self.mode = mode
 		self.platform = Platform()
 		self.isRPI = self.platform.isRPI
-		currentLanguage = self.conf.get('GENERAL', 'lang')
+		self.currentLanguage = self.conf.get('GENERAL', 'lang')
 		self.currentdir = os.path.dirname(__file__)
-		self.language = Language(self.currentdir,'openplotter-settings',currentLanguage)
+		self.language = Language(self.currentdir,'openplotter-settings',self.currentLanguage)
 
 		self.ttimer = 100
 		self.logger_data=False
@@ -138,6 +138,7 @@ class MyFrame(wx.Frame):
 		sources = subprocess.check_output(['apt-cache', 'policy']).decode()
 		if 'http://ppa.launchpad.net/openplotter/openplotter/ubuntu' in sources:
 			self.add_logger_data({'green':_('added'),'black':'','red':''})
+		else: self.add_logger_data({'green':'','black':'','red':_('There are missing packages sources. Please add sources in "OpenPlotter Settings".')})
 
 		startup = False
 		try:
@@ -161,13 +162,13 @@ class MyFrame(wx.Frame):
 
 	def processApp(self, startup):
 		if self.mode == 'start':
-			start = startup.Start(self.conf)
+			start = startup.Start(self.conf,self.currentLanguage)
 			initialMessage = start.initialMessage
 			if initialMessage: 
 				self.add_logger_data(initialMessage)
 				result = start.start()
 				if result: self.add_logger_data(result)
-		check = startup.Check(self.conf)
+		check = startup.Check(self.conf,self.currentLanguage)
 		initialMessage = check.initialMessage
 		if initialMessage: 
 			self.add_logger_data(initialMessage)

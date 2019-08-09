@@ -35,10 +35,10 @@ class Platform:
 				for line in data:
 					if 'Environment=EXTERNALPORT=' in line:
 						lineList = line.split('=')
-						self.skPort = lineList[2]
+						self.skPort = lineList[2].rstrip()
 					if 'WorkingDirectory=' in line:
 						lineList = line.split('=')
-						self.skDir = lineList[1]
+						self.skDir = lineList[1].rstrip()
 		except: pass
 
 	def isInstalled(self,package):

@@ -301,13 +301,133 @@ class MyFrame(wx.Frame):
 		self.apps.append(app)
 
 		app = {
-		'name': _('Fake app with missing source'),
+		'name': _('Signal K Filters'),
 		'platform': 'both',
-		'package': 'openplotter-fake2',
-		'uninstall': 'openplotter-fake2',
-		'sources': ['http://ppa.launchpad.net/openplotter/xxxxx/ubuntu'],
-		'dev': 'no',
-		'entryPoint': 'openplotter-fake2',
+		'package': 'openplotter-signalk-filters',
+		'uninstall': 'openplotter-signalk-filters',
+		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'dev': 'yes',
+		'entryPoint': 'openplotter-signalk-filters',
+		'postInstallation': '',
+		}
+		self.apps.append(app)
+
+		app = {
+		'name': _('SDR AIS'),
+		'platform': 'both',
+		'package': 'openplotter-sdr-ais',
+		'uninstall': 'openplotter-sdr-ais',
+		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'dev': 'yes',
+		'entryPoint': 'openplotter-sdr-ais',
+		'postInstallation': '',
+		}
+		self.apps.append(app)
+
+		app = {
+		'name': _('Kplex'),
+		'platform': 'both',
+		'package': 'openplotter-kplex',
+		'uninstall': 'openplotter-kplex',
+		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'dev': 'yes',
+		'entryPoint': 'openplotter-kplex',
+		'postInstallation': '',
+		}
+		self.apps.append(app)
+
+		app = {
+		'name': _('Dashboards'),
+		'platform': 'both',
+		'package': 'openplotter-dashboards',
+		'uninstall': 'openplotter-dashboards',
+		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'dev': 'yes',
+		'entryPoint': 'openplotter-dashboards',
+		'postInstallation': '',
+		}
+		self.apps.append(app)
+
+		app = {
+		'name': _('Actions'),
+		'platform': 'both',
+		'package': 'openplotter-actions',
+		'uninstall': 'openplotter-actions',
+		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'dev': 'yes',
+		'entryPoint': 'openplotter-actions',
+		'postInstallation': '',
+		}
+		self.apps.append(app)
+
+		app = {
+		'name': _('CAN Devices Management'),
+		'platform': 'both',
+		'package': 'openplotter-can',
+		'uninstall': 'openplotter-can',
+		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'dev': 'yes',
+		'entryPoint': 'openplotter-can',
+		'postInstallation': '',
+		}
+		self.apps.append(app)
+
+		app = {
+		'name': _('Moitessier HAT'),
+		'platform': 'rpi',
+		'package': 'openplotter-moitessier',
+		'uninstall': 'openplotter-moitessier',
+		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'dev': 'yes',
+		'entryPoint': 'openplotter-moitessier',
+		'postInstallation': '',
+		}
+		self.apps.append(app)
+
+		app = {
+		'name': _('Pypilot'),
+		'platform': 'rpi',
+		'package': 'openplotter-pypilot',
+		'uninstall': 'openplotter-pypilot',
+		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'dev': 'yes',
+		'entryPoint': 'openplotter-pypilot',
+		'postInstallation': '',
+		}
+		self.apps.append(app)
+
+		app = {
+		'name': _('1W Sensors'),
+		'platform': 'rpi',
+		'package': 'openplotter-1w',
+		'uninstall': 'openplotter-1w',
+		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'dev': 'yes',
+		'entryPoint': 'openplotter-1w',
+		'postInstallation': '',
+		}
+		self.apps.append(app)
+
+		app = {
+		'name': _('I2C Sensors'),
+		'platform': 'rpi',
+		'package': 'openplotter-i2c',
+		'uninstall': 'openplotter-i2c',
+		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'dev': 'yes',
+		'entryPoint': 'openplotter-i2c',
+		'postInstallation': '',
+		}
+		self.apps.append(app)
+
+		app = {
+		'name': _('Serial Devices Management'),
+		'platform': 'both',
+		'package': 'openplotter-serial',
+		'uninstall': 'openplotter-serial',
+		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'dev': 'yes',
+		'entryPoint': 'openplotter-serial',
 		'postInstallation': '',
 		}
 		self.apps.append(app)

@@ -15,11 +15,11 @@
 # You should have received a copy of the GNU General Public License
 # along with Openplotter. If not, see <http://www.gnu.org/licenses/>.
 from .conf import Conf
-from .language import Language
 
 class Ports:
 	def __init__(self):
 		self.conf = Conf()
+		self.currentLanguage = self.conf.get('GENERAL', 'lang')
 
 	def getUsedPorts(self):
 		usedPorts=[]
@@ -29,7 +29,7 @@ class Ports:
 			from openplotterSignalkInstaller import ports
 		except:pass
 		if ports: 
-			target = ports.Ports(self.conf)
+			target = ports.Ports(self.conf,self.currentLanguage)
 			for i in target.usedPorts:
 				usedPorts.append(i)
 				
@@ -38,7 +38,7 @@ class Ports:
 			from openplotterOpencpnInstaller import ports
 		except:pass
 		if ports: 
-			target = ports.Ports(self.conf)
+			target = ports.Ports(self.conf,self.currentLanguage)
 			for i in target.usedPorts:
 				usedPorts.append(i)
 
@@ -47,7 +47,7 @@ class Ports:
 			from openplotterNetwork import ports
 		except:pass
 		if ports: 
-			target = ports.Ports(self.conf)
+			target = ports.Ports(self.conf,self.currentLanguage)
 			for i in target.usedPorts:
 				usedPorts.append(i)
 
