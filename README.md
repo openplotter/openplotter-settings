@@ -4,7 +4,7 @@ Main OpenPlotter app
 
 ### Installing
 
-Install dependencies:
+Install dependencies (for production and development):
 
 `sudo apt install python-configparser python3-wxgtk4.0 whois`
 
