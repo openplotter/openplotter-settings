@@ -21,6 +21,7 @@ class Platform:
 		self.isRPI = False
 		self.skPort = False
 		self.skDir = False
+		self.http = 'http://'
 		
 		try:
 			modelfile = open('/sys/firmware/devicetree/base/model', 'r', 2000)
@@ -36,6 +37,7 @@ class Platform:
 					if 'Environment=EXTERNALPORT=' in line:
 						lineList = line.split('=')
 						self.skPort = lineList[2].rstrip()
+						if self.skPort == '3443': self.http = 'https://'
 					if 'WorkingDirectory=' in line:
 						lineList = line.split('=')
 						self.skDir = lineList[1].rstrip()

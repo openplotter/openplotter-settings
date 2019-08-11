@@ -414,7 +414,7 @@ class MyFrame(wx.Frame):
 		'package': 'openplotter-i2c',
 		'uninstall': 'openplotter-i2c',
 		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'yes',
+		'dev': 'no',
 		'entryPoint': 'openplotter-i2c',
 		'postInstallation': '',
 		}

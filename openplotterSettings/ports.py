@@ -26,6 +26,15 @@ class Ports:
 
 		ports = False
 		try:
+			from openplotterI2c import ports
+		except:pass
+		if ports: 
+			target = ports.Ports(self.conf,self.currentLanguage)
+			for i in target.usedPorts:
+				usedPorts.append(i)
+
+		ports = False
+		try:
 			from openplotterSignalkInstaller import ports
 		except:pass
 		if ports: 
