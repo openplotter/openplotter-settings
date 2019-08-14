@@ -20,11 +20,12 @@ from .version import *
 
 class Conf:
 	def __init__(self):
-		self.home = os.path.expanduser('~')
+		self.user = os.environ.get('USER')
+		if self.user == 'root': self.user = os.path.expanduser(os.environ["SUDO_USER"])
+		self.home = '/home/'+self.user
+
 		self.data_conf = configparser.ConfigParser()
 
-		if 'root' in self.home:
-			self.home = '/home/'+os.path.expanduser(os.environ["SUDO_USER"])
 
 		self.conf_folder = self.home+'/.openplotter'
 		if not os.path.exists(self.conf_folder):

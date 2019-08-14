@@ -45,7 +45,6 @@ class MyFrame(wx.Frame):
 		self.GetStatusBar().SetFont(font_statusBar)
 		if self.mode == 'start': self.SetStatusText(_('Starting OpenPlotter. Please wait for all services to start'))
 		else: self.SetStatusText(_('Checking OpenPlotter system. Please wait for all services to be checked'))
-		self.Centre()
 
 		panel = wx.Panel(self, wx.ID_ANY)
 
@@ -69,6 +68,8 @@ class MyFrame(wx.Frame):
 
 		self.timer.Start(self.ttimer)
 
+		self.Centre() 
+
 	def refresh(self,event):
 		if self.logger_data:
 			if isinstance(self.logger_data, str):
@@ -77,7 +78,7 @@ class MyFrame(wx.Frame):
 			if isinstance(self.logger_data, dict):
 				if self.logger_data['green']:
 					self.logger.WriteText(' | ')
-					self.logger.BeginTextColour((0, 255, 0))
+					self.logger.BeginTextColour((0, 130, 0))
 					self.logger.WriteText(self.logger_data['green'])
 					self.logger.EndTextColour()
 				if self.logger_data['black']:
@@ -88,7 +89,7 @@ class MyFrame(wx.Frame):
 				if self.logger_data['red']:
 					self.warnings_flag = True
 					self.logger.Newline()
-					self.logger.BeginTextColour((255, 0, 0))
+					self.logger.BeginTextColour((130, 0, 0))
 					self.logger.WriteText(self.logger_data['red'])
 					self.logger.EndTextColour()
 				self.logger.Newline()
@@ -115,6 +116,13 @@ class MyFrame(wx.Frame):
 		self.logger_data=msg
 
 	def starting(self):
+		try:
+			delay = self.conf.get('GENERAL', 'delay')
+			if delay:
+				self.add_logger_data(_('Applying delay of ')+delay+_(' seconds...'))
+				time.sleep(int(delay))
+				self.add_logger_data({'green':_('done'),'black':'','red':''})
+		except:self.add_logger_data({'green':'','black':'','red':_('Delay failed. Is it a number?')})
 
 		self.add_logger_data(_('Checking OpenPlotter autostart...'))
 		if self.conf.get('GENERAL', 'autostart') != '1':
@@ -124,7 +132,7 @@ class MyFrame(wx.Frame):
 
 		if self.isRPI:
 			self.add_logger_data(_('Checking user "pi" password...'))
-			out = subprocess.check_output(['sudo', '-n', 'grep', '-E', '^pi:', '/etc/shadow']).decode()
+			out = subprocess.check_output([self.platform.admin, '-n', 'grep', '-E', '^pi:', '/etc/shadow']).decode()
 			tmp = out.split(':')
 			passw_a = tmp[1]
 			tmp = passw_a.split('$')
@@ -163,6 +171,14 @@ class MyFrame(wx.Frame):
 			from openplotterOpencpnInstaller import startup
 		except:pass
 		if startup: self.processApp(startup)
+
+		try:
+			play = self.conf.get('GENERAL', 'play')
+			if play: subprocess.Popen(['cvlc', '--play-and-exit', play])
+		except: pass
+
+		if self.mode == 'start': self.add_logger_data(_('STARTUP FINISHED'))
+		else: self.add_logger_data(_('CHECK SYSTEM FINISHED'))
 
 		self.autoclose=time.time() + 60
 

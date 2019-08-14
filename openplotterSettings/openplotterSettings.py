@@ -27,10 +27,228 @@ class MyFrame(wx.Frame):
 		self.conf = Conf()
 		self.home = self.conf.home
 		self.platform = Platform()
-		self.isRPI = self.platform.isRPI
 		self.currentdir = os.path.dirname(__file__)
 		currentLanguage = self.conf.get('GENERAL', 'lang')
 		self.language = Language(self.currentdir,'openplotter-settings',currentLanguage)
+
+		self.appsDict = []
+		app = {
+		'name': _('Fake app only for desktops'),
+		'platform': 'debian',
+		'package': 'openplotter-fake',
+		'uninstall': 'openplotter-fake',
+		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'dev': 'no',
+		'entryPoint': 'openplotter-fake',
+		'postInstallation': '',
+		}
+		self.appsDict.append(app)
+
+		app = {
+		'name': _('Signal K Filters'),
+		'platform': 'both',
+		'package': 'openplotter-signalk-filters',
+		'uninstall': 'openplotter-signalk-filters',
+		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'dev': 'yes',
+		'entryPoint': 'openplotter-signalk-filters',
+		'postInstallation': '',
+		}
+		self.appsDict.append(app)
+
+		app = {
+		'name': _('SDR AIS'),
+		'platform': 'both',
+		'package': 'openplotter-sdr-ais',
+		'uninstall': 'openplotter-sdr-ais',
+		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'dev': 'yes',
+		'entryPoint': 'openplotter-sdr-ais',
+		'postInstallation': '',
+		}
+		self.appsDict.append(app)
+
+		app = {
+		'name': _('Kplex'),
+		'platform': 'both',
+		'package': 'openplotter-kplex',
+		'uninstall': 'openplotter-kplex',
+		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'dev': 'yes',
+		'entryPoint': 'openplotter-kplex',
+		'postInstallation': '',
+		}
+		self.appsDict.append(app)
+
+		app = {
+		'name': _('Dashboards'),
+		'platform': 'both',
+		'package': 'openplotter-dashboards',
+		'uninstall': 'openplotter-dashboards',
+		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'dev': 'yes',
+		'entryPoint': 'openplotter-dashboards',
+		'postInstallation': '',
+		}
+		self.appsDict.append(app)
+
+		app = {
+		'name': _('Actions'),
+		'platform': 'both',
+		'package': 'openplotter-actions',
+		'uninstall': 'openplotter-actions',
+		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'dev': 'yes',
+		'entryPoint': 'openplotter-actions',
+		'postInstallation': '',
+		}
+		self.appsDict.append(app)
+
+		app = {
+		'name': _('CAN Devices Management'),
+		'platform': 'both',
+		'package': 'openplotter-can',
+		'uninstall': 'openplotter-can',
+		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'dev': 'yes',
+		'entryPoint': 'openplotter-can',
+		'postInstallation': '',
+		}
+		self.appsDict.append(app)
+
+		app = {
+		'name': _('Moitessier HAT'),
+		'platform': 'rpi',
+		'package': 'openplotter-moitessier',
+		'uninstall': 'openplotter-moitessier',
+		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'dev': 'yes',
+		'entryPoint': 'openplotter-moitessier',
+		'postInstallation': '',
+		}
+		self.appsDict.append(app)
+
+		app = {
+		'name': _('Pypilot'),
+		'platform': 'rpi',
+		'package': 'openplotter-pypilot',
+		'uninstall': 'openplotter-pypilot',
+		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'dev': 'yes',
+		'entryPoint': 'openplotter-pypilot',
+		'postInstallation': '',
+		}
+		self.appsDict.append(app)
+
+		app = {
+		'name': _('1W Sensors'),
+		'platform': 'rpi',
+		'package': 'openplotter-1w',
+		'uninstall': 'openplotter-1w',
+		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'dev': 'yes',
+		'entryPoint': 'openplotter-1w',
+		'postInstallation': '',
+		}
+		self.appsDict.append(app)
+
+		app = {
+		'name': _('I2C Sensors'),
+		'platform': 'rpi',
+		'package': 'openplotter-i2c',
+		'uninstall': 'openplotter-i2c',
+		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'dev': 'no',
+		'entryPoint': 'openplotter-i2c',
+		'postInstallation': self.platform.admin+' i2cPostInstallation',
+		}
+		self.appsDict.append(app)
+
+		app = {
+		'name': _('Serial Devices Management'),
+		'platform': 'both',
+		'package': 'openplotter-serial',
+		'uninstall': 'openplotter-serial',
+		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'dev': 'yes',
+		'entryPoint': 'openplotter-serial',
+		'postInstallation': '',
+		}
+		self.appsDict.append(app)
+
+		app = {
+		'name': _('Network'),
+		'platform': 'rpi',
+		'package': 'openplotter-network',
+		'uninstall': 'openplotter-network',
+		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'dev': 'no',
+		'entryPoint': 'openplotter-network',
+		'postInstallation': self.platform.admin+' networkPostInstallation',
+		}
+		self.appsDict.append(app)
+
+		app = {
+		'name': _('XyGrib'),
+		'platform': 'both',
+		'package': 'xygrib',
+		'uninstall': 'xygrib',
+		'sources': [],
+		'dev': 'no',
+		'entryPoint': 'XyGrib',
+		'postInstallation': '',
+		}
+		self.appsDict.append(app)
+
+		if self.platform.skPort: entryPoint = 'x-www-browser '+self.platform.http+'localhost:'+self.platform.skPort
+		else: entryPoint = ''
+		app = {
+		'name': _('Signal K Installer'),
+		'platform': 'both',
+		'package': 'openplotter-signalk-installer',
+		'uninstall': 'openplotter-signalk-installer',
+		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu','https://deb.nodesource.com/node_10.x'],
+		'dev': 'no',
+		'entryPoint': entryPoint,
+		'postInstallation': self.platform.admin+' signalkPostInstallation',
+		}
+		self.appsDict.append(app)
+
+		app = {
+		'name': _('OpenCPN Installer'),
+		'platform': 'both',
+		'package': 'openplotter-opencpn-installer',
+		'uninstall': 'openplotter-opencpn-installer opencpn',
+		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu','http://ppa.launchpad.net/opencpn/opencpn/ubuntu'],
+		'dev': 'no',
+		'entryPoint': 'openplotter-opencpn-installer',
+		'postInstallation': '',
+		}
+		self.appsDict.append(app)
+
+		app = {
+		'name': _('Documentation'),
+		'platform': 'both',
+		'package': 'openplotter-doc',
+		'uninstall': 'openplotter-doc',
+		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'dev': 'no',
+		'entryPoint': 'x-www-browser /usr/share/openplotter-doc/index.html',
+		'postInstallation': '',
+		}
+		self.appsDict.append(app)
+
+		app = {
+		'name': _('Settings'),
+		'platform': 'both',
+		'package': 'openplotter-settings',
+		'uninstall': 'openplotter-settings',
+		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'dev': 'no',
+		'entryPoint': 'openplotter-settings',
+		'postInstallation': '',
+		}
+		self.appsDict.append(app)
 
 		wx.Frame.__init__(self, None, title=_('OpenPlotter Settings'), size=(800,444))
 		self.SetFont(wx.Font(10, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
@@ -40,6 +258,8 @@ class MyFrame(wx.Frame):
 		self.toolbar1 = wx.ToolBar(self, style=wx.TB_TEXT)
 		toolHelp = self.toolbar1.AddTool(101, _('Help'), wx.Bitmap(self.currentdir+"/data/help.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolHelp, toolHelp)
+		if not self.platform.isInstalled('openplotter-doc'): self.toolbar1.EnableTool(101,False)
+		else:self.toolbar1.EnableTool(101,True)
 		self.toolbar1.AddSeparator()
 		toolStartup = self.toolbar1.AddCheckTool(102, _('Autostart'), wx.Bitmap(self.currentdir+"/data/autostart.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolStartup, toolStartup)
@@ -47,9 +267,9 @@ class MyFrame(wx.Frame):
 		toolCheck = self.toolbar1.AddTool(103, _('Check System'), wx.Bitmap(self.currentdir+"/data/check.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolCheck, toolCheck)
 		self.toolbar1.AddSeparator()
-		toolSources = self.toolbar1.AddTool(105, _('Add sources'), wx.Bitmap(self.currentdir+"/data/sources.png"))
+		toolSources = self.toolbar1.AddTool(105, _('Add Sources'), wx.Bitmap(self.currentdir+"/data/sources.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolSources, toolSources)
-		toolUpdate = self.toolbar1.AddTool(104, _('Update Data'), wx.Bitmap(self.currentdir+"/data/update.png"))
+		toolUpdate = self.toolbar1.AddTool(104, _('Update Candidates'), wx.Bitmap(self.currentdir+"/data/update.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolUpdate, toolUpdate)
 		
 		self.notebook = wx.Notebook(self)
@@ -82,24 +302,24 @@ class MyFrame(wx.Frame):
 		font_statusBar = self.GetStatusBar().GetFont()
 		font_statusBar.SetWeight(wx.BOLD)
 		self.GetStatusBar().SetFont(font_statusBar)
-		self.Centre(True) 
-		self.Show(True)
 
-		self.pageApps()
-		self.onListAppsDeselected()
 		self.pageGeneral()
 		self.pageRpi()
 		self.pageOutput()
+		self.pageApps()
+		self.onListAppsDeselected()
+
+		self.Centre()
 
 	def ShowStatusBar(self, w_msg, colour):
 		self.GetStatusBar().SetForegroundColour(colour)
 		self.SetStatusText(w_msg)
 
 	def ShowStatusBarRED(self, w_msg):
-		self.ShowStatusBar(w_msg, wx.RED)
+		self.ShowStatusBar(w_msg, (130,0,0))
 
 	def ShowStatusBarGREEN(self, w_msg):
-		self.ShowStatusBar(w_msg, wx.GREEN)
+		self.ShowStatusBar(w_msg, (0,130,0))
 
 	def ShowStatusBarBLACK(self, w_msg):
 		self.ShowStatusBar(w_msg, wx.BLACK) 
@@ -118,24 +338,26 @@ class MyFrame(wx.Frame):
 	def OnToolUpdate(self, event=0):
 		self.logger.Clear()
 		self.notebook.ChangeSelection(3)
-		command = 'sudo apt update'
+		command = self.platform.admin+' apt update'
 		popen = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
 		for line in popen.stdout:
-			self.logger.WriteText(line)
-			self.ShowStatusBarYELLOW(_('Updating packages data, please wait... ')+line)
-			self.logger.ShowPosition(self.logger.GetLastPosition())
-		self.ShowStatusBarGREEN(_('Done. Now you can check if there are available updates'))
+			if not 'Warning' in line and not 'WARNING' in line:
+				self.logger.WriteText(line)
+				self.ShowStatusBarYELLOW(_('Updating packages data, please wait... ')+line)
+				self.logger.ShowPosition(self.logger.GetLastPosition())
 		self.readApps()
 
 	def OnToolSources(self, e):
 		self.ShowStatusBarYELLOW(_('Adding packages sources, please wait... '))
-		os.system('sudo cp -f '+self.currentdir+'/data/sources/openplotter.list /etc/apt/sources.list.d')
-		os.system('sudo cp -f '+self.currentdir+'/data/sources/preferences /etc/apt/preferences.d')
-		os.system('sudo apt-key add - < '+self.currentdir+'/data/sources/opencpn.gpg.key')
-		os.system('sudo apt-key add - < '+self.currentdir+'/data/sources/openplotter.gpg.key')
-		os.system('sudo apt-key add - < '+self.currentdir+'/data/sources/grafana.gpg.key')
-		os.system('sudo apt-key add - < '+self.currentdir+'/data/sources/influxdb.gpg.key')
-		os.system('sudo apt-key add - < '+self.currentdir+'/data/sources/nodesource.gpg.key')
+		self.logger.Clear()
+		self.notebook.ChangeSelection(3)
+		command = self.platform.admin+' python3 '+self.currentdir+'/installSources.py'
+		popen = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
+		for line in popen.stdout:
+			if not 'Warning' in line and not 'WARNING' in line:
+				self.logger.WriteText(line)
+				self.ShowStatusBarYELLOW(_('Adding packages sources, please wait... ')+line)
+				self.logger.ShowPosition(self.logger.GetLastPosition())
 		self.OnToolUpdate()
 
 	def OnToolLanguage(self, event): 
@@ -157,15 +379,72 @@ class MyFrame(wx.Frame):
 		toolTranslate = self.toolbar3.AddTool(302, _('Translate'), wx.Bitmap(self.currentdir+"/data/crowdin.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolTranslate, toolTranslate)
 		self.toolbar3.AddSeparator()
+		starupLabel = wx.StaticText(self.genSettings, label=_('Startup'))
+		self.toolbar4 = wx.ToolBar(self.genSettings, style=wx.TB_TEXT)
+		toolDelay = self.toolbar4.AddCheckTool(401, _('Delay (seconds)'), wx.Bitmap(self.currentdir+"/data/delay.png"))
+		self.Bind(wx.EVT_TOOL, self.OnToolDelay, toolDelay)
+		self.delay = wx.TextCtrl(self.toolbar4, 402)
+		tooldelay = self.toolbar4.AddControl(self.delay)
+		self.toolbar4.AddSeparator()
+		toolPlay = self.toolbar4.AddCheckTool(403, _('Play'), wx.Bitmap(self.currentdir+"/data/play.png"))
+		self.Bind(wx.EVT_TOOL, self.OnToolPlay, toolPlay)
+		self.pathFile = wx.TextCtrl(self.toolbar4, 404, size=(415,-1))
+		toolPathFile = self.toolbar4.AddControl(self.pathFile)
+		toolFile = self.toolbar4.AddTool(405, '', wx.Bitmap(self.currentdir+"/data/file.png"))
+		self.Bind(wx.EVT_TOOL, self.OnToolFile, toolFile)
 
 		sizer = wx.BoxSizer(wx.VERTICAL)
 		sizer.Add(self.toolbar3, 0, wx.EXPAND, 0)
+		sizer.Add(starupLabel, 0, wx.ALL | wx.EXPAND, 10)
+		sizer.Add(self.toolbar4, 0, wx.EXPAND, 0)
 		self.genSettings.SetSizer(sizer)
+
+		delay = self.conf.get('GENERAL', 'delay')
+		if delay:
+			self.delay.SetValue(delay)
+			self.toolbar4.ToggleTool(401,True)
+		path = self.conf.get('GENERAL', 'play')
+		if not path == '':
+			self.pathFile.SetValue(path)
+			self.toolbar4.ToggleTool(403,True)
+		else: self.pathFile.SetValue('/usr/share/sounds/openplotter/Store_Door_Chime.mp3')
+
+	def OnToolFile(self,e):
+		dlg = wx.FileDialog(self, message=_('Choose a file'), defaultDir='/usr/share/sounds/openplotter', defaultFile='',
+							wildcard=_('Audio files') + ' (*.mp3)|*.mp3|' + _('All files') + ' (*.*)|*.*',
+							style=wx.FD_OPEN | wx.FD_CHANGE_DIR)
+		if dlg.ShowModal() == wx.ID_OK:
+			file_path = dlg.GetPath()
+			self.pathFile.SetValue(file_path)
+			self.OnToolPlay()
+		dlg.Destroy()
+
+	def OnToolPlay(self,e=0):
+		if self.toolbar4.GetToolState(403):
+			path = self.pathFile.GetValue()
+			if path:
+				self.conf.set('GENERAL', 'play', path)
+				self.ShowStatusBarGREEN(_('Sound to play at startup set to: ')+path)
+			else: self.toolbar4.ToggleTool(403,False)
+		else:
+			self.conf.set('GENERAL', 'play', '')
+			self.ShowStatusBarGREEN(_('Removed sound to play at startup'))
+
+	def OnToolDelay(self,e):
+		if self.toolbar4.GetToolState(401):
+			delay = self.delay.GetValue()
+			if delay:
+				self.conf.set('GENERAL', 'delay', delay)
+				self.ShowStatusBarGREEN(_('Delay at startup set to: ')+delay)
+			else: self.toolbar4.ToggleTool(401,False)
+		else:
+			self.conf.set('GENERAL', 'delay', '')
+			self.ShowStatusBarGREEN(_('Removed delay at startup'))
 
 	def pageRpi(self):
 		pass
 		#TODO disable is not on RPI
-		#if self.isRPI:
+		#if self.platform.isRPI:
 
 	def OnToolStartup(self, e):
 		autostartFolder = self.home+'/.config/autostart'
@@ -195,46 +474,72 @@ class MyFrame(wx.Frame):
 		self.listApps.SetImageList(self.il, wx.IMAGE_LIST_SMALL)
 
 		self.toolbar2 = wx.ToolBar(self.apps, style=wx.TB_TEXT | wx.TB_VERTICAL)
+		self.refreshButton = self.toolbar2.AddTool(204, _('Refresh'), wx.Bitmap(self.currentdir+"/data/refresh.png"))
+		self.Bind(wx.EVT_TOOL, self.OnRefreshButton, self.refreshButton)
+		self.toolbar2.AddSeparator()
 		self.installButton = self.toolbar2.AddTool(201, _('Install'), wx.Bitmap(self.currentdir+"/data/install.png"))
 		self.Bind(wx.EVT_TOOL, self.OnInstallButton, self.installButton)
 		self.uninstallButton = self.toolbar2.AddTool(202, _('Uninstall'), wx.Bitmap(self.currentdir+"/data/uninstall.png"))
 		self.Bind(wx.EVT_TOOL, self.OnUninstallButton, self.uninstallButton)
-		self.toolbar2.AddSeparator()
 		self.openButton = self.toolbar2.AddTool(203, _('Open'), wx.Bitmap(self.currentdir+"/data/open.png"))
 		self.Bind(wx.EVT_TOOL, self.OnOpenButton, self.openButton)
-		self.changelogButton = self.toolbar2.AddTool(204, _('Changelog'), wx.Bitmap(self.currentdir+"/data/text.png"))
-		self.Bind(wx.EVT_TOOL, self.OnChangelogButtonButton, self.changelogButton)
 
 		sizer = wx.BoxSizer(wx.HORIZONTAL)
 		sizer.Add(self.listApps, 1, wx.EXPAND, 0)
 		sizer.Add(self.toolbar2, 0)
 		self.apps.SetSizer(sizer)
 
-		self.readApps()
+		sources = subprocess.check_output(['apt-cache', 'policy']).decode()
+		for i in self.appsDict:
+			item = self.listApps.InsertItem(0, i['name'])
+			if i['platform'] == 'rpi': self.listApps.SetItemImage(item, 2)
+			else: self.listApps.SetItemImage(item, 1)
+			candidate = ''
+			missing = False
+			for ii in i['sources']:
+				if not ii in sources:  missing = ii
+			if missing: 
+				candidate = _('missing source: ')+missing
+			if i['dev'] == 'yes': 
+				candidate = _('coming soon')
+			if self.platform.isRPI:
+				if i['platform'] == 'debian': 
+					candidate = _('app only for non Raspberry machines')
+			else:
+				if i['platform'] == 'rpi': 
+					candidate = _('app only for Raspberry machines')
+			if candidate:
+				self.listApps.SetItem(item, 2, candidate)
+			else:
+				self.listApps.SetItem(item, 1, _('Press Refresh'))
+			self.listApps.SetItemBackgroundColour(item,(200,200,200))
+
 
 	def OnInstallButton(self,e):
 		index = self.listApps.GetFirstSelected()
 		if index == -1: return
-		apps = list(reversed(self.apps))
+		apps = list(reversed(self.appsDict))
 		package = apps[index]['package']
 		msg = _('Are you sure you want to install ')+package+_(' and its dependencies?')
 		dlg = wx.MessageDialog(None, msg, _('Question'), wx.YES_NO | wx.NO_DEFAULT | wx.ICON_EXCLAMATION)
 		if dlg.ShowModal() == wx.ID_YES:
 			self.logger.Clear()
 			self.notebook.ChangeSelection(3)
-			command = 'sudo apt -y install '+package
+			command = self.platform.admin+' apt -y install '+package
 			popen = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
 			for line in popen.stdout:
-				self.logger.WriteText(line)
-				self.ShowStatusBarYELLOW(_('Installing package, please wait... ')+line)
-				self.logger.ShowPosition(self.logger.GetLastPosition())
+				if not 'Warning' in line and not 'WARNING' in line:
+					self.logger.WriteText(line)
+					self.ShowStatusBarYELLOW(_('Installing package, please wait... ')+line)
+					self.logger.ShowPosition(self.logger.GetLastPosition())
 			postInstallation = apps[index]['postInstallation']
 			if postInstallation:
 				popen = subprocess.Popen(postInstallation, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
 				for line in popen.stdout:
-					self.logger.WriteText(line)
-					self.ShowStatusBarYELLOW(_('Running post-installation scripts, please wait... ')+line)
-					self.logger.ShowPosition(self.logger.GetLastPosition())	
+					if not 'Warning' in line and not 'WARNING' in line:
+						self.logger.WriteText(line)
+						self.ShowStatusBarYELLOW(_('Running post-installation scripts, please wait... ')+line)
+						self.logger.ShowPosition(self.logger.GetLastPosition())	
 			self.ShowStatusBarGREEN(_('Done'))
 			dlg.Destroy()
 			self.readApps()
@@ -243,7 +548,7 @@ class MyFrame(wx.Frame):
 	def OnUninstallButton(self,e):
 		index = self.listApps.GetFirstSelected()
 		if index == -1: return
-		apps = list(reversed(self.apps))
+		apps = list(reversed(self.appsDict))
 		package = apps[index]['uninstall']
 		if self.installedFlag and package == 'openplotter-settings':
 			wx.MessageBox(_('You have to uninstall the rest of apps before uninstalling openplotter-settings.'), _('Info'), wx.OK | wx.ICON_INFORMATION)
@@ -253,255 +558,42 @@ class MyFrame(wx.Frame):
 		if dlg.ShowModal() == wx.ID_YES:
 			self.logger.Clear()
 			self.notebook.ChangeSelection(3)
-			command = 'sudo apt -y autoremove '+package
+			command = self.platform.admin+' apt -y autoremove '+package
 			popen = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
 			for line in popen.stdout:
-				self.logger.WriteText(line)
-				self.ShowStatusBarYELLOW(_('Uninstalling packages, please wait... ')+line)
-				self.logger.ShowPosition(self.logger.GetLastPosition())
+				if not 'Warning' in line and not 'WARNING' in line:
+					self.logger.WriteText(line)
+					self.ShowStatusBarYELLOW(_('Uninstalling packages, please wait... ')+line)
+					self.logger.ShowPosition(self.logger.GetLastPosition())
 			self.ShowStatusBarGREEN(_('Done'))
 			dlg.Destroy()
 			self.readApps()
 		else: dlg.Destroy()
 
-	def OnChangelogButtonButton(self,e):
-		index = self.listApps.GetFirstSelected()
-		if index == -1: return
-		apps = list(reversed(self.apps))
-		self.logger.Clear()
-		self.notebook.ChangeSelection(3)
-		command = 'apt changelog '+apps[index]['package']
-		popen = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
-		for line in popen.stdout:
-			self.logger.WriteText(line)
-			self.ShowStatusBarYELLOW(_('Reading changelog, please wait... ')+line)
-		self.ShowStatusBarGREEN(_('Done'))
+	def OnRefreshButton(self,e):
+		self.readApps()
 
 	def OnOpenButton(self,e):
 		index = self.listApps.GetFirstSelected()
 		if index == -1: return
-		apps = list(reversed(self.apps))
+		apps = list(reversed(self.appsDict))
 		entryPoint = apps[index]['entryPoint']
 		popen = subprocess.Popen(entryPoint, shell=True)
 
 	def readApps(self):
+		self.notebook.ChangeSelection(0)
 		self.listApps.DeleteAllItems()
-		self.apps = []
-
-		app = {
-		'name': _('Fake app only for desktops'),
-		'platform': 'debian',
-		'package': 'openplotter-fake',
-		'uninstall': 'openplotter-fake',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'no',
-		'entryPoint': 'openplotter-fake',
-		'postInstallation': '',
-		}
-		self.apps.append(app)
-
-		app = {
-		'name': _('Signal K Filters'),
-		'platform': 'both',
-		'package': 'openplotter-signalk-filters',
-		'uninstall': 'openplotter-signalk-filters',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'yes',
-		'entryPoint': 'openplotter-signalk-filters',
-		'postInstallation': '',
-		}
-		self.apps.append(app)
-
-		app = {
-		'name': _('SDR AIS'),
-		'platform': 'both',
-		'package': 'openplotter-sdr-ais',
-		'uninstall': 'openplotter-sdr-ais',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'yes',
-		'entryPoint': 'openplotter-sdr-ais',
-		'postInstallation': '',
-		}
-		self.apps.append(app)
-
-		app = {
-		'name': _('Kplex'),
-		'platform': 'both',
-		'package': 'openplotter-kplex',
-		'uninstall': 'openplotter-kplex',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'yes',
-		'entryPoint': 'openplotter-kplex',
-		'postInstallation': '',
-		}
-		self.apps.append(app)
-
-		app = {
-		'name': _('Dashboards'),
-		'platform': 'both',
-		'package': 'openplotter-dashboards',
-		'uninstall': 'openplotter-dashboards',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'yes',
-		'entryPoint': 'openplotter-dashboards',
-		'postInstallation': '',
-		}
-		self.apps.append(app)
-
-		app = {
-		'name': _('Actions'),
-		'platform': 'both',
-		'package': 'openplotter-actions',
-		'uninstall': 'openplotter-actions',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'yes',
-		'entryPoint': 'openplotter-actions',
-		'postInstallation': '',
-		}
-		self.apps.append(app)
-
-		app = {
-		'name': _('CAN Devices Management'),
-		'platform': 'both',
-		'package': 'openplotter-can',
-		'uninstall': 'openplotter-can',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'yes',
-		'entryPoint': 'openplotter-can',
-		'postInstallation': '',
-		}
-		self.apps.append(app)
-
-		app = {
-		'name': _('Moitessier HAT'),
-		'platform': 'rpi',
-		'package': 'openplotter-moitessier',
-		'uninstall': 'openplotter-moitessier',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'yes',
-		'entryPoint': 'openplotter-moitessier',
-		'postInstallation': '',
-		}
-		self.apps.append(app)
-
-		app = {
-		'name': _('Pypilot'),
-		'platform': 'rpi',
-		'package': 'openplotter-pypilot',
-		'uninstall': 'openplotter-pypilot',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'yes',
-		'entryPoint': 'openplotter-pypilot',
-		'postInstallation': '',
-		}
-		self.apps.append(app)
-
-		app = {
-		'name': _('1W Sensors'),
-		'platform': 'rpi',
-		'package': 'openplotter-1w',
-		'uninstall': 'openplotter-1w',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'yes',
-		'entryPoint': 'openplotter-1w',
-		'postInstallation': '',
-		}
-		self.apps.append(app)
-
-		app = {
-		'name': _('I2C Sensors'),
-		'platform': 'rpi',
-		'package': 'openplotter-i2c',
-		'uninstall': 'openplotter-i2c',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'no',
-		'entryPoint': 'openplotter-i2c',
-		'postInstallation': '',
-		}
-		self.apps.append(app)
-
-		app = {
-		'name': _('Serial Devices Management'),
-		'platform': 'both',
-		'package': 'openplotter-serial',
-		'uninstall': 'openplotter-serial',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'yes',
-		'entryPoint': 'openplotter-serial',
-		'postInstallation': '',
-		}
-		self.apps.append(app)
-
-		app = {
-		'name': _('Network'),
-		'platform': 'rpi',
-		'package': 'openplotter-network',
-		'uninstall': 'openplotter-network',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'no',
-		'entryPoint': 'openplotter-network',
-		'postInstallation': 'sudo networkPostInstallation',
-		}
-		self.apps.append(app)
-
-		app = {
-		'name': _('Signal K Installer'),
-		'platform': 'both',
-		'package': 'openplotter-signalk-installer',
-		'uninstall': 'openplotter-signalk-installer',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu','https://deb.nodesource.com/node_10.x'],
-		'dev': 'no',
-		'entryPoint': 'openplotter-signalk-installer',
-		'postInstallation': 'sudo signalkPostInstallation',
-		}
-		self.apps.append(app)
-
-		app = {
-		'name': _('OpenCPN Installer'),
-		'platform': 'both',
-		'package': 'openplotter-opencpn-installer',
-		'uninstall': 'openplotter-opencpn-installer opencpn',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu','http://ppa.launchpad.net/opencpn/opencpn/ubuntu'],
-		'dev': 'no',
-		'entryPoint': 'openplotter-opencpn-installer',
-		'postInstallation': '',
-		}
-		self.apps.append(app)
-
-		app = {
-		'name': _('Documentation'),
-		'platform': 'both',
-		'package': 'openplotter-doc',
-		'uninstall': 'openplotter-doc',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'no',
-		'entryPoint': 'x-www-browser /usr/share/openplotter-doc/index.html',
-		'postInstallation': '',
-		}
-		self.apps.append(app)
-
-		app = {
-		'name': _('Settings'),
-		'platform': 'both',
-		'package': 'openplotter-settings',
-		'uninstall': 'openplotter-settings',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'no',
-		'entryPoint': 'openplotter-settings',
-		'postInstallation': '',
-		}
-		self.apps.append(app)
-
+		self.ShowStatusBarYELLOW(_('Checking apps list, please wait... '))
 		self.installedFlag = False
 		sources = subprocess.check_output(['apt-cache', 'policy']).decode()
-		for i in self.apps:
+		for i in self.appsDict:
 			item = self.listApps.InsertItem(0, i['name'])
 			if i['platform'] == 'rpi': self.listApps.SetItemImage(item, 2)
 			else: self.listApps.SetItemImage(item, 1)
-
+			
 			installed = ''
 			candidate = ''
-			command = 'LANG=C apt-cache policy '+i['package']
+			command = 'LC_ALL=C apt-cache policy '+i['package']
 			popen = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
 			for line in popen.stdout:
 				if 'Installed:' in line: installed = line
@@ -525,7 +617,7 @@ class MyFrame(wx.Frame):
 				candidate = _('coming soon')
 				self.listApps.SetItemBackgroundColour(item,(200,200,200))
 
-			if self.isRPI:
+			if self.platform.isRPI:
 				if i['platform'] == 'debian': 
 					self.listApps.SetItemBackgroundColour(item,(200,200,200))
 					candidate = _('app only for non Raspberry machines')
@@ -537,12 +629,16 @@ class MyFrame(wx.Frame):
 			if not candidate:
 				self.listApps.SetItemBackgroundColour(item,(200,200,200))
 
+			if installed and candidate:
+				if installed != candidate: self.listApps.SetItemBackgroundColour(item,(220,255,220))
+
 			self.listApps.SetItem(item, 1, installed)
 			self.listApps.SetItem(item, 2, candidate)
 			if installed and i['package'] != 'openplotter-settings': self.installedFlag = True
 
 		if not self.platform.isInstalled('openplotter-doc'): self.toolbar1.EnableTool(101,False)
 		else:self.toolbar1.EnableTool(101,True)
+		self.ShowStatusBarGREEN(_('Done'))
 	
 	def pageOutput(self):
 		self.logger = rt.RichTextCtrl(self.output, style=wx.TE_MULTILINE|wx.TE_READONLY|wx.TE_DONTWRAP|wx.LC_SORT_ASCENDING)
@@ -563,13 +659,11 @@ class MyFrame(wx.Frame):
 			if self.listApps.GetItemText(i, 1) != '':
 				if i != 0:
 					self.toolbar2.EnableTool(203,True)
-				self.toolbar2.EnableTool(204,True)
 
 	def onListAppsDeselected(self, event=0):
 		self.toolbar2.EnableTool(201,False)
 		self.toolbar2.EnableTool(202,False)
 		self.toolbar2.EnableTool(203,False)
-		self.toolbar2.EnableTool(204,False)
 
 def main():
 	app = wx.App()
