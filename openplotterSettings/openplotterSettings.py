@@ -36,11 +36,25 @@ class MyFrame(wx.Frame):
 		'name': _('Fake app only for desktops'),
 		'platform': 'debian',
 		'package': 'openplotter-fake',
+		'preUninstall': '',
 		'uninstall': 'openplotter-fake',
 		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
 		'dev': 'no',
 		'entryPoint': 'openplotter-fake',
-		'postInstallation': '',
+		'postInstall': '',
+		}
+		self.appsDict.append(app)
+
+		app = {
+		'name': _('OpenPlotter Apps Template'),
+		'platform': 'both',
+		'package': 'openplotter-myapp',
+		'preUninstall': self.platform.admin+' myappPreUninstall',
+		'uninstall': 'openplotter-myapp',
+		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'dev': 'no',
+		'entryPoint': 'openplotter-myapp',
+		'postInstall': self.platform.admin+' myappPostInstall',
 		}
 		self.appsDict.append(app)
 
@@ -48,11 +62,12 @@ class MyFrame(wx.Frame):
 		'name': _('Signal K Filters'),
 		'platform': 'both',
 		'package': 'openplotter-signalk-filters',
+		'preUninstall': '',
 		'uninstall': 'openplotter-signalk-filters',
 		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
 		'dev': 'yes',
 		'entryPoint': 'openplotter-signalk-filters',
-		'postInstallation': '',
+		'postInstall': '',
 		}
 		self.appsDict.append(app)
 
@@ -60,11 +75,12 @@ class MyFrame(wx.Frame):
 		'name': _('SDR AIS'),
 		'platform': 'both',
 		'package': 'openplotter-sdr-ais',
+		'preUninstall': '',
 		'uninstall': 'openplotter-sdr-ais',
 		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
 		'dev': 'yes',
 		'entryPoint': 'openplotter-sdr-ais',
-		'postInstallation': '',
+		'postInstall': '',
 		}
 		self.appsDict.append(app)
 
@@ -72,11 +88,12 @@ class MyFrame(wx.Frame):
 		'name': _('Kplex'),
 		'platform': 'both',
 		'package': 'openplotter-kplex',
+		'preUninstall': '',
 		'uninstall': 'openplotter-kplex',
 		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
 		'dev': 'yes',
 		'entryPoint': 'openplotter-kplex',
-		'postInstallation': '',
+		'postInstall': '',
 		}
 		self.appsDict.append(app)
 
@@ -84,11 +101,12 @@ class MyFrame(wx.Frame):
 		'name': _('Dashboards'),
 		'platform': 'both',
 		'package': 'openplotter-dashboards',
+		'preUninstall': '',
 		'uninstall': 'openplotter-dashboards',
 		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
 		'dev': 'yes',
 		'entryPoint': 'openplotter-dashboards',
-		'postInstallation': '',
+		'postInstall': '',
 		}
 		self.appsDict.append(app)
 
@@ -96,47 +114,12 @@ class MyFrame(wx.Frame):
 		'name': _('Actions'),
 		'platform': 'both',
 		'package': 'openplotter-actions',
+		'preUninstall': '',
 		'uninstall': 'openplotter-actions',
 		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
 		'dev': 'yes',
 		'entryPoint': 'openplotter-actions',
-		'postInstallation': '',
-		}
-		self.appsDict.append(app)
-
-		app = {
-		'name': _('CAN Devices Management'),
-		'platform': 'both',
-		'package': 'openplotter-can',
-		'uninstall': 'openplotter-can',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'yes',
-		'entryPoint': 'openplotter-can',
-		'postInstallation': '',
-		}
-		self.appsDict.append(app)
-
-		app = {
-		'name': _('Moitessier HAT'),
-		'platform': 'rpi',
-		'package': 'openplotter-moitessier',
-		'uninstall': 'openplotter-moitessier',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'yes',
-		'entryPoint': 'openplotter-moitessier',
-		'postInstallation': '',
-		}
-		self.appsDict.append(app)
-
-		app = {
-		'name': _('Pypilot'),
-		'platform': 'rpi',
-		'package': 'openplotter-pypilot',
-		'uninstall': 'openplotter-pypilot',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'yes',
-		'entryPoint': 'openplotter-pypilot',
-		'postInstallation': '',
+		'postInstall': '',
 		}
 		self.appsDict.append(app)
 
@@ -144,23 +127,25 @@ class MyFrame(wx.Frame):
 		'name': _('1W Sensors'),
 		'platform': 'rpi',
 		'package': 'openplotter-1w',
+		'preUninstall': '',
 		'uninstall': 'openplotter-1w',
 		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
 		'dev': 'yes',
 		'entryPoint': 'openplotter-1w',
-		'postInstallation': '',
+		'postInstall': '',
 		}
 		self.appsDict.append(app)
 
 		app = {
-		'name': _('I2C Sensors'),
-		'platform': 'rpi',
-		'package': 'openplotter-i2c',
-		'uninstall': 'openplotter-i2c',
+		'name': _('CAN Devices Management'),
+		'platform': 'both',
+		'package': 'openplotter-can',
+		'preUninstall': '',
+		'uninstall': 'openplotter-can',
 		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'no',
-		'entryPoint': 'openplotter-i2c',
-		'postInstallation': self.platform.admin+' i2cPostInstallation',
+		'dev': 'yes',
+		'entryPoint': 'openplotter-can',
+		'postInstall': '',
 		}
 		self.appsDict.append(app)
 
@@ -168,11 +153,51 @@ class MyFrame(wx.Frame):
 		'name': _('Serial Devices Management'),
 		'platform': 'both',
 		'package': 'openplotter-serial',
+		'preUninstall': '',
 		'uninstall': 'openplotter-serial',
 		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
 		'dev': 'yes',
 		'entryPoint': 'openplotter-serial',
-		'postInstallation': '',
+		'postInstall': '',
+		}
+		self.appsDict.append(app)
+
+		app = {
+		'name': _('Moitessier HAT'),
+		'platform': 'rpi',
+		'package': 'openplotter-moitessier',
+		'preUninstall': '',
+		'uninstall': 'openplotter-moitessier',
+		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'dev': 'yes',
+		'entryPoint': 'openplotter-moitessier',
+		'postInstall': '',
+		}
+		self.appsDict.append(app)
+
+		app = {
+		'name': _('Pypilot'),
+		'platform': 'rpi',
+		'package': 'openplotter-pypilot',
+		'preUninstall': '',
+		'uninstall': 'openplotter-pypilot',
+		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'dev': 'yes',
+		'entryPoint': 'openplotter-pypilot',
+		'postInstall': '',
+		}
+		self.appsDict.append(app)
+
+		app = {
+		'name': _('I2C Sensors'),
+		'platform': 'rpi',
+		'package': 'openplotter-i2c',
+		'preUninstall': self.platform.admin+' i2cPreUninstall',
+		'uninstall': 'openplotter-i2c',
+		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'dev': 'no',
+		'entryPoint': 'openplotter-i2c',
+		'postInstall': self.platform.admin+' i2cPostInstall',
 		}
 		self.appsDict.append(app)
 
@@ -180,11 +205,12 @@ class MyFrame(wx.Frame):
 		'name': _('Network'),
 		'platform': 'rpi',
 		'package': 'openplotter-network',
+		'preUninstall': self.platform.admin+' networkPreUninstall',
 		'uninstall': 'openplotter-network',
 		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
 		'dev': 'no',
 		'entryPoint': 'openplotter-network',
-		'postInstallation': self.platform.admin+' networkPostInstallation',
+		'postInstall': self.platform.admin+' networkPostInstall',
 		}
 		self.appsDict.append(app)
 
@@ -192,11 +218,12 @@ class MyFrame(wx.Frame):
 		'name': _('XyGrib'),
 		'platform': 'both',
 		'package': 'xygrib',
+		'preUninstall': '',
 		'uninstall': 'xygrib',
 		'sources': [],
 		'dev': 'no',
 		'entryPoint': 'XyGrib',
-		'postInstallation': '',
+		'postInstall': '',
 		}
 		self.appsDict.append(app)
 
@@ -206,11 +233,12 @@ class MyFrame(wx.Frame):
 		'name': _('Signal K Installer'),
 		'platform': 'both',
 		'package': 'openplotter-signalk-installer',
+		'preUninstall': self.platform.admin+' signalkPreUninstall',
 		'uninstall': 'openplotter-signalk-installer',
 		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu','https://deb.nodesource.com/node_10.x'],
 		'dev': 'no',
 		'entryPoint': entryPoint,
-		'postInstallation': self.platform.admin+' signalkPostInstallation',
+		'postInstall': self.platform.admin+' signalkPostInstall',
 		}
 		self.appsDict.append(app)
 
@@ -218,11 +246,12 @@ class MyFrame(wx.Frame):
 		'name': _('OpenCPN Installer'),
 		'platform': 'both',
 		'package': 'openplotter-opencpn-installer',
+		'preUninstall': '',
 		'uninstall': 'openplotter-opencpn-installer opencpn',
 		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu','http://ppa.launchpad.net/opencpn/opencpn/ubuntu'],
 		'dev': 'no',
 		'entryPoint': 'openplotter-opencpn-installer',
-		'postInstallation': '',
+		'postInstall': '',
 		}
 		self.appsDict.append(app)
 
@@ -230,11 +259,12 @@ class MyFrame(wx.Frame):
 		'name': _('Documentation'),
 		'platform': 'both',
 		'package': 'openplotter-doc',
+		'preUninstall': '',
 		'uninstall': 'openplotter-doc',
 		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
 		'dev': 'no',
 		'entryPoint': 'x-www-browser /usr/share/openplotter-doc/index.html',
-		'postInstallation': '',
+		'postInstall': '',
 		}
 		self.appsDict.append(app)
 
@@ -242,11 +272,12 @@ class MyFrame(wx.Frame):
 		'name': _('Settings'),
 		'platform': 'both',
 		'package': 'openplotter-settings',
+		'preUninstall': '',
 		'uninstall': 'openplotter-settings',
 		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
 		'dev': 'no',
 		'entryPoint': 'openplotter-settings',
-		'postInstallation': '',
+		'postInstall': '',
 		}
 		self.appsDict.append(app)
 
@@ -254,6 +285,10 @@ class MyFrame(wx.Frame):
 		self.SetFont(wx.Font(10, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
 		icon = wx.Icon(self.currentdir+"/data/openplotter-settings.png", wx.BITMAP_TYPE_PNG)
 		self.SetIcon(icon)
+		self.CreateStatusBar()
+		font_statusBar = self.GetStatusBar().GetFont()
+		font_statusBar.SetWeight(wx.BOLD)
+		self.GetStatusBar().SetFont(font_statusBar)
 
 		self.toolbar1 = wx.ToolBar(self, style=wx.TB_TEXT)
 		toolHelp = self.toolbar1.AddTool(101, _('Help'), wx.Bitmap(self.currentdir+"/data/help.png"))
@@ -273,6 +308,7 @@ class MyFrame(wx.Frame):
 		self.Bind(wx.EVT_TOOL, self.OnToolUpdate, toolUpdate)
 		
 		self.notebook = wx.Notebook(self)
+		self.notebook.Bind(wx.EVT_NOTEBOOK_PAGE_CHANGED, self.onTabChange)
 		self.apps = wx.Panel(self.notebook)
 		self.genSettings = wx.Panel(self.notebook)
 		self.raspSettings = wx.Panel(self.notebook)
@@ -298,11 +334,6 @@ class MyFrame(wx.Frame):
 		vbox.Add(self.notebook, 1, wx.EXPAND)
 		self.SetSizer(vbox)
 
-		self.CreateStatusBar()
-		font_statusBar = self.GetStatusBar().GetFont()
-		font_statusBar.SetWeight(wx.BOLD)
-		self.GetStatusBar().SetFont(font_statusBar)
-
 		self.pageGeneral()
 		self.pageRpi()
 		self.pageOutput()
@@ -325,7 +356,10 @@ class MyFrame(wx.Frame):
 		self.ShowStatusBar(w_msg, wx.BLACK) 
 
 	def ShowStatusBarYELLOW(self, w_msg):
-		self.ShowStatusBar(w_msg,(255,140,0)) 
+		self.ShowStatusBar(w_msg,(255,140,0))
+
+	def onTabChange(self, event):
+		self.SetStatusText('')
 
 	def OnToolHelp(self, event): 
 		url = "/usr/share/openplotter-doc/settings/settings_app.html"
@@ -532,9 +566,9 @@ class MyFrame(wx.Frame):
 					self.logger.WriteText(line)
 					self.ShowStatusBarYELLOW(_('Installing package, please wait... ')+line)
 					self.logger.ShowPosition(self.logger.GetLastPosition())
-			postInstallation = apps[index]['postInstallation']
-			if postInstallation:
-				popen = subprocess.Popen(postInstallation, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
+			postInstall = apps[index]['postInstall']
+			if postInstall:
+				popen = subprocess.Popen(postInstall, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
 				for line in popen.stdout:
 					if not 'Warning' in line and not 'WARNING' in line:
 						self.logger.WriteText(line)
@@ -558,6 +592,14 @@ class MyFrame(wx.Frame):
 		if dlg.ShowModal() == wx.ID_YES:
 			self.logger.Clear()
 			self.notebook.ChangeSelection(3)
+			preUninstall = apps[index]['preUninstall']
+			if preUninstall:
+				popen = subprocess.Popen(preUninstall, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
+				for line in popen.stdout:
+					if not 'Warning' in line and not 'WARNING' in line:
+						self.logger.WriteText(line)
+						self.ShowStatusBarYELLOW(_('Running pre-uninstall scripts, please wait... ')+line)
+						self.logger.ShowPosition(self.logger.GetLastPosition())	
 			command = self.platform.admin+' apt -y autoremove '+package
 			popen = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
 			for line in popen.stdout:

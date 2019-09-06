@@ -23,15 +23,17 @@ class Ports:
 
 	def getUsedPorts(self):
 		usedPorts=[]
-
+		
 		ports = False
 		try:
 			from openplotterI2c import ports
 		except:pass
 		if ports: 
 			target = ports.Ports(self.conf,self.currentLanguage)
-			for i in target.usedPorts:
-				usedPorts.append(i)
+			targetPorts = target.usedPorts()
+			if targetPorts:
+				for i in targetPorts:
+					usedPorts.append(i)
 
 		ports = False
 		try:
@@ -39,25 +41,42 @@ class Ports:
 		except:pass
 		if ports: 
 			target = ports.Ports(self.conf,self.currentLanguage)
-			for i in target.usedPorts:
-				usedPorts.append(i)
-				
+			targetPorts = target.usedPorts()
+			if targetPorts:
+				for i in targetPorts:
+					usedPorts.append(i)
+		'''	
 		ports = False
 		try:
 			from openplotterOpencpnInstaller import ports
 		except:pass
 		if ports: 
 			target = ports.Ports(self.conf,self.currentLanguage)
-			for i in target.usedPorts:
-				usedPorts.append(i)
-
+			targetPorts = target.usedPorts()
+			if targetPorts:
+				for i in targetPorts:
+					usedPorts.append(i)
+		'''
 		ports = False
 		try:
 			from openplotterNetwork import ports
 		except:pass
 		if ports: 
 			target = ports.Ports(self.conf,self.currentLanguage)
-			for i in target.usedPorts:
-				usedPorts.append(i)
+			targetPorts = target.usedPorts()
+			if targetPorts:
+				for i in targetPorts:
+					usedPorts.append(i)
 
+		ports = False
+		try:
+			from openplotterMyapp import ports
+		except:pass
+		if ports: 
+			target = ports.Ports(self.conf,self.currentLanguage)
+			targetPorts = target.usedPorts()
+			if targetPorts:
+				for i in targetPorts:
+					usedPorts.append(i)
+				
 		return usedPorts
