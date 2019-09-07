@@ -98,19 +98,18 @@ class MyFrame(wx.Frame):
 		if self.autoclose > 0:
 			rest = round(self.autoclose - time.time())
 			if self.autoclose < time.time():
-				if self.mode == 'start': self.OnCloseButton()
+				self.OnCloseButton()
 		if not self.thread1.isAlive():
 			if not self.warnings_flag:
 				if self.mode == 'start': self.OnCloseButton()
 				else:
 					self.closeButton.Enable()
 					self.GetStatusBar().SetForegroundColour(wx.BLACK)
-					self.SetStatusText(_('There are no warnings'))
+					self.SetStatusText(_('There are no warnings. Closing in ')+str(rest)+_(' seconds'))
 			else:
 				self.closeButton.Enable()
 				self.GetStatusBar().SetForegroundColour(wx.RED)
-				if self.mode == 'start': self.SetStatusText(_('There are some warnings. Check your system. Closing in ')+str(rest)+_(' seconds'))
-				else: self.SetStatusText(_('There are some warnings. Check your system.'))
+				self.SetStatusText(_('There are some warnings. Check your system. Closing in ')+str(rest)+_(' seconds'))
 				
 
 	def add_logger_data(self, msg):
