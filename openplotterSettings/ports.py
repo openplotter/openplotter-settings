@@ -45,7 +45,7 @@ class Ports:
 			if targetPorts:
 				for i in targetPorts:
 					usedPorts.append(i)
-		'''	
+
 		ports = False
 		try:
 			from openplotterOpencpnInstaller import ports
@@ -56,7 +56,7 @@ class Ports:
 			if targetPorts:
 				for i in targetPorts:
 					usedPorts.append(i)
-		'''
+
 		ports = False
 		try:
 			from openplotterNetwork import ports
@@ -80,3 +80,21 @@ class Ports:
 					usedPorts.append(i)
 				
 		return usedPorts
+
+	def conflicts(self):
+		usedPorts = self.getUsedPorts()
+		conflict = []
+		if usedPorts:
+			for i in usedPorts:
+				if i['mode'] == 'server':
+					for ii in usedPorts:
+						if ii['id'] != i['id'] and ii['mode'] == 'server' and ii['type'] == i['type'] and ii['port'] == i['port']:
+							iexists = False
+							for iii in conflict:
+								if iii['id'] == i['id']: iexists = True
+							if not iexists: conflict.append(i)
+							iiexists = False
+							for iii in conflict:
+								if iii['id'] == ii['id']: iiexists = True
+							if not iiexists: conflict.append(ii)
+		if conflict: return conflict

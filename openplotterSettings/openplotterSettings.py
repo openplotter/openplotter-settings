@@ -182,7 +182,7 @@ class MyFrame(wx.Frame):
 		'preUninstall': '',
 		'uninstall': 'openplotter-pypilot',
 		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'yes',
+		'dev': 'no',
 		'entryPoint': 'openplotter-pypilot',
 		'postInstall': '',
 		}
@@ -272,7 +272,7 @@ class MyFrame(wx.Frame):
 		'name': _('Settings'),
 		'platform': 'both',
 		'package': 'openplotter-settings',
-		'preUninstall': '',
+		'preUninstall': self.platform.admin+' settingsPreUninstall',
 		'uninstall': 'openplotter-settings',
 		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
 		'dev': 'no',

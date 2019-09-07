@@ -19,6 +19,7 @@ import wx.richtext as rt
 from .conf import Conf
 from .language import Language
 from .platform import Platform
+from .ports import Ports
 
 class MyFrame(wx.Frame):
 	def __init__(self, mode):
@@ -183,6 +184,18 @@ class MyFrame(wx.Frame):
 		try:
 			play = self.conf.get('GENERAL', 'play')
 			if play: subprocess.Popen(['cvlc', '--play-and-exit', play])
+		except: pass
+
+		try:
+			self.add_logger_data(_('Checking ports conflict...'))
+			self.ports = Ports()
+			conflicts = self.ports.conflicts()
+			if conflicts:
+				red = _('There are conflicts between the following server connections:')
+				for i in conflicts: 
+					red += '\n'+i['description']+' ('+i['mode']+'): '+i['type']+' '+i['address']+':'+i['port']
+				self.add_logger_data({'green':'','black':'','red':red})
+			else: self.add_logger_data({'green':_('no conflicts'),'black':'','red':''})
 		except: pass
 
 		if self.mode == 'start': self.add_logger_data(_('STARTUP FINISHED'))
