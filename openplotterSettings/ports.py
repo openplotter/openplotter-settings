@@ -23,7 +23,18 @@ class Ports:
 
 	def getUsedPorts(self):
 		usedPorts=[]
-		
+
+		ports = False
+		try:
+			from openplotterMyapp import ports
+		except:pass
+		if ports: 
+			target = ports.Ports(self.conf,self.currentLanguage)
+			targetPorts = target.usedPorts()
+			if targetPorts:
+				for i in targetPorts:
+					usedPorts.append(i)
+
 		ports = False
 		try:
 			from openplotterI2c import ports
@@ -70,7 +81,7 @@ class Ports:
 
 		ports = False
 		try:
-			from openplotterMyapp import ports
+			from openplotterPypilot import ports
 		except:pass
 		if ports: 
 			target = ports.Ports(self.conf,self.currentLanguage)
