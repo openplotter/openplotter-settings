@@ -179,12 +179,12 @@ class MyFrame(wx.Frame):
 		'name': _('Pypilot'),
 		'platform': 'rpi',
 		'package': 'openplotter-pypilot',
-		'preUninstall': '',
+		'preUninstall': self.platform.admin+' pypilotPreUninstall',
 		'uninstall': 'openplotter-pypilot',
 		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
 		'dev': 'no',
 		'entryPoint': 'openplotter-pypilot',
-		'postInstall': '',
+		'postInstall': self.platform.admin+' pypilotPostInstall',
 		}
 		self.appsDict.append(app)
 
