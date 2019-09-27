@@ -186,6 +186,12 @@ class MyFrame(wx.Frame):
 		except:pass
 		if startup: self.processApp(startup)
 
+		startup = False
+		try:
+			from openplotterMoitessier import startup
+		except:pass
+		if startup: self.processApp(startup)
+
 		try:
 			play = self.conf.get('GENERAL', 'play')
 			if play: subprocess.Popen(['cvlc', '--play-and-exit', play])

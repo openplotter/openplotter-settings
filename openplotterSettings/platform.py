@@ -48,7 +48,7 @@ class Platform:
 
 	def isInstalled(self,package):
 		installed = False
-		command = 'LANG=C apt-cache policy '+package
+		command = 'LC_ALL=C apt-cache policy '+package
 		popen = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
 		for line in popen.stdout:
 			if 'Installed:' in line:
