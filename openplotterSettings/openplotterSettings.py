@@ -166,12 +166,12 @@ class MyFrame(wx.Frame):
 		'name': _('Moitessier HAT'),
 		'platform': 'rpi',
 		'package': 'openplotter-moitessier',
-		'preUninstall': '',
+		'preUninstall': self.platform.admin+' moitessierPreUninstall',
 		'uninstall': 'openplotter-moitessier',
 		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'yes',
+		'dev': 'no',
 		'entryPoint': 'openplotter-moitessier',
-		'postInstall': '',
+		'postInstall': self.platform.admin+' moitessierPostInstall',
 		}
 		self.appsDict.append(app)
 
@@ -316,7 +316,7 @@ class MyFrame(wx.Frame):
 		self.notebook.AddPage(self.apps, _('OpenPlotter Apps'))
 		self.notebook.AddPage(self.genSettings, _('General Settings'))
 		self.notebook.AddPage(self.raspSettings, _('Raspberry Settings'))
-		self.notebook.AddPage(self.output, _('Output'))
+		self.notebook.AddPage(self.output, '')
 
 		self.il = wx.ImageList(24, 24)
 		img0 = self.il.Add(wx.Bitmap(self.currentdir+"/data/openplotter-24.png", wx.BITMAP_TYPE_PNG))
@@ -413,6 +413,8 @@ class MyFrame(wx.Frame):
 		toolTranslate = self.toolbar3.AddTool(302, _('Translate'), wx.Bitmap(self.currentdir+"/data/crowdin.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolTranslate, toolTranslate)
 		self.toolbar3.AddSeparator()
+		toolMaxi = self.toolbar3.AddCheckTool(303, _('Maximize OpenPlotter Apps'), wx.Bitmap(self.currentdir+"/data/resize.png"))
+		self.Bind(wx.EVT_TOOL, self.OnToolMaxi, toolMaxi)
 		starupLabel = wx.StaticText(self.genSettings, label=_('Startup'))
 		self.toolbar4 = wx.ToolBar(self.genSettings, style=wx.TB_TEXT)
 		toolDelay = self.toolbar4.AddCheckTool(401, _('Delay (seconds)'), wx.Bitmap(self.currentdir+"/data/delay.png"))
@@ -432,6 +434,11 @@ class MyFrame(wx.Frame):
 		sizer.Add(starupLabel, 0, wx.ALL | wx.EXPAND, 10)
 		sizer.Add(self.toolbar4, 0, wx.EXPAND, 0)
 		self.genSettings.SetSizer(sizer)
+
+		maxi = self.conf.get('GENERAL', 'maximize')
+		if maxi == '1': 
+			self.toolbar3.ToggleTool(303,True)
+			self.Maximize()
 
 		delay = self.conf.get('GENERAL', 'delay')
 		if delay:
@@ -475,10 +482,41 @@ class MyFrame(wx.Frame):
 			self.conf.set('GENERAL', 'delay', '')
 			self.ShowStatusBarGREEN(_('Removed delay at startup'))
 
+	def OnToolMaxi(self,e):
+		if self.toolbar3.GetToolState(303):
+			self.conf.set('GENERAL', 'maximize', '1')
+			self.ShowStatusBarGREEN(_('OpenPlotter apps will open maximized'))
+		else:
+			self.conf.set('GENERAL', 'maximize', '0')
+			self.ShowStatusBarGREEN(_('Disabled maximized OpenPlotter apps'))
+
 	def pageRpi(self):
-		pass
-		#TODO disable is not on RPI
-		#if self.platform.isRPI:
+		if self.platform.isRPI:
+			self.toolbar5 = wx.ToolBar(self.raspSettings, style=wx.TB_TEXT)
+			toolScreensaver = self.toolbar5.AddCheckTool(501, _('Disable Screensaver'), wx.Bitmap(self.currentdir+"/data/screen.png"))
+			self.Bind(wx.EVT_TOOL, self.OnToolScreensaver, toolScreensaver)
+			self.toolbar5.AddSeparator()
+
+			sizer = wx.BoxSizer(wx.VERTICAL)
+			sizer.Add(self.toolbar5, 0, wx.EXPAND, 0)
+			self.raspSettings.SetSizer(sizer)
+
+			screensaver = self.conf.get('GENERAL', 'screensaver')
+			if screensaver == '1': 
+				self.toolbar5.ToggleTool(501,True)
+		else: self.toolbar5.EnableTool(501,False)
+
+	def OnToolScreensaver(self, e):
+		if self.toolbar5.GetToolState(501):
+			self.conf.set('GENERAL', 'screensaver', '1')
+			subprocess.call(['xset', 's', 'noblank'])
+			subprocess.call(['xset', 's', 'off'])
+			subprocess.call(['xset', '-dpms'])
+		else: 
+			self.conf.set('GENERAL', 'screensaver', '0')
+			subprocess.call(['xset', 's', 'blank'])
+			subprocess.call(['xset', 's', 'on'])
+			subprocess.call(['xset', '+dpms'])
 
 	def OnToolStartup(self, e):
 		autostartFolder = self.home+'/.config/autostart'
