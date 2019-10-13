@@ -1,6 +1,0 @@
-deb http://ppa.launchpad.net/opencpn/opencpn/ubuntu/ bionic main
-deb http://ppa.launchpad.net/openplotter/openplotter/ubuntu bionic main
-deb https://repos.influxdata.com/debian buster stable
-deb https://packages.grafana.com/oss/deb stable main
-deb https://deb.nodesource.com/node_10.x buster main
-deb-src https://deb.nodesource.com/node_10.x buster main

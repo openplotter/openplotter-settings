@@ -137,15 +137,15 @@ class MyFrame(wx.Frame):
 		self.appsDict.append(app)
 
 		app = {
-		'name': _('CAN Devices Management'),
+		'name': _('CAN Bus'),
 		'platform': 'both',
 		'package': 'openplotter-can',
-		'preUninstall': '',
+		'preUninstall': self.platform.admin+' canPreUninstall',
 		'uninstall': 'openplotter-can',
 		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'yes',
+		'dev': 'no',
 		'entryPoint': 'openplotter-can',
-		'postInstall': '',
+		'postInstall': self.platform.admin+' canPostInstall',
 		}
 		self.appsDict.append(app)
 
@@ -156,7 +156,7 @@ class MyFrame(wx.Frame):
 		'preUninstall': '',
 		'uninstall': 'openplotter-serial',
 		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'yes',
+		'dev': 'no',
 		'entryPoint': 'openplotter-serial',
 		'postInstall': '',
 		}
@@ -306,6 +306,8 @@ class MyFrame(wx.Frame):
 		self.Bind(wx.EVT_TOOL, self.OnToolSources, toolSources)
 		toolUpdate = self.toolbar1.AddTool(104, _('Update Candidates'), wx.Bitmap(self.currentdir+"/data/update.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolUpdate, toolUpdate)
+		self.refreshButton = self.toolbar1.AddTool(106, _('Refresh'), wx.Bitmap(self.currentdir+"/data/refresh.png"))
+		self.Bind(wx.EVT_TOOL, self.OnRefreshButton, self.refreshButton)
 		
 		self.notebook = wx.Notebook(self)
 		self.notebook.Bind(wx.EVT_NOTEBOOK_PAGE_CHANGED, self.onTabChange)
@@ -385,14 +387,14 @@ class MyFrame(wx.Frame):
 		self.ShowStatusBarYELLOW(_('Adding packages sources, please wait... '))
 		self.logger.Clear()
 		self.notebook.ChangeSelection(3)
-		command = self.platform.admin+' python3 '+self.currentdir+'/installSources.py'
+		command = self.platform.admin+' settingsSourcesInstall'
 		popen = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
 		for line in popen.stdout:
 			if not 'Warning' in line and not 'WARNING' in line:
 				self.logger.WriteText(line)
 				self.ShowStatusBarYELLOW(_('Adding packages sources, please wait... ')+line)
 				self.logger.ShowPosition(self.logger.GetLastPosition())
-		self.OnToolUpdate()
+		self.ShowStatusBarGREEN(_('Added sources. Update candidates to see changes'))
 
 	def OnToolLanguage(self, event): 
 		short = 'en'
@@ -546,13 +548,11 @@ class MyFrame(wx.Frame):
 		self.listApps.SetImageList(self.il, wx.IMAGE_LIST_SMALL)
 
 		self.toolbar2 = wx.ToolBar(self.apps, style=wx.TB_TEXT | wx.TB_VERTICAL)
-		self.refreshButton = self.toolbar2.AddTool(204, _('Refresh'), wx.Bitmap(self.currentdir+"/data/refresh.png"))
-		self.Bind(wx.EVT_TOOL, self.OnRefreshButton, self.refreshButton)
-		self.toolbar2.AddSeparator()
 		self.installButton = self.toolbar2.AddTool(201, _('Install'), wx.Bitmap(self.currentdir+"/data/install.png"))
 		self.Bind(wx.EVT_TOOL, self.OnInstallButton, self.installButton)
 		self.uninstallButton = self.toolbar2.AddTool(202, _('Uninstall'), wx.Bitmap(self.currentdir+"/data/uninstall.png"))
 		self.Bind(wx.EVT_TOOL, self.OnUninstallButton, self.uninstallButton)
+		self.toolbar2.AddSeparator()
 		self.openButton = self.toolbar2.AddTool(203, _('Open'), wx.Bitmap(self.currentdir+"/data/open.png"))
 		self.Bind(wx.EVT_TOOL, self.OnOpenButton, self.openButton)
 
@@ -719,6 +719,10 @@ class MyFrame(wx.Frame):
 		if not self.platform.isInstalled('openplotter-doc'): self.toolbar1.EnableTool(101,False)
 		else:self.toolbar1.EnableTool(101,True)
 		self.ShowStatusBarGREEN(_('Done'))
+
+		self.toolbar2.EnableTool(201,False)
+		self.toolbar2.EnableTool(202,False)
+		self.toolbar2.EnableTool(203,False)
 	
 	def pageOutput(self):
 		self.logger = rt.RichTextCtrl(self.output, style=wx.TE_MULTILINE|wx.TE_READONLY|wx.TE_DONTWRAP|wx.LC_SORT_ASCENDING)

@@ -34,7 +34,6 @@ class MyFrame(wx.Frame):
 		self.ttimer = 100
 		self.logger_data=False
 		self.warnings_flag=False
-		self.autoclose = 0
 
 		wx.Frame.__init__(self, None, title=_('Starting OpenPlotter'), style=wx.STAY_ON_TOP, size=(800,475))
 		self.SetFont(wx.Font(10, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
@@ -65,6 +64,7 @@ class MyFrame(wx.Frame):
 		self.Bind(wx.EVT_TIMER, self.refresh, self.timer)
 
 		self.thread1=threading.Thread(target=self.starting)
+		self.thread1.daemon = True
 		if not self.thread1.isAlive(): self.thread1.start()
 
 		self.timer.Start(self.ttimer)
@@ -73,10 +73,20 @@ class MyFrame(wx.Frame):
 
 	def refresh(self,event):
 		if self.logger_data:
-			if isinstance(self.logger_data, str):
+			if isinstance(self.logger_data, int):
+				self.closeButton.Enable()
+				if self.warnings_flag:
+					self.GetStatusBar().SetForegroundColour(wx.RED)
+					self.SetStatusText(_('There are some warnings. Check your system. Closing in ')+str(self.logger_data)+_(' seconds'))
+				else:
+					if self.mode == 'start': self.OnCloseButton()
+					else:
+						self.GetStatusBar().SetForegroundColour(wx.BLACK)
+						self.SetStatusText(_('There are no warnings. Closing in ')+str(self.logger_data)+_(' seconds'))
+			elif isinstance(self.logger_data, str):
 				self.logger.BeginTextColour((55, 55, 55))
 				self.logger.WriteText(self.logger_data)
-			if isinstance(self.logger_data, dict):
+			elif isinstance(self.logger_data, dict):
 				if self.logger_data['green']:
 					self.logger.WriteText(' | ')
 					self.logger.BeginTextColour((0, 130, 0))
@@ -95,22 +105,8 @@ class MyFrame(wx.Frame):
 					self.logger.EndTextColour()
 				self.logger.Newline()
 			self.logger_data = False
-		if self.autoclose > 0:
-			rest = round(self.autoclose - time.time())
-			if self.autoclose < time.time():
-				self.OnCloseButton()
-		if not self.thread1.isAlive():
-			if not self.warnings_flag:
-				if self.mode == 'start': self.OnCloseButton()
-				else:
-					self.closeButton.Enable()
-					self.GetStatusBar().SetForegroundColour(wx.BLACK)
-					self.SetStatusText(_('There are no warnings. Closing in ')+str(rest)+_(' seconds'))
-			else:
-				self.closeButton.Enable()
-				self.GetStatusBar().SetForegroundColour(wx.RED)
-				self.SetStatusText(_('There are some warnings. Check your system. Closing in ')+str(rest)+_(' seconds'))
-				
+
+		if not self.thread1.isAlive(): self.OnCloseButton()
 
 	def add_logger_data(self, msg):
 		while self.logger_data:
@@ -153,49 +149,50 @@ class MyFrame(wx.Frame):
 		startup = False
 		try:
 			from openplotterSignalkInstaller import startup
-		except:pass
-		if startup: self.processApp(startup)
-
+			if startup: self.processApp(startup)
+		except Exception as e: print(str(e))
+		
 		startup = False
 		try:
 			from openplotterI2c import startup
-		except:pass
-		if startup: self.processApp(startup)
+			if startup: self.processApp(startup)
+		except Exception as e: print(str(e))
 
 		startup = False
 		try:
 			from openplotterNetwork import startup
-		except:pass
-		if startup: self.processApp(startup)
+			if startup: self.processApp(startup)
+		except Exception as e: print(str(e))
 
 		startup = False
 		try:
 			from openplotterOpencpnInstaller import startup
-		except:pass
-		if startup: self.processApp(startup)
+			if startup: self.processApp(startup)
+		except Exception as e: print(str(e))
 
 		startup = False
 		try:
 			from openplotterMyapp import startup
-		except:pass
-		if startup: self.processApp(startup)
+			if startup: self.processApp(startup)
+		except Exception as e: print(str(e))
 
 		startup = False
 		try:
 			from openplotterPypilot import startup
-		except:pass
-		if startup: self.processApp(startup)
+			if startup: self.processApp(startup)
+		except Exception as e: print(str(e))
 
 		startup = False
 		try:
 			from openplotterMoitessier import startup
-		except:pass
-		if startup: self.processApp(startup)
+			if startup: self.processApp(startup)
+		except Exception as e: print(str(e))
 
+		startup = False
 		try:
-			play = self.conf.get('GENERAL', 'play')
-			if play: subprocess.Popen(['cvlc', '--play-and-exit', play])
-		except: pass
+			from openplotterCan import startup
+			if startup: self.processApp(startup)
+		except Exception as e: print(str(e))
 
 		try:
 			self.add_logger_data(_('Checking ports conflict...'))
@@ -207,12 +204,22 @@ class MyFrame(wx.Frame):
 					red += '\n'+i['description']+' ('+i['mode']+'): '+i['type']+' '+i['address']+':'+i['port']
 				self.add_logger_data({'green':'','black':'','red':red})
 			else: self.add_logger_data({'green':_('no conflicts'),'black':'','red':''})
-		except: pass
+		except Exception as e: print(str(e))
+
+		try:
+			play = self.conf.get('GENERAL', 'play')
+			if play: subprocess.Popen(['cvlc', '--play-and-exit', play])
+		except Exception as e: print(str(e))
 
 		if self.mode == 'start': self.add_logger_data(_('STARTUP FINISHED'))
 		else: self.add_logger_data(_('CHECK SYSTEM FINISHED'))
 
-		self.autoclose=time.time() + 60
+		c= 1
+		while True:
+			time.sleep(1)
+			if c >= 60: break
+			else: self.add_logger_data(c)
+			c = c + 1
 
 	def processApp(self, startup):
 		if self.mode == 'start':
@@ -232,7 +239,6 @@ class MyFrame(wx.Frame):
 	def OnCloseButton(self,e=0):
 		self.timer.Stop()
 		self.Destroy()
-
 
 def print_help():
 	print('This is part of OpenPlotter software')

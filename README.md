@@ -20,9 +20,13 @@ Clone the repository:
 
 `git clone https://github.com/openplotter/openplotter-settings.git`
 
-Make your changes and test them:
+Make your changes and install:
 
 `sudo python3 setup.py install`
+
+Run:
+
+`openplotter-settings`
 
 Pull request your changes to github and we will check and add them to the next version of the [Debian package](https://launchpad.net/~openplotter/+archive/ubuntu/openplotter/).
 
