@@ -123,7 +123,7 @@ class MyFrame(wx.Frame):
 		except:self.add_logger_data({'green':'','black':'','red':_('Delay failed. Is it a number?')})
 
 		self.add_logger_data(_('Checking OpenPlotter autostart...'))
-		if self.conf.get('GENERAL', 'autostart') != '1':
+		if not os.path.exists(self.conf.home+'/.config/autostart/openplotter-startup.desktop'):
 			self.add_logger_data({'green':'','black':'','red':_('Autostart is not enabled and most features will not work. Please select "Autostart" in "OpenPlotter Settings"')})
 		else:
 			self.add_logger_data({'green':_('enabled'),'black':'','red':''})
@@ -139,6 +139,18 @@ class MyFrame(wx.Frame):
 			if passw_a.rstrip() == passw_b.rstrip():
 				self.add_logger_data({'green':'','black':'','red':_('Security warning: You are using the default password for "pi" user.\nPlease change password in Menu > Preferences > Raspberry Pi Configuration.')})
 			else: self.add_logger_data({'green':_('changed'),'black':'','red':''})
+
+			self.add_logger_data(_('Checking screensaver state...'))
+			screensaver = self.conf.get('GENERAL', 'screensaver')
+			if screensaver == '1': self.add_logger_data({'green':'','black':_('disabled'),'red':''})
+			else: self.add_logger_data({'green':_('enabled'),'black':'','red':''})
+
+			self.add_logger_data(_('Checking headless state...'))
+			config = open('/boot/config.txt', 'r')
+			data = config.read()
+			config.close()
+			if '#hdmi_force_hotplug=1' in data: self.add_logger_data({'green':'','black':_('disabled'),'red':''})
+			else: self.add_logger_data({'green':_('enabled'),'black':'','red':''})
 
 		self.add_logger_data(_('Checking OpenPlotter packages source...'))
 		sources = subprocess.check_output(['apt-cache', 'policy']).decode()
@@ -214,12 +226,12 @@ class MyFrame(wx.Frame):
 		if self.mode == 'start': self.add_logger_data(_('STARTUP FINISHED'))
 		else: self.add_logger_data(_('CHECK SYSTEM FINISHED'))
 
-		c= 1
+		c = 60
 		while True:
 			time.sleep(1)
-			if c >= 60: break
+			if c < 1: break
 			else: self.add_logger_data(c)
-			c = c + 1
+			c = c - 1
 
 	def processApp(self, startup):
 		if self.mode == 'start':

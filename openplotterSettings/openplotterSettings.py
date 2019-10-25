@@ -32,16 +32,17 @@ class MyFrame(wx.Frame):
 		self.language = Language(self.currentdir,'openplotter-settings',currentLanguage)
 
 		self.appsDict = []
+
 		app = {
-		'name': _('Fake app only for desktops'),
-		'platform': 'debian',
-		'package': 'openplotter-fake',
-		'preUninstall': '',
-		'uninstall': 'openplotter-fake',
+		'name': _('OpenPlotter MCS'),
+		'platform': 'rpi',
+		'package': 'openplotter-mcs',
+		'preUninstall': self.platform.admin+' MCSPreUninstall',
+		'uninstall': 'openplotter-mcs',
 		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
 		'dev': 'no',
-		'entryPoint': 'openplotter-fake',
-		'postInstall': '',
+		'entryPoint': 'openplotter-MCS',
+		'postInstall': self.platform.admin+' MCSPostInstall',
 		}
 		self.appsDict.append(app)
 
@@ -55,19 +56,6 @@ class MyFrame(wx.Frame):
 		'dev': 'no',
 		'entryPoint': 'openplotter-myapp',
 		'postInstall': self.platform.admin+' myappPostInstall',
-		}
-		self.appsDict.append(app)
-
-		app = {
-		'name': _('Signal K Filters'),
-		'platform': 'both',
-		'package': 'openplotter-signalk-filters',
-		'preUninstall': '',
-		'uninstall': 'openplotter-signalk-filters',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'yes',
-		'entryPoint': 'openplotter-signalk-filters',
-		'postInstall': '',
 		}
 		self.appsDict.append(app)
 
@@ -227,6 +215,19 @@ class MyFrame(wx.Frame):
 		}
 		self.appsDict.append(app)
 
+		app = {
+		'name': _('Signal K Filter'),
+		'platform': 'both',
+		'package': 'openplotter-SKfilter',
+		'preUninstall': '',
+		'uninstall': 'openplotter-SKfilter',
+		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'dev': 'no',
+		'entryPoint': 'openplotter-SKfilter',
+		'postInstall': '',
+		}
+		self.appsDict.append(app)
+
 		if self.platform.skPort: entryPoint = 'x-www-browser '+self.platform.http+'localhost:'+self.platform.skPort
 		else: entryPoint = ''
 		app = {
@@ -298,7 +299,7 @@ class MyFrame(wx.Frame):
 		self.toolbar1.AddSeparator()
 		toolStartup = self.toolbar1.AddCheckTool(102, _('Autostart'), wx.Bitmap(self.currentdir+"/data/autostart.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolStartup, toolStartup)
-		if self.conf.get('GENERAL', 'autostart') == '1': self.toolbar1.ToggleTool(102,True)
+		if os.path.exists(self.home+'/.config/autostart/openplotter-startup.desktop'): self.toolbar1.ToggleTool(102,True)		
 		toolCheck = self.toolbar1.AddTool(103, _('Check System'), wx.Bitmap(self.currentdir+"/data/check.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolCheck, toolCheck)
 		self.toolbar1.AddSeparator()
@@ -493,20 +494,28 @@ class MyFrame(wx.Frame):
 			self.ShowStatusBarGREEN(_('Disabled maximized OpenPlotter apps'))
 
 	def pageRpi(self):
+		self.toolbar5 = wx.ToolBar(self.raspSettings, style=wx.TB_TEXT)
+		toolScreensaver = self.toolbar5.AddCheckTool(501, _('Disable Screensaver'), wx.Bitmap(self.currentdir+"/data/screen.png"))
+		self.Bind(wx.EVT_TOOL, self.OnToolScreensaver, toolScreensaver)
+		self.toolbar5.AddSeparator()
+		toolHeadless = self.toolbar5.AddCheckTool(502, _('Headless'), wx.Bitmap(self.currentdir+"/data/headless.png"))
+		self.Bind(wx.EVT_TOOL, self.OnToolHeadless, toolHeadless)
+		sizer = wx.BoxSizer(wx.VERTICAL)
+		sizer.Add(self.toolbar5, 0, wx.EXPAND, 0)
+		self.raspSettings.SetSizer(sizer)
+
 		if self.platform.isRPI:
-			self.toolbar5 = wx.ToolBar(self.raspSettings, style=wx.TB_TEXT)
-			toolScreensaver = self.toolbar5.AddCheckTool(501, _('Disable Screensaver'), wx.Bitmap(self.currentdir+"/data/screen.png"))
-			self.Bind(wx.EVT_TOOL, self.OnToolScreensaver, toolScreensaver)
-			self.toolbar5.AddSeparator()
-
-			sizer = wx.BoxSizer(wx.VERTICAL)
-			sizer.Add(self.toolbar5, 0, wx.EXPAND, 0)
-			self.raspSettings.SetSizer(sizer)
-
 			screensaver = self.conf.get('GENERAL', 'screensaver')
 			if screensaver == '1': 
 				self.toolbar5.ToggleTool(501,True)
-		else: self.toolbar5.EnableTool(501,False)
+			config = open('/boot/config.txt', 'r')
+			data = config.read()
+			config.close()
+			if not '#hdmi_force_hotplug=1' in data:
+				self.toolbar5.ToggleTool(502,True)
+		else: 
+			self.toolbar5.EnableTool(501,False)
+			self.toolbar5.EnableTool(502,False)
 
 	def OnToolScreensaver(self, e):
 		if self.toolbar5.GetToolState(501):
@@ -520,6 +529,34 @@ class MyFrame(wx.Frame):
 			subprocess.call(['xset', 's', 'on'])
 			subprocess.call(['xset', '+dpms'])
 
+	def OnToolHeadless(self, e):
+		onoff = self.toolbar5.GetToolState(502)
+		file = open('/boot/config.txt', 'r')
+		file1 = open(self.home+'/config.txt', 'w')
+		exists = False
+		while True:
+			line = file.readline()
+			if not line: break
+			if onoff and 'hdmi_force_hotplug=1' in line: 
+				file1.write('hdmi_force_hotplug=1\n')
+				exists = True
+			elif not onoff and 'hdmi_force_hotplug=1' in line: 
+				file1.write('#hdmi_force_hotplug=1\n')
+				exists = True
+			else: file1.write(line)
+		if onoff and not exists: 
+			file1.write('\nhdmi_force_hotplug=1\n')
+		file.close()
+		file1.close()
+
+		reset = False
+		if os.system('diff '+self.home+'/config.txt /boot/config.txt > /dev/null'):
+			os.system(self.platform.admin+' mv '+self.home+'/config.txt /boot')
+			reset = True
+		else: os.system('rm -f '+self.home+'/config.txt')
+
+		if reset: self.ShowStatusBarGREEN(_('Changes will be applied after restarting'))
+
 	def OnToolStartup(self, e):
 		autostartFolder = self.home+'/.config/autostart'
 		if not os.path.exists(autostartFolder):
@@ -528,11 +565,9 @@ class MyFrame(wx.Frame):
 		self.autostartFile = self.home+'/.config/autostart/openplotter-startup.desktop'
 		if self.toolbar1.GetToolState(102):
 			os.system('cp -f '+self.currentdir+'/data/openplotter-startup.desktop '+autostartFolder)
-			self.conf.set('GENERAL', 'autostart', '1')
 			self.ShowStatusBarGREEN(_('Autostart enabled'))
 		else: 
 			os.system('rm -f '+self.autostartFile)
-			self.conf.set('GENERAL', 'autostart', '0')
 			self.ShowStatusBarRED(_('Autostart disabled. Most features will not work!'))
 
 	def OnToolCheck(self, e):
@@ -542,7 +577,7 @@ class MyFrame(wx.Frame):
 		self.listApps = wx.ListCtrl(self.apps, -1, style=wx.LC_REPORT | wx.LC_SINGLE_SEL | wx.LC_HRULES, size=(-1,200))
 		self.listApps.InsertColumn(0, _('Name'), width=260)
 		self.listApps.InsertColumn(1, _('Installed'), width=130)
-		self.listApps.InsertColumn(2, _('Candidate'), width=290)
+		self.listApps.InsertColumn(2, _('Candidate'), width=280)
 		self.listApps.Bind(wx.EVT_LIST_ITEM_SELECTED, self.onListAppsSelected)
 		self.listApps.Bind(wx.EVT_LIST_ITEM_DESELECTED, self.onListAppsDeselected)
 		self.listApps.SetImageList(self.il, wx.IMAGE_LIST_SMALL)
@@ -555,6 +590,8 @@ class MyFrame(wx.Frame):
 		self.toolbar2.AddSeparator()
 		self.openButton = self.toolbar2.AddTool(203, _('Open'), wx.Bitmap(self.currentdir+"/data/open.png"))
 		self.Bind(wx.EVT_TOOL, self.OnOpenButton, self.openButton)
+		self.logButton = self.toolbar2.AddTool(204, _('Change Log'), wx.Bitmap(self.currentdir+"/data/changelog.png"))
+		self.Bind(wx.EVT_TOOL, self.OnLogButton, self.logButton)
 
 		sizer = wx.BoxSizer(wx.HORIZONTAL)
 		sizer.Add(self.listApps, 1, wx.EXPAND, 0)
@@ -660,6 +697,21 @@ class MyFrame(wx.Frame):
 		entryPoint = apps[index]['entryPoint']
 		popen = subprocess.Popen(entryPoint, shell=True)
 
+	def OnLogButton(self,e):
+		index = self.listApps.GetFirstSelected()
+		if index == -1: return
+		apps = list(reversed(self.appsDict))
+		self.logger.Clear()
+		self.notebook.ChangeSelection(3)
+		command = 'apt changelog '+apps[index]['package']
+		popen = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
+		for line in popen.stdout:
+			if not 'Warning' in line and not 'WARNING' in line:
+				self.logger.WriteText(line)
+				self.ShowStatusBarYELLOW(_('Reading changelog, please wait... ')+line)
+				self.logger.ShowPosition(self.logger.GetLastPosition())
+		self.ShowStatusBarGREEN(_('Done'))
+
 	def readApps(self):
 		self.notebook.ChangeSelection(0)
 		self.listApps.DeleteAllItems()
@@ -723,6 +775,7 @@ class MyFrame(wx.Frame):
 		self.toolbar2.EnableTool(201,False)
 		self.toolbar2.EnableTool(202,False)
 		self.toolbar2.EnableTool(203,False)
+		self.toolbar2.EnableTool(204,False)
 	
 	def pageOutput(self):
 		self.logger = rt.RichTextCtrl(self.output, style=wx.TE_MULTILINE|wx.TE_READONLY|wx.TE_DONTWRAP|wx.LC_SORT_ASCENDING)
@@ -743,11 +796,13 @@ class MyFrame(wx.Frame):
 			if self.listApps.GetItemText(i, 1) != '':
 				if i != 0:
 					self.toolbar2.EnableTool(203,True)
+				self.toolbar2.EnableTool(204,True)
 
 	def onListAppsDeselected(self, event=0):
 		self.toolbar2.EnableTool(201,False)
 		self.toolbar2.EnableTool(202,False)
 		self.toolbar2.EnableTool(203,False)
+		self.toolbar2.EnableTool(204,False)
 
 def main():
 	app = wx.App()

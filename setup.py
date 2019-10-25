@@ -32,7 +32,7 @@ setup (
 	'Programming Language :: Python :: 3'],
 	include_package_data=True,
 	entry_points={'console_scripts': ['openplotter-settings=openplotterSettings.openplotterSettings:main','openplotter-startup=openplotterSettings.startup:main','settingsPreUninstall=openplotterSettings.settingsPreUninstall:main','settingsSourcesInstall=openplotterSettings.installSources:main']},
-	data_files=[('share/applications', ['openplotterSettings/data/openplotter-settings.desktop']),('share/pixmaps', ['openplotterSettings/data/openplotter-settings.png']),
+	data_files=[('share/applications', ['openplotterSettings/data/openplotter-settings.desktop']),('share/pixmaps', ['openplotterSettings/data/openplotter-settings.png', 'openplotterSettings/data/openplotter-48.png']),
 	('share/sounds/openplotter', ['openplotterSettings/data/sounds/Bleep.mp3',
 									'openplotterSettings/data/sounds/House_Fire_Alarm.mp3',
 									'openplotterSettings/data/sounds/Ship_Bell.mp3',
