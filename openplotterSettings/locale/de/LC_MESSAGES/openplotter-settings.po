@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openplotter\n"
 "POT-Creation-Date: 2019-10-25 18:57+0200\n"
-"PO-Revision-Date: 2019-10-28 13:31+0100\n"
+"PO-Revision-Date: 2019-10-30 10:05+0100\n"
 "Last-Translator: Sailoog (sailoog)\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -24,7 +24,7 @@ msgstr "OpenCPN-Paketquelle hinzugefügt"
 
 #: installSources.py:43
 msgid "OpenCPN packages source already exists"
-msgstr "OpenCPN-Paketquelle existiert bereits"
+msgstr "OpenPlotter-Paketquelle existiert bereits"
 
 #: installSources.py:48
 msgid "Added OpenPlotter packages source"

@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Openplotter. If not, see <http://www.gnu.org/licenses/>.
 
-import wx, os, webbrowser, subprocess
+import wx, os, webbrowser, subprocess, sys
 import wx.richtext as rt
 
 from .conf import Conf
@@ -598,7 +598,7 @@ class MyFrame(wx.Frame):
 		sizer.Add(self.toolbar2, 0)
 		self.apps.SetSizer(sizer)
 
-		sources = subprocess.check_output(['apt-cache', 'policy']).decode()
+		sources = subprocess.check_output(['apt-cache', 'policy']).decode(sys.stdin.encoding)
 		for i in self.appsDict:
 			item = self.listApps.InsertItem(0, i['name'])
 			if i['platform'] == 'rpi': self.listApps.SetItemImage(item, 2)
@@ -717,7 +717,7 @@ class MyFrame(wx.Frame):
 		self.listApps.DeleteAllItems()
 		self.ShowStatusBarYELLOW(_('Checking apps list, please wait... '))
 		self.installedFlag = False
-		sources = subprocess.check_output(['apt-cache', 'policy']).decode()
+		sources = subprocess.check_output(['apt-cache', 'policy']).decode(sys.stdin.encoding)
 		for i in self.appsDict:
 			item = self.listApps.InsertItem(0, i['name'])
 			if i['platform'] == 'rpi': self.listApps.SetItemImage(item, 2)

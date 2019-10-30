@@ -130,12 +130,12 @@ class MyFrame(wx.Frame):
 
 		if self.isRPI:
 			self.add_logger_data(_('Checking user "pi" password...'))
-			out = subprocess.check_output([self.platform.admin, '-n', 'grep', '-E', '^pi:', '/etc/shadow']).decode()
+			out = subprocess.check_output([self.platform.admin, '-n', 'grep', '-E', '^pi:', '/etc/shadow']).decode(sys.stdin.encoding)
 			tmp = out.split(':')
 			passw_a = tmp[1]
 			tmp = passw_a.split('$')
 			salt = tmp[2]
-			passw_b = subprocess.check_output(['mkpasswd', '-msha-512', 'raspberry', salt]).decode()
+			passw_b = subprocess.check_output(['mkpasswd', '-msha-512', 'raspberry', salt]).decode(sys.stdin.encoding)
 			if passw_a.rstrip() == passw_b.rstrip():
 				self.add_logger_data({'green':'','black':'','red':_('Security warning: You are using the default password for "pi" user.\nPlease change password in Menu > Preferences > Raspberry Pi Configuration.')})
 			else: self.add_logger_data({'green':_('changed'),'black':'','red':''})
@@ -153,7 +153,7 @@ class MyFrame(wx.Frame):
 			else: self.add_logger_data({'green':_('enabled'),'black':'','red':''})
 
 		self.add_logger_data(_('Checking OpenPlotter packages source...'))
-		sources = subprocess.check_output(['apt-cache', 'policy']).decode()
+		sources = subprocess.check_output(['apt-cache', 'policy']).decode(sys.stdin.encoding)
 		if 'http://ppa.launchpad.net/openplotter/openplotter/ubuntu' in sources:
 			self.add_logger_data({'green':_('added'),'black':'','red':''})
 		else: self.add_logger_data({'green':'','black':'','red':_('There are missing packages sources. Please add sources in "OpenPlotter Settings".')})

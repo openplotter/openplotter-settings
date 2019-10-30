@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Openplotter. If not, see <http://www.gnu.org/licenses/>.
 
-import os, subprocess
+import os, subprocess, sys
 from .conf import Conf
 from .language import Language
 
@@ -26,7 +26,7 @@ def main():
 		currentLanguage = conf2.get('GENERAL', 'lang')
 		Language(currentdir,'openplotter-settings',currentLanguage)
 
-		sources = subprocess.check_output('apt-cache policy', shell=True).decode()
+		sources = subprocess.check_output('apt-cache policy', shell=True).decode(sys.stdin.encoding)
 
 		fileData = ''
 		try:
