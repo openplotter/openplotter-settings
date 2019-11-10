@@ -20,8 +20,7 @@ from .version import *
 
 class Conf:
 	def __init__(self):
-		self.user = os.environ.get('USER')
-		if self.user == 'root': self.user = os.path.expanduser(os.environ["SUDO_USER"])
+		self.user = os.path.expanduser(os.getlogin())
 		self.home = '/home/'+self.user
 
 		self.data_conf = configparser.ConfigParser()

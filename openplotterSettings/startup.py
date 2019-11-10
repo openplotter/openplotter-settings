@@ -35,7 +35,7 @@ class MyFrame(wx.Frame):
 		self.logger_data=False
 		self.warnings_flag=False
 
-		wx.Frame.__init__(self, None, title=_('Starting OpenPlotter'), style=wx.STAY_ON_TOP, size=(800,475))
+		wx.Frame.__init__(self, None, title=_('Starting OpenPlotter'), size=(800,475))
 		self.SetFont(wx.Font(10, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
 		icon = wx.Icon(self.currentdir+"/data/openplotter-48.png", wx.BITMAP_TYPE_PNG)
 		self.SetIcon(icon)
