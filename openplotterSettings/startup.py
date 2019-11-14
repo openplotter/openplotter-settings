@@ -184,6 +184,12 @@ class MyFrame(wx.Frame):
 
 		startup = False
 		try:
+			from openplotterDashboards import startup
+			if startup: self.processApp(startup)
+		except Exception as e: print(str(e))
+		
+		startup = False
+		try:
 			from openplotterMyapp import startup
 			if startup: self.processApp(startup)
 		except Exception as e: print(str(e))

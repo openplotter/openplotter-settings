@@ -58,11 +58,23 @@ class Platform:
 	def isSKpluginInstalled(self,plugin):
 		installed = False
 		data = ''
+		if 'node-red-' in plugin: file = self.skDir+'/red/package.json'
+		else: file = self.skDir+'/package.json'
 		try:
-			with open(self.skDir+'/package.json') as data_file:
+			with open(file) as data_file:
 				data = ujson.load(data_file)
 				if plugin in data['dependencies']: installed = True
 		except: pass
 		return installed
 
+	def isSKpluginEnabled(self,plugin):
+		Enabled = False
+		try:
+			setting_file = self.skDir+'/plugin-config-data/'+plugin+'.json'
+			data = ''
+			with open(setting_file) as data_file:
+				data = ujson.load(data_file)
+			Enabled = data['enabled']
+		except:pass
+		return Enabled
 			

@@ -36,7 +36,7 @@ class Conf:
 		if not os.path.exists(self.conf_file):
 			print('openplotter.conf not found, creating', self.conf_file)
 			fo = open(self.conf_file, "w")
-			fo.write( '[GENERAL]\nlang = en\nversion = '+version+'\ncodeName = '+codeName+'\nstate = '+state+'\n')
+			fo.write( '[GENERAL]\nlang = en\nplay = /usr/share/sounds/openplotter/Store_Door_Chime.mp3\n')
 			fo.close()
 		self.read()
 

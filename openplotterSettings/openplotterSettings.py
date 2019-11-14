@@ -86,19 +86,6 @@ class MyFrame(wx.Frame):
 		self.appsDict.append(app)
 
 		app = {
-		'name': _('Dashboards'),
-		'platform': 'both',
-		'package': 'openplotter-dashboards',
-		'preUninstall': '',
-		'uninstall': 'openplotter-dashboards',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'yes',
-		'entryPoint': 'openplotter-dashboards',
-		'postInstall': '',
-		}
-		self.appsDict.append(app)
-
-		app = {
 		'name': _('Actions'),
 		'platform': 'both',
 		'package': 'openplotter-actions',
@@ -125,15 +112,15 @@ class MyFrame(wx.Frame):
 		self.appsDict.append(app)
 
 		app = {
-		'name': _('CAN Bus'),
+		'name': _('Signal K Filter'),
 		'platform': 'both',
-		'package': 'openplotter-can',
-		'preUninstall': self.platform.admin+' canPreUninstall',
-		'uninstall': 'openplotter-can',
+		'package': 'openplotter-SKfilter',
+		'preUninstall': '',
+		'uninstall': 'openplotter-SKfilter',
 		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
 		'dev': 'no',
-		'entryPoint': 'openplotter-can',
-		'postInstall': self.platform.admin+' canPostInstall',
+		'entryPoint': 'openplotter-SKfilter',
+		'postInstall': '',
 		}
 		self.appsDict.append(app)
 
@@ -203,27 +190,27 @@ class MyFrame(wx.Frame):
 		self.appsDict.append(app)
 
 		app = {
-		'name': _('XyGrib'),
+		'name': _('CAN Bus'),
 		'platform': 'both',
-		'package': 'xygrib',
-		'preUninstall': '',
-		'uninstall': 'xygrib',
-		'sources': [],
-		'dev': 'no',
-		'entryPoint': 'XyGrib',
-		'postInstall': '',
-		}
-		self.appsDict.append(app)
-
-		app = {
-		'name': _('Signal K Filter'),
-		'platform': 'both',
-		'package': 'openplotter-SKfilter',
-		'preUninstall': '',
-		'uninstall': 'openplotter-SKfilter',
+		'package': 'openplotter-can',
+		'preUninstall': self.platform.admin+' canPreUninstall',
+		'uninstall': 'openplotter-can',
 		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
 		'dev': 'no',
-		'entryPoint': 'openplotter-SKfilter',
+		'entryPoint': 'openplotter-can',
+		'postInstall': self.platform.admin+' canPostInstall',
+		}
+		self.appsDict.append(app)
+		
+		app = {
+		'name': _('Dashboards'),
+		'platform': 'both',
+		'package': 'openplotter-dashboards',
+		'preUninstall': '',
+		'uninstall': 'openplotter-dashboards',
+		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu','https://repos.influxdata.com/debian','https://packages.grafana.com/oss/deb'],
+		'dev': 'no',
+		'entryPoint': 'openplotter-dashboards',
 		'postInstall': '',
 		}
 		self.appsDict.append(app)
@@ -243,6 +230,19 @@ class MyFrame(wx.Frame):
 		}
 		self.appsDict.append(app)
 
+		app = {
+		'name': _('XyGrib'),
+		'platform': 'both',
+		'package': 'xygrib',
+		'preUninstall': '',
+		'uninstall': 'xygrib',
+		'sources': [],
+		'dev': 'no',
+		'entryPoint': 'XyGrib',
+		'postInstall': '',
+		}
+		self.appsDict.append(app)
+		
 		app = {
 		'name': _('OpenCPN Installer'),
 		'platform': 'both',
@@ -362,7 +362,9 @@ class MyFrame(wx.Frame):
 		self.ShowStatusBar(w_msg,(255,140,0))
 
 	def onTabChange(self, event):
-		self.SetStatusText('')
+		try:
+			self.SetStatusText('')
+		except:pass
 
 	def OnToolHelp(self, event): 
 		url = "/usr/share/openplotter-doc/settings/settings_app.html"
