@@ -58,8 +58,7 @@ class Platform:
 	def isSKpluginInstalled(self,plugin):
 		installed = False
 		data = ''
-		if 'node-red-' in plugin: file = self.skDir+'/red/package.json'
-		else: file = self.skDir+'/package.json'
+		file = self.skDir+'/package.json'
 		try:
 			with open(file) as data_file:
 				data = ujson.load(data_file)
