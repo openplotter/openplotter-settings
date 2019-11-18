@@ -42,6 +42,13 @@ def main():
 		else: 
 			print(_('OpenCPN packages source already exists'))
 
+		deb = 'deb https://www.free-x.de/debian buster main contrib non-free'
+		if not 'https://www.free-x.de/debian buster' in sources:
+			if not deb in fileData: fileData += '\n'+deb
+			print(_('Added XyGrib packages source'))
+		else: 
+			print(_('XyGrib packages source already exists'))
+
 		deb = 'deb http://ppa.launchpad.net/openplotter/openplotter/ubuntu bionic main'
 		if not 'http://ppa.launchpad.net/openplotter/openplotter/ubuntu bionic' in sources:
 			if not deb in fileData: fileData += '\n'+deb
@@ -87,6 +94,7 @@ def main():
 
 		os.system('cp -f '+currentdir+'/data/sources/preferences /etc/apt/preferences.d')
 		os.system('apt-key add - < '+currentdir+'/data/sources/opencpn.gpg.key')
+		os.system('apt-key add - < '+currentdir+'/data/sources/oss.boating.gpg.key')
 		os.system('apt-key add - < '+currentdir+'/data/sources/openplotter.gpg.key')
 		os.system('apt-key add - < '+currentdir+'/data/sources/grafana.gpg.key')
 		os.system('apt-key add - < '+currentdir+'/data/sources/influxdb.gpg.key')
