@@ -92,7 +92,7 @@ def main():
 			fo.write(fileData)
 			fo.close()
 
-		os.system('cp -f '+currentdir+'/data/sources/preferences /etc/apt/preferences.d')
+		os.system('cp -f '+currentdir+'/data/sources/99openplotter /etc/apt/preferences.d')
 		os.system('apt-key add - < '+currentdir+'/data/sources/opencpn.gpg.key')
 		os.system('apt-key add - < '+currentdir+'/data/sources/oss.boating.gpg.key')
 		os.system('apt-key add - < '+currentdir+'/data/sources/openplotter.gpg.key')
