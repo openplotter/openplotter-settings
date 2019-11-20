@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: openplotter-settings\n"
-"POT-Creation-Date: 2019-10-25 18:57+0200\n"
-"PO-Revision-Date: 2019-10-25 18:57+0200\n"
+"POT-Creation-Date: 2019-11-20 11:54+0100\n"
+"PO-Revision-Date: 2019-11-20 11:54+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -24,38 +24,46 @@ msgid "OpenCPN packages source already exists"
 msgstr ""
 
 #: installSources.py:48
-msgid "Added OpenPlotter packages source"
+msgid "Added XyGrib packages source"
 msgstr ""
 
 #: installSources.py:50
+msgid "XyGrib packages source already exists"
+msgstr ""
+
+#: installSources.py:55
+msgid "Added OpenPlotter packages source"
+msgstr ""
+
+#: installSources.py:57
 msgid "OpenPlotter packages source already exists"
 msgstr ""
 
-#: installSources.py:65
+#: installSources.py:72
 msgid "Added InfluxDB packages source"
 msgstr ""
 
-#: installSources.py:67
+#: installSources.py:74
 msgid "InfluxDB packages source already exists"
 msgstr ""
 
-#: installSources.py:72
+#: installSources.py:79
 msgid "Added Grafana packages source"
 msgstr ""
 
-#: installSources.py:74
+#: installSources.py:81
 msgid "Grafana packages source already exists"
 msgstr ""
 
-#: installSources.py:79
+#: installSources.py:86
 msgid "Added Node.js 10 packages source"
 msgstr ""
 
-#: installSources.py:81
+#: installSources.py:88
 msgid "Node.js 10 packages source already exists"
 msgstr ""
 
-#: installSources.py:95 settingsPreUninstall.py:32
+#: installSources.py:103 settingsPreUninstall.py:32
 msgid "FAILED: "
 msgstr ""
 
@@ -76,102 +84,102 @@ msgid "Kplex"
 msgstr ""
 
 #: openplotterSettings.py:89
-msgid "Dashboards"
-msgstr ""
-
-#: openplotterSettings.py:102
 msgid "Actions"
 msgstr ""
 
-#: openplotterSettings.py:115
+#: openplotterSettings.py:102
 msgid "1W Sensors"
 msgstr ""
 
-#: openplotterSettings.py:128
-msgid "CAN Bus"
-msgstr ""
-
-#: openplotterSettings.py:141
-msgid "Serial Devices Management"
-msgstr ""
-
-#: openplotterSettings.py:154
-msgid "Moitessier HAT"
-msgstr ""
-
-#: openplotterSettings.py:167
-msgid "Pypilot"
-msgstr ""
-
-#: openplotterSettings.py:180
-msgid "I2C Sensors"
-msgstr ""
-
-#: openplotterSettings.py:193
-msgid "Network"
-msgstr ""
-
-#: openplotterSettings.py:206
-msgid "XyGrib"
-msgstr ""
-
-#: openplotterSettings.py:219
+#: openplotterSettings.py:115
 msgid "Signal K Filter"
 msgstr ""
 
-#: openplotterSettings.py:234
+#: openplotterSettings.py:128
+msgid "Serial Devices Management"
+msgstr ""
+
+#: openplotterSettings.py:141
+msgid "Moitessier HAT"
+msgstr ""
+
+#: openplotterSettings.py:154
+msgid "Pypilot"
+msgstr ""
+
+#: openplotterSettings.py:167
+msgid "I2C Sensors"
+msgstr ""
+
+#: openplotterSettings.py:180
+msgid "Network"
+msgstr ""
+
+#: openplotterSettings.py:193
+msgid "CAN Bus"
+msgstr ""
+
+#: openplotterSettings.py:206
+msgid "Dashboards"
+msgstr ""
+
+#: openplotterSettings.py:219
 msgid "Signal K Installer"
 msgstr ""
 
-#: openplotterSettings.py:247
+#: openplotterSettings.py:232
+msgid "XyGrib"
+msgstr ""
+
+#: openplotterSettings.py:245
 msgid "OpenCPN Installer"
 msgstr ""
 
-#: openplotterSettings.py:260
+#: openplotterSettings.py:258
 msgid "Documentation"
 msgstr ""
 
-#: openplotterSettings.py:273
+#: openplotterSettings.py:271
 msgid "Settings"
 msgstr ""
 
-#: openplotterSettings.py:285
+#: openplotterSettings.py:283
 msgid "OpenPlotter Settings"
 msgstr ""
 
-#: openplotterSettings.py:295
+#: openplotterSettings.py:293
 msgid "Help"
 msgstr ""
 
-#: openplotterSettings.py:300
+#: openplotterSettings.py:298
 msgid "Autostart"
 msgstr ""
 
-#: openplotterSettings.py:303
+#: openplotterSettings.py:301
 msgid "Check System"
 msgstr ""
 
-#: openplotterSettings.py:306
+#: openplotterSettings.py:304
 msgid "Add Sources"
 msgstr ""
 
-#: openplotterSettings.py:308
+#: openplotterSettings.py:306
 msgid "Update Candidates"
 msgstr ""
 
-#: openplotterSettings.py:310 selectKey.py:40
+#: openplotterSettings.py:308 selectKey.py:40
 msgid "Refresh"
 msgstr ""
 
-#: openplotterSettings.py:319
+#: openplotterSettings.py:317
 msgid "OpenPlotter Apps"
 msgstr ""
 
-#: openplotterSettings.py:320
+#: openplotterSettings.py:318
 msgid "General Settings"
 msgstr ""
 
-#: openplotterSettings.py:321
+#: openplotterSettings.py:319
 msgid "Raspberry Settings"
 msgstr ""
 
@@ -520,22 +528,22 @@ msgid ""
 "Settings\"."
 msgstr ""
 
-#: startup.py:210
+#: startup.py:216
 msgid "Checking ports conflict..."
 msgstr ""
 
-#: startup.py:214
+#: startup.py:220
 msgid "There are conflicts between the following server connections:"
 msgstr ""
 
-#: startup.py:218
+#: startup.py:224
 msgid "no conflicts"
 msgstr ""
 
-#: startup.py:226
+#: startup.py:232
 msgid "STARTUP FINISHED"
 msgstr ""
 
-#: startup.py:227
+#: startup.py:233
 msgid "CHECK SYSTEM FINISHED"
 msgstr ""
