@@ -215,8 +215,6 @@ class MyFrame(wx.Frame):
 		}
 		self.appsDict.append(app)
 
-		if self.platform.skPort: entryPoint = 'x-www-browser '+self.platform.http+'localhost:'+self.platform.skPort
-		else: entryPoint = ''
 		app = {
 		'name': _('Signal K Installer'),
 		'platform': 'both',
@@ -225,7 +223,7 @@ class MyFrame(wx.Frame):
 		'uninstall': 'openplotter-signalk-installer',
 		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu','https://deb.nodesource.com/node_10.x'],
 		'dev': 'no',
-		'entryPoint': entryPoint,
+		'entryPoint': 'openplotter-signalk-installer',
 		'postInstall': self.platform.admin+' signalkPostInstall',
 		}
 		self.appsDict.append(app)
