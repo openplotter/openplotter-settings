@@ -142,8 +142,16 @@ class MyFrame(wx.Frame):
 
 			self.add_logger_data(_('Checking screensaver state...'))
 			screensaver = self.conf.get('GENERAL', 'screensaver')
-			if screensaver == '1': self.add_logger_data({'green':'','black':_('disabled'),'red':''})
-			else: self.add_logger_data({'green':_('enabled'),'black':'','red':''})
+			if screensaver == '1':
+				subprocess.call(['xset', 's', 'noblank'])
+				subprocess.call(['xset', 's', 'off'])
+				subprocess.call(['xset', '-dpms'])
+				self.add_logger_data({'green':'','black':_('disabled'),'red':''})
+			else:
+				subprocess.call(['xset', 's', 'blank'])
+				subprocess.call(['xset', 's', 'on'])
+				subprocess.call(['xset', '+dpms'])
+				self.add_logger_data({'green':_('enabled'),'black':'','red':''})
 
 			self.add_logger_data(_('Checking headless state...'))
 			config = open('/boot/config.txt', 'r')
