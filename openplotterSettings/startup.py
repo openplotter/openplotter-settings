@@ -20,6 +20,7 @@ from .conf import Conf
 from .language import Language
 from .platform import Platform
 from .ports import Ports
+from .serialPorts import SerialPorts
 
 class MyFrame(wx.Frame):
 	def __init__(self, mode):
@@ -220,8 +221,26 @@ class MyFrame(wx.Frame):
 			if startup: self.processApp(startup)
 		except Exception as e: print(str(e))
 
+		startup = False
 		try:
-			self.add_logger_data(_('Checking ports conflict...'))
+			from openplotterSerial import startup
+			if startup: self.processApp(startup)
+		except Exception as e: print(str(e))
+
+		try:
+			self.add_logger_data(_('Checking serial connections conflicts...'))
+			allSerialPorts = SerialPorts()
+			conflicts = allSerialPorts.conflicts()
+			if conflicts:
+				red = _('There are conflicts between the following serial connections:')
+				for i in conflicts: 
+					red += '\n'+i
+				self.add_logger_data({'green':'','black':'','red':red})
+			else: self.add_logger_data({'green':_('no conflicts'),'black':'','red':''})
+		except Exception as e: self.add_logger_data({'green':'','black':'','red':print(str(e))})
+
+		try:
+			self.add_logger_data(_('Checking network connections conflicts...'))
 			self.ports = Ports()
 			conflicts = self.ports.conflicts()
 			if conflicts:
@@ -235,7 +254,7 @@ class MyFrame(wx.Frame):
 		try:
 			play = self.conf.get('GENERAL', 'play')
 			if play: subprocess.Popen(['cvlc', '--play-and-exit', play])
-		except Exception as e: print(str(e))
+		except Exception as e: self.add_logger_data({'green':'','black':'','red':print(str(e))})
 
 		if self.mode == 'start': self.add_logger_data(_('STARTUP FINISHED'))
 		else: self.add_logger_data(_('CHECK SYSTEM FINISHED'))

@@ -29,8 +29,8 @@ class Serial(wx.Dialog):
 			if not '/virtual/' in DEVPATH or 'moitessier' in DEVNAME: self.devices.append(i)
 
 class AddPort(wx.Dialog):
-	def __init__(self):
-		wx.Dialog.__init__(self, None, title=_('Add Serial Port'), size=(-1,200))
+	def __init__(self, deviceSent, deviceStatus, baudsSent, baudsStatus):
+		wx.Dialog.__init__(self, None, title=_('Add serial device'), size=(-1,230))
 		panel = wx.Panel(self)
 
 		serial = Serial()
@@ -52,15 +52,30 @@ class AddPort(wx.Dialog):
 				OPserial = True
 
 		if OPserial:
-			self.port = wx.Choice(panel, choices=self.listDevicesOP)
+			self.port = wx.ComboBox(panel, choices=self.listDevicesOP)
 			self.OPserialTrue = wx.CheckBox(panel, label=_('Show only Openplotter-Serial managed ports'))
 			self.OPserialTrue.Bind(wx.EVT_CHECKBOX, self.on_OPserialTrue)
 			self.OPserialTrue.SetValue(True)
 		else:
-			self.port = wx.Choice(panel, choices=self.listDevices)
+			self.port = wx.ComboBox(panel, choices=self.listDevices)
+
+		baudsList = ['4800', '9600', '19200', '38400', '57600', '115200', '230400', '460800', '921600']
+		baudsLabel = wx.StaticText(panel, label=_('Baud Rate: '))
+		self.bauds = wx.ComboBox(panel, choices=baudsList)
+
+		if deviceSent: self.port.SetValue(deviceSent)
+		else: self.port.SetValue('')
+		if not deviceStatus: self.port.Disable()
+		if baudsSent: self.bauds.SetValue(baudsSent)
+		else: self.bauds.SetValue('')
+		if not baudsStatus: self.bauds.Disable()
 
 		cancelBtn = wx.Button(panel, wx.ID_CANCEL)
 		okBtn = wx.Button(panel, wx.ID_OK)
+
+		hbox3 = wx.BoxSizer(wx.HORIZONTAL)
+		hbox3.Add(baudsLabel, 0, wx.RIGHT | wx.LEFT | wx.EXPAND, 10)
+		hbox3.Add(self.bauds, 1, wx.RIGHT | wx.LEFT | wx.EXPAND, 10)
 
 		hbox = wx.BoxSizer(wx.HORIZONTAL)
 		hbox.Add(cancelBtn, 1, wx.ALL | wx.EXPAND, 10)
@@ -69,7 +84,9 @@ class AddPort(wx.Dialog):
 		vbox = wx.BoxSizer(wx.VERTICAL)
 		vbox.Add(self.port, 0, wx.ALL | wx.EXPAND, 10)
 		if OPserial:
-			vbox.Add(self.OPserialTrue, 0, wx.ALL | wx.EXPAND, 10)
+			vbox.Add(self.OPserialTrue, 0, wx.RIGHT | wx.LEFT | wx.EXPAND, 10)
+			vbox.AddSpacer(10)
+		vbox.Add(hbox3, 0, wx.EXPAND, 0)
 		vbox.AddStretchSpacer(1)
 		vbox.Add(hbox, 0, wx.EXPAND, 0)
 
@@ -81,4 +98,5 @@ class AddPort(wx.Dialog):
 		if self.OPserialTrue.GetValue():
 			self.port.AppendItems(self.listDevicesOP)
 		else:
-			self.port.AppendItems(self.listDevices)	
+			self.port.AppendItems(self.listDevices)
+		self.port.SetValue('')

@@ -125,19 +125,6 @@ class MyFrame(wx.Frame):
 		self.appsDict.append(app)
 
 		app = {
-		'name': _('Serial Devices Management'),
-		'platform': 'both',
-		'package': 'openplotter-serial',
-		'preUninstall': '',
-		'uninstall': 'openplotter-serial',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'no',
-		'entryPoint': 'openplotter-serial',
-		'postInstall': '',
-		}
-		self.appsDict.append(app)
-
-		app = {
 		'name': _('Moitessier HAT'),
 		'platform': 'rpi',
 		'package': 'openplotter-moitessier',
@@ -177,6 +164,32 @@ class MyFrame(wx.Frame):
 		self.appsDict.append(app)
 
 		app = {
+		'name': _('CAN Bus'),
+		'platform': 'both',
+		'package': 'openplotter-can',
+		'preUninstall': self.platform.admin+' canPreUninstall',
+		'uninstall': 'openplotter-can',
+		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'dev': 'no',
+		'entryPoint': 'openplotter-can',
+		'postInstall': self.platform.admin+' canPostInstall',
+		}
+		self.appsDict.append(app)
+
+		app = {
+		'name': _('Serial'),
+		'platform': 'both',
+		'package': 'openplotter-serial',
+		'preUninstall': self.platform.admin+' serialPreUninstall',
+		'uninstall': 'openplotter-serial',
+		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'dev': 'no',
+		'entryPoint': 'openplotter-serial',
+		'postInstall': self.platform.admin+' serialPostInstall',
+		}
+		self.appsDict.append(app)
+
+		app = {
 		'name': _('Network'),
 		'platform': 'rpi',
 		'package': 'openplotter-network',
@@ -189,19 +202,6 @@ class MyFrame(wx.Frame):
 		}
 		self.appsDict.append(app)
 
-		app = {
-		'name': _('CAN Bus'),
-		'platform': 'both',
-		'package': 'openplotter-can',
-		'preUninstall': self.platform.admin+' canPreUninstall',
-		'uninstall': 'openplotter-can',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'no',
-		'entryPoint': 'openplotter-can',
-		'postInstall': self.platform.admin+' canPostInstall',
-		}
-		self.appsDict.append(app)
-		
 		app = {
 		'name': _('Dashboards'),
 		'platform': 'both',
