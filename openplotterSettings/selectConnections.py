@@ -100,3 +100,68 @@ class AddPort(wx.Dialog):
 		else:
 			self.port.AppendItems(self.listDevices)
 		self.port.SetValue('')
+		
+'''
+class AddNetworkConnection(wx.Dialog):
+	def __init__(self, data, dataStatus, networkType, typeStatus, host, hostStatus, port, portStatus):
+		wx.Dialog.__init__(self, None, title=_('Add network connection'), size=(-1,230))
+		panel = wx.Panel(self)
+
+		dataLabel = wx.StaticText(panel, label=_('Data'))
+		self.data = wx.ComboBox(panel, choices=['NMEA0183', 'SignalK'])
+		networkTypeLabel = wx.StaticText(panel, label=_('Type'))
+		self.networkType = wx.ComboBox(panel, choices=['TCP', 'UDP'])
+		hostLabel = wx.StaticText(panel, label=_('Host'))
+		self.host = wx.TextCtrl(panel)
+		portLabel = wx.StaticText(panel, label=_('Port'))
+		self.port = wx.SpinCtrl(panel, 101, min=4000, max=65536, initial=50000)
+
+		if data: self.data.SetValue(data)
+		else: self.data.SetValue('')
+		if not dataStatus: self.data.Disable()
+
+		if networkType: self.networkType.SetValue(networkType)
+		else: self.networkType.SetValue('')
+		if not typeStatus: self.networkType.Disable()
+
+		if host: self.host.SetValue(host)
+		else: self.host.SetValue('')
+		if not hostStatus: self.host.Disable()
+
+		if port: self.port.SetValue(int(port))
+		if not portStatus: self.port.Disable()
+
+		cancelBtn = wx.Button(panel, wx.ID_CANCEL)
+		okBtn = wx.Button(panel, wx.ID_OK)
+
+		hbox1 = wx.BoxSizer(wx.HORIZONTAL)
+		hbox1.Add(dataLabel, 0, wx.LEFT | wx.EXPAND, 10)
+		hbox1.Add(self.data, 1, wx.RIGHT | wx.LEFT | wx.EXPAND, 10)
+
+		hbox2 = wx.BoxSizer(wx.HORIZONTAL)
+		hbox2.Add(networkTypeLabel, 0, wx.LEFT | wx.EXPAND, 10)
+		hbox2.Add(self.networkType, 1, wx.RIGHT | wx.LEFT | wx.EXPAND, 10)
+
+		hbox3 = wx.BoxSizer(wx.HORIZONTAL)
+		hbox3.Add(hostLabel, 0, wx.LEFT | wx.EXPAND, 10)
+		hbox3.Add(self.host, 1, wx.RIGHT | wx.LEFT | wx.EXPAND, 10)
+
+		hbox4 = wx.BoxSizer(wx.HORIZONTAL)
+		hbox4.Add(portLabel, 0, wx.LEFT | wx.EXPAND, 10)
+		hbox4.Add(self.port, 1, wx.RIGHT | wx.LEFT | wx.EXPAND, 10)
+
+		hbox = wx.BoxSizer(wx.HORIZONTAL)
+		hbox.Add(cancelBtn, 1, wx.ALL | wx.EXPAND, 10)
+		hbox.Add(okBtn, 1, wx.ALL | wx.EXPAND, 10)
+
+		vbox = wx.BoxSizer(wx.VERTICAL)
+		vbox.Add(hbox1 0, wx.ALL | wx.EXPAND, 5)
+		vbox.Add(hbox2 0, wx.ALL | wx.EXPAND, 5)
+		vbox.Add(hbox3 0, wx.ALL | wx.EXPAND, 5)
+		vbox.Add(hbox4 0, wx.ALL | wx.EXPAND, 5)
+		vbox.AddStretchSpacer(1)
+		vbox.Add(hbox, 0, wx.EXPAND, 0)
+
+		panel.SetSizer(vbox)
+		self.Centre() 
+'''
