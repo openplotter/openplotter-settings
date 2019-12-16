@@ -249,7 +249,7 @@ class MyFrame(wx.Frame):
 					red += '\n'+i['description']+' ('+i['mode']+'): '+i['type']+' '+i['address']+':'+i['port']
 				self.add_logger_data({'green':'','black':'','red':red})
 			else: self.add_logger_data({'green':_('no conflicts'),'black':'','red':''})
-		except Exception as e: print(str(e))
+		except Exception as e: self.add_logger_data({'green':'','black':'','red':print(str(e))})
 
 		try:
 			play = self.conf.get('GENERAL', 'play')
