@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: openplotter\n"
-"POT-Creation-Date: 2019-10-25 18:57+0200\n"
-"PO-Revision-Date: 2019-10-30 10:05+0100\n"
-"Last-Translator: Sailoog (sailoog)\n"
+"POT-Creation-Date: 2019-12-13 19:49+0100\n"
+"PO-Revision-Date: 2019-12-16 13:01+0100\n"
+"Last-Translator: \n"
 "Language-Team: Spanish\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -27,38 +27,46 @@ msgid "OpenCPN packages source already exists"
 msgstr "Ya existe la fuente de paquetes OpenCPN"
 
 #: installSources.py:48
+msgid "Added XyGrib packages source"
+msgstr "Añadida fuente de paquetes de XyGrib"
+
+#: installSources.py:50
+msgid "XyGrib packages source already exists"
+msgstr "La fuente de los paquetes XyGrib ya existe"
+
+#: installSources.py:55
 msgid "Added OpenPlotter packages source"
 msgstr "Añadida fuente de paquetes OpenPlotter"
 
-#: installSources.py:50
+#: installSources.py:57
 msgid "OpenPlotter packages source already exists"
 msgstr "Ya existe la fuente de paquetes OpenPlotter"
 
-#: installSources.py:65
+#: installSources.py:72
 msgid "Added InfluxDB packages source"
 msgstr "Añadida la fuente de paquetes InfluxDB"
 
-#: installSources.py:67
+#: installSources.py:74
 msgid "InfluxDB packages source already exists"
 msgstr "La fuente de paquetes InfluxDB ya existe"
 
-#: installSources.py:72
+#: installSources.py:79
 msgid "Added Grafana packages source"
 msgstr "Añadido fuente de paquetes de Grafana"
 
-#: installSources.py:74
+#: installSources.py:81
 msgid "Grafana packages source already exists"
 msgstr "La fuente de paquetes de Grafana ya existe"
 
-#: installSources.py:79
+#: installSources.py:86
 msgid "Added Node.js 10 packages source"
 msgstr "Añadida la fuente de paquetes Node.js 10"
 
-#: installSources.py:81
+#: installSources.py:88
 msgid "Node.js 10 packages source already exists"
 msgstr "La fuente de paquetes Node.js 10 ya existe"
 
-#: installSources.py:95 settingsPreUninstall.py:32
+#: installSources.py:103 settingsPreUninstall.py:32
 msgid "FAILED: "
 msgstr "ERROR: "
 
@@ -79,102 +87,102 @@ msgid "Kplex"
 msgstr "Kplex"
 
 #: openplotterSettings.py:89
-msgid "Dashboards"
-msgstr "Cuadros de instrumentos"
-
-#: openplotterSettings.py:102
 msgid "Actions"
 msgstr "Acciones"
 
-#: openplotterSettings.py:115
+#: openplotterSettings.py:102
 msgid "1W Sensors"
 msgstr "Sensores 1W"
 
+#: openplotterSettings.py:115
+msgid "Signal K Filter"
+msgstr "Filtro signal K"
+
 #: openplotterSettings.py:128
-msgid "CAN Bus"
-msgstr "Bus CAN"
-
-#: openplotterSettings.py:141
-msgid "Serial Devices Management"
-msgstr "Gestión de dispositivos Serie"
-
-#: openplotterSettings.py:154
 msgid "Moitessier HAT"
 msgstr "HAT Moitessier"
 
-#: openplotterSettings.py:167
+#: openplotterSettings.py:141
 msgid "Pypilot"
 msgstr "Pypilot"
 
-#: openplotterSettings.py:180
+#: openplotterSettings.py:154
 msgid "I2C Sensors"
 msgstr "Sensores I2C"
+
+#: openplotterSettings.py:167
+msgid "CAN Bus"
+msgstr "Bus CAN"
+
+#: openplotterSettings.py:180
+msgid "Serial"
+msgstr "Serie"
 
 #: openplotterSettings.py:193
 msgid "Network"
 msgstr "Red"
 
 #: openplotterSettings.py:206
-msgid "XyGrib"
-msgstr "XyGrib"
+msgid "Dashboards"
+msgstr "Cuadros de instrumentos"
 
 #: openplotterSettings.py:219
-msgid "Signal K Filter"
-msgstr "Filtro signal K"
-
-#: openplotterSettings.py:234
 msgid "Signal K Installer"
 msgstr "Instalador de Signal K"
 
-#: openplotterSettings.py:247
+#: openplotterSettings.py:232
+msgid "XyGrib"
+msgstr "XyGrib"
+
+#: openplotterSettings.py:245
 msgid "OpenCPN Installer"
 msgstr "Instalador OpenCPN"
 
-#: openplotterSettings.py:260
+#: openplotterSettings.py:258
 msgid "Documentation"
 msgstr "Documentación"
 
-#: openplotterSettings.py:273
+#: openplotterSettings.py:271
 msgid "Settings"
 msgstr "Ajustes"
 
-#: openplotterSettings.py:285
+#: openplotterSettings.py:283
 msgid "OpenPlotter Settings"
 msgstr "Ajustes de OpenPlotter"
 
-#: openplotterSettings.py:295
+#: openplotterSettings.py:293
 msgid "Help"
 msgstr "Ayuda"
 
-#: openplotterSettings.py:300
+#: openplotterSettings.py:298
 msgid "Autostart"
 msgstr "AutoInicio"
 
-#: openplotterSettings.py:303
+#: openplotterSettings.py:301
 msgid "Check System"
 msgstr "Comprobar sistema"
 
-#: openplotterSettings.py:306
+#: openplotterSettings.py:304
 msgid "Add Sources"
 msgstr "Añadir fuentes"
 
-#: openplotterSettings.py:308
+#: openplotterSettings.py:306
 msgid "Update Candidates"
 msgstr "Comprobar disponibles"
 
-#: openplotterSettings.py:310 selectKey.py:40
+#: openplotterSettings.py:308 selectKey.py:40
 msgid "Refresh"
 msgstr "Actualizar"
 
-#: openplotterSettings.py:319
+#: openplotterSettings.py:317
 msgid "OpenPlotter Apps"
 msgstr "Apps OpenPlotter"
 
-#: openplotterSettings.py:320
+#: openplotterSettings.py:318
 msgid "General Settings"
 msgstr "Ajustes generales"
 
-#: openplotterSettings.py:321
+#: openplotterSettings.py:319
 msgid "Raspberry Settings"
 msgstr "Ajustes de Raspberry"
 
@@ -375,6 +383,18 @@ msgstr "Leyendo lista de cambios, espere... "
 msgid "Checking apps list, please wait... "
 msgstr "Comprobando lista de aplicaciones, por favor espere... "
 
+#: selectConnections.py:33
+msgid "Add serial device"
+msgstr "Añadir dispositivo serie"
+
+#: selectConnections.py:56
+msgid "Show only Openplotter-Serial managed ports"
+msgstr "Mostrar sólo puertos administrados por Openplotter-Serial"
+
+#: selectConnections.py:63
+msgid "Baud Rate: "
+msgstr "Baudios: "
+
 #: selectKey.py:23
 msgid "Select Signal K key"
 msgstr "Seleccione la clave Signal K"
@@ -415,6 +435,14 @@ msgstr "No se permiten caracteres especiales."
 msgid "Failed. Replace * by some text."
 msgstr "Error. Reemplace * por algún texto."
 
+#: serialPorts.py:100
+msgid "connection ID: "
+msgstr "iD de conexión: "
+
+#: serialPorts.py:100
+msgid "device: "
+msgstr "dispositivo: "
+
 #: settingsPreUninstall.py:27
 msgid "Removing packages sources..."
 msgstr "Eliminando fuentes de paquetes..."
@@ -423,67 +451,67 @@ msgstr "Eliminando fuentes de paquetes..."
 msgid "DONE"
 msgstr "HECHO"
 
-#: startup.py:38
+#: startup.py:39
 msgid "Starting OpenPlotter"
 msgstr "Iniciando OpenPlotter"
 
-#: startup.py:46
+#: startup.py:47
 msgid "Starting OpenPlotter. Please wait for all services to start"
 msgstr "Iniciando OpenPlotter. Espere a que todos los servicios inicien, por favor"
 
-#: startup.py:47
+#: startup.py:48
 msgid "Checking OpenPlotter system. Please wait for all services to be checked"
 msgstr "Comprobando sistema OpenPlotter. Por favor espere a que todos los servicios sean comprobados"
 
-#: startup.py:54
+#: startup.py:55
 msgid "Close"
 msgstr "Cerrar"
 
-#: startup.py:80
+#: startup.py:81
 msgid "There are some warnings. Check your system. Closing in "
 msgstr "Hay algunas advertencias. Compruebe su sistema. Cerrando "
 
-#: startup.py:80 startup.py:85
+#: startup.py:81 startup.py:86
 msgid " seconds"
 msgstr " segundos"
 
-#: startup.py:85
+#: startup.py:86
 msgid "There are no warnings. Closing in "
 msgstr "No hay advertencias. Cerrando en "
 
-#: startup.py:120
+#: startup.py:121
 msgid "Applying delay of "
 msgstr "Aplicando retraso de "
 
-#: startup.py:120
+#: startup.py:121
 msgid " seconds..."
 msgstr " segundos..."
 
-#: startup.py:122
+#: startup.py:123
 msgid "done"
 msgstr "completado"
 
-#: startup.py:123
+#: startup.py:124
 msgid "Delay failed. Is it a number?"
 msgstr "Retraso no aplicado. ¿Es un número?"
 
-#: startup.py:125
+#: startup.py:126
 msgid "Checking OpenPlotter autostart..."
 msgstr "Comprobando el auto-arranque de OpenPlotter..."
 
-#: startup.py:127
+#: startup.py:128
 msgid "Autostart is not enabled and most features will not work. Please select \"Autostart\" in \"OpenPlotter Settings\""
 msgstr "El autoarranque no está activado y la mayoría de las características no funcionarán. Por favor, seleccione \"Autostart\" en \"OpenPlotter Settings\""
 
-#: startup.py:129 startup.py:146 startup.py:153
+#: startup.py:130 startup.py:155 startup.py:162
 msgid "enabled"
 msgstr "habilitado"
 
-#: startup.py:132
+#: startup.py:133
 msgid "Checking user \"pi\" password..."
 msgstr "Verificación de la contraseña del usuario \"pi\"..."
 
-#: startup.py:140
+#: startup.py:141
 msgid ""
 "Security warning: You are using the default password for \"pi\" user.\n"
 "Please change password in Menu > Preferences > Raspberry Pi Configuration."
@@ -491,50 +519,58 @@ msgstr ""
 "Advertencia de seguridad: Está utilizando la contraseña predeterminada para el usuario \"pi\".\n"
 "Por favor, cambie la contraseña en Menú > Preferencias > Configuración de Raspberry Pi."
 
-#: startup.py:141
+#: startup.py:142
 msgid "changed"
 msgstr "cambiado"
 
-#: startup.py:143
+#: startup.py:144
 msgid "Checking screensaver state..."
 msgstr "Comprobando estado de salvapantallas..."
 
-#: startup.py:145 startup.py:152
+#: startup.py:150 startup.py:161
 msgid "disabled"
 msgstr "deshabilitado"
 
-#: startup.py:148
+#: startup.py:157
 msgid "Checking headless state..."
 msgstr "Comprobando estado del uso sin pantalla..."
 
-#: startup.py:155
+#: startup.py:164
 msgid "Checking OpenPlotter packages source..."
 msgstr "Comprobando la fuente de paquetes OpenPlotter..."
 
-#: startup.py:158
+#: startup.py:167
 msgid "added"
 msgstr "añadido"
 
-#: startup.py:159
+#: startup.py:168
 msgid "There are missing packages sources. Please add sources in \"OpenPlotter Settings\"."
 msgstr "Hay fuentes de paquetes faltantes. Por favor, añada las fuentes en \"Configuración OpenPlotter\"."
 
-#: startup.py:210
-msgid "Checking ports conflict..."
-msgstr "Comprobando conflicto de puertos..."
+#: startup.py:231
+msgid "Checking serial connections conflicts..."
+msgstr "Comprobando conflictos de conexiones serie..."
 
-#: startup.py:214
-msgid "There are conflicts between the following server connections:"
-msgstr "Hay conflictos entre las siguientes conexiones del servidor:"
+#: startup.py:235
+msgid "There are conflicts between the following serial connections:"
+msgstr "Hay conflictos entre las siguientes conexiones serie:"
 
-#: startup.py:218
+#: startup.py:239 startup.py:251
 msgid "no conflicts"
 msgstr "sin conflictos"
 
-#: startup.py:226
+#: startup.py:243
+msgid "Checking network connections conflicts..."
+msgstr "Comprobando conflictos de conexiones de red..."
+
+#: startup.py:247
+msgid "There are conflicts between the following server connections:"
+msgstr "Hay conflictos entre las siguientes conexiones del servidor:"
+
+#: startup.py:259
 msgid "STARTUP FINISHED"
 msgstr "ARRANQUE FINALIZADO"
 
-#: startup.py:227
+#: startup.py:260
 msgid "CHECK SYSTEM FINISHED"
 msgstr "COMPROBACION DEL SISTEMA FINALIZADA"

@@ -2,10 +2,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openplotter\n"
 "POT-Creation-Date: 2019-12-13 19:49+0100\n"
-"PO-Revision-Date: 2019-12-16 12:57+0100\n"
+"PO-Revision-Date: 2019-12-16 12:38+0100\n"
 "Last-Translator: \n"
-"Language-Team: Italian\n"
-"Language: it\n"
+"Language-Team: Basque\n"
+"Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -14,563 +14,561 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Crowdin-Project: openplotter\n"
-"X-Crowdin-Language: it\n"
+"X-Crowdin-Language: eu\n"
 "X-Crowdin-File: openplotter-settings.po\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: installSources.py:41
 msgid "Added OpenCPN packages source"
-msgstr "Pacchetti sorgente OpenCPN aggiunti"
+msgstr ""
 
 #: installSources.py:43
 msgid "OpenCPN packages source already exists"
-msgstr "Pacchetti sorgente OpenCPN esistono già"
+msgstr ""
 
 #: installSources.py:48
 msgid "Added XyGrib packages source"
-msgstr "Pacchetti sorgente aggiunti XyGrib"
+msgstr ""
 
 #: installSources.py:50
 msgid "XyGrib packages source already exists"
-msgstr "Pacchetti sorgente XyGrib esistono già"
+msgstr ""
 
 #: installSources.py:55
 msgid "Added OpenPlotter packages source"
-msgstr "Pacchetti sorgente aggiunti OpenPlotter"
+msgstr ""
 
 #: installSources.py:57
 msgid "OpenPlotter packages source already exists"
-msgstr "Openplotter pacchetti sorgente esistono già"
+msgstr ""
 
 #: installSources.py:72
 msgid "Added InfluxDB packages source"
-msgstr "Pacchetti sorgente InfluxDB aggiunti"
+msgstr ""
 
 #: installSources.py:74
 msgid "InfluxDB packages source already exists"
-msgstr "InfluxDB pacchetti sorgente esistono già"
+msgstr ""
 
 #: installSources.py:79
 msgid "Added Grafana packages source"
-msgstr "Grafana pacchetti sorgente aggiunti"
+msgstr ""
 
 #: installSources.py:81
 msgid "Grafana packages source already exists"
-msgstr "Grafana pacchetti sorgente esistono già"
+msgstr ""
 
 #: installSources.py:86
 msgid "Added Node.js 10 packages source"
-msgstr "Pacchetti sorgente Node.js 10 aggiunti"
+msgstr ""
 
 #: installSources.py:88
 msgid "Node.js 10 packages source already exists"
-msgstr "Pacchetti sorgente Node.js 10 esistono già"
+msgstr ""
 
 #: installSources.py:103 settingsPreUninstall.py:32
 msgid "FAILED: "
-msgstr "ABORTO: "
+msgstr ""
 
 #: openplotterSettings.py:37
 msgid "OpenPlotter MCS"
-msgstr "OpenPlotter MCS"
+msgstr ""
 
 #: openplotterSettings.py:50
 msgid "OpenPlotter Apps Template"
-msgstr "Modello di App per OpenPlotter"
+msgstr ""
 
 #: openplotterSettings.py:63
 msgid "SDR AIS"
-msgstr "SDR AIS"
+msgstr ""
 
 #: openplotterSettings.py:76
 msgid "Kplex"
-msgstr "Kplex"
+msgstr ""
 
 #: openplotterSettings.py:89
 msgid "Actions"
-msgstr "Azioni"
+msgstr ""
 
 #: openplotterSettings.py:102
 msgid "1W Sensors"
-msgstr "Sensori 1W"
+msgstr ""
 
 #: openplotterSettings.py:115
 msgid "Signal K Filter"
-msgstr "Filtro signal K"
+msgstr ""
 
 #: openplotterSettings.py:128
 msgid "Moitessier HAT"
-msgstr "Moitessier HAT"
+msgstr ""
 
 #: openplotterSettings.py:141
 msgid "Pypilot"
-msgstr "Pypilot - pilota automatico"
+msgstr ""
 
 #: openplotterSettings.py:154
 msgid "I2C Sensors"
-msgstr "Sensori I2C"
+msgstr ""
 
 #: openplotterSettings.py:167
 msgid "CAN Bus"
-msgstr "Bus CAN"
+msgstr ""
 
 #: openplotterSettings.py:180
 msgid "Serial"
-msgstr "Seriale"
+msgstr ""
 
 #: openplotterSettings.py:193
 msgid "Network"
-msgstr "Wireless e Reti"
+msgstr ""
 
 #: openplotterSettings.py:206
 msgid "Dashboards"
-msgstr "Pannello strumenti"
+msgstr ""
 
 #: openplotterSettings.py:219
 msgid "Signal K Installer"
-msgstr "Installlazione Signal K"
+msgstr ""
 
 #: openplotterSettings.py:232
 msgid "XyGrib"
-msgstr "XyGrib"
+msgstr ""
 
 #: openplotterSettings.py:245
 msgid "OpenCPN Installer"
-msgstr "Installlazione OpenCPN"
+msgstr ""
 
 #: openplotterSettings.py:258
 msgid "Documentation"
-msgstr "Documentazione"
+msgstr ""
 
 #: openplotterSettings.py:271
 msgid "Settings"
-msgstr "Impostazioni"
+msgstr ""
 
 #: openplotterSettings.py:283
 msgid "OpenPlotter Settings"
-msgstr "Impostazioni OpenPlotter"
+msgstr ""
 
 #: openplotterSettings.py:293
 msgid "Help"
-msgstr "Guida"
+msgstr ""
 
 #: openplotterSettings.py:298
 msgid "Autostart"
-msgstr "Avvio automatico"
+msgstr ""
 
 #: openplotterSettings.py:301
 msgid "Check System"
-msgstr "Controlla il sistema"
+msgstr ""
 
 #: openplotterSettings.py:304
 msgid "Add Sources"
-msgstr "Aggiungi Fonti"
+msgstr ""
 
 #: openplotterSettings.py:306
 msgid "Update Candidates"
-msgstr "Aggiorna candidati"
+msgstr ""
 
 #: openplotterSettings.py:308 selectKey.py:40
 msgid "Refresh"
-msgstr "Ricarica"
+msgstr ""
 
 #: openplotterSettings.py:317
 msgid "OpenPlotter Apps"
-msgstr "Applicazioni OpenPlotter"
+msgstr ""
 
 #: openplotterSettings.py:318
 msgid "General Settings"
-msgstr "Impostazioni generali"
+msgstr ""
 
 #: openplotterSettings.py:319
 msgid "Raspberry Settings"
-msgstr "Impostazioni Raspberry Pi"
+msgstr ""
 
 #: openplotterSettings.py:383
 msgid "Updating packages data, please wait... "
-msgstr "Aggiornamento dati pacchetti, attendere prego... "
+msgstr ""
 
 #: openplotterSettings.py:388 openplotterSettings.py:396
 msgid "Adding packages sources, please wait... "
-msgstr "Aggiunta fonti pacchetti, attendere prego... "
+msgstr ""
 
 #: openplotterSettings.py:398
 msgid "Added sources. Update candidates to see changes"
-msgstr "Aggiunte fonti. Aggiorna i candidati per vedere le modifiche"
+msgstr ""
 
 #: openplotterSettings.py:406
 msgid "Close and open again the window to see changes."
-msgstr "Chiudi e apri nuovamente la finestra per vedere le modifiche."
+msgstr ""
 
 #: openplotterSettings.py:406 openplotterSettings.py:663
 msgid "Info"
-msgstr "Informazioni"
+msgstr ""
 
 #: openplotterSettings.py:413
 msgid "Language"
-msgstr "Lingua"
+msgstr ""
 
 #: openplotterSettings.py:416
 msgid "Translate"
-msgstr "Traduci"
+msgstr ""
 
 #: openplotterSettings.py:419
 msgid "Maximize OpenPlotter Apps"
-msgstr "Massimizza le app OpenPlotter"
+msgstr ""
 
 #: openplotterSettings.py:421
 msgid "Startup"
-msgstr "Avvio"
+msgstr ""
 
 #: openplotterSettings.py:423
 msgid "Delay (seconds)"
-msgstr "Ritardo (secondi)"
+msgstr ""
 
 #: openplotterSettings.py:428
 msgid "Play"
-msgstr "Avvia"
+msgstr ""
 
 #: openplotterSettings.py:457
 msgid "Choose a file"
-msgstr "Scegli un file"
+msgstr ""
 
 #: openplotterSettings.py:458
 msgid "Audio files"
-msgstr "Files audio"
+msgstr ""
 
 #: openplotterSettings.py:458
 msgid "All files"
-msgstr "Tutti i file"
+msgstr ""
 
 #: openplotterSettings.py:471
 msgid "Sound to play at startup set to: "
-msgstr "Suono all'avvio impostato: "
+msgstr ""
 
 #: openplotterSettings.py:475
 msgid "Removed sound to play at startup"
-msgstr "Suono all'avvio disattivato"
+msgstr ""
 
 #: openplotterSettings.py:482
 msgid "Delay at startup set to: "
-msgstr "Ritardo all'avvio impostato: "
+msgstr ""
 
 #: openplotterSettings.py:486
 msgid "Removed delay at startup"
-msgstr "Avvio ritardato disattivato"
+msgstr ""
 
 #: openplotterSettings.py:491
 msgid "OpenPlotter apps will open maximized"
-msgstr "Le applicazioni di OpenPlotter si apriranno massimizzate"
+msgstr ""
 
 #: openplotterSettings.py:494
 msgid "Disabled maximized OpenPlotter apps"
-msgstr "Massimizza le app disattivato"
+msgstr ""
 
 #: openplotterSettings.py:498
 msgid "Disable Screensaver"
-msgstr "Disabilita il salvaschermo"
+msgstr ""
 
 #: openplotterSettings.py:501
 msgid "Headless"
-msgstr "Utlizzo senza monitor"
+msgstr ""
 
 #: openplotterSettings.py:558
 msgid "Changes will be applied after restarting"
-msgstr "Le modifiche saranno applicate dopo il riavvio"
+msgstr ""
 
 #: openplotterSettings.py:568
 msgid "Autostart enabled"
-msgstr "Avvio automatico attivato"
+msgstr ""
 
 #: openplotterSettings.py:571
 msgid "Autostart disabled. Most features will not work!"
-msgstr "Avvio automatico disabilitato. La maggior parte delle funzioni non sarà disponibile!"
+msgstr ""
 
 #: openplotterSettings.py:578
 msgid "Name"
-msgstr "Nome"
+msgstr ""
 
 #: openplotterSettings.py:579
 msgid "Installed"
-msgstr "Installato"
+msgstr ""
 
 #: openplotterSettings.py:580
 msgid "Candidate"
-msgstr "Candidati"
+msgstr ""
 
 #: openplotterSettings.py:586
 msgid "Install"
-msgstr "Installa"
+msgstr ""
 
 #: openplotterSettings.py:588
 msgid "Uninstall"
-msgstr "Disinstalla"
+msgstr ""
 
 #: openplotterSettings.py:591
 msgid "Open"
-msgstr "Apri"
+msgstr ""
 
 #: openplotterSettings.py:593
 msgid "Change Log"
-msgstr "Elenco delle modifiche"
+msgstr ""
 
 #: openplotterSettings.py:611 openplotterSettings.py:745
 msgid "missing source: "
-msgstr "fonte mancante: "
+msgstr ""
 
 #: openplotterSettings.py:613 openplotterSettings.py:749
 msgid "coming soon"
-msgstr "disponibile a breve"
+msgstr ""
 
 #: openplotterSettings.py:616 openplotterSettings.py:755
 msgid "app only for non Raspberry machines"
-msgstr "applicazione solo per dispositivi non Raspberry"
+msgstr ""
 
 #: openplotterSettings.py:619 openplotterSettings.py:759
 msgid "app only for Raspberry machines"
-msgstr "applicazione solo per dispositivi Raspberry"
+msgstr ""
 
 #: openplotterSettings.py:623
 msgid "Press Refresh"
-msgstr "Premi Aggiorna"
+msgstr ""
 
 #: openplotterSettings.py:632
 msgid "Are you sure you want to install "
-msgstr "Sei sicuro di voler installare "
+msgstr ""
 
 #: openplotterSettings.py:632 openplotterSettings.py:665
 msgid " and its dependencies?"
-msgstr " e le sue dipendenze?"
+msgstr ""
 
 #: openplotterSettings.py:633 openplotterSettings.py:666
 msgid "Question"
-msgstr "Domanda"
+msgstr ""
 
 #: openplotterSettings.py:642
 msgid "Installing package, please wait... "
-msgstr "Installazione pacchetto, attendere prego... "
+msgstr ""
 
 #: openplotterSettings.py:650
 msgid "Running post-installation scripts, please wait... "
-msgstr "Esecuzione script post-installazione, attendere prego... "
+msgstr ""
 
 #: openplotterSettings.py:652 openplotterSettings.py:685
 #: openplotterSettings.py:713 openplotterSettings.py:773
 msgid "Done"
-msgstr "Fatto"
+msgstr ""
 
 #: openplotterSettings.py:663
 msgid "You have to uninstall the rest of apps before uninstalling openplotter-settings."
-msgstr "Devi disinstallare il resto delle app prima di disinstallare openplotter-settings."
+msgstr ""
 
 #: openplotterSettings.py:665
 msgid "Are you sure you want to uninstall "
-msgstr "Sei sicuro di voler disinstallare "
+msgstr ""
 
 #: openplotterSettings.py:676
 msgid "Running pre-uninstall scripts, please wait... "
-msgstr "Esecuzione script di pre-disinstallazione in corso, attendere prego... "
+msgstr ""
 
 #: openplotterSettings.py:683
 msgid "Uninstalling packages, please wait... "
-msgstr "Disinstallazione pacchetti, attendere prego... "
+msgstr ""
 
 #: openplotterSettings.py:711
 msgid "Reading changelog, please wait... "
-msgstr "Lettura elenco modifiche, attendere prego... "
+msgstr ""
 
 #: openplotterSettings.py:718
 msgid "Checking apps list, please wait... "
-msgstr "Controllo lista delle app, attendere prego... "
+msgstr ""
 
 #: selectConnections.py:33
 msgid "Add serial device"
-msgstr "Aggiungi dispositivo seriale"
+msgstr ""
 
 #: selectConnections.py:56
 msgid "Show only Openplotter-Serial managed ports"
-msgstr "Mostra solo le porte Openplotter-Serial gestite"
+msgstr ""
 
 #: selectConnections.py:63
 msgid "Baud Rate: "
-msgstr "Baud rate: "
+msgstr ""
 
 #: selectKey.py:23
 msgid "Select Signal K key"
-msgstr "Seleziona la chiave Signal K"
+msgstr ""
 
 #: selectKey.py:38
 msgid "Vessel"
-msgstr "Imbarcazione"
+msgstr ""
 
 #: selectKey.py:45
 msgid "Groups"
-msgstr "Gruppi"
+msgstr ""
 
 #: selectKey.py:49
 msgid "Keys"
-msgstr "Chiavi"
+msgstr ""
 
 #: selectKey.py:53
 msgid "Properties"
-msgstr "Proprietà"
+msgstr ""
 
 #: selectKey.py:59
 msgid "Replace * (allowed characters: 0-9, a-z, A-Z)"
-msgstr "Sostituisci * (caratteri permessi: 0-9, a-z, A-Z)"
+msgstr ""
 
 #: selectKey.py:61
 msgid "Replace"
-msgstr "Sostituisci"
+msgstr ""
 
 #: selectKey.py:64
 msgid "Selected key"
-msgstr "Chiave selezionata"
+msgstr ""
 
 #: selectKey.py:275
 msgid "Failed. Characters not allowed."
-msgstr "Errore. Caratteri non consentiti."
+msgstr ""
 
 #: selectKey.py:285
 msgid "Failed. Replace * by some text."
-msgstr "Errore. Sostituire * con del testo."
+msgstr ""
 
 #: serialPorts.py:100
 msgid "connection ID: "
-msgstr "ID connessione: "
+msgstr ""
 
 #: serialPorts.py:100
 msgid "device: "
-msgstr "dispositivo: "
+msgstr ""
 
 #: settingsPreUninstall.py:27
 msgid "Removing packages sources..."
-msgstr "Rimozione fonti pacchetti..."
+msgstr ""
 
 #: settingsPreUninstall.py:31
 msgid "DONE"
-msgstr "FATTO"
+msgstr ""
 
 #: startup.py:39
 msgid "Starting OpenPlotter"
-msgstr "Avvio di OpenPlotter"
+msgstr ""
 
 #: startup.py:47
 msgid "Starting OpenPlotter. Please wait for all services to start"
-msgstr "Avvio di OpenPlotter. Attendere che tutti i servizi siano avviati"
+msgstr ""
 
 #: startup.py:48
 msgid "Checking OpenPlotter system. Please wait for all services to be checked"
-msgstr "Verifica del sistema OpenPlotter in corso. Attendi che tutti i servizi siano controllati"
+msgstr ""
 
 #: startup.py:55
 msgid "Close"
-msgstr "Chiudi"
+msgstr ""
 
 #: startup.py:81
 msgid "There are some warnings. Check your system. Closing in "
-msgstr "Ci sono alcuni avvisi. Controlla il tuo sistema. Chiusura "
+msgstr ""
 
 #: startup.py:81 startup.py:86
 msgid " seconds"
-msgstr " secondi"
+msgstr ""
 
 #: startup.py:86
 msgid "There are no warnings. Closing in "
-msgstr "Non ci sono avvisi. Chiusura "
+msgstr ""
 
 #: startup.py:121
 msgid "Applying delay of "
-msgstr "Applicazione ritardo di "
+msgstr ""
 
 #: startup.py:121
 msgid " seconds..."
-msgstr " secondi..."
+msgstr ""
 
 #: startup.py:123
 msgid "done"
-msgstr "fatto"
+msgstr ""
 
 #: startup.py:124
 msgid "Delay failed. Is it a number?"
-msgstr "Errore nel ritardo. È un numero?"
+msgstr ""
 
 #: startup.py:126
 msgid "Checking OpenPlotter autostart..."
-msgstr "Controllo avvio automatico di OpenPlotter all'accensione..."
+msgstr ""
 
 #: startup.py:128
 msgid "Autostart is not enabled and most features will not work. Please select \"Autostart\" in \"OpenPlotter Settings\""
-msgstr "Avvio automatico non abilitato, molte funzioni non funzioneranno. Si prega di selezionare \"Avvio automatico\" in \"Impostazioni OpenPlotter \""
+msgstr ""
 
 #: startup.py:130 startup.py:155 startup.py:162
 msgid "enabled"
-msgstr "abilitato"
+msgstr ""
 
 #: startup.py:133
 msgid "Checking user \"pi\" password..."
-msgstr "Controllo password dell'utente \"pi\"..."
+msgstr ""
 
 #: startup.py:141
 msgid ""
 "Security warning: You are using the default password for \"pi\" user.\n"
 "Please change password in Menu > Preferences > Raspberry Pi Configuration."
 msgstr ""
-"Avviso di sicurezza: Stai utilizzando la password predefinita per l'utente \"pi\".\n"
-"Cambia la password nel Menu > Preferenze > Configurazione Raspberry Pi."
 
 #: startup.py:142
 msgid "changed"
-msgstr "modificato"
+msgstr ""
 
 #: startup.py:144
 msgid "Checking screensaver state..."
-msgstr "Controllo stato screensaver..."
+msgstr ""
 
 #: startup.py:150 startup.py:161
 msgid "disabled"
-msgstr "disabilitato"
+msgstr ""
 
 #: startup.py:157
 msgid "Checking headless state..."
-msgstr "Controllo stato utilizzo senza monitor..."
+msgstr ""
 
 #: startup.py:164
 msgid "Checking OpenPlotter packages source..."
-msgstr "Controllo fonte pacchetti OpenPlotter..."
+msgstr ""
 
 #: startup.py:167
 msgid "added"
-msgstr "aggiunto"
+msgstr ""
 
 #: startup.py:168
 msgid "There are missing packages sources. Please add sources in \"OpenPlotter Settings\"."
-msgstr "Ci sono delle fonti mancanti. Aggiungi le fonti in \"Impostazioni OpenPlotter\"."
+msgstr ""
 
 #: startup.py:231
 msgid "Checking serial connections conflicts..."
-msgstr "Controllo conflitti connessioni seriali..."
+msgstr ""
 
 #: startup.py:235
 msgid "There are conflicts between the following serial connections:"
-msgstr "Ci sono conflitti tra le seguenti connessioni server:"
+msgstr ""
 
 #: startup.py:239 startup.py:251
 msgid "no conflicts"
-msgstr "nessun conflitto"
+msgstr ""
 
 #: startup.py:243
 msgid "Checking network connections conflicts..."
-msgstr "Controllo conflitti connessioni seriali..."
+msgstr ""
 
 #: startup.py:247
 msgid "There are conflicts between the following server connections:"
-msgstr "Ci sono conflitti tra le seguenti connessioni server:"
+msgstr ""
 
 #: startup.py:259
 msgid "STARTUP FINISHED"
-msgstr "AVVIO COMPLETATO"
+msgstr ""
 
 #: startup.py:260
 msgid "CHECK SYSTEM FINISHED"
-msgstr "CONTROLLO DEL SISTEMA COMPLETATO"
+msgstr ""
