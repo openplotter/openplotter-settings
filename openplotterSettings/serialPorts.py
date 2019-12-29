@@ -68,7 +68,18 @@ class SerialPorts:
 			if targetPorts:
 				for i in targetPorts:
 					usedPorts.append(i)
-					
+			
+		serialPorts = False
+		try:
+			from openplotterPypilot import serialPorts
+		except:pass
+		if serialPorts: 
+			target = serialPorts.SerialPorts(self.conf)
+			targetPorts = target.usedSerialPorts()
+			if targetPorts:
+				for i in targetPorts:
+					usedPorts.append(i)
+
 		return usedPorts
 
 
