@@ -27,7 +27,7 @@ def main():
 	print(_('Removing packages sources...'))
 	try:
 		subprocess.call(['rm', '-f', '/etc/apt/sources.list.d/openplotter.list'])
-		subprocess.call(['rm', '-f', '/etc/apt/preferences.d/preferences'])
+		subprocess.call(['rm', '-f', '/etc/apt/preferences.d/99openplotter'])
 		print(_('DONE'))
 	except Exception as e: print(_('FAILED: ')+str(e))
 
