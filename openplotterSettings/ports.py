@@ -101,7 +101,18 @@ class Ports:
 			if targetPorts:
 				for i in targetPorts:
 					usedPorts.append(i)
-				
+
+		ports = False
+		try:
+			from openplotterMCS import ports
+		except:pass
+		if ports: 
+			target = ports.Ports(self.conf,self.currentLanguage)
+			targetPorts = target.usedPorts()
+			if targetPorts:
+				for i in targetPorts:
+					usedPorts.append(i)
+					
 		return usedPorts
 
 	def conflicts(self):

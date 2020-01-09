@@ -227,6 +227,12 @@ class MyFrame(wx.Frame):
 			if startup: self.processApp(startup)
 		except Exception as e: print(str(e))
 
+		startup = False
+		try:
+			from openplotterMCS import startup
+			if startup: self.processApp(startup)
+		except Exception as e: print(str(e))
+
 		try:
 			self.add_logger_data(_('Checking serial connections conflicts...'))
 			allSerialPorts = SerialPorts()

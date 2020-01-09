@@ -34,11 +34,11 @@ class MyFrame(wx.Frame):
 		self.appsDict = []
 
 		app = {
-		'name': _('OpenPlotter MCS'),
+		'name': _('MCS'),
 		'platform': 'rpi',
-		'package': 'openplotter-mcs',
+		'package': 'openplotter-MCS',
 		'preUninstall': self.platform.admin+' MCSPreUninstall',
-		'uninstall': 'openplotter-mcs',
+		'uninstall': 'openplotter-MCS',
 		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
 		'dev': 'no',
 		'entryPoint': 'openplotter-MCS',
