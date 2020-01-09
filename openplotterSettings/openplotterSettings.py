@@ -36,9 +36,9 @@ class MyFrame(wx.Frame):
 		app = {
 		'name': 'MCS',
 		'platform': 'rpi',
-		'package': 'openplotter-MCS',
+		'package': 'openplotter-mcs',
 		'preUninstall': self.platform.admin+' MCSPreUninstall',
-		'uninstall': 'openplotter-MCS',
+		'uninstall': 'openplotter-mcs',
 		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
 		'dev': 'no',
 		'entryPoint': 'openplotter-MCS',
