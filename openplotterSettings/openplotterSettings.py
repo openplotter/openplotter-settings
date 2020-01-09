@@ -34,7 +34,7 @@ class MyFrame(wx.Frame):
 		self.appsDict = []
 
 		app = {
-		'name': _('MCS'),
+		'name': 'MCS',
 		'platform': 'rpi',
 		'package': 'openplotter-MCS',
 		'preUninstall': self.platform.admin+' MCSPreUninstall',
