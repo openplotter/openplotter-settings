@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Check system
+Exec=openplotter-startup check
+Icon=openplotter-check
+StartupNotify=true
+Terminal=false
+Type=Application
+Categories=OpenPlotter
