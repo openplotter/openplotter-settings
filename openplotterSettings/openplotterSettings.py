@@ -86,14 +86,40 @@ class MyFrame(wx.Frame):
 		self.appsDict.append(app)
 
 		app = {
-		'name': _('Actions'),
+		'name': _('Signal K Filter'),
 		'platform': 'both',
-		'package': 'openplotter-actions',
+		'package': 'openplotter-SKfilter',
 		'preUninstall': '',
-		'uninstall': 'openplotter-actions',
+		'uninstall': 'openplotter-SKfilter',
 		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
 		'dev': 'yes',
-		'entryPoint': 'openplotter-actions',
+		'entryPoint': 'openplotter-SKfilter',
+		'postInstall': '',
+		}
+		self.appsDict.append(app)
+
+		app = {
+		'name': _('IoT'),
+		'platform': 'both',
+		'package': 'openplotter-iot',
+		'preUninstall': '',
+		'uninstall': 'openplotter-iot',
+		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'dev': 'yes',
+		'entryPoint': 'openplotter-iot',
+		'postInstall': '',
+		}
+		self.appsDict.append(app)
+
+		app = {
+		'name': _('Analog Sensors'),
+		'platform': 'rpi',
+		'package': 'openplotter-analog',
+		'preUninstall': '',
+		'uninstall': 'openplotter-analog',
+		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'dev': 'yes',
+		'entryPoint': 'openplotter-analog',
 		'postInstall': '',
 		}
 		self.appsDict.append(app)
@@ -112,15 +138,15 @@ class MyFrame(wx.Frame):
 		self.appsDict.append(app)
 
 		app = {
-		'name': _('Signal K Filter'),
-		'platform': 'both',
-		'package': 'openplotter-SKfilter',
-		'preUninstall': '',
-		'uninstall': 'openplotter-SKfilter',
+		'name': _('I2C Sensors'),
+		'platform': 'rpi',
+		'package': 'openplotter-i2c',
+		'preUninstall': self.platform.admin+' i2cPreUninstall',
+		'uninstall': 'openplotter-i2c',
 		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
 		'dev': 'no',
-		'entryPoint': 'openplotter-SKfilter',
-		'postInstall': '',
+		'entryPoint': 'openplotter-i2c',
+		'postInstall': self.platform.admin+' i2cPostInstall',
 		}
 		self.appsDict.append(app)
 
@@ -147,19 +173,6 @@ class MyFrame(wx.Frame):
 		'dev': 'no',
 		'entryPoint': 'openplotter-pypilot',
 		'postInstall': self.platform.admin+' pypilotPostInstall',
-		}
-		self.appsDict.append(app)
-
-		app = {
-		'name': _('I2C Sensors'),
-		'platform': 'rpi',
-		'package': 'openplotter-i2c',
-		'preUninstall': self.platform.admin+' i2cPreUninstall',
-		'uninstall': 'openplotter-i2c',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'no',
-		'entryPoint': 'openplotter-i2c',
-		'postInstall': self.platform.admin+' i2cPostInstall',
 		}
 		self.appsDict.append(app)
 
