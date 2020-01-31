@@ -43,6 +43,7 @@ class MyFrame(wx.Frame):
 		'dev': 'no',
 		'entryPoint': 'openplotter-MCS',
 		'postInstall': self.platform.admin+' MCSPostInstall',
+		'reboot': 'no',
 		}
 		self.appsDict.append(app)
 
@@ -56,6 +57,7 @@ class MyFrame(wx.Frame):
 		'dev': 'no',
 		'entryPoint': 'openplotter-myapp',
 		'postInstall': self.platform.admin+' myappPostInstall',
+		'reboot': 'no',
 		}
 		self.appsDict.append(app)
 
@@ -69,6 +71,7 @@ class MyFrame(wx.Frame):
 		'dev': 'yes',
 		'entryPoint': 'openplotter-sdr-ais',
 		'postInstall': '',
+		'reboot': 'no',
 		}
 		self.appsDict.append(app)
 
@@ -82,6 +85,7 @@ class MyFrame(wx.Frame):
 		'dev': 'yes',
 		'entryPoint': 'openplotter-kplex',
 		'postInstall': '',
+		'reboot': 'no',
 		}
 		self.appsDict.append(app)
 
@@ -95,6 +99,7 @@ class MyFrame(wx.Frame):
 		'dev': 'yes',
 		'entryPoint': 'openplotter-SKfilter',
 		'postInstall': '',
+		'reboot': 'no',
 		}
 		self.appsDict.append(app)
 
@@ -108,6 +113,7 @@ class MyFrame(wx.Frame):
 		'dev': 'yes',
 		'entryPoint': 'openplotter-iot',
 		'postInstall': '',
+		'reboot': 'no',
 		}
 		self.appsDict.append(app)
 
@@ -121,6 +127,7 @@ class MyFrame(wx.Frame):
 		'dev': 'yes',
 		'entryPoint': 'openplotter-analog',
 		'postInstall': '',
+		'reboot': 'no',
 		}
 		self.appsDict.append(app)
 
@@ -134,6 +141,7 @@ class MyFrame(wx.Frame):
 		'dev': 'yes',
 		'entryPoint': 'openplotter-1w',
 		'postInstall': '',
+		'reboot': 'no',
 		}
 		self.appsDict.append(app)
 
@@ -147,6 +155,7 @@ class MyFrame(wx.Frame):
 		'dev': 'no',
 		'entryPoint': 'openplotter-i2c',
 		'postInstall': self.platform.admin+' i2cPostInstall',
+		'reboot': 'no',
 		}
 		self.appsDict.append(app)
 
@@ -160,6 +169,7 @@ class MyFrame(wx.Frame):
 		'dev': 'no',
 		'entryPoint': 'openplotter-moitessier',
 		'postInstall': self.platform.admin+' moitessierPostInstall',
+		'reboot': 'yes',
 		}
 		self.appsDict.append(app)
 
@@ -173,6 +183,7 @@ class MyFrame(wx.Frame):
 		'dev': 'no',
 		'entryPoint': 'openplotter-pypilot',
 		'postInstall': self.platform.admin+' pypilotPostInstall',
+		'reboot': 'no',
 		}
 		self.appsDict.append(app)
 
@@ -186,6 +197,7 @@ class MyFrame(wx.Frame):
 		'dev': 'no',
 		'entryPoint': 'openplotter-can',
 		'postInstall': self.platform.admin+' canPostInstall',
+		'reboot': 'no',
 		}
 		self.appsDict.append(app)
 
@@ -199,6 +211,7 @@ class MyFrame(wx.Frame):
 		'dev': 'no',
 		'entryPoint': 'openplotter-serial',
 		'postInstall': self.platform.admin+' serialPostInstall',
+		'reboot': 'no',
 		}
 		self.appsDict.append(app)
 
@@ -212,6 +225,7 @@ class MyFrame(wx.Frame):
 		'dev': 'no',
 		'entryPoint': 'openplotter-network',
 		'postInstall': self.platform.admin+' networkPostInstall',
+		'reboot': 'no',
 		}
 		self.appsDict.append(app)
 
@@ -225,6 +239,7 @@ class MyFrame(wx.Frame):
 		'dev': 'no',
 		'entryPoint': 'openplotter-dashboards',
 		'postInstall': '',
+		'reboot': 'no',
 		}
 		self.appsDict.append(app)
 
@@ -238,6 +253,7 @@ class MyFrame(wx.Frame):
 		'dev': 'no',
 		'entryPoint': 'openplotter-signalk-installer',
 		'postInstall': self.platform.admin+' signalkPostInstall',
+		'reboot': 'no',
 		}
 		self.appsDict.append(app)
 
@@ -251,6 +267,7 @@ class MyFrame(wx.Frame):
 		'dev': 'no',
 		'entryPoint': 'XyGrib',
 		'postInstall': self.platform.admin+' python3 '+self.currentdir+'/xygribPostInstall.py',
+		'reboot': 'no',
 		}
 		self.appsDict.append(app)
 		
@@ -264,6 +281,7 @@ class MyFrame(wx.Frame):
 		'dev': 'no',
 		'entryPoint': 'openplotter-opencpn-installer',
 		'postInstall': '',
+		'reboot': 'no',
 		}
 		self.appsDict.append(app)
 
@@ -277,6 +295,7 @@ class MyFrame(wx.Frame):
 		'dev': 'no',
 		'entryPoint': 'x-www-browser /usr/share/openplotter-doc/index.html',
 		'postInstall': '',
+		'reboot': 'no',
 		}
 		self.appsDict.append(app)
 
@@ -290,6 +309,7 @@ class MyFrame(wx.Frame):
 		'dev': 'no',
 		'entryPoint': 'openplotter-settings',
 		'postInstall': '',
+		'reboot': 'no',
 		}
 		self.appsDict.append(app)
 
@@ -661,11 +681,10 @@ class MyFrame(wx.Frame):
 					if not 'Warning' in line and not 'WARNING' in line:
 						self.logger.WriteText(line)
 						self.ShowStatusBarYELLOW(_('Running post-installation scripts, please wait... ')+line)
-						self.logger.ShowPosition(self.logger.GetLastPosition())	
-			self.ShowStatusBarGREEN(_('Done'))
-			dlg.Destroy()
-			self.readApps()
-		else: dlg.Destroy()
+						self.logger.ShowPosition(self.logger.GetLastPosition())
+			if apps[index]['reboot'] == 'yes': self.ShowStatusBarRED(_('Restart the system to apply changes'))
+			else: self.ShowStatusBarGREEN(_('Done. Refresh the apps list'))
+		dlg.Destroy()
 
 	def OnUninstallButton(self,e):
 		index = self.listApps.GetFirstSelected()
@@ -695,10 +714,9 @@ class MyFrame(wx.Frame):
 					self.logger.WriteText(line)
 					self.ShowStatusBarYELLOW(_('Uninstalling packages, please wait... ')+line)
 					self.logger.ShowPosition(self.logger.GetLastPosition())
-			self.ShowStatusBarGREEN(_('Done'))
-			dlg.Destroy()
-			self.readApps()
-		else: dlg.Destroy()
+			if apps[index]['reboot'] == 'yes': self.ShowStatusBarRED(_('Restart the system to apply changes'))
+			else: self.ShowStatusBarGREEN(_('Done. Refresh the apps list'))
+		dlg.Destroy()
 
 	def OnRefreshButton(self,e):
 		self.readApps()
