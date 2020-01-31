@@ -87,6 +87,7 @@ class MyFrame(wx.Frame):
 			elif isinstance(self.logger_data, str):
 				self.logger.BeginTextColour((55, 55, 55))
 				self.logger.WriteText(self.logger_data)
+				self.logger.ShowPosition(self.logger.GetLastPosition())
 			elif isinstance(self.logger_data, dict):
 				if self.logger_data['green']:
 					self.logger.WriteText(' | ')
@@ -105,6 +106,7 @@ class MyFrame(wx.Frame):
 					self.logger.WriteText(self.logger_data['red'])
 					self.logger.EndTextColour()
 				self.logger.Newline()
+				self.logger.ShowPosition(self.logger.GetLastPosition())
 			self.logger_data = False
 
 		if not self.thread1.isAlive(): self.OnCloseButton()
