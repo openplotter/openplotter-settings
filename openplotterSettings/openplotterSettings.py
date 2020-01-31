@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Openplotter. If not, see <http://www.gnu.org/licenses/>.
 
-import wx, os, webbrowser, subprocess, sys
+import wx, os, webbrowser, subprocess, sys, time
 import wx.richtext as rt
 
 from .conf import Conf
@@ -682,8 +682,8 @@ class MyFrame(wx.Frame):
 						self.logger.WriteText(line)
 						self.ShowStatusBarYELLOW(_('Running post-installation scripts, please wait... ')+line)
 						self.logger.ShowPosition(self.logger.GetLastPosition())
-			if apps[index]['reboot'] == 'yes': self.ShowStatusBarRED(_('Restart the system to apply changes'))
-			else: self.ShowStatusBarGREEN(_('Done. Refresh the apps list'))
+			if apps[index]['reboot'] == 'yes': self.ShowStatusBarRED(_('Done. Restart to apply changes'))
+			else: self.ShowStatusBarGREEN(_('Done. Press Refresh'))
 		dlg.Destroy()
 
 	def OnUninstallButton(self,e):
@@ -714,8 +714,8 @@ class MyFrame(wx.Frame):
 					self.logger.WriteText(line)
 					self.ShowStatusBarYELLOW(_('Uninstalling packages, please wait... ')+line)
 					self.logger.ShowPosition(self.logger.GetLastPosition())
-			if apps[index]['reboot'] == 'yes': self.ShowStatusBarRED(_('Restart the system to apply changes'))
-			else: self.ShowStatusBarGREEN(_('Done. Refresh the apps list'))
+			if apps[index]['reboot'] == 'yes': self.ShowStatusBarRED(_('Done. Restart to apply changes'))
+			else: self.ShowStatusBarGREEN(_('Done. Press Refresh'))
 		dlg.Destroy()
 
 	def OnRefreshButton(self,e):
@@ -838,6 +838,7 @@ class MyFrame(wx.Frame):
 def main():
 	app = wx.App()
 	MyFrame().Show()
+	time.sleep(1)
 	app.MainLoop()
 
 if __name__ == '__main__':
