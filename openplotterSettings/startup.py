@@ -305,10 +305,12 @@ def main():
 		if sys.argv[1]=='start':
 			app = wx.App()
 			MyFrame('start').Show()
+			time.sleep(1)
 			app.MainLoop()
 		elif sys.argv[1]=='check':
 			app = wx.App()
 			MyFrame('check').Show()
+			time.sleep(1)
 			app.MainLoop()
 		else: print_help()
 	else: print_help()
