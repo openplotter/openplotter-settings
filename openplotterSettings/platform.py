@@ -15,6 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Openplotter. If not, see <http://www.gnu.org/licenses/>.
 import subprocess, ujson
+from .conf import Conf
 
 class Platform:
 	def __init__(self):
@@ -23,6 +24,7 @@ class Platform:
 		self.skDir = False
 		self.http = 'http://'
 		self.admin = 'pkexec'
+		self.conf = Conf()
 		
 		try:
 			modelfile = open('/sys/firmware/devicetree/base/model', 'r', 2000)
@@ -77,3 +79,13 @@ class Platform:
 		except:pass
 		return Enabled
 			
+	def postInstall(self,version,app):
+		currentVersion = self.conf.get('APPS', app)
+		if currentVersion: 
+			currentVersion = currentVersion.split('.')
+			targetVersion = version.split('.')
+			if int(currentVersion[0]) < int(targetVersion[0]): return False
+			elif int(currentVersion[1]) < int(targetVersion[1]): return False
+			elif int(currentVersion[2]) < int(targetVersion[2]): return False
+			else: return True
+		else: return False
