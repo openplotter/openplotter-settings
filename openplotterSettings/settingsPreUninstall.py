@@ -20,7 +20,7 @@ from .language import Language
 
 def main():
 	conf2 = Conf()
-	currentdir = os.path.dirname(__file__)
+	currentdir = os.path.dirname(os.path.abspath(__file__))
 	currentLanguage = conf2.get('GENERAL', 'lang')
 	Language(currentdir,'openplotter-settings',currentLanguage)
 

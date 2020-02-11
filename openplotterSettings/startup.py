@@ -29,7 +29,7 @@ class MyFrame(wx.Frame):
 		self.platform = Platform()
 		self.isRPI = self.platform.isRPI
 		self.currentLanguage = self.conf.get('GENERAL', 'lang')
-		self.currentdir = os.path.dirname(__file__)
+		self.currentdir = os.path.dirname(os.path.abspath(__file__))
 		self.language = Language(self.currentdir,'openplotter-settings',self.currentLanguage)
 
 		self.ttimer = 100

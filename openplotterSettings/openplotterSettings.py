@@ -21,13 +21,14 @@ import wx.richtext as rt
 from .conf import Conf
 from .language import Language
 from .platform import Platform
+from .version import version
 
 class MyFrame(wx.Frame):
 	def __init__(self):
 		self.conf = Conf()
 		self.home = self.conf.home
 		self.platform = Platform()
-		self.currentdir = os.path.dirname(__file__)
+		self.currentdir = os.path.dirname(os.path.abspath(__file__))
 		currentLanguage = self.conf.get('GENERAL', 'lang')
 		self.language = Language(self.currentdir,'openplotter-settings',currentLanguage)
 
@@ -313,7 +314,7 @@ class MyFrame(wx.Frame):
 		}
 		self.appsDict.append(app)
 
-		wx.Frame.__init__(self, None, title=_('OpenPlotter Settings'), size=(800,444))
+		wx.Frame.__init__(self, None, title=_('OpenPlotter Settings')+' '+version, size=(800,444))
 		self.SetFont(wx.Font(10, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
 		icon = wx.Icon(self.currentdir+"/data/openplotter-settings.png", wx.BITMAP_TYPE_PNG)
 		self.SetIcon(icon)
