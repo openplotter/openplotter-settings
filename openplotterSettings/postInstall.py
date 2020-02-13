@@ -11,7 +11,7 @@ class MyFrame(wx.Frame):
 		currentLanguage = conf2.get('GENERAL', 'lang')
 		Language(currentdir,'openplotter-settings',currentLanguage)
 
-		wx.Frame.__init__(self, None, title=_('Post-installation actions'), size=(600,300))
+		wx.Frame.__init__(self, None, title=_('Post-installation actions'), size=(700,350))
 		self.SetFont(wx.Font(10, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
 		icon = wx.Icon(currentdir+"/data/openplotter-48.png", wx.BITMAP_TYPE_PNG)
 		self.SetIcon(icon)
