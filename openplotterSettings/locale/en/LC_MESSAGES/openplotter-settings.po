@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: openplotter-settings\n"
-"POT-Creation-Date: 2020-02-11 17:53+0100\n"
-"PO-Revision-Date: 2020-02-11 17:53+0100\n"
+"POT-Creation-Date: 2020-02-14 12:17+0100\n"
+"PO-Revision-Date: 2020-02-14 12:17+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -15,51 +15,59 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: installSources.py:41
+#: installSources.py:42
 msgid "Added OpenCPN packages source"
 msgstr ""
 
-#: installSources.py:43
+#: installSources.py:44
 msgid "OpenCPN packages source already exists"
 msgstr ""
 
-#: installSources.py:48
+#: installSources.py:49
 msgid "Added XyGrib packages source"
 msgstr ""
 
-#: installSources.py:50
+#: installSources.py:51
 msgid "XyGrib packages source already exists"
 msgstr ""
 
-#: installSources.py:55
+#: installSources.py:56
 msgid "Added OpenPlotter packages source"
 msgstr ""
 
-#: installSources.py:57
+#: installSources.py:58
 msgid "OpenPlotter packages source already exists"
 msgstr ""
 
-#: installSources.py:72
+#: installSources.py:64
+msgid "Added OpenPlotter beta packages source"
+msgstr ""
+
+#: installSources.py:66
+msgid "OpenPlotter beta packages source already exists"
+msgstr ""
+
+#: installSources.py:71
 msgid "Added InfluxDB packages source"
 msgstr ""
 
-#: installSources.py:74
+#: installSources.py:73
 msgid "InfluxDB packages source already exists"
 msgstr ""
 
-#: installSources.py:79
+#: installSources.py:78
 msgid "Added Grafana packages source"
 msgstr ""
 
-#: installSources.py:81
+#: installSources.py:80
 msgid "Grafana packages source already exists"
 msgstr ""
 
-#: installSources.py:86
+#: installSources.py:85
 msgid "Added Node.js 10 packages source"
 msgstr ""
 
-#: installSources.py:88
+#: installSources.py:87
 msgid "Node.js 10 packages source already exists"
 msgstr ""
 
@@ -389,6 +397,40 @@ msgstr ""
 msgid "Checking apps list, please wait... "
 msgstr ""
 
+#: postInstall.py:14
+msgid "Post-installation actions"
+msgstr ""
+
+#: postInstall.py:29
+msgid "Start"
+msgstr ""
+
+#: postInstall.py:31
+msgid "Cancel"
+msgstr ""
+
+#: postInstall.py:33 startup.py:55
+msgid "Close"
+msgstr ""
+
+#: postInstall.py:49
+msgid ""
+"This application has been updated recently and it needs to configure your "
+"system to work properly. Please be patient, it could take some time."
+msgstr ""
+
+#: postInstall.py:52
+msgid "Press Start."
+msgstr ""
+
+#: postInstall.py:65 postInstall.py:71
+msgid "Performing pending actions, please wait... "
+msgstr ""
+
+#: postInstall.py:74
+msgid "Done. Close this window and open the app again."
+msgstr ""
+
 #: selectConnections.py:33
 msgid "Add serial device"
 msgstr ""
@@ -467,10 +509,6 @@ msgstr ""
 
 #: startup.py:48
 msgid "Checking OpenPlotter system. Please wait for all services to be checked"
-msgstr ""
-
-#: startup.py:55
-msgid "Close"
 msgstr ""
 
 #: startup.py:81
