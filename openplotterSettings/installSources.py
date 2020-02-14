@@ -25,6 +25,7 @@ def main():
 		currentdir = os.path.dirname(os.path.abspath(__file__))
 		currentLanguage = conf2.get('GENERAL', 'lang')
 		Language(currentdir,'openplotter-settings',currentLanguage)
+		beta = conf2.get('GENERAL', 'beta')
 
 		sources = subprocess.check_output('apt-cache policy', shell=True).decode(sys.stdin.encoding)
 
@@ -49,22 +50,20 @@ def main():
 		else: 
 			print(_('XyGrib packages source already exists'))
 
-		deb = 'deb http://ppa.launchpad.net/openplotter/openplotter/ubuntu bionic main'
-		if not 'http://ppa.launchpad.net/openplotter/openplotter/ubuntu bionic' in sources:
+		deb = 'deb https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian buster main'
+		if not 'https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian buster' in sources:
 			if not deb in fileData: fileData += '\n'+deb
 			print(_('Added OpenPlotter packages source'))
 		else: 
 			print(_('OpenPlotter packages source already exists'))
 
-		#openplotter beta sources
-		'''
-		deb = 'deb http://ppa.launchpad.net/sailoog/openplotter/ubuntu bionic main'
-		if not 'http://ppa.launchpad.net/sailoog/openplotter/ubuntu bionic' in sources:
-			if not deb in fileData: fileData += '\n'+deb
-			print(_('Added OpenPlotter beta packages source'))
-		else: 
-			print(_('OpenPlotter beta packages source already exists'))
-		'''
+		if beta == 'yes':
+			deb = 'deb https://dl.cloudsmith.io/public/openplotter/openplotter-beta/deb/debian buster main'
+			if not 'https://dl.cloudsmith.io/public/openplotter/openplotter-beta/deb/debian buster' in sources:
+				if not deb in fileData: fileData += '\n'+deb
+				print(_('Added OpenPlotter beta packages source'))
+			else: 
+				print(_('OpenPlotter beta packages source already exists'))
 
 		deb = 'deb https://repos.influxdata.com/debian buster stable'
 		if not 'https://repos.influxdata.com/debian buster' in sources:
@@ -96,6 +95,7 @@ def main():
 		os.system('apt-key add - < '+currentdir+'/data/sources/opencpn.gpg.key')
 		os.system('apt-key add - < '+currentdir+'/data/sources/oss.boating.gpg.key')
 		os.system('apt-key add - < '+currentdir+'/data/sources/openplotter.gpg.key')
+		if beta == 'yes': os.system('apt-key add - < '+currentdir+'/data/sources/openplotter.beta.gpg.key')
 		os.system('apt-key add - < '+currentdir+'/data/sources/grafana.gpg.key')
 		os.system('apt-key add - < '+currentdir+'/data/sources/influxdb.gpg.key')
 		os.system('apt-key add - < '+currentdir+'/data/sources/nodesource.gpg.key')
