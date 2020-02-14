@@ -12,7 +12,7 @@ Install dependencies (for production and development):
 
 Download the latest .deb file from [releases](https://github.com/openplotter/openplotter-settings/releases) and install it:
 
-`sudo dpkg -i openplotter-settings_x.x.x-xxx.deb`
+`sudo dpkg -i openplotter-settings_x.x.x-xxx_all.deb`
 
 #### For development
 
@@ -20,15 +20,24 @@ Clone the repository:
 
 `git clone https://github.com/openplotter/openplotter-settings.git`
 
-Make your changes and install:
+Make your changes and create the package:
 
-`sudo python3 setup.py install`
+```
+cd openplotter-settings
+dpkg-buildpackage -b
+```
+Install the package:
+
+```
+cd ..
+sudo dpkg -i openplotter-settings_x.x.x-xxx_all.deb
+```
 
 Run:
 
 `openplotter-settings`
 
-Pull request your changes to github and we will check and add them to the next version of the [Debian package](https://launchpad.net/~openplotter/+archive/ubuntu/openplotter/).
+Pull request your changes to github and we will check and add them to the next version of the [Debian package](https://cloudsmith.io/~openplotter/repos/openplotter/packages/).
 
 ### Documentation
 
