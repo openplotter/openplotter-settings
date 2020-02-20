@@ -93,13 +93,13 @@ class MyFrame(wx.Frame):
 		app = {
 		'name': _('Signal K Filter'),
 		'platform': 'both',
-		'package': 'openplotter-SKfilter',
-		'preUninstall': '',
-		'uninstall': 'openplotter-SKfilter',
+		'package': 'openplotter-skfilter',
+		'preUninstall': self.platform.admin+' SKfilterPreUninstall',
+		'uninstall': 'openplotter-skfilter',
 		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
-		'dev': 'yes',
+		'dev': 'no',
 		'entryPoint': 'openplotter-SKfilter',
-		'postInstall': '',
+		'postInstall': self.platform.admin+' SKfilterPostInstall',
 		'reboot': 'no',
 		}
 		self.appsDict.append(app)
