@@ -218,7 +218,7 @@ class MyFrame(wx.Frame):
 
 		app = {
 		'name': _('Network'),
-		'platform': 'rpi',
+		'platform': 'both',
 		'package': 'openplotter-network',
 		'preUninstall': self.platform.admin+' networkPreUninstall',
 		'uninstall': 'openplotter-network',
