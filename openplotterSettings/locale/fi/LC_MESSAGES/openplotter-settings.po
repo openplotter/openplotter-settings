@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: openplotter\n"
-"POT-Creation-Date: 2019-12-13 19:49+0100\n"
-"PO-Revision-Date: 2019-12-16 12:45+0100\n"
+"POT-Creation-Date: 2020-02-14 12:17+0100\n"
+"PO-Revision-Date: 2020-02-28 20:46+0100\n"
 "Last-Translator: \n"
 "Language-Team: Finnish\n"
 "Language: fi\n"
@@ -18,51 +18,59 @@ msgstr ""
 "X-Crowdin-File: openplotter-settings.po\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: installSources.py:41
+#: installSources.py:42
 msgid "Added OpenCPN packages source"
 msgstr "OpenCPN pakettien lähde lisätty"
 
-#: installSources.py:43
+#: installSources.py:44
 msgid "OpenCPN packages source already exists"
 msgstr "OpenCPN pakettien lähde on jo olemassa"
 
-#: installSources.py:48
+#: installSources.py:49
 msgid "Added XyGrib packages source"
 msgstr "XyGrib pakettien lähde lisätty"
 
-#: installSources.py:50
+#: installSources.py:51
 msgid "XyGrib packages source already exists"
 msgstr "XyGrib pakettien lähde on jo olemassa"
 
-#: installSources.py:55
+#: installSources.py:56
 msgid "Added OpenPlotter packages source"
 msgstr "OpenCPN pakettien lähde lisätty"
 
-#: installSources.py:57
+#: installSources.py:58
 msgid "OpenPlotter packages source already exists"
 msgstr "OpenCPN pakettien lähde on jo olemassa"
 
-#: installSources.py:72
+#: installSources.py:64
+msgid "Added OpenPlotter beta packages source"
+msgstr "OpenPlotter beta pakettien lähde lisätty"
+
+#: installSources.py:66
+msgid "OpenPlotter beta packages source already exists"
+msgstr "OpenPlotter beta pakettien lähde on jo olemassa"
+
+#: installSources.py:71
 msgid "Added InfluxDB packages source"
 msgstr "InfluxDB pakettien lähde lisätty"
 
-#: installSources.py:74
+#: installSources.py:73
 msgid "InfluxDB packages source already exists"
 msgstr "InfluxDB pakettien lähde on jo olemassa"
 
-#: installSources.py:79
+#: installSources.py:78
 msgid "Added Grafana packages source"
 msgstr "Grafana pakettien lähde lisätty"
 
-#: installSources.py:81
+#: installSources.py:80
 msgid "Grafana packages source already exists"
 msgstr "Grafana pakettien lähde on jo olemassa"
 
-#: installSources.py:86
+#: installSources.py:85
 msgid "Added Node.js 10 packages source"
 msgstr "Node.js 10 pakettien lähde lisätty"
 
-#: installSources.py:88
+#: installSources.py:87
 msgid "Node.js 10 packages source already exists"
 msgstr "Node.js 10 pakettien lähde on jo olemassa"
 
@@ -70,330 +78,369 @@ msgstr "Node.js 10 pakettien lähde on jo olemassa"
 msgid "FAILED: "
 msgstr "EPÄONNISTUNUT: "
 
-#: openplotterSettings.py:37
-msgid "OpenPlotter MCS"
-msgstr "OpenPlotter MCS"
-
-#: openplotterSettings.py:50
+#: openplotterSettings.py:52
 msgid "OpenPlotter Apps Template"
 msgstr "OpenPlotter sovellusmalli"
 
-#: openplotterSettings.py:63
+#: openplotterSettings.py:66
 msgid "SDR AIS"
 msgstr "SDR AIS"
 
-#: openplotterSettings.py:76
+#: openplotterSettings.py:80
 msgid "Kplex"
 msgstr "Kplex"
 
-#: openplotterSettings.py:89
-msgid "Actions"
-msgstr "Tehtävät"
-
-#: openplotterSettings.py:102
-msgid "1W Sensors"
-msgstr "1W Anturit"
-
-#: openplotterSettings.py:115
+#: openplotterSettings.py:94
 msgid "Signal K Filter"
 msgstr "Signal K Suodatin"
 
-#: openplotterSettings.py:128
-msgid "Moitessier HAT"
-msgstr "Moitessier HAT"
+#: openplotterSettings.py:108
+msgid "IoT"
+msgstr "IoT"
 
-#: openplotterSettings.py:141
-msgid "Pypilot"
-msgstr "Pypilot"
+#: openplotterSettings.py:122
+msgid "Analog Sensors"
+msgstr "Analoginen anturi"
 
-#: openplotterSettings.py:154
+#: openplotterSettings.py:136
+msgid "1W Sensors"
+msgstr "1W Anturit"
+
+#: openplotterSettings.py:150
 msgid "I2C Sensors"
 msgstr "I2C Anturit"
 
-#: openplotterSettings.py:167
+#: openplotterSettings.py:164
+msgid "Moitessier HAT"
+msgstr "Moitessier HAT"
+
+#: openplotterSettings.py:178
+msgid "Pypilot"
+msgstr "Pypilot"
+
+#: openplotterSettings.py:192
 msgid "CAN Bus"
 msgstr "CAN Väylä"
 
-#: openplotterSettings.py:180
+#: openplotterSettings.py:206
 msgid "Serial"
-msgstr ""
+msgstr "Sarja"
 
-#: openplotterSettings.py:193
+#: openplotterSettings.py:220
 msgid "Network"
 msgstr "Verkko"
 
-#: openplotterSettings.py:206
+#: openplotterSettings.py:234
 msgid "Dashboards"
 msgstr "Hallintasivut"
 
-#: openplotterSettings.py:219
+#: openplotterSettings.py:248
 msgid "Signal K Installer"
 msgstr "Signal K Asentaja"
 
-#: openplotterSettings.py:232
+#: openplotterSettings.py:262
 msgid "XyGrib"
 msgstr "XyGrib"
 
-#: openplotterSettings.py:245
+#: openplotterSettings.py:276
 msgid "OpenCPN Installer"
 msgstr "OpenCPN Asentaja"
 
-#: openplotterSettings.py:258
+#: openplotterSettings.py:290
 msgid "Documentation"
 msgstr "Käyttöohjeet"
 
-#: openplotterSettings.py:271
+#: openplotterSettings.py:304
 msgid "Settings"
 msgstr "Asetukset"
 
-#: openplotterSettings.py:283
+#: openplotterSettings.py:317
 msgid "OpenPlotter Settings"
 msgstr "OpenPlotterin Asetukset"
 
-#: openplotterSettings.py:293
+#: openplotterSettings.py:327
 msgid "Help"
 msgstr "Ohje"
 
-#: openplotterSettings.py:298
+#: openplotterSettings.py:332
 msgid "Autostart"
 msgstr "Autom. käynnistys"
 
-#: openplotterSettings.py:301
+#: openplotterSettings.py:335
 msgid "Check System"
 msgstr "Tarkista järjestelmä"
 
-#: openplotterSettings.py:304
+#: openplotterSettings.py:338
 msgid "Add Sources"
 msgstr "Lisää Sorsat"
 
-#: openplotterSettings.py:306
+#: openplotterSettings.py:340
 msgid "Update Candidates"
 msgstr "Päivitys ehdokkaat"
 
-#: openplotterSettings.py:308 selectKey.py:40
+#: openplotterSettings.py:342 selectKey.py:40
 msgid "Refresh"
 msgstr "Päivitä"
 
-#: openplotterSettings.py:317
+#: openplotterSettings.py:351
 msgid "OpenPlotter Apps"
 msgstr "OpenPlotter Sovelmat"
 
-#: openplotterSettings.py:318
+#: openplotterSettings.py:352
 msgid "General Settings"
 msgstr "Yleiset asetukset"
 
-#: openplotterSettings.py:319
+#: openplotterSettings.py:353
 msgid "Raspberry Settings"
 msgstr "Raspin Asetukset"
 
-#: openplotterSettings.py:383
+#: openplotterSettings.py:417
 msgid "Updating packages data, please wait... "
 msgstr "Pakettien dataa päivitetään, odottele... "
 
-#: openplotterSettings.py:388 openplotterSettings.py:396
+#: openplotterSettings.py:422 openplotterSettings.py:430
 msgid "Adding packages sources, please wait... "
 msgstr "Pakettien sorsia lisätään, odottele... "
 
-#: openplotterSettings.py:398
+#: openplotterSettings.py:432
 msgid "Added sources. Update candidates to see changes"
 msgstr "Sorsat on lisätty. Päivitä ehdokkaat, niin näet muutokset"
 
-#: openplotterSettings.py:406
+#: openplotterSettings.py:440
 msgid "Close and open again the window to see changes."
 msgstr "Sulje ja avaa ikkuna uudelleen, niin näet muutokset."
 
-#: openplotterSettings.py:406 openplotterSettings.py:663
+#: openplotterSettings.py:440 openplotterSettings.py:696
 msgid "Info"
 msgstr "Tietoja"
 
-#: openplotterSettings.py:413
+#: openplotterSettings.py:447
 msgid "Language"
 msgstr "Kieli"
 
-#: openplotterSettings.py:416
+#: openplotterSettings.py:450
 msgid "Translate"
 msgstr "Käännä"
 
-#: openplotterSettings.py:419
+#: openplotterSettings.py:453
 msgid "Maximize OpenPlotter Apps"
 msgstr "Maksimoi OpenPlotter Sovelmat"
 
-#: openplotterSettings.py:421
+#: openplotterSettings.py:455
 msgid "Startup"
 msgstr "Käynnistys"
 
-#: openplotterSettings.py:423
+#: openplotterSettings.py:457
 msgid "Delay (seconds)"
 msgstr "Viive (sekuntia)"
 
-#: openplotterSettings.py:428
+#: openplotterSettings.py:462
 msgid "Play"
 msgstr "Toista"
 
-#: openplotterSettings.py:457
+#: openplotterSettings.py:491
 msgid "Choose a file"
 msgstr "Valitse tiedosto"
 
-#: openplotterSettings.py:458
+#: openplotterSettings.py:492
 msgid "Audio files"
 msgstr "Audiotiedostot"
 
-#: openplotterSettings.py:458
+#: openplotterSettings.py:492
 msgid "All files"
 msgstr "Kaikki tiedostot"
 
-#: openplotterSettings.py:471
+#: openplotterSettings.py:505
 msgid "Sound to play at startup set to: "
 msgstr "Käynnistyksen ääni asetettu: "
 
-#: openplotterSettings.py:475
+#: openplotterSettings.py:509
 msgid "Removed sound to play at startup"
 msgstr "Poistettu käynnistyksen ääni"
 
-#: openplotterSettings.py:482
+#: openplotterSettings.py:516
 msgid "Delay at startup set to: "
 msgstr "Käynnistyksen viive asetettu: "
 
-#: openplotterSettings.py:486
+#: openplotterSettings.py:520
 msgid "Removed delay at startup"
 msgstr "Käynnistyksen viive poistettu"
 
-#: openplotterSettings.py:491
+#: openplotterSettings.py:525
 msgid "OpenPlotter apps will open maximized"
 msgstr "OpenPlotter sovelmat avataan maksimoituna"
 
-#: openplotterSettings.py:494
+#: openplotterSettings.py:528
 msgid "Disabled maximized OpenPlotter apps"
 msgstr "Estetty maksimoidut OpenPlotter sovelmat"
 
-#: openplotterSettings.py:498
+#: openplotterSettings.py:532
 msgid "Disable Screensaver"
 msgstr "Estä näytönsäästäjä"
 
-#: openplotterSettings.py:501
+#: openplotterSettings.py:535
 msgid "Headless"
 msgstr "Päätteetön"
 
-#: openplotterSettings.py:558
+#: openplotterSettings.py:592
 msgid "Changes will be applied after restarting"
 msgstr "Muutokset lisätään käynnistyksessä"
 
-#: openplotterSettings.py:568
+#: openplotterSettings.py:602
 msgid "Autostart enabled"
 msgstr "Autokäynnistys sallittu"
 
-#: openplotterSettings.py:571
+#: openplotterSettings.py:605
 msgid "Autostart disabled. Most features will not work!"
 msgstr "Autokäynnistys estetty. Useat ominaisuudet ei toimi!"
 
-#: openplotterSettings.py:578
+#: openplotterSettings.py:612
 msgid "Name"
 msgstr "Nimi"
 
-#: openplotterSettings.py:579
+#: openplotterSettings.py:613
 msgid "Installed"
 msgstr "Asennettu"
 
-#: openplotterSettings.py:580
+#: openplotterSettings.py:614
 msgid "Candidate"
 msgstr "Ehdokas"
 
-#: openplotterSettings.py:586
+#: openplotterSettings.py:620
 msgid "Install"
 msgstr "Asenna"
 
-#: openplotterSettings.py:588
+#: openplotterSettings.py:622
 msgid "Uninstall"
 msgstr "Poista"
 
-#: openplotterSettings.py:591
+#: openplotterSettings.py:625
 msgid "Open"
 msgstr "Avaa"
 
-#: openplotterSettings.py:593
+#: openplotterSettings.py:627
 msgid "Change Log"
 msgstr "Muutosloki"
 
-#: openplotterSettings.py:611 openplotterSettings.py:745
+#: openplotterSettings.py:645 openplotterSettings.py:777
 msgid "missing source: "
 msgstr "puuttuva sorsa: "
 
-#: openplotterSettings.py:613 openplotterSettings.py:749
+#: openplotterSettings.py:647 openplotterSettings.py:781
 msgid "coming soon"
 msgstr "tulossa pian"
 
-#: openplotterSettings.py:616 openplotterSettings.py:755
+#: openplotterSettings.py:650 openplotterSettings.py:787
 msgid "app only for non Raspberry machines"
 msgstr "sovelma ei ole Raspberry koneille"
 
-#: openplotterSettings.py:619 openplotterSettings.py:759
+#: openplotterSettings.py:653 openplotterSettings.py:791
 msgid "app only for Raspberry machines"
 msgstr "sovelma on vain Raspberry koneille"
 
-#: openplotterSettings.py:623
+#: openplotterSettings.py:657
 msgid "Press Refresh"
 msgstr "Paina Virkistä"
 
-#: openplotterSettings.py:632
+#: openplotterSettings.py:666
 msgid "Are you sure you want to install "
 msgstr "Oletko varma, että haluat asentaa "
 
-#: openplotterSettings.py:632 openplotterSettings.py:665
+#: openplotterSettings.py:666 openplotterSettings.py:698
 msgid " and its dependencies?"
 msgstr " ja sen riippuvuudet?"
 
-#: openplotterSettings.py:633 openplotterSettings.py:666
+#: openplotterSettings.py:667 openplotterSettings.py:699
 msgid "Question"
 msgstr "Kysymys"
 
-#: openplotterSettings.py:642
+#: openplotterSettings.py:676
 msgid "Installing package, please wait... "
 msgstr "Paketti asennetaan, odottele... "
 
-#: openplotterSettings.py:650
+#: openplotterSettings.py:684
 msgid "Running post-installation scripts, please wait... "
 msgstr "Ajetaan asennuksen jälkeisiä komentoja, odottele... "
 
-#: openplotterSettings.py:652 openplotterSettings.py:685
-#: openplotterSettings.py:713 openplotterSettings.py:773
-msgid "Done"
-msgstr "Tehty"
+#: openplotterSettings.py:686 openplotterSettings.py:718
+msgid "Done. Restart to apply changes"
+msgstr "Tehty. Käynnistä, niin mutokset lisätään"
 
-#: openplotterSettings.py:663
+#: openplotterSettings.py:687 openplotterSettings.py:719
+msgid "Done. Press Refresh"
+msgstr "Tehty. Paina päivitä"
+
+#: openplotterSettings.py:696
 msgid "You have to uninstall the rest of apps before uninstalling openplotter-settings."
 msgstr "Sinun on poistettava loput sovelmat ennen openplotterasetusten poistoa."
 
-#: openplotterSettings.py:665
+#: openplotterSettings.py:698
 msgid "Are you sure you want to uninstall "
 msgstr "Oletko varma, että haluat poistaa "
 
-#: openplotterSettings.py:676
+#: openplotterSettings.py:709
 msgid "Running pre-uninstall scripts, please wait... "
 msgstr "Ajetaan asennuksen alustus komentoja, odottele... "
 
-#: openplotterSettings.py:683
+#: openplotterSettings.py:716
 msgid "Uninstalling packages, please wait... "
 msgstr "Paketteja poistetaan, odottele... "
 
-#: openplotterSettings.py:711
+#: openplotterSettings.py:743
 msgid "Reading changelog, please wait... "
 msgstr "Luetaan muutoslokeja, odottele... "
 
-#: openplotterSettings.py:718
+#: openplotterSettings.py:745 openplotterSettings.py:805
+msgid "Done"
+msgstr "Tehty"
+
+#: openplotterSettings.py:750
 msgid "Checking apps list, please wait... "
 msgstr "Tarkistetaan sovelmaluetteloita, odota... "
 
+#: postInstall.py:14
+msgid "Post-installation actions"
+msgstr "Asennuksen jälkeiset toimet"
+
+#: postInstall.py:29
+msgid "Start"
+msgstr "Aloita"
+
+#: postInstall.py:31
+msgid "Cancel"
+msgstr "Peru"
+
+#: postInstall.py:33 startup.py:55
+msgid "Close"
+msgstr "Sulje"
+
+#: postInstall.py:49
+msgid "This application has been updated recently and it needs to configure your system to work properly. Please be patient, it could take some time."
+msgstr "Tämä sovelma on päivitetty äskettäin ja sen tarvitsee säätää systeemiäsi toimiakseen oikein. Ole pitkämielinen, tämä vie aikaa."
+
+#: postInstall.py:52
+msgid "Press Start."
+msgstr "Paina käynnistä."
+
+#: postInstall.py:65 postInstall.py:71
+msgid "Performing pending actions, please wait... "
+msgstr "Suoritetaan tarvittavia toimenpiteitä, odottelethan... "
+
+#: postInstall.py:74
+msgid "Done. Close this window and open the app again."
+msgstr "Tehty. Sulje tämä ruutu ja avaa sitten sovelma."
+
 #: selectConnections.py:33
 msgid "Add serial device"
-msgstr ""
+msgstr "Lisää sarja laite"
 
 #: selectConnections.py:56
 msgid "Show only Openplotter-Serial managed ports"
-msgstr ""
+msgstr "Näytä vain Openplotter-Serial hallittuja portteja"
 
 #: selectConnections.py:63
 msgid "Baud Rate: "
-msgstr ""
+msgstr "Baud Arvo: "
 
 #: selectKey.py:23
 msgid "Select Signal K key"
@@ -435,13 +482,13 @@ msgstr "Epäonnistui. Merkit eivät ole sallittuja."
 msgid "Failed. Replace * by some text."
 msgstr "Epäonnistui Korvaa * tekstillä."
 
-#: serialPorts.py:100
+#: serialPorts.py:111
 msgid "connection ID: "
-msgstr ""
+msgstr "kytkentä ID: "
 
-#: serialPorts.py:100
+#: serialPorts.py:111
 msgid "device: "
-msgstr ""
+msgstr "laite: "
 
 #: settingsPreUninstall.py:27
 msgid "Removing packages sources..."
@@ -463,10 +510,6 @@ msgstr "Avaa OpenPlotter. Odota, kunnes kaikki palvelut käynnistyneet"
 msgid "Checking OpenPlotter system. Please wait for all services to be checked"
 msgstr "OpenPlotter systeemin tarkistus. Odotathan kaikkien palvelujen tarkistukset"
 
-#: startup.py:55
-msgid "Close"
-msgstr "Sulje"
-
 #: startup.py:81
 msgid "There are some warnings. Check your system. Closing in "
 msgstr "On muutamia varoituksia. Tarkista systeemisi. Suljetaan "
@@ -479,96 +522,96 @@ msgstr " sekuntia"
 msgid "There are no warnings. Closing in "
 msgstr "Varotuksia ei ole. Suljetaan "
 
-#: startup.py:121
+#: startup.py:123
 msgid "Applying delay of "
 msgstr "Lisätään viive "
 
-#: startup.py:121
+#: startup.py:123
 msgid " seconds..."
 msgstr " sekuntia..."
 
-#: startup.py:123
+#: startup.py:125
 msgid "done"
 msgstr "tehty"
 
-#: startup.py:124
+#: startup.py:126
 msgid "Delay failed. Is it a number?"
 msgstr "Viive epäonnistui. Onko se numero?"
 
-#: startup.py:126
+#: startup.py:128
 msgid "Checking OpenPlotter autostart..."
 msgstr "Tarkistetaan OpenPlotter autokäynnistys..."
 
-#: startup.py:128
+#: startup.py:130
 msgid "Autostart is not enabled and most features will not work. Please select \"Autostart\" in \"OpenPlotter Settings\""
 msgstr "Autokäynnistys ei ole sallittu ja useimmat ominaisuudet eivät toimi. Valitse \"Autokäynnistys\" OpenPlotter Asetuksissa\""
 
-#: startup.py:130 startup.py:155 startup.py:162
+#: startup.py:132 startup.py:157 startup.py:164
 msgid "enabled"
 msgstr "käytössä"
 
-#: startup.py:133
+#: startup.py:135
 msgid "Checking user \"pi\" password..."
 msgstr "Tarkistaa käyttäjän pi salasanaa..."
 
-#: startup.py:141
+#: startup.py:143
 msgid ""
 "Security warning: You are using the default password for \"pi\" user.\n"
 "Please change password in Menu > Preferences > Raspberry Pi Configuration."
 msgstr "Suojausvaroitus: käytät oletussalasana ”pi” käyttäjälle. Vaihda salasana valikosta > Asetukset > Raspberry Pi asetukset."
 
-#: startup.py:142
+#: startup.py:144
 msgid "changed"
 msgstr "muutettu"
 
-#: startup.py:144
+#: startup.py:146
 msgid "Checking screensaver state..."
 msgstr "Tarkistetaan näytönsäästäjän tila..."
 
-#: startup.py:150 startup.py:161
+#: startup.py:152 startup.py:163
 msgid "disabled"
 msgstr "estetty"
 
-#: startup.py:157
+#: startup.py:159
 msgid "Checking headless state..."
 msgstr "Tarkistetaan päätteetöntä tilaa..."
 
-#: startup.py:164
+#: startup.py:166
 msgid "Checking OpenPlotter packages source..."
 msgstr "Tarkistetaan OpenCPN pakettien sorsia..."
 
-#: startup.py:167
+#: startup.py:169
 msgid "added"
 msgstr "lisätty"
 
-#: startup.py:168
+#: startup.py:170
 msgid "There are missing packages sources. Please add sources in \"OpenPlotter Settings\"."
 msgstr "Pakettien sorsia puuttuu. Lisääthän sorsat \"OpenPlotter Asetuksissa\"."
 
-#: startup.py:231
+#: startup.py:239
 msgid "Checking serial connections conflicts..."
-msgstr ""
+msgstr "Tutkitaan sarjaliitäntöjen ristiriitoja..."
 
-#: startup.py:235
+#: startup.py:243
 msgid "There are conflicts between the following serial connections:"
-msgstr ""
+msgstr "Seuraavien sarjakytkentöjen välillä on ristiriitoja:"
 
-#: startup.py:239 startup.py:251
+#: startup.py:247 startup.py:259
 msgid "no conflicts"
 msgstr "ei ristiriitoja"
 
-#: startup.py:243
+#: startup.py:251
 msgid "Checking network connections conflicts..."
-msgstr ""
+msgstr "Tutkitaan verkkoliitäntöjen ristiriitoja..."
 
-#: startup.py:247
+#: startup.py:255
 msgid "There are conflicts between the following server connections:"
 msgstr "Seuraavien serverikytkentöjen välillä on ristiriitoja:"
 
-#: startup.py:259
+#: startup.py:267
 msgid "STARTUP FINISHED"
 msgstr "KÄYNNISTYS PÄÄTTYNYT"
 
-#: startup.py:260
+#: startup.py:268
 msgid "CHECK SYSTEM FINISHED"
 msgstr "SYSTEEMITARKISTUS PÄÄTTYNYT"
