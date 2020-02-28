@@ -80,12 +80,12 @@ class MyFrame(wx.Frame):
 		'name': _('Kplex'),
 		'platform': 'both',
 		'package': 'openplotter-kplex',
-		'preUninstall': '',
+		'preUninstall': self.platform.admin+' kplexPreUninstall',
 		'uninstall': 'openplotter-kplex',
 		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
-		'dev': 'yes',
+		'dev': 'no',
 		'entryPoint': 'openplotter-kplex',
-		'postInstall': '',
+		'postInstall': self.platform.admin+' kplexPostInstall',
 		'reboot': 'no',
 		}
 		self.appsDict.append(app)
@@ -314,7 +314,7 @@ class MyFrame(wx.Frame):
 		}
 		self.appsDict.append(app)
 
-		wx.Frame.__init__(self, None, title=_('OpenPlotter Settings')+' '+version, size=(800,444))
+		wx.Frame.__init__(self, None, title=_('Settings')+' '+version, size=(800,444))
 		self.SetFont(wx.Font(10, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
 		icon = wx.Icon(self.currentdir+"/data/openplotter-settings.png", wx.BITMAP_TYPE_PNG)
 		self.SetIcon(icon)
