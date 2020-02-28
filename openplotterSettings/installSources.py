@@ -50,16 +50,16 @@ def main():
 		else: 
 			print(_('XyGrib packages source already exists'))
 
-		deb = 'deb https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian buster main'
-		if not 'https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian buster' in sources:
+		deb = 'deb http://ppa.launchpad.net/openplotter/openplotter/ubuntu bionic main'
+		if not 'http://ppa.launchpad.net/openplotter/openplotter/ubuntu bionic' in sources:
 			if not deb in fileData: fileData += '\n'+deb
 			print(_('Added OpenPlotter packages source'))
 		else: 
 			print(_('OpenPlotter packages source already exists'))
 
 		if beta == 'yes':
-			deb = 'deb https://dl.cloudsmith.io/public/openplotter/openplotter-beta/deb/debian buster main'
-			if not 'https://dl.cloudsmith.io/public/openplotter/openplotter-beta/deb/debian buster' in sources:
+			deb = 'deb http://ppa.launchpad.net/sailoog/openplotter/ubuntu bionic main'
+			if not 'http://ppa.launchpad.net/sailoog/openplotter/ubuntu bionic' in sources:
 				if not deb in fileData: fileData += '\n'+deb
 				print(_('Added OpenPlotter beta packages source'))
 			else: 
