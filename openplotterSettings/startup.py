@@ -165,7 +165,7 @@ class MyFrame(wx.Frame):
 
 		self.add_logger_data(_('Checking OpenPlotter packages source...'))
 		sources = subprocess.check_output(['apt-cache', 'policy']).decode(sys.stdin.encoding)
-		if 'https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian' in sources:
+		if 'http://ppa.launchpad.net/openplotter/openplotter/ubuntu' in sources:
 			self.add_logger_data({'green':_('added'),'black':'','red':''})
 		else: self.add_logger_data({'green':'','black':'','red':_('There are missing packages sources. Please add sources in "OpenPlotter Settings".')})
 
