@@ -1,4 +1,10 @@
-openplotter-settings (2.0.27-stable) buster; urgency=medium
+openplotter-settings (2.1.0-stable) bionic; urgency=medium
+
+  * Initial release
+
+ -- Sailoog <info@sailoog.com>  Fri, 28 Feb 2020 20:50:38 +0100
+
+openplotter-settings (2.0.27-stable) bionic; urgency=medium
 
   * Release Candidate
 
