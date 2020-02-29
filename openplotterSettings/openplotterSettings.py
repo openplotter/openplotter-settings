@@ -35,34 +35,6 @@ class MyFrame(wx.Frame):
 		self.appsDict = []
 
 		app = {
-		'name': 'MCS',
-		'platform': 'rpi',
-		'package': 'openplotter-mcs',
-		'preUninstall': self.platform.admin+' MCSPreUninstall',
-		'uninstall': 'openplotter-mcs',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'no',
-		'entryPoint': 'openplotter-MCS',
-		'postInstall': self.platform.admin+' MCSPostInstall',
-		'reboot': 'no',
-		}
-		self.appsDict.append(app)
-
-		app = {
-		'name': _('OpenPlotter Apps Template'),
-		'platform': 'both',
-		'package': 'openplotter-myapp',
-		'preUninstall': self.platform.admin+' myappPreUninstall',
-		'uninstall': 'openplotter-myapp',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'no',
-		'entryPoint': 'openplotter-myapp',
-		'postInstall': self.platform.admin+' myappPostInstall',
-		'reboot': 'no',
-		}
-		self.appsDict.append(app)
-
-		app = {
 		'name': _('SDR AIS'),
 		'platform': 'both',
 		'package': 'openplotter-sdr-ais',
