@@ -15,7 +15,9 @@
 # You should have received a copy of the GNU General Public License
 # along with Openplotter. If not, see <http://www.gnu.org/licenses/>.
 
+import importlib
 from .conf import Conf
+from .appsList import AppsList
 
 class Ports:
 	def __init__(self):
@@ -24,95 +26,21 @@ class Ports:
 
 	def getUsedPorts(self):
 		usedPorts=[]
-
-		ports = False
-		try:
-			from openplotterMyapp import ports
-		except:pass
-		if ports: 
-			target = ports.Ports(self.conf,self.currentLanguage)
-			targetPorts = target.usedPorts()
-			if targetPorts:
-				for i in targetPorts:
-					usedPorts.append(i)
-
-		ports = False
-		try:
-			from openplotterI2c import ports
-		except:pass
-		if ports: 
-			target = ports.Ports(self.conf,self.currentLanguage)
-			targetPorts = target.usedPorts()
-			if targetPorts:
-				for i in targetPorts:
-					usedPorts.append(i)
-
-		ports = False
-		try:
-			from openplotterSignalkInstaller import ports
-		except:pass
-		if ports: 
-			target = ports.Ports(self.conf,self.currentLanguage)
-			targetPorts = target.usedPorts()
-			if targetPorts:
-				for i in targetPorts:
-					usedPorts.append(i)
-
-		ports = False
-		try:
-			from openplotterOpencpnInstaller import ports
-		except:pass
-		if ports: 
-			target = ports.Ports(self.conf,self.currentLanguage)
-			targetPorts = target.usedPorts()
-			if targetPorts:
-				for i in targetPorts:
-					usedPorts.append(i)
-
-		ports = False
-		try:
-			from openplotterDashboards import ports
-		except:pass
-		if ports: 
-			target = ports.Ports(self.conf,self.currentLanguage)
-			targetPorts = target.usedPorts()
-			if targetPorts:
-				for i in targetPorts:
-					usedPorts.append(i)
-					
-		ports = False
-		try:
-			from openplotterNetwork import ports
-		except:pass
-		if ports: 
-			target = ports.Ports(self.conf,self.currentLanguage)
-			targetPorts = target.usedPorts()
-			if targetPorts:
-				for i in targetPorts:
-					usedPorts.append(i)
-
-		ports = False
-		try:
-			from openplotterPypilot import ports
-		except:pass
-		if ports: 
-			target = ports.Ports(self.conf,self.currentLanguage)
-			targetPorts = target.usedPorts()
-			if targetPorts:
-				for i in targetPorts:
-					usedPorts.append(i)
-
-		ports = False
-		try:
-			from openplotterMCS import ports
-		except:pass
-		if ports: 
-			target = ports.Ports(self.conf,self.currentLanguage)
-			targetPorts = target.usedPorts()
-			if targetPorts:
-				for i in targetPorts:
-					usedPorts.append(i)
-					
+		appsList = AppsList()
+		appsDict = appsList.appsDict
+		for i in appsDict:
+			name = i['module']
+			if name:
+				ports = False
+				try:
+					ports = importlib.import_module(name+'.ports')
+					if ports: 
+						target = ports.Ports(self.conf,self.currentLanguage)
+						targetPorts = target.usedPorts()
+						if targetPorts:
+							for i in targetPorts:
+								usedPorts.append(i)
+				except Exception as e: print(str(e))
 		return usedPorts
 
 	def conflicts(self):

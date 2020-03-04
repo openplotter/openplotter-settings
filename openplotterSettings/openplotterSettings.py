@@ -22,6 +22,7 @@ from .conf import Conf
 from .language import Language
 from .platform import Platform
 from .version import version
+from .appsList import AppsList
 
 class MyFrame(wx.Frame):
 	def __init__(self):
@@ -31,260 +32,8 @@ class MyFrame(wx.Frame):
 		self.currentdir = os.path.dirname(os.path.abspath(__file__))
 		currentLanguage = self.conf.get('GENERAL', 'lang')
 		self.language = Language(self.currentdir,'openplotter-settings',currentLanguage)
-
-		self.appsDict = []
-
-		app = {
-		'name': _('SDR AIS'),
-		'platform': 'both',
-		'package': 'openplotter-sdr-ais',
-		'preUninstall': '',
-		'uninstall': 'openplotter-sdr-ais',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'yes',
-		'entryPoint': 'openplotter-sdr-ais',
-		'postInstall': '',
-		'reboot': 'no',
-		}
-		self.appsDict.append(app)
-
-		app = {
-		'name': _('Kplex'),
-		'platform': 'both',
-		'package': 'openplotter-kplex',
-		'preUninstall': self.platform.admin+' kplexPreUninstall',
-		'uninstall': 'openplotter-kplex',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'no',
-		'entryPoint': 'openplotter-kplex',
-		'postInstall': self.platform.admin+' kplexPostInstall',
-		'reboot': 'no',
-		}
-		self.appsDict.append(app)
-
-		app = {
-		'name': _('Signal K Filter'),
-		'platform': 'both',
-		'package': 'openplotter-skfilter',
-		'preUninstall': self.platform.admin+' SKfilterPreUninstall',
-		'uninstall': 'openplotter-skfilter',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'no',
-		'entryPoint': 'openplotter-SKfilter',
-		'postInstall': self.platform.admin+' SKfilterPostInstall',
-		'reboot': 'no',
-		}
-		self.appsDict.append(app)
-
-		app = {
-		'name': _('IoT'),
-		'platform': 'both',
-		'package': 'openplotter-iot',
-		'preUninstall': '',
-		'uninstall': 'openplotter-iot',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'yes',
-		'entryPoint': 'openplotter-iot',
-		'postInstall': '',
-		'reboot': 'no',
-		}
-		self.appsDict.append(app)
-
-		app = {
-		'name': _('Analog Sensors'),
-		'platform': 'rpi',
-		'package': 'openplotter-analog',
-		'preUninstall': '',
-		'uninstall': 'openplotter-analog',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'yes',
-		'entryPoint': 'openplotter-analog',
-		'postInstall': '',
-		'reboot': 'no',
-		}
-		self.appsDict.append(app)
-
-		app = {
-		'name': _('1W Sensors'),
-		'platform': 'rpi',
-		'package': 'openplotter-1w',
-		'preUninstall': '',
-		'uninstall': 'openplotter-1w',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'yes',
-		'entryPoint': 'openplotter-1w',
-		'postInstall': '',
-		'reboot': 'no',
-		}
-		self.appsDict.append(app)
-
-		app = {
-		'name': _('I2C Sensors'),
-		'platform': 'rpi',
-		'package': 'openplotter-i2c',
-		'preUninstall': self.platform.admin+' i2cPreUninstall',
-		'uninstall': 'openplotter-i2c',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'no',
-		'entryPoint': 'openplotter-i2c',
-		'postInstall': self.platform.admin+' i2cPostInstall',
-		'reboot': 'no',
-		}
-		self.appsDict.append(app)
-
-		app = {
-		'name': _('Moitessier HAT'),
-		'platform': 'rpi',
-		'package': 'openplotter-moitessier',
-		'preUninstall': self.platform.admin+' moitessierPreUninstall',
-		'uninstall': 'openplotter-moitessier',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'no',
-		'entryPoint': 'openplotter-moitessier',
-		'postInstall': self.platform.admin+' moitessierPostInstall',
-		'reboot': 'yes',
-		}
-		self.appsDict.append(app)
-
-		app = {
-		'name': _('Pypilot'),
-		'platform': 'rpi',
-		'package': 'openplotter-pypilot',
-		'preUninstall': self.platform.admin+' pypilotPreUninstall',
-		'uninstall': 'openplotter-pypilot',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'no',
-		'entryPoint': 'openplotter-pypilot',
-		'postInstall': self.platform.admin+' pypilotPostInstall',
-		'reboot': 'no',
-		}
-		self.appsDict.append(app)
-
-		app = {
-		'name': _('CAN Bus'),
-		'platform': 'both',
-		'package': 'openplotter-can',
-		'preUninstall': self.platform.admin+' canPreUninstall',
-		'uninstall': 'openplotter-can',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'no',
-		'entryPoint': 'openplotter-can',
-		'postInstall': self.platform.admin+' canPostInstall',
-		'reboot': 'no',
-		}
-		self.appsDict.append(app)
-
-		app = {
-		'name': _('Serial'),
-		'platform': 'both',
-		'package': 'openplotter-serial',
-		'preUninstall': self.platform.admin+' serialPreUninstall',
-		'uninstall': 'openplotter-serial',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'no',
-		'entryPoint': 'openplotter-serial',
-		'postInstall': self.platform.admin+' serialPostInstall',
-		'reboot': 'no',
-		}
-		self.appsDict.append(app)
-
-		app = {
-		'name': _('Network'),
-		'platform': 'both',
-		'package': 'openplotter-network',
-		'preUninstall': self.platform.admin+' networkPreUninstall',
-		'uninstall': 'openplotter-network',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'no',
-		'entryPoint': 'openplotter-network',
-		'postInstall': self.platform.admin+' networkPostInstall',
-		'reboot': 'no',
-		}
-		self.appsDict.append(app)
-
-		app = {
-		'name': _('Dashboards'),
-		'platform': 'both',
-		'package': 'openplotter-dashboards',
-		'preUninstall': '',
-		'uninstall': 'openplotter-dashboards',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu','https://repos.influxdata.com/debian','https://packages.grafana.com/oss/deb'],
-		'dev': 'no',
-		'entryPoint': 'openplotter-dashboards',
-		'postInstall': '',
-		'reboot': 'no',
-		}
-		self.appsDict.append(app)
-
-		app = {
-		'name': _('Signal K Installer'),
-		'platform': 'both',
-		'package': 'openplotter-signalk-installer',
-		'preUninstall': self.platform.admin+' signalkPreUninstall',
-		'uninstall': 'openplotter-signalk-installer',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu','https://deb.nodesource.com/node_10.x'],
-		'dev': 'no',
-		'entryPoint': 'openplotter-signalk-installer',
-		'postInstall': self.platform.admin+' signalkPostInstall',
-		'reboot': 'no',
-		}
-		self.appsDict.append(app)
-
-		app = {
-		'name': _('XyGrib'),
-		'platform': 'rpi',
-		'package': 'xygrib',
-		'preUninstall': '',
-		'uninstall': 'xygrib',
-		'sources': ['https://www.free-x.de/debian'],
-		'dev': 'no',
-		'entryPoint': 'XyGrib',
-		'postInstall': self.platform.admin+' python3 '+self.currentdir+'/xygribPostInstall.py',
-		'reboot': 'no',
-		}
-		self.appsDict.append(app)
-		
-		app = {
-		'name': _('OpenCPN Installer'),
-		'platform': 'both',
-		'package': 'openplotter-opencpn-installer',
-		'preUninstall': '',
-		'uninstall': 'openplotter-opencpn-installer opencpn',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu','http://ppa.launchpad.net/opencpn/opencpn/ubuntu'],
-		'dev': 'no',
-		'entryPoint': 'openplotter-opencpn-installer',
-		'postInstall': '',
-		'reboot': 'no',
-		}
-		self.appsDict.append(app)
-
-		app = {
-		'name': _('Documentation'),
-		'platform': 'both',
-		'package': 'openplotter-doc',
-		'preUninstall': '',
-		'uninstall': 'openplotter-doc',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'no',
-		'entryPoint': 'x-www-browser /usr/share/openplotter-doc/index.html',
-		'postInstall': '',
-		'reboot': 'no',
-		}
-		self.appsDict.append(app)
-
-		app = {
-		'name': _('Settings'),
-		'platform': 'both',
-		'package': 'openplotter-settings',
-		'preUninstall': self.platform.admin+' settingsPreUninstall',
-		'uninstall': 'openplotter-settings',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'no',
-		'entryPoint': 'openplotter-settings',
-		'postInstall': '',
-		'reboot': 'no',
-		}
-		self.appsDict.append(app)
+		appsList = AppsList()
+		self.appsDict = appsList.appsDict
 
 		wx.Frame.__init__(self, None, title=_('Settings')+' '+version, size=(800,444))
 		self.SetFont(wx.Font(10, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
@@ -388,7 +137,7 @@ class MyFrame(wx.Frame):
 				self.logger.WriteText(line)
 				self.ShowStatusBarYELLOW(_('Updating packages data, please wait... ')+line)
 				self.logger.ShowPosition(self.logger.GetLastPosition())
-		self.readApps()
+		self.OnRefreshButton()
 
 	def OnToolSources(self, e):
 		self.ShowStatusBarYELLOW(_('Adding packages sources, please wait... '))
@@ -691,7 +440,9 @@ class MyFrame(wx.Frame):
 			else: self.ShowStatusBarGREEN(_('Done. Press Refresh'))
 		dlg.Destroy()
 
-	def OnRefreshButton(self,e):
+	def OnRefreshButton(self,e=0):
+		appsList = AppsList()
+		self.appsDict = appsList.appsDict
 		self.readApps()
 
 	def OnOpenButton(self,e):

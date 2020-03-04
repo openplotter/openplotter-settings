@@ -14,13 +14,14 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Openplotter. If not, see <http://www.gnu.org/licenses/>.
-import wx, os, sys, time, threading, subprocess
+import wx, os, sys, time, threading, subprocess, importlib
 import wx.richtext as rt
 from .conf import Conf
 from .language import Language
 from .platform import Platform
 from .ports import Ports
 from .serialPorts import SerialPorts
+from .appsList import AppsList
 
 class MyFrame(wx.Frame):
 	def __init__(self, mode):
@@ -169,72 +170,17 @@ class MyFrame(wx.Frame):
 			self.add_logger_data({'green':_('added'),'black':'','red':''})
 		else: self.add_logger_data({'green':'','black':'','red':_('There are missing packages sources. Please add sources in "OpenPlotter Settings".')})
 
-		startup = False
-		try:
-			from openplotterSignalkInstaller import startup
-			if startup: self.processApp(startup)
-		except Exception as e: print(str(e))
+		appsList = AppsList()
+		appsDict = appsList.appsDict
+		for i in appsDict:
+			name = i['module']
+			if name:
+				startup = False
+				try:
+					startup = importlib.import_module(name+'.startup')
+					if startup: self.processApp(startup)
+				except Exception as e: print(str(e))
 		
-		startup = False
-		try:
-			from openplotterI2c import startup
-			if startup: self.processApp(startup)
-		except Exception as e: print(str(e))
-
-		startup = False
-		try:
-			from openplotterNetwork import startup
-			if startup: self.processApp(startup)
-		except Exception as e: print(str(e))
-
-		startup = False
-		try:
-			from openplotterOpencpnInstaller import startup
-			if startup: self.processApp(startup)
-		except Exception as e: print(str(e))
-
-		startup = False
-		try:
-			from openplotterDashboards import startup
-			if startup: self.processApp(startup)
-		except Exception as e: print(str(e))
-		
-		startup = False
-		try:
-			from openplotterMyapp import startup
-			if startup: self.processApp(startup)
-		except Exception as e: print(str(e))
-
-		startup = False
-		try:
-			from openplotterPypilot import startup
-			if startup: self.processApp(startup)
-		except Exception as e: print(str(e))
-
-		startup = False
-		try:
-			from openplotterMoitessier import startup
-			if startup: self.processApp(startup)
-		except Exception as e: print(str(e))
-
-		startup = False
-		try:
-			from openplotterCan import startup
-			if startup: self.processApp(startup)
-		except Exception as e: print(str(e))
-
-		startup = False
-		try:
-			from openplotterSerial import startup
-			if startup: self.processApp(startup)
-		except Exception as e: print(str(e))
-
-		startup = False
-		try:
-			from openplotterMCS import startup
-			if startup: self.processApp(startup)
-		except Exception as e: print(str(e))
-
 		try:
 			self.add_logger_data(_('Checking serial connections conflicts...'))
 			allSerialPorts = SerialPorts()

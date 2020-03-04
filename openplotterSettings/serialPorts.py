@@ -15,7 +15,9 @@
 # You should have received a copy of the GNU General Public License
 # along with Openplotter. If not, see <http://www.gnu.org/licenses/>.
 
+import importlib
 from .conf import Conf
+from .appsList import AppsList
 
 class SerialPorts:
 	def __init__(self):
@@ -24,64 +26,22 @@ class SerialPorts:
 
 	def getSerialUsedPorts(self):
 		usedPorts=[]
-
-		serialPorts = False
-		try:
-			from openplotterSignalkInstaller import serialPorts
-		except:pass
-		if serialPorts: 
-			target = serialPorts.SerialPorts(self.conf)
-			targetPorts = target.usedSerialPorts()
-			if targetPorts:
-				for i in targetPorts:
-					usedPorts.append(i)
-
-		serialPorts = False
-		try:
-			from openplotterCan import serialPorts
-		except:pass
-		if serialPorts: 
-			target = serialPorts.SerialPorts(self.conf)
-			targetPorts = target.usedSerialPorts()
-			if targetPorts:
-				for i in targetPorts:
-					usedPorts.append(i)
-
-		serialPorts = False
-		try:
-			from openplotterSerial import serialPorts
-		except:pass
-		if serialPorts: 
-			target = serialPorts.SerialPorts(self.conf)
-			targetPorts = target.usedSerialPorts()
-			if targetPorts:
-				for i in targetPorts:
-					usedPorts.append(i)
-
-		serialPorts = False
-		try:
-			from openplotterOpencpnInstaller import serialPorts
-		except:pass
-		if serialPorts: 
-			target = serialPorts.SerialPorts(self.conf)
-			targetPorts = target.usedSerialPorts()
-			if targetPorts:
-				for i in targetPorts:
-					usedPorts.append(i)
-			
-		serialPorts = False
-		try:
-			from openplotterPypilot import serialPorts
-		except:pass
-		if serialPorts: 
-			target = serialPorts.SerialPorts(self.conf)
-			targetPorts = target.usedSerialPorts()
-			if targetPorts:
-				for i in targetPorts:
-					usedPorts.append(i)
-
+		appsList = AppsList()
+		appsDict = appsList.appsDict
+		for i in appsDict:
+			name = i['module']
+			if name:
+				serialPorts = False
+				try:
+					serialPorts = importlib.import_module(name+'.serialPorts')
+					if serialPorts: 
+						target = serialPorts.SerialPorts(self.conf)
+						targetPorts = target.usedSerialPorts()
+						if targetPorts:
+							for i in targetPorts:
+								usedPorts.append(i)
+				except Exception as e: print(str(e))
 		return usedPorts
-
 
 	def conflicts(self):
 		usedSerialPorts = self.getSerialUsedPorts()
