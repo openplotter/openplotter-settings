@@ -464,7 +464,6 @@ class MyFrame(wx.Frame):
 			if not 'Warning' in line and not 'WARNING' in line:
 				self.logger.WriteText(line)
 				self.ShowStatusBarYELLOW(_('Reading changelog, please wait... ')+line)
-				self.logger.ShowPosition(self.logger.GetLastPosition())
 		self.ShowStatusBarGREEN(_('Done'))
 
 	def readApps(self):
