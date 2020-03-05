@@ -1,3 +1,9 @@
+openplotter-settings (2.2.0-stable) bionic; urgency=medium
+
+  * Make external apps independent
+
+ -- Sailoog <info@sailoog.com>  Thu, 05 Mar 2020 15:30:52 +0100
+
 openplotter-settings (2.1.0-stable) bionic; urgency=medium
 
   * Initial release
