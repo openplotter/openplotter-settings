@@ -1,3 +1,10 @@
+openplotter-settings (2.2.1-stable) bionic; urgency=medium
+
+  * Add Czech and Danish languages
+  * Update translations
+
+ -- Sailoog <info@sailoog.com>  Mon, 09 Mar 2020 19:56:05 +0100
+
 openplotter-settings (2.2.0-stable) bionic; urgency=medium
 
   * Make external apps independent
