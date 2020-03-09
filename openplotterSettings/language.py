@@ -19,7 +19,7 @@ import gettext
 
 class Language:
 	def __init__(self, currentdir, module, language):
-		self.available = [['Català','ca'],['Deutsch','de'],['ελληνικά','el'],['English','en'],['Español','es'],['Euskara','eu'],['Suomi','fi'],['Français','fr'],['Galego','gl'],['Italiano','it'],['Dutch','nl'],['Polski','pl'],['Svenska','sv']]
+		self.available = [['Català','ca'],['Čeština','cs'],['Dansk','da'],['Deutsch','de'],['ελληνικά','el'],['English','en'],['Español','es'],['Euskara','eu'],['Suomi','fi'],['Français','fr'],['Galego','gl'],['Italiano','it'],['Dutch','nl'],['Polski','pl'],['Svenska','sv']]
 		locale_folder = currentdir+'/locale'
 		gettext.install(module, locale_folder, False)
 		try: presLan = gettext.translation(module, locale_folder, languages=[language])
