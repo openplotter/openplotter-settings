@@ -43,8 +43,8 @@ def main():
 		else: 
 			print(_('OpenCPN packages source already exists'))
 
-		deb = 'deb https://www.free-x.de/debian buster main contrib non-free'
-		if not 'https://www.free-x.de/debian buster' in sources:
+		deb = 'deb https://www.free-x.de/deb4op buster main'
+		if not 'https://www.free-x.de/deb4op buster' in sources:
 			if not deb in fileData: fileData += '\n'+deb
 			print(_('Added XyGrib packages source'))
 		else: 
