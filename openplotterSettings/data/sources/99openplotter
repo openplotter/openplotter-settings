@@ -1,7 +1,3 @@
 Package: nodejs
 Pin: origin deb.nodesource.com
 Pin-Priority: 1001
-
-Package: *
-Pin: origin ppa.launchpad.net
-Pin-Priority: 1001
