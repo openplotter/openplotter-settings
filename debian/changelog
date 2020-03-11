@@ -1,3 +1,10 @@
+openplotter-settings (2.2.2-stable) bionic; urgency=medium
+
+  * Change source for Xygrib
+  * Make Xygrib available for all Debian flavors
+
+ -- Sailoog <info@sailoog.com>  Wed, 11 Mar 2020 18:38:32 +0100
+
 openplotter-settings (2.2.1-stable) bionic; urgency=medium
 
   * Add Czech and Danish languages
