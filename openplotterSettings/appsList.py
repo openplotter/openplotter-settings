@@ -245,12 +245,12 @@ class AppsList:
 		self.appsDict.append(app)
 
 		app = {
-		'name': _('XyGrib'),
-		'platform': 'rpi',
+		'name': 'XyGrib',
+		'platform': 'both',
 		'package': 'xygrib',
 		'preUninstall': '',
 		'uninstall': 'xygrib',
-		'sources': ['https://www.free-x.de/debian'],
+		'sources': ['https://www.free-x.de/deb4op'],
 		'dev': 'no',
 		'entryPoint': 'XyGrib',
 		'postInstall': platform2.admin+' python3 '+currentdir+'/xygribPostInstall.py',

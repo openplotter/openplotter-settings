@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: openplotter-settings\n"
-"POT-Creation-Date: 2020-03-05 15:26+0100\n"
-"PO-Revision-Date: 2020-03-05 15:26+0100\n"
+"POT-Creation-Date: 2020-03-11 18:32+0100\n"
+"PO-Revision-Date: 2020-03-11 18:32+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -69,10 +69,6 @@ msgstr ""
 
 #: appsList.py:233
 msgid "Signal K Installer"
-msgstr ""
-
-#: appsList.py:248
-msgid "XyGrib"
 msgstr ""
 
 #: appsList.py:263
