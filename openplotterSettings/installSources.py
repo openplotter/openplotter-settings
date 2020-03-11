@@ -36,23 +36,25 @@ def main():
 			fo.close()
 		except: pass
 
+		fileDataList = fileData.splitlines()
+
 		deb = 'deb http://ppa.launchpad.net/opencpn/opencpn/ubuntu bionic main'
 		if not 'http://ppa.launchpad.net/opencpn/opencpn/ubuntu bionic' in sources:
-			if not deb in fileData: fileData += '\n'+deb
+			if not deb in fileData: fileDataList.append(deb)
 			print(_('Added OpenCPN packages source'))
 		else: 
 			print(_('OpenCPN packages source already exists'))
 
 		deb = 'deb https://www.free-x.de/deb4op buster main'
 		if not 'https://www.free-x.de/deb4op buster' in sources:
-			if not deb in fileData: fileData += '\n'+deb
+			if not deb in fileData: fileDataList.append(deb)
 			print(_('Added XyGrib packages source'))
 		else: 
 			print(_('XyGrib packages source already exists'))
 
 		deb = 'deb http://ppa.launchpad.net/openplotter/openplotter/ubuntu bionic main'
 		if not 'http://ppa.launchpad.net/openplotter/openplotter/ubuntu bionic' in sources:
-			if not deb in fileData: fileData += '\n'+deb
+			if not deb in fileData: fileDataList.append(deb)
 			print(_('Added OpenPlotter packages source'))
 		else: 
 			print(_('OpenPlotter packages source already exists'))
@@ -60,32 +62,44 @@ def main():
 		if beta == 'yes':
 			deb = 'deb http://ppa.launchpad.net/sailoog/openplotter/ubuntu bionic main'
 			if not 'http://ppa.launchpad.net/sailoog/openplotter/ubuntu bionic' in sources:
-				if not deb in fileData: fileData += '\n'+deb
+				if not deb in fileData: fileDataList.append(deb)
 				print(_('Added OpenPlotter beta packages source'))
 			else: 
 				print(_('OpenPlotter beta packages source already exists'))
 
 		deb = 'deb https://repos.influxdata.com/debian buster stable'
 		if not 'https://repos.influxdata.com/debian buster' in sources:
-			if not deb in fileData: fileData += '\n'+deb
+			if not deb in fileData: fileDataList.append(deb)
 			print(_('Added InfluxDB packages source'))
 		else: 
 			print(_('InfluxDB packages source already exists'))
 
 		deb = 'deb https://packages.grafana.com/oss/deb stable main'
 		if not 'https://packages.grafana.com/oss/deb stable' in sources:
-			if not deb in fileData: fileData += '\n'+deb
+			if not deb in fileData: fileDataList.append(deb)
 			print(_('Added Grafana packages source'))
 		else: 
 			print(_('Grafana packages source already exists'))
 
 		deb = 'deb https://deb.nodesource.com/node_10.x buster main\ndeb-src https://deb.nodesource.com/node_10.x buster main'
 		if not 'https://deb.nodesource.com/node_10.x buster' in sources:
-			if not deb in fileData: fileData += '\n'+deb
+			if not deb in fileData: fileDataList.append(deb)
 			print(_('Added Node.js 10 packages source'))
 		else: 
 			print(_('Node.js 10 packages source already exists'))
 
+		removeList = []
+		removeList.append('deb https://www.free-x.de/debian buster main contrib non-free')
+		removeList.append('deb https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian buster main')
+		removeList.append('deb https://dl.cloudsmith.io/public/openplotter/openplotter-beta/deb/debian buster main')
+		if beta != 'yes':
+			removeList.append('deb http://ppa.launchpad.net/sailoog/openplotter/ubuntu bionic main')
+
+		finalList = []
+		for i in fileDataList:
+			if i and not i in removeList: finalList.append(i)
+
+		fileData = '\n'.join(finalList)
 		if fileData:
 			fo = open('/etc/apt/sources.list.d/openplotter.list', "w")
 			fo.write(fileData)
