@@ -1,4 +1,4 @@
-openplotter-settings (2.2.2-stable) bionic; urgency=medium
+openplotter-settings (2.2.3-stable) bionic; urgency=medium
 
   * Change source for Xygrib
   * Make Xygrib available for all Debian flavors
