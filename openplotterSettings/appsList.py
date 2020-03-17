@@ -35,7 +35,7 @@ class AppsList:
 			except Exception as e: print ("wrong external app format: "+str(e))
 
 		app = {
-		'name': _('SDR AIS'),
+		'name': 'SDR',
 		'platform': 'both',
 		'package': 'openplotter-sdr-ais',
 		'preUninstall': '',
@@ -50,7 +50,7 @@ class AppsList:
 		self.appsDict.append(app)
 
 		app = {
-		'name': _('Kplex'),
+		'name': 'Kplex',
 		'platform': 'both',
 		'package': 'openplotter-kplex',
 		'preUninstall': platform2.admin+' kplexPreUninstall',
@@ -80,7 +80,7 @@ class AppsList:
 		self.appsDict.append(app)
 
 		app = {
-		'name': _('IoT'),
+		'name': 'IoT',
 		'platform': 'both',
 		'package': 'openplotter-iot',
 		'preUninstall': '',
@@ -140,7 +140,7 @@ class AppsList:
 		self.appsDict.append(app)
 
 		app = {
-		'name': _('Moitessier HAT'),
+		'name': 'Moitessier HAT',
 		'platform': 'rpi',
 		'package': 'openplotter-moitessier',
 		'preUninstall': platform2.admin+' moitessierPreUninstall',
@@ -155,7 +155,7 @@ class AppsList:
 		self.appsDict.append(app)
 
 		app = {
-		'name': _('Pypilot'),
+		'name': 'Pypilot',
 		'platform': 'rpi',
 		'package': 'openplotter-pypilot',
 		'preUninstall': platform2.admin+' pypilotPreUninstall',

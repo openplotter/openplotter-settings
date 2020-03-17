@@ -414,7 +414,7 @@ class MyFrame(wx.Frame):
 		apps = list(reversed(self.appsDict))
 		package = apps[index]['uninstall']
 		if self.installedFlag and package == 'openplotter-settings':
-			wx.MessageBox(_('You have to uninstall the rest of apps before uninstalling openplotter-settings.'), _('Info'), wx.OK | wx.ICON_INFORMATION)
+			wx.MessageBox(_('You have to uninstall the rest of the apps before uninstalling openplotter-settings.'), _('Info'), wx.OK | wx.ICON_INFORMATION)
 			return
 		msg = _('Are you sure you want to uninstall ')+package+_(' and its dependencies?')
 		dlg = wx.MessageDialog(None, msg, _('Question'), wx.YES_NO | wx.NO_DEFAULT | wx.ICON_EXCLAMATION)
