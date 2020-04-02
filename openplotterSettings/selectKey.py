@@ -44,15 +44,18 @@ class SelectKey(wx.Dialog):
 		self.list_groups = wx.ListCtrl(panel, style=wx.LC_REPORT, size=(140,-1))
 		self.list_groups.InsertColumn(0, _('Groups'), width=140)
 		self.list_groups.Bind(wx.EVT_LIST_ITEM_SELECTED, self.OnSelectGroup)
+		self.list_groups.SetTextColour(wx.BLACK)
 
 		self.list_skpaths = wx.ListCtrl(panel, style=wx.LC_REPORT)
 		self.list_skpaths.InsertColumn(0, _('Keys'), width=350)
 		self.list_skpaths.Bind(wx.EVT_LIST_ITEM_SELECTED, self.OnSelectPath)
+		self.list_skpaths.SetTextColour(wx.BLACK)
 
 		self.list_skproperties = wx.ListCtrl(panel, style=wx.LC_REPORT, size=(130,-1))
 		self.list_skproperties.InsertColumn(0, _('Properties'), width=120)
 		self.list_skproperties.Bind(wx.EVT_LIST_ITEM_SELECTED, self.OnSelectProperty)
-
+		self.list_skproperties.SetTextColour(wx.BLACK)
+		
 		self.key_description = wx.TextCtrl(panel, -1, style=wx.TE_MULTILINE | wx.TE_READONLY, size=(-1,60))
 		self.key_description.SetBackgroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_INACTIVECAPTION))
 
