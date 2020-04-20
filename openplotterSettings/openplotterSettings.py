@@ -405,6 +405,10 @@ class MyFrame(wx.Frame):
 						self.logger.WriteText(line)
 						self.ShowStatusBarYELLOW(_('Running post-installation scripts, please wait... ')+line)
 						self.logger.ShowPosition(self.logger.GetLastPosition())
+			if package == 'openplotter-settings':
+				wx.MessageBox(_('This app will close to apply the changes.'), _('Info'), wx.OK | wx.ICON_INFORMATION)
+				self.Close()
+				return
 			if apps[index]['reboot'] == 'yes': self.ShowStatusBarRED(_('Done. Restart to apply changes'))
 			else: self.ShowStatusBarGREEN(_('Done. Press Refresh'))
 		dlg.Destroy()
