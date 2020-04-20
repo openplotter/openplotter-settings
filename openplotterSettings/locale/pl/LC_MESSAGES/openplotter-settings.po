@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: openplotter\n"
-"POT-Creation-Date: 2020-03-05 15:26+0100\n"
-"PO-Revision-Date: 2020-03-09 19:54+0100\n"
+"POT-Creation-Date: 2020-04-20 13:38+0200\n"
+"PO-Revision-Date: 2020-04-20 14:02+0200\n"
 "Last-Translator: \n"
 "Language-Team: Polish\n"
 "Language: pl\n"
@@ -18,135 +18,107 @@ msgstr ""
 "X-Crowdin-File: openplotter-settings.po\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: appsList.py:38
-msgid "SDR AIS"
-msgstr "SDR AIS"
-
-#: appsList.py:53
-msgid "Kplex"
-msgstr "Kplex"
-
 #: appsList.py:68
 msgid "Signal K Filter"
 msgstr "Signal K Filter"
 
-#: appsList.py:83
-msgid "IoT"
-msgstr ""
-
 #: appsList.py:98
-msgid "Analog Sensors"
-msgstr ""
-
-#: appsList.py:113
 msgid "1W Sensors"
 msgstr "Czujniki 1W"
 
-#: appsList.py:128
+#: appsList.py:113
 msgid "I2C Sensors"
 msgstr "Czujniki I2C"
 
-#: appsList.py:143
-msgid "Moitessier HAT"
-msgstr "Moitessier HAT"
-
 #: appsList.py:158
-msgid "Pypilot"
-msgstr "Pypilot"
-
-#: appsList.py:173
 msgid "CAN Bus"
 msgstr "Szyna CAN"
 
-#: appsList.py:188
+#: appsList.py:173
 msgid "Serial"
 msgstr ""
 
-#: appsList.py:203
+#: appsList.py:188
 msgid "Network"
 msgstr "Ustawienia i konfiguracja sieci"
 
-#: appsList.py:218
+#: appsList.py:203
 msgid "Dashboards"
 msgstr "Tablice wskaźników"
 
-#: appsList.py:233
+#: appsList.py:218
 msgid "Signal K Installer"
 msgstr "Instalator serwera SignalK"
 
 #: appsList.py:248
-msgid "XyGrib"
-msgstr "XyGrib"
-
-#: appsList.py:263
 msgid "OpenCPN Installer"
 msgstr "Instalator OpenCPN"
 
-#: appsList.py:278
+#: appsList.py:263
 msgid "Documentation"
 msgstr "Dokumentacja"
 
-#: appsList.py:293 openplotterSettings.py:38
+#: appsList.py:278 openplotterSettings.py:38
 msgid "Settings"
 msgstr "Ustawienia"
 
-#: installSources.py:42
+#: installSources.py:44
 msgid "Added OpenCPN packages source"
 msgstr "Dodano repozytoria źródłowe dla pakietów komponentu OpenCPN"
 
-#: installSources.py:44
+#: installSources.py:46
 msgid "OpenCPN packages source already exists"
 msgstr "OpenCPN: repozytorium źródłowe dla pakietów komponentu już istnieje"
 
-#: installSources.py:49
+#: installSources.py:51
 msgid "Added XyGrib packages source"
 msgstr "Dodano repozytoria źródłowe dla pakietów komponentu XyGrib"
 
-#: installSources.py:51
+#: installSources.py:53
 msgid "XyGrib packages source already exists"
 msgstr "XyGrib: repozytorium źródłowe dla pakietów komponentu już istnieje"
 
-#: installSources.py:56
+#: installSources.py:58
 msgid "Added OpenPlotter packages source"
 msgstr "Dodano repozytoria źródłowe dla pakietów komponentu OpenPlotter"
 
-#: installSources.py:58
+#: installSources.py:60
 msgid "OpenPlotter packages source already exists"
 msgstr "OpenPlotter: repozytorium źródłowe dla pakietów komponentu już istnieje"
 
-#: installSources.py:64
+#: installSources.py:66
 msgid "Added OpenPlotter beta packages source"
 msgstr ""
 
-#: installSources.py:66
+#: installSources.py:68
 msgid "OpenPlotter beta packages source already exists"
 msgstr ""
 
-#: installSources.py:71
+#: installSources.py:73
 msgid "Added InfluxDB packages source"
 msgstr "Dodano repozytoria źródłowe dla pakietów komponentu InfluxDB"
 
-#: installSources.py:73
+#: installSources.py:75
 msgid "InfluxDB packages source already exists"
 msgstr "InlfluxDB: repozytorium źródłowe dla pakietów komponentu już istnieje"
 
-#: installSources.py:78
+#: installSources.py:80
 msgid "Added Grafana packages source"
 msgstr "Dodano repozytoria źródłowe dla pakietów komponentu Grafana"
 
-#: installSources.py:80
+#: installSources.py:82
 msgid "Grafana packages source already exists"
 msgstr "Grafana: repozytorium źródłowe dla pakietów komponentu już istnieje"
 
-#: installSources.py:85
+#: installSources.py:87
 msgid "Added Node.js 10 packages source"
 msgstr "Dodano repozytoria źródłowe dla pakietów komponentu Node.js"
 
-#: installSources.py:87
+#: installSources.py:89
 msgid "Node.js 10 packages source already exists"
 msgstr "Node.js: repozytorium źródłowe dla pakietów komponentu już istnieje"
 
-#: installSources.py:103 settingsPreUninstall.py:32
+#: installSources.py:117 settingsPreUninstall.py:32
 msgid "FAILED: "
 msgstr "WYSTĄPIŁ BŁĄD: "
 
@@ -202,7 +174,8 @@ msgstr "Dodano repozytoria źródłowe. Zaktualizuj kandydatów, aby zobaczyć z
 msgid "Close and open again the window to see changes."
 msgstr "Zamknij i ponownie otwórz okno, aby zobaczyć zmiany."
 
-#: openplotterSettings.py:161 openplotterSettings.py:417
+#: openplotterSettings.py:161 openplotterSettings.py:409
+#: openplotterSettings.py:422
 msgid "Info"
 msgstr "Informacje"
 
@@ -298,95 +271,99 @@ msgstr "Zainstalowane"
 msgid "Candidate"
 msgstr "Kandydat"
 
-#: openplotterSettings.py:341
+#: openplotterSettings.py:342
 msgid "Install"
 msgstr "Zainstaluj"
 
-#: openplotterSettings.py:343
+#: openplotterSettings.py:344
 msgid "Uninstall"
 msgstr "Odinstaluj"
 
-#: openplotterSettings.py:346
+#: openplotterSettings.py:347
 msgid "Open"
 msgstr "Otwórz"
 
-#: openplotterSettings.py:348
+#: openplotterSettings.py:349
 msgid "Change Log"
 msgstr "Dziennik zmian"
 
-#: openplotterSettings.py:366 openplotterSettings.py:499
+#: openplotterSettings.py:367 openplotterSettings.py:504
 msgid "missing source: "
 msgstr "brak repozytorium źródłowego: "
 
-#: openplotterSettings.py:368 openplotterSettings.py:503
+#: openplotterSettings.py:369 openplotterSettings.py:508
 msgid "coming soon"
 msgstr "dostępne wkrótce"
 
-#: openplotterSettings.py:371 openplotterSettings.py:509
+#: openplotterSettings.py:372 openplotterSettings.py:514
 msgid "app only for non Raspberry machines"
 msgstr "komponent tylko dla urządzeń innych niż Raspberry"
 
-#: openplotterSettings.py:374 openplotterSettings.py:513
+#: openplotterSettings.py:375 openplotterSettings.py:518
 msgid "app only for Raspberry machines"
 msgstr "komponent tylko dla urządzeń Raspberry"
 
-#: openplotterSettings.py:378
+#: openplotterSettings.py:379
 msgid "Press Refresh"
 msgstr "Naciśnij Odśwież"
 
-#: openplotterSettings.py:387
+#: openplotterSettings.py:388
 msgid "Are you sure you want to install "
 msgstr "Jesteś pewien ze chcesz zainstalować "
 
-#: openplotterSettings.py:387 openplotterSettings.py:419
+#: openplotterSettings.py:388 openplotterSettings.py:424
 msgid " and its dependencies?"
 msgstr " wraz z zależnościami?"
 
-#: openplotterSettings.py:388 openplotterSettings.py:420
+#: openplotterSettings.py:389 openplotterSettings.py:425
 msgid "Question"
 msgstr "Pytanie"
 
-#: openplotterSettings.py:397
+#: openplotterSettings.py:398
 msgid "Installing package, please wait... "
 msgstr "Instalowanie pakietu, proszę czekać... "
 
-#: openplotterSettings.py:405
+#: openplotterSettings.py:406
 msgid "Running post-installation scripts, please wait... "
 msgstr "Uruchamianie skryptów post-instalacyjnych, proszę czekać... "
 
-#: openplotterSettings.py:407 openplotterSettings.py:439
+#: openplotterSettings.py:409
+msgid "This app will close to apply the changes."
+msgstr ""
+
+#: openplotterSettings.py:412 openplotterSettings.py:444
 msgid "Done. Restart to apply changes"
 msgstr ""
 
-#: openplotterSettings.py:408 openplotterSettings.py:440
+#: openplotterSettings.py:413 openplotterSettings.py:445
 msgid "Done. Press Refresh"
 msgstr ""
 
-#: openplotterSettings.py:417
-msgid "You have to uninstall the rest of apps before uninstalling openplotter-settings."
-msgstr "Musisz odinstalować pozostałe komponenty przed odinstalowaniem openplotter-settings."
+#: openplotterSettings.py:422
+msgid "You have to uninstall the rest of the apps before uninstalling openplotter-settings."
+msgstr ""
 
-#: openplotterSettings.py:419
+#: openplotterSettings.py:424
 msgid "Are you sure you want to uninstall "
 msgstr "Czy na pewno chcesz odinstalować "
 
-#: openplotterSettings.py:430
+#: openplotterSettings.py:435
 msgid "Running pre-uninstall scripts, please wait... "
 msgstr "Uruchamianie skryptów pre-instalacyjnych, proszę czekać... "
 
-#: openplotterSettings.py:437
+#: openplotterSettings.py:442
 msgid "Uninstalling packages, please wait... "
 msgstr "Odinstalowywanie pakietów, proszę czekać... "
 
-#: openplotterSettings.py:466
+#: openplotterSettings.py:471
 msgid "Reading changelog, please wait... "
 msgstr "Czytanie dziennika zmian, proszę czekać... "
 
-#: openplotterSettings.py:467 openplotterSettings.py:527
+#: openplotterSettings.py:472 openplotterSettings.py:532
 msgid "Done"
 msgstr "Gotowe"
 
-#: openplotterSettings.py:472
+#: openplotterSettings.py:477
 msgid "Checking apps list, please wait... "
 msgstr "Sprawdzanie listy komponentów, proszę czekać... "
 
@@ -446,31 +423,31 @@ msgstr "Statek"
 msgid "Groups"
 msgstr "Grupy"
 
-#: selectKey.py:49
+#: selectKey.py:50
 msgid "Keys"
 msgstr "Klawisze"
 
-#: selectKey.py:53
+#: selectKey.py:55
 msgid "Properties"
 msgstr "Właściwości"
 
-#: selectKey.py:59
+#: selectKey.py:62
 msgid "Replace * (allowed characters: 0-9, a-z, A-Z)"
 msgstr "Zastąp * (dozwolone znaki: 0-9, a-z, A-Z)"
 
-#: selectKey.py:61
+#: selectKey.py:64
 msgid "Replace"
 msgstr "Zastąp"
 
-#: selectKey.py:64
+#: selectKey.py:67
 msgid "Selected key"
 msgstr "Wybrany klawisz"
 
-#: selectKey.py:275
+#: selectKey.py:278
 msgid "Failed. Characters not allowed."
 msgstr "Wystąpił błąd. Niedozwolone znaki."
 
-#: selectKey.py:285
+#: selectKey.py:288
 msgid "Failed. Replace * by some text."
 msgstr "Wystąpił błąd. Zastąp * jakimś innym tekstem."
 
