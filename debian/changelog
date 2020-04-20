@@ -1,3 +1,11 @@
+openplotter-settings (2.3.0-stable) bionic; urgency=medium
+
+  * Add SDR VHF app
+  * Close app after updating to apply changes
+  * Small text fix and update translations
+
+ -- Sailoog <info@sailoog.com>  Mon, 20 Apr 2020 14:06:04 +0200
+
 openplotter-settings (2.2.3-stable) bionic; urgency=medium
 
   * Change source for Xygrib
