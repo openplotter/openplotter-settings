@@ -35,17 +35,17 @@ class AppsList:
 			except Exception as e: print ("wrong external app format: "+str(e))
 
 		app = {
-		'name': 'SDR',
+		'name': 'SDR VHF',
 		'platform': 'both',
-		'package': 'openplotter-sdr-ais',
-		'preUninstall': '',
-		'uninstall': 'openplotter-sdr-ais',
+		'package': 'openplotter-sdr-vhf',
+		'preUninstall': platform2.admin+' sdrVhfPreUninstall',
+		'uninstall': 'openplotter-sdr-vhf',
 		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'yes',
-		'entryPoint': 'openplotter-sdr-ais',
-		'postInstall': '',
+		'dev': 'no',
+		'entryPoint': 'openplotter-sdr-vhf',
+		'postInstall': platform2.admin+' sdrVhfPostInstall',
 		'reboot': 'no',
-		'module': ''
+		'module': 'openplotterSdrVhf'
 		}
 		self.appsDict.append(app)
 
@@ -88,21 +88,6 @@ class AppsList:
 		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
 		'dev': 'yes',
 		'entryPoint': 'openplotter-iot',
-		'postInstall': '',
-		'reboot': 'no',
-		'module': ''
-		}
-		self.appsDict.append(app)
-
-		app = {
-		'name': _('Analog Sensors'),
-		'platform': 'rpi',
-		'package': 'openplotter-analog',
-		'preUninstall': '',
-		'uninstall': 'openplotter-analog',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'yes',
-		'entryPoint': 'openplotter-analog',
 		'postInstall': '',
 		'reboot': 'no',
 		'module': ''
