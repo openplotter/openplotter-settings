@@ -83,26 +83,26 @@ class AppsList:
 		'name': 'IoT',
 		'platform': 'both',
 		'package': 'openplotter-iot',
-		'preUninstall': '',
+		'preUninstall': platform2.admin+' iotPreUninstall',
 		'uninstall': 'openplotter-iot',
 		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'yes',
+		'dev': 'no',
 		'entryPoint': 'openplotter-iot',
-		'postInstall': '',
+		'postInstall': platform2.admin+' iotPostInstall',
 		'reboot': 'no',
-		'module': ''
+		'module': 'openplotterIot'
 		}
 		self.appsDict.append(app)
 
 		app = {
-		'name': _('1W Sensors'),
+		'name': 'GPIO',
 		'platform': 'rpi',
-		'package': 'openplotter-1w',
+		'package': 'openplotter-gpio',
 		'preUninstall': '',
-		'uninstall': 'openplotter-1w',
+		'uninstall': 'openplotter-gpio',
 		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
 		'dev': 'yes',
-		'entryPoint': 'openplotter-1w',
+		'entryPoint': 'openplotter-gpio',
 		'postInstall': '',
 		'reboot': 'no',
 		'module': ''
