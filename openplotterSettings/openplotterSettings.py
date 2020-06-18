@@ -422,7 +422,7 @@ class MyFrame(wx.Frame):
 								self.ShowStatusBarYELLOW(_('Running post-installation scripts, please wait... ')+line)
 								self.logger.ShowPosition(self.logger.GetLastPosition())
 					if package == 'openplotter-settings': settings = True
-					if apps[index]['reboot'] == 'yes': reboot = True
+					if apps[i]['reboot'] == 'yes': reboot = True
 					installed = True
 				dlg.Destroy()
 		if not installed: self.ShowStatusBarGREEN(_('Done. Nothing to install'))
