@@ -52,16 +52,10 @@ class MyFrame(wx.Frame):
 		self.toolbar1.AddSeparator()
 		toolStartup = self.toolbar1.AddCheckTool(102, _('Autostart'), wx.Bitmap(self.currentdir+"/data/autostart.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolStartup, toolStartup)
-		if os.path.exists(self.home+'/.config/autostart/openplotter-startup.desktop'): self.toolbar1.ToggleTool(102,True)		
+		if os.path.exists(self.home+'/.config/autostart/openplotter-startup.desktop'): self.toolbar1.ToggleTool(102,True)
+		self.toolbar1.AddSeparator()	
 		toolCheck = self.toolbar1.AddTool(103, _('Check System'), wx.Bitmap(self.currentdir+"/data/check.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolCheck, toolCheck)
-		self.toolbar1.AddSeparator()
-		toolSources = self.toolbar1.AddTool(105, _('Add Sources'), wx.Bitmap(self.currentdir+"/data/sources.png"))
-		self.Bind(wx.EVT_TOOL, self.OnToolSources, toolSources)
-		toolUpdate = self.toolbar1.AddTool(104, _('Update Candidates'), wx.Bitmap(self.currentdir+"/data/update.png"))
-		self.Bind(wx.EVT_TOOL, self.OnToolUpdate, toolUpdate)
-		self.refreshButton = self.toolbar1.AddTool(106, _('Refresh'), wx.Bitmap(self.currentdir+"/data/refresh.png"))
-		self.Bind(wx.EVT_TOOL, self.OnRefreshButton, self.refreshButton)
 		
 		self.notebook = wx.Notebook(self)
 		self.notebook.Bind(wx.EVT_NOTEBOOK_PAGE_CHANGED, self.onTabChange)
@@ -126,31 +120,6 @@ class MyFrame(wx.Frame):
 	def OnToolTranslate(self, event): 
 		url = "https://crowdin.com/project/openplotter"
 		webbrowser.open(url, new=2)
-
-	def OnToolUpdate(self, event=0):
-		self.logger.Clear()
-		self.notebook.ChangeSelection(3)
-		command = self.platform.admin+' apt update'
-		popen = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
-		for line in popen.stdout:
-			if not 'Warning' in line and not 'WARNING' in line:
-				self.logger.WriteText(line)
-				self.ShowStatusBarYELLOW(_('Updating packages data, please wait... ')+line)
-				self.logger.ShowPosition(self.logger.GetLastPosition())
-		self.OnRefreshButton()
-
-	def OnToolSources(self, e):
-		self.ShowStatusBarYELLOW(_('Adding packages sources, please wait... '))
-		self.logger.Clear()
-		self.notebook.ChangeSelection(3)
-		command = self.platform.admin+' settingsSourcesInstall'
-		popen = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
-		for line in popen.stdout:
-			if not 'Warning' in line and not 'WARNING' in line:
-				self.logger.WriteText(line)
-				self.ShowStatusBarYELLOW(_('Adding packages sources, please wait... ')+line)
-				self.logger.ShowPosition(self.logger.GetLastPosition())
-		self.ShowStatusBarGREEN(_('Added sources. Update candidates to see changes'))
 
 	def OnToolLanguage(self, event): 
 		short = 'en'
@@ -328,6 +297,8 @@ class MyFrame(wx.Frame):
 	def OnToolCheck(self, e):
 		subprocess.call(['openplotter-startup', 'check'])
 
+	###################################################################################
+
 	def pageApps(self):
 		self.listApps = wx.ListCtrl(self.apps, -1, style=wx.LC_REPORT | wx.LC_SINGLE_SEL | wx.LC_HRULES, size=(-1,200))
 		self.listApps.InsertColumn(0, _('Name'), width=260)
@@ -337,6 +308,16 @@ class MyFrame(wx.Frame):
 		self.listApps.Bind(wx.EVT_LIST_ITEM_DESELECTED, self.onListAppsDeselected)
 		self.listApps.SetImageList(self.il, wx.IMAGE_LIST_SMALL)
 		self.listApps.SetTextColour(wx.BLACK)
+
+		self.toolbar6 = wx.ToolBar(self.apps, style=wx.TB_TEXT | wx.TB_HORIZONTAL)
+		toolSources = self.toolbar6.AddTool(605, _('Add Sources'), wx.Bitmap(self.currentdir+"/data/sources.png"))
+		self.Bind(wx.EVT_TOOL, self.OnToolSources, toolSources)
+		toolUpdate = self.toolbar6.AddTool(604, _('Update Candidates'), wx.Bitmap(self.currentdir+"/data/update.png"))
+		self.Bind(wx.EVT_TOOL, self.OnToolUpdate, toolUpdate)
+		toolUpdateAvailable = self.toolbar6.AddTool(607, _('Install all available updates'), wx.Bitmap(self.currentdir+"/data/install.png"))
+		self.Bind(wx.EVT_TOOL, self.OnToolUpdateAvailable, toolUpdateAvailable)
+		self.refreshButton = self.toolbar6.AddTool(606, _('Refresh'), wx.Bitmap(self.currentdir+"/data/refresh.png"))
+		self.Bind(wx.EVT_TOOL, self.OnRefreshButton, self.refreshButton)
 
 		self.toolbar2 = wx.ToolBar(self.apps, style=wx.TB_TEXT | wx.TB_VERTICAL)
 		self.installButton = self.toolbar2.AddTool(201, _('Install'), wx.Bitmap(self.currentdir+"/data/install.png"))
@@ -349,9 +330,14 @@ class MyFrame(wx.Frame):
 		self.logButton = self.toolbar2.AddTool(204, _('Change Log'), wx.Bitmap(self.currentdir+"/data/changelog.png"))
 		self.Bind(wx.EVT_TOOL, self.OnLogButton, self.logButton)
 
-		sizer = wx.BoxSizer(wx.HORIZONTAL)
-		sizer.Add(self.listApps, 1, wx.EXPAND, 0)
-		sizer.Add(self.toolbar2, 0)
+		sizerh = wx.BoxSizer(wx.HORIZONTAL)
+		sizerh.Add(self.listApps, 1, wx.EXPAND, 0)
+		sizerh.Add(self.toolbar2, 0)
+
+		sizer = wx.BoxSizer(wx.VERTICAL)
+		sizer.Add(self.toolbar6, 0)
+		sizer.Add(sizerh, 1, wx.EXPAND, 0)
+
 		self.apps.SetSizer(sizer)
 
 		sources = subprocess.check_output(['apt-cache', 'policy']).decode(sys.stdin.encoding)
@@ -379,6 +365,73 @@ class MyFrame(wx.Frame):
 				self.listApps.SetItem(item, 1, _('Press Refresh'))
 			self.listApps.SetItemBackgroundColour(item,(200,200,200))
 
+	def OnToolUpdate(self, event=0):
+		self.logger.Clear()
+		self.notebook.ChangeSelection(3)
+		command = self.platform.admin+' apt update'
+		popen = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
+		for line in popen.stdout:
+			if not 'Warning' in line and not 'WARNING' in line:
+				self.logger.WriteText(line)
+				self.ShowStatusBarYELLOW(_('Updating packages data, please wait... ')+line)
+				self.logger.ShowPosition(self.logger.GetLastPosition())
+		self.OnRefreshButton()
+
+	def OnToolSources(self, e):
+		self.ShowStatusBarYELLOW(_('Adding packages sources, please wait... '))
+		self.logger.Clear()
+		self.notebook.ChangeSelection(3)
+		command = self.platform.admin+' settingsSourcesInstall'
+		popen = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
+		for line in popen.stdout:
+			if not 'Warning' in line and not 'WARNING' in line:
+				self.logger.WriteText(line)
+				self.ShowStatusBarYELLOW(_('Adding packages sources, please wait... ')+line)
+				self.logger.ShowPosition(self.logger.GetLastPosition())
+		self.ShowStatusBarGREEN(_('Added sources. Update candidates to see changes'))
+
+	def OnToolUpdateAvailable(self,e):
+		apps = list(reversed(self.appsDict))
+		appsToUpdate = []
+		listCount = range(self.listApps.GetItemCount())
+		reboot = False
+		settings = False
+		installed = False
+		for i in listCount:
+			if self.listApps.GetItemBackgroundColour(i) == (220,255,220):
+				package = apps[i]['package']
+				msg = _('Are you sure you want to install ')+package+_(' and its dependencies?')
+				dlg = wx.MessageDialog(None, msg, _('Question'), wx.YES_NO | wx.NO_DEFAULT | wx.ICON_EXCLAMATION)
+				if dlg.ShowModal() == wx.ID_YES:
+					self.logger.Clear()
+					self.notebook.ChangeSelection(3)
+					command = self.platform.admin+' apt -y install '+package
+					popen = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
+					for line in popen.stdout:
+						if not 'Warning' in line and not 'WARNING' in line:
+							self.logger.WriteText(line)
+							self.ShowStatusBarYELLOW(_('Installing package, please wait... ')+line)
+							self.logger.ShowPosition(self.logger.GetLastPosition())
+					postInstall = apps[i]['postInstall']
+					if postInstall:
+						popen = subprocess.Popen(postInstall, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
+						for line in popen.stdout:
+							if not 'Warning' in line and not 'WARNING' in line:
+								self.logger.WriteText(line)
+								self.ShowStatusBarYELLOW(_('Running post-installation scripts, please wait... ')+line)
+								self.logger.ShowPosition(self.logger.GetLastPosition())
+					if package == 'openplotter-settings': settings = True
+					if apps[index]['reboot'] == 'yes': reboot = True
+					installed = True
+				dlg.Destroy()
+		if not installed: self.ShowStatusBarGREEN(_('Done. Nothing to install'))
+		else:
+			if reboot: self.ShowStatusBarRED(_('Done. Restart to apply changes'))
+			elif settings:
+				wx.MessageBox(_('This app will close to apply the changes.'), _('Info'), wx.OK | wx.ICON_INFORMATION)
+				self.Close()
+				return
+			else: self.ShowStatusBarGREEN(_('Done. Press Refresh'))
 
 	def OnInstallButton(self,e):
 		index = self.listApps.GetFirstSelected()
