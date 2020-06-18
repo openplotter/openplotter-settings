@@ -301,9 +301,10 @@ class MyFrame(wx.Frame):
 
 	def pageApps(self):
 		self.listApps = wx.ListCtrl(self.apps, -1, style=wx.LC_REPORT | wx.LC_SINGLE_SEL | wx.LC_HRULES, size=(-1,200))
-		self.listApps.InsertColumn(0, _('Name'), width=260)
-		self.listApps.InsertColumn(1, _('Installed'), width=130)
-		self.listApps.InsertColumn(2, _('Candidate'), width=280)
+		self.listApps.InsertColumn(0, _('Name'), width=240)
+		self.listApps.InsertColumn(1, _('Installed'), width=120)
+		self.listApps.InsertColumn(2, _('Candidate'), width=120)
+		self.listApps.InsertColumn(3, _('Pending tasks'), width=190)
 		self.listApps.Bind(wx.EVT_LIST_ITEM_SELECTED, self.onListAppsSelected)
 		self.listApps.Bind(wx.EVT_LIST_ITEM_DESELECTED, self.onListAppsDeselected)
 		self.listApps.SetImageList(self.il, wx.IMAGE_LIST_SMALL)
@@ -537,6 +538,7 @@ class MyFrame(wx.Frame):
 			
 			installed = ''
 			candidate = ''
+			pending = ''
 			command = 'LC_ALL=C apt-cache policy '+i['package']
 			popen = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
 			for line in popen.stdout:
@@ -574,10 +576,19 @@ class MyFrame(wx.Frame):
 				self.listApps.SetItemBackgroundColour(item,(200,200,200))
 
 			if installed and candidate:
-				if installed != candidate: self.listApps.SetItemBackgroundColour(item,(220,255,220))
+				if installed != candidate: 
+					self.listApps.SetItemBackgroundColour(item,(220,255,220))
+					pending = _('Install')
+				else:
+					if i['conf']:
+						installedL = installed.split('-')
+						if self.conf.get('APPS', i['conf']).strip() != installedL[0].strip():
+							self.listApps.SetItemBackgroundColour(item,(255,220,220))
+							pending = _('Open to apply and refresh')
 
 			self.listApps.SetItem(item, 1, installed)
 			self.listApps.SetItem(item, 2, candidate)
+			self.listApps.SetItem(item, 3, pending)
 			if installed and i['package'] != 'openplotter-settings': self.installedFlag = True
 
 		if not self.platform.isInstalled('openplotter-doc'): self.toolbar1.EnableTool(101,False)

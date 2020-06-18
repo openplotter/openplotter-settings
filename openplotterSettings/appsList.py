@@ -45,7 +45,8 @@ class AppsList:
 		'entryPoint': 'openplotter-sdr-vhf',
 		'postInstall': platform2.admin+' sdrVhfPostInstall',
 		'reboot': 'no',
-		'module': 'openplotterSdrVhf'
+		'module': 'openplotterSdrVhf',
+		'conf': 'sdr_vhf'
 		}
 		self.appsDict.append(app)
 
@@ -60,7 +61,8 @@ class AppsList:
 		'entryPoint': 'openplotter-kplex',
 		'postInstall': platform2.admin+' kplexPostInstall',
 		'reboot': 'no',
-		'module': 'openplotterKplex'
+		'module': 'openplotterKplex',
+		'conf': 'kplex'
 		}
 		self.appsDict.append(app)
 
@@ -75,7 +77,8 @@ class AppsList:
 		'entryPoint': 'openplotter-SKfilter',
 		'postInstall': platform2.admin+' SKfilterPostInstall',
 		'reboot': 'no',
-		'module': 'openplotterSKfilter'
+		'module': 'openplotterSKfilter',
+		'conf': 'SKfilter'
 		}
 		self.appsDict.append(app)
 
@@ -90,7 +93,8 @@ class AppsList:
 		'entryPoint': 'openplotter-iot',
 		'postInstall': platform2.admin+' iotPostInstall',
 		'reboot': 'no',
-		'module': 'openplotterIot'
+		'module': 'openplotterIot',
+		'conf': 'iot'
 		}
 		self.appsDict.append(app)
 
@@ -105,7 +109,8 @@ class AppsList:
 		'entryPoint': 'openplotter-gpio',
 		'postInstall': '',
 		'reboot': 'no',
-		'module': ''
+		'module': '',
+		'conf': 'gpio'
 		}
 		self.appsDict.append(app)
 
@@ -120,7 +125,8 @@ class AppsList:
 		'entryPoint': 'openplotter-i2c',
 		'postInstall': platform2.admin+' i2cPostInstall',
 		'reboot': 'no',
-		'module': 'openplotterI2c'
+		'module': 'openplotterI2c',
+		'conf': 'i2c'
 		}
 		self.appsDict.append(app)
 
@@ -135,7 +141,8 @@ class AppsList:
 		'entryPoint': 'openplotter-moitessier',
 		'postInstall': platform2.admin+' moitessierPostInstall',
 		'reboot': 'yes',
-		'module': 'openplotterMoitessier'
+		'module': 'openplotterMoitessier',
+		'conf': 'moitessier'
 		}
 		self.appsDict.append(app)
 
@@ -150,7 +157,8 @@ class AppsList:
 		'entryPoint': 'openplotter-pypilot',
 		'postInstall': platform2.admin+' pypilotPostInstall',
 		'reboot': 'no',
-		'module': 'openplotterPypilot'
+		'module': 'openplotterPypilot',
+		'conf': 'pypilot'
 		}
 		self.appsDict.append(app)
 
@@ -165,7 +173,8 @@ class AppsList:
 		'entryPoint': 'openplotter-can',
 		'postInstall': platform2.admin+' canPostInstall',
 		'reboot': 'no',
-		'module': 'openplotterCan'
+		'module': 'openplotterCan',
+		'conf': 'can'
 		}
 		self.appsDict.append(app)
 
@@ -180,7 +189,8 @@ class AppsList:
 		'entryPoint': 'openplotter-serial',
 		'postInstall': platform2.admin+' serialPostInstall',
 		'reboot': 'no',
-		'module': 'openplotterSerial'
+		'module': 'openplotterSerial',
+		'conf': 'serial'
 		}
 		self.appsDict.append(app)
 
@@ -195,7 +205,8 @@ class AppsList:
 		'entryPoint': 'openplotter-network',
 		'postInstall': platform2.admin+' networkPostInstall',
 		'reboot': 'no',
-		'module': 'openplotterNetwork'
+		'module': 'openplotterNetwork',
+		'conf': 'network'
 		}
 		self.appsDict.append(app)
 
@@ -210,7 +221,8 @@ class AppsList:
 		'entryPoint': 'openplotter-dashboards',
 		'postInstall': '',
 		'reboot': 'no',
-		'module': 'openplotterDashboards'
+		'module': 'openplotterDashboards',
+		'conf': ''
 		}
 		self.appsDict.append(app)
 
@@ -225,7 +237,8 @@ class AppsList:
 		'entryPoint': 'openplotter-signalk-installer',
 		'postInstall': platform2.admin+' signalkPostInstall',
 		'reboot': 'no',
-		'module': 'openplotterSignalkInstaller'
+		'module': 'openplotterSignalkInstaller',
+		'conf': 'signalk'
 		}
 		self.appsDict.append(app)
 
@@ -240,7 +253,8 @@ class AppsList:
 		'entryPoint': 'XyGrib',
 		'postInstall': platform2.admin+' python3 '+currentdir+'/xygribPostInstall.py',
 		'reboot': 'no',
-		'module': ''
+		'module': '',
+		'conf': ''
 		}
 		self.appsDict.append(app)
 		
@@ -255,7 +269,8 @@ class AppsList:
 		'entryPoint': 'openplotter-opencpn-installer',
 		'postInstall': '',
 		'reboot': 'no',
-		'module': 'openplotterOpencpnInstaller'
+		'module': 'openplotterOpencpnInstaller',
+		'conf': ''
 		}
 		self.appsDict.append(app)
 
@@ -270,7 +285,8 @@ class AppsList:
 		'entryPoint': 'x-www-browser /usr/share/openplotter-doc/index.html',
 		'postInstall': '',
 		'reboot': 'no',
-		'module': ''
+		'module': '',
+		'conf': ''
 		}
 		self.appsDict.append(app)
 
@@ -285,7 +301,8 @@ class AppsList:
 		'entryPoint': 'openplotter-settings',
 		'postInstall': '',
 		'reboot': 'no',
-		'module': ''
+		'module': '',
+		'conf': ''
 		}
 		self.appsDict.append(app)
 		
