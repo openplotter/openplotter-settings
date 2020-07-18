@@ -170,7 +170,9 @@ class MyFrame(wx.Frame):
 		delay = self.conf.get('GENERAL', 'delay')
 		if delay:
 			self.delay.SetValue(delay)
+			self.delay.Disable()
 			self.toolbar4.ToggleTool(401,True)
+
 		path = self.conf.get('GENERAL', 'play')
 		if not path == '':
 			self.pathFile.SetValue(path)
@@ -204,10 +206,13 @@ class MyFrame(wx.Frame):
 			if delay:
 				self.conf.set('GENERAL', 'delay', delay)
 				self.ShowStatusBarGREEN(_('Delay at startup set to: ')+delay)
+				self.delay.Disable()
 			else: self.toolbar4.ToggleTool(401,False)
 		else:
 			self.conf.set('GENERAL', 'delay', '')
 			self.ShowStatusBarGREEN(_('Removed delay at startup'))
+			self.delay.SetValue('')
+			self.delay.Enable()
 
 	def OnToolMaxi(self,e):
 		if self.toolbar3.GetToolState(303):

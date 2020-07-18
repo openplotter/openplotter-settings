@@ -118,13 +118,22 @@ class MyFrame(wx.Frame):
 		self.logger_data=msg
 
 	def starting(self):
-		try:
-			delay = self.conf.get('GENERAL', 'delay')
-			if delay:
-				self.add_logger_data(_('Applying delay of ')+delay+_(' seconds...'))
-				time.sleep(int(delay))
-				self.add_logger_data({'green':_('done'),'black':'','red':''})
-		except:self.add_logger_data({'green':'','black':'','red':_('Delay failed. Is it a number?')})
+
+		delay = self.conf.get('GENERAL', 'delay')
+		if self.mode == 'start':
+			try:
+				if delay:
+					self.add_logger_data(_('Applying delay of ')+delay+_(' seconds...'))
+					time.sleep(int(delay))
+					self.add_logger_data({'green':_('done'),'black':'','red':''})
+			except:self.add_logger_data({'green':'','black':'','red':_('Delay failed. Is it a number?')})
+		else:
+			try:
+				if delay:
+					self.add_logger_data(_('A startup delay will apply'))
+					checkDelay = int(delay)
+					self.add_logger_data({'green':delay+_(' seconds'),'black':'','red':''})
+			except:self.add_logger_data({'green':'','black':'','red':_('Delay failed. Is it a number?')})
 
 		self.add_logger_data(_('Checking OpenPlotter autostart...'))
 		if not os.path.exists(self.conf.home+'/.config/autostart/openplotter-startup.desktop'):
