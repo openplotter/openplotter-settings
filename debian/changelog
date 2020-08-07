@@ -1,3 +1,12 @@
+openplotter-settings (2.4.0-stable) bionic; urgency=medium
+
+  * Update apps list
+  * Add button to update all available apps
+  * Fix small bugs
+  * Update translations
+
+ -- Sailoog <info@sailoog.com>  Fri, 07 Aug 2020 18:52:42 +0200
+
 openplotter-settings (2.3.0-stable) bionic; urgency=medium
 
   * Add SDR VHF app
