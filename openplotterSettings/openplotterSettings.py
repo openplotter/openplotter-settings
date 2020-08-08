@@ -585,7 +585,7 @@ class MyFrame(wx.Frame):
 					self.listApps.SetItemBackgroundColour(item,(220,255,220))
 					pending = _('Install')
 				else:
-					if i['conf']:
+					if 'conf' in i and i['conf']:
 						installedL = installed.split('-')
 						if self.conf.get('APPS', i['conf']).strip() != installedL[0].strip():
 							self.listApps.SetItemBackgroundColour(item,(255,220,220))
