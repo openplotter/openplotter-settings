@@ -1,3 +1,10 @@
+openplotter-settings (2.4.1-stable) bionic; urgency=medium
+
+  * Fix error with new features and external apps
+  * Update translations
+
+ -- Sailoog <info@sailoog.com>  Sat, 08 Aug 2020 13:47:04 +0200
+
 openplotter-settings (2.4.0-stable) bionic; urgency=medium
 
   * Update apps list
