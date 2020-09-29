@@ -1,3 +1,10 @@
+openplotter-settings (2.4.2-stable) bionic; urgency=medium
+
+  * Remove ttyS0 from serial devices and ttyAMA0 when Bluetooth is active
+  * Update translations
+
+ -- Sailoog <info@sailoog.com>  Tue, 29 Sep 2020 20:12:07 +0200
+
 openplotter-settings (2.4.1-stable) bionic; urgency=medium
 
   * Fix error with new features and external apps
