@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: openplotter-settings\n"
-"POT-Creation-Date: 2020-08-07 18:40+0200\n"
-"PO-Revision-Date: 2020-08-08 13:45+0200\n"
+"POT-Creation-Date: 2020-09-29 20:08+0200\n"
+"PO-Revision-Date: 2020-09-29 20:09+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -416,15 +416,15 @@ msgstr ""
 msgid "Done. Close this window and open the app again."
 msgstr ""
 
-#: selectConnections.py:33
+#: selectConnections.py:45
 msgid "Add serial device"
 msgstr ""
 
-#: selectConnections.py:56
+#: selectConnections.py:68
 msgid "Show only Openplotter-Serial managed ports"
 msgstr ""
 
-#: selectConnections.py:63
+#: selectConnections.py:75
 msgid "Baud Rate: "
 msgstr ""
 
