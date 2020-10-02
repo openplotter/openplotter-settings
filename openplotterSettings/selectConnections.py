@@ -29,7 +29,7 @@ class Serial(wx.Dialog):
 				btStatus = True
 			except: btStatus = False
 			if not '/virtual/' in DEVPATH or 'moitessier' in DEVNAME:
-				if not 'ttyS0' in DEVPATH:
+				if not '/devices/platform/serial' in DEVPATH:
 					if 'ttyAMA0' in DEVPATH and btStatus: pass
 					else: self.devices.append(i)
 			'''
