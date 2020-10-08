@@ -21,6 +21,7 @@ from .language import Language
 from .platform import Platform
 from .ports import Ports
 from .serialPorts import SerialPorts
+from .gpio import Gpio
 from .appsList import AppsList
 
 class MyFrame(wx.Frame):
@@ -213,6 +214,24 @@ class MyFrame(wx.Frame):
 				self.add_logger_data({'green':'','black':'','red':red})
 			else: self.add_logger_data({'green':_('no conflicts'),'black':'','red':''})
 		except Exception as e: self.add_logger_data({'green':'','black':'','red':print(str(e))})
+
+		if self.isRPI:
+			try:
+				self.add_logger_data(_('Checking GPIO conflicts...'))
+				gpios = Gpio()
+				gpioMap = gpios.gpioMap
+				red = ''
+				for i in gpioMap:
+					if not i['shared'] and len(i['usedBy']) > 1:
+						if not red: red = _('There are GPIO conflicts between the following apps:')
+						line = ''
+						for ii in i['usedBy']:
+							if line: line += ', '
+							line += ii['app']+' - '+ii['id']
+						red += '\n'+line
+				if red: self.add_logger_data({'green':'','black':'','red':red})
+				else: self.add_logger_data({'green':_('no conflicts'),'black':'','red':''})
+			except Exception as e: self.add_logger_data({'green':'','black':'','red':print(str(e))})
 
 		try:
 			play = self.conf.get('GENERAL', 'play')

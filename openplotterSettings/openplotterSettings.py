@@ -23,6 +23,7 @@ from .language import Language
 from .platform import Platform
 from .version import version
 from .appsList import AppsList
+from .gpio import GpioMap
 
 class MyFrame(wx.Frame):
 	def __init__(self):
@@ -229,6 +230,10 @@ class MyFrame(wx.Frame):
 		self.toolbar5.AddSeparator()
 		toolHeadless = self.toolbar5.AddCheckTool(502, _('Headless'), wx.Bitmap(self.currentdir+"/data/headless.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolHeadless, toolHeadless)
+		self.toolbar5.AddSeparator()
+		toolGpio = self.toolbar5.AddTool(503, _('GPIO Map'), wx.Bitmap(self.currentdir+"/data/chip.png"))
+		self.Bind(wx.EVT_TOOL, self.OnToolGpio, toolGpio)
+
 		sizer = wx.BoxSizer(wx.VERTICAL)
 		sizer.Add(self.toolbar5, 0, wx.EXPAND, 0)
 		self.raspSettings.SetSizer(sizer)
@@ -242,9 +247,11 @@ class MyFrame(wx.Frame):
 			config.close()
 			if not '#hdmi_force_hotplug=1' in data:
 				self.toolbar5.ToggleTool(502,True)
+			self.toolbar5.ToggleTool(503,True)
 		else: 
 			self.toolbar5.EnableTool(501,False)
 			self.toolbar5.EnableTool(502,False)
+			self.toolbar5.EnableTool(503,False)
 
 	def OnToolScreensaver(self, e):
 		if self.toolbar5.GetToolState(501):
@@ -285,6 +292,11 @@ class MyFrame(wx.Frame):
 		else: os.system('rm -f '+self.home+'/config.txt')
 
 		if reset: self.ShowStatusBarGREEN(_('Changes will be applied after restarting'))
+
+	def OnToolGpio(self,e):
+		dlg = GpioMap()
+		res = dlg.ShowModal()
+		dlg.Destroy()
 
 	def OnToolStartup(self, e):
 		autostartFolder = self.home+'/.config/autostart'

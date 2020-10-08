@@ -102,14 +102,14 @@ class AppsList:
 		'name': 'GPIO',
 		'platform': 'rpi',
 		'package': 'openplotter-gpio',
-		'preUninstall': '',
+		'preUninstall': platform2.admin+' gpioPreUninstall',
 		'uninstall': 'openplotter-gpio',
 		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'yes',
+		'dev': 'no',
 		'entryPoint': 'openplotter-gpio',
-		'postInstall': '',
+		'postInstall': platform2.admin+' gpioPostInstall',
 		'reboot': 'no',
-		'module': '',
+		'module': 'openplotterGpio',
 		'conf': 'gpio'
 		}
 		self.appsDict.append(app)
