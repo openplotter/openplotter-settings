@@ -219,6 +219,7 @@ class MyFrame(wx.Frame):
 			try:
 				self.add_logger_data(_('Checking GPIO conflicts...'))
 				gpios = Gpio()
+				gpios.addUsedGpios()
 				gpioMap = gpios.gpioMap
 				red = ''
 				for i in gpioMap:

@@ -71,6 +71,7 @@ class Gpio:
 			{'physical':'40', 'BCM': 'GPIO 21', 'feature': 'GPIO', 'shared': False, 'usedBy': []}
 		] 
 
+	def addUsedGpios(self):
 		UsedGpios = []
 		appsList = AppsList()
 		appsDict = appsList.appsDict
@@ -103,9 +104,6 @@ class GpioMap(wx.Dialog):
 		self.currentdir = os.path.dirname(os.path.abspath(__file__))
 		self.currentLanguage = self.conf.get('GENERAL', 'lang')
 		self.language = Language(self.currentdir,'openplotter-settings',self.currentLanguage)
-
-		self.gpio = Gpio()
-		self.gpioMap = self.gpio.gpioMap
 
 		if self.allowed != '0': title = _('Select GPIO')
 		else: title = _('GPIO Map')
@@ -163,6 +161,9 @@ class GpioMap(wx.Dialog):
 		if self.allowed != '0':
 			cancelBtn = wx.Button(panel, wx.ID_CANCEL)
 			self.okBtn = wx.Button(panel, wx.ID_OK)
+
+		refresh =wx.Button(panel, label=_('Refresh'))
+		refresh.Bind(wx.EVT_BUTTON, self.refresh)
 
 		left = wx.BoxSizer(wx.VERTICAL)
 		left.AddSpacer(6)
@@ -231,6 +232,7 @@ class GpioMap(wx.Dialog):
 
 		right2 = wx.BoxSizer(wx.VERTICAL)
 		right2.Add(self.logger, 1, wx.ALL | wx.EXPAND, 5)
+		right2.Add(refresh, 0, wx.ALL | wx.EXPAND, 5)
 		if self.allowed != '0':
 			right2.Add(self.okBtn, 0, wx.ALL | wx.EXPAND, 5)
 			right2.Add(cancelBtn, 0, wx.ALL | wx.EXPAND, 5)
@@ -245,7 +247,12 @@ class GpioMap(wx.Dialog):
 
 		self.refresh()
 
-	def refresh(self):
+	def refresh(self,e=0):
+		self.gpio = Gpio()
+		self.gpio.addUsedGpios()
+		self.gpioMap = self.gpio.gpioMap
+		self.logger.Clear()
+
 		for i in range(1,41): 
 			if i % 2 != 0:
 				if not 'GPIO' in self.gpioMap[i-1]['feature']:
@@ -258,6 +265,8 @@ class GpioMap(wx.Dialog):
 					label += ' ('+self.gpioMap[i-1]['feature']+')'
 
 			if i < 41: eval('self.pin'+str(i)).SetLabel(label)
+			if i < 41: eval('self.pin'+str(i)).SetForegroundColour((55, 55, 55))
+			if i < 41: eval('self.pin'+str(i)).SetValue(False)
 
 			if len(self.gpioMap[i-1]['usedBy']) > 0:
 				eval('self.pin'+str(i)).SetForegroundColour((0, 130, 0))
@@ -304,11 +313,9 @@ class GpioMap(wx.Dialog):
 			self.logger.WriteText(_('Used by'))
 			self.logger.EndBold()
 			self.logger.WriteText(': ')
-			usedBy = ''
 			for i in pin['usedBy']:
-				if usedBy: usedBy += ', '
-				usedBy += i['app']+' - '+i['id']
-			self.logger.WriteText(usedBy)
+				self.logger.Newline()
+				self.logger.WriteText(i['app']+' - '+i['id'])
 			self.logger.Newline()
 		self.logger.Newline()
 
