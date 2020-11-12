@@ -140,7 +140,7 @@ class AppsList:
 		'dev': 'no',
 		'entryPoint': 'openplotter-moitessier',
 		'postInstall': platform2.admin+' moitessierPostInstall',
-		'reboot': 'yes',
+		'reboot': 'no',
 		'module': 'openplotterMoitessier',
 		'conf': 'moitessier'
 		}
