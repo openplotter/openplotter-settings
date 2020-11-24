@@ -18,14 +18,22 @@
 import os, subprocess, sys
 from .conf import Conf
 from .language import Language
+from .platform import Platform
 
 def main():
 	try:
 		conf2 = Conf()
+		platform2 = Platform()
 		currentdir = os.path.dirname(os.path.abspath(__file__))
 		currentLanguage = conf2.get('GENERAL', 'lang')
 		Language(currentdir,'openplotter-settings',currentLanguage)
 		beta = conf2.get('GENERAL', 'beta')
+
+		codename_debian = 'buster'
+		codename_ubuntu = 'bionic'
+		RELEASE_DATA = platform2.RELEASE_DATA
+		if RELEASE_DATA['VERSION_CODENAME'] == 'focal': codename_ubuntu = 'focal' #ubuntu
+		if RELEASE_DATA['VERSION_CODENAME'] == 'ulyana': codename_ubuntu = 'focal' #mint
 
 		sources = subprocess.check_output('apt-cache policy', shell=True).decode(sys.stdin.encoding)
 
@@ -38,37 +46,37 @@ def main():
 
 		fileDataList = fileData.splitlines()
 
-		deb = 'deb http://ppa.launchpad.net/opencpn/opencpn/ubuntu bionic main'
-		if not 'http://ppa.launchpad.net/opencpn/opencpn/ubuntu bionic' in sources:
+		deb = 'deb http://ppa.launchpad.net/opencpn/opencpn/ubuntu '+codename_ubuntu+' main'
+		if not 'http://ppa.launchpad.net/opencpn/opencpn/ubuntu '+codename_ubuntu in sources:
 			if not deb in fileData: fileDataList.append(deb)
 			print(_('Added OpenCPN packages source'))
 		else: 
 			print(_('OpenCPN packages source already exists'))
 
-		deb = 'deb https://www.free-x.de/deb4op buster main'
-		if not 'https://www.free-x.de/deb4op buster' in sources:
+		deb = 'deb https://www.free-x.de/deb4op '+codename_debian+' main'
+		if not 'https://www.free-x.de/deb4op '+codename_debian in sources:
 			if not deb in fileData: fileDataList.append(deb)
 			print(_('Added XyGrib packages source'))
 		else: 
 			print(_('XyGrib packages source already exists'))
 
-		deb = 'deb http://ppa.launchpad.net/openplotter/openplotter/ubuntu bionic main'
-		if not 'http://ppa.launchpad.net/openplotter/openplotter/ubuntu bionic' in sources:
+		deb = 'deb http://ppa.launchpad.net/openplotter/openplotter/ubuntu '+codename_ubuntu+' main'
+		if not 'http://ppa.launchpad.net/openplotter/openplotter/ubuntu '+codename_ubuntu in sources:
 			if not deb in fileData: fileDataList.append(deb)
 			print(_('Added OpenPlotter packages source'))
 		else: 
 			print(_('OpenPlotter packages source already exists'))
 
 		if beta == 'yes':
-			deb = 'deb http://ppa.launchpad.net/sailoog/openplotter/ubuntu bionic main'
-			if not 'http://ppa.launchpad.net/sailoog/openplotter/ubuntu bionic' in sources:
+			deb = 'deb http://ppa.launchpad.net/sailoog/openplotter/ubuntu '+codename_ubuntu+' main'
+			if not 'http://ppa.launchpad.net/sailoog/openplotter/ubuntu '+codename_ubuntu in sources:
 				if not deb in fileData: fileDataList.append(deb)
 				print(_('Added OpenPlotter beta packages source'))
 			else: 
 				print(_('OpenPlotter beta packages source already exists'))
 
-		deb = 'deb https://repos.influxdata.com/debian buster stable'
-		if not 'https://repos.influxdata.com/debian buster' in sources:
+		deb = 'deb https://repos.influxdata.com/debian '+codename_debian+' stable'
+		if not 'https://repos.influxdata.com/debian '+codename_debian in sources:
 			if not deb in fileData: fileDataList.append(deb)
 			print(_('Added InfluxDB packages source'))
 		else: 
@@ -81,8 +89,12 @@ def main():
 		else: 
 			print(_('Grafana packages source already exists'))
 
-		deb = 'deb https://deb.nodesource.com/node_10.x buster main\ndeb-src https://deb.nodesource.com/node_10.x buster main'
-		if not 'https://deb.nodesource.com/node_10.x buster' in sources:
+		if RELEASE_DATA['ID'] == 'ubuntu': codename_node = codename_ubuntu
+		elif RELEASE_DATA['ID'] == 'linuxmint': codename_node = codename_ubuntu
+		else: codename_node = codename_debian
+
+		deb = 'deb https://deb.nodesource.com/node_10.x '+codename_node+' main\ndeb-src https://deb.nodesource.com/node_10.x '+codename_node+' main'
+		if not 'https://deb.nodesource.com/node_10.x '+codename_node in sources:
 			if not deb in fileData: fileDataList.append(deb)
 			print(_('Added Node.js 10 packages source'))
 		else: 
@@ -93,7 +105,7 @@ def main():
 		removeList.append('deb https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian buster main')
 		removeList.append('deb https://dl.cloudsmith.io/public/openplotter/openplotter-beta/deb/debian buster main')
 		if beta != 'yes':
-			removeList.append('deb http://ppa.launchpad.net/sailoog/openplotter/ubuntu bionic main')
+			removeList.append('deb http://ppa.launchpad.net/sailoog/openplotter/ubuntu '+codename_ubuntu+' main')
 
 		finalList = []
 		for i in fileDataList:

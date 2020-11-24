@@ -14,7 +14,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Openplotter. If not, see <http://www.gnu.org/licenses/>.
-import subprocess, ujson
+import subprocess, ujson, csv
 from .conf import Conf
 
 class Platform:
@@ -26,7 +26,13 @@ class Platform:
 		self.ws = 'ws://'
 		self.admin = 'pkexec'
 		self.conf = Conf()
-		
+		self.RELEASE_DATA = {}
+
+		with open("/etc/os-release") as f:
+			reader = csv.reader(f, delimiter="=")
+			for row in reader:
+				if row: self.RELEASE_DATA[row[0]] = row[1]
+
 		try:
 			modelfile = open('/sys/firmware/devicetree/base/model', 'r', 2000)
 			rpimodel = modelfile.read()
