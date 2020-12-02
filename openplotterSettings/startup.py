@@ -168,7 +168,8 @@ class MyFrame(wx.Frame):
 				self.add_logger_data({'green':_('enabled'),'black':'','red':''})
 
 			self.add_logger_data(_('Checking headless state...'))
-			config = open('/boot/config.txt', 'r')
+			try: config = open('/boot/config.txt', 'r')
+			except: config = open('/boot/firmware/config.txt', 'r')
 			data = config.read()
 			config.close()
 			if '#hdmi_force_hotplug=1' in data: self.add_logger_data({'green':'','black':_('disabled'),'red':''})

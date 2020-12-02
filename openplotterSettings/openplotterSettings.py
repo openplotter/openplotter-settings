@@ -242,7 +242,8 @@ class MyFrame(wx.Frame):
 			screensaver = self.conf.get('GENERAL', 'screensaver')
 			if screensaver == '1': 
 				self.toolbar5.ToggleTool(501,True)
-			config = open('/boot/config.txt', 'r')
+			try: config = open('/boot/config.txt', 'r')
+			except: config = open('/boot/firmware/config.txt', 'r')
 			data = config.read()
 			config.close()
 			if not '#hdmi_force_hotplug=1' in data:
@@ -267,7 +268,13 @@ class MyFrame(wx.Frame):
 
 	def OnToolHeadless(self, e):
 		onoff = self.toolbar5.GetToolState(502)
-		file = open('/boot/config.txt', 'r')
+		config = '/boot/config.txt'
+		boot = '/boot'
+		try: file = open(config, 'r')
+		except:
+			config = '/boot/firmware/config.txt'
+			boot = '/boot/firmware'
+			file = open(config, 'r')
 		file1 = open(self.home+'/config.txt', 'w')
 		exists = False
 		while True:
@@ -286,8 +293,8 @@ class MyFrame(wx.Frame):
 		file1.close()
 
 		reset = False
-		if os.system('diff '+self.home+'/config.txt /boot/config.txt > /dev/null'):
-			os.system(self.platform.admin+' mv '+self.home+'/config.txt /boot')
+		if os.system('diff '+self.home+'/config.txt '+config+' > /dev/null'):
+			os.system(self.platform.admin+' mv '+self.home+'/config.txt '+boot)
 			reset = True
 		else: os.system('rm -f '+self.home+'/config.txt')
 
