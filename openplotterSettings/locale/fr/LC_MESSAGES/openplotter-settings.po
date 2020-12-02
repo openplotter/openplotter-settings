@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openplotter\n"
 "POT-Creation-Date: 2020-10-09 17:25+0200\n"
-"PO-Revision-Date: 2020-10-19 12:50+0200\n"
+"PO-Revision-Date: 2020-12-02 19:25+0100\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -63,20 +63,20 @@ msgstr "Paramètres"
 #: gpio.py:32 gpio.py:33 gpio.py:35 gpio.py:37 gpio.py:40 gpio.py:45 gpio.py:48
 #: gpio.py:51 gpio.py:56 gpio.py:61 gpio.py:65 gpio.py:70
 msgid "Power"
-msgstr ""
+msgstr "Alimentation"
 
 #: gpio.py:37 gpio.py:40 gpio.py:45 gpio.py:51 gpio.py:56 gpio.py:61 gpio.py:65
 #: gpio.py:70
 msgid "Ground"
-msgstr ""
+msgstr "Broche de mise à la terre"
 
 #: gpio.py:108
 msgid "Select GPIO"
-msgstr ""
+msgstr "Sélectionner GPIO"
 
 #: gpio.py:109 openplotterSettings.py:234
 msgid "GPIO Map"
-msgstr ""
+msgstr "Carte GPIO"
 
 #: gpio.py:165 openplotterSettings.py:337 selectKey.py:40
 msgid "Refresh"
@@ -84,39 +84,39 @@ msgstr "Actualiser"
 
 #: gpio.py:289
 msgid "Physical pin"
-msgstr ""
+msgstr "Broche"
 
 #: gpio.py:294
 msgid "BCM name"
-msgstr ""
+msgstr "Nom BCM"
 
 #: gpio.py:299
 msgid "Interface"
-msgstr ""
+msgstr "Interface"
 
 #: gpio.py:304
 msgid "Shared"
-msgstr ""
+msgstr "Partagé"
 
 #: gpio.py:307
 msgid "Yes"
-msgstr ""
+msgstr "Oui"
 
 #: gpio.py:309
 msgid "No"
-msgstr ""
+msgstr "Non"
 
 #: gpio.py:313
 msgid "Used by"
-msgstr ""
+msgstr "Utilisé par"
 
 #: gpio.py:325
 msgid "There is a conflict with this GPIO."
-msgstr ""
+msgstr "Il y a un conflit avec ce GPIO."
 
 #: gpio.py:335 gpio.py:346
 msgid "You can not select this GPIO to do this job."
-msgstr ""
+msgstr "Vous ne pouvez pas sélectionner ce GPIO pour effectuer cette tâche."
 
 #: installSources.py:44
 msgid "Added OpenCPN packages source"
@@ -657,11 +657,11 @@ msgstr "Il y a des conflits avec les connexions serveur suivantes :"
 
 #: startup.py:220
 msgid "Checking GPIO conflicts..."
-msgstr ""
+msgstr "Vérification des conflits de GPIO..."
 
 #: startup.py:227
 msgid "There are GPIO conflicts between the following apps:"
-msgstr ""
+msgstr "Il y a des conflits GPIO entre les applications suivantes :"
 
 #: startup.py:242
 msgid "STARTUP FINISHED"

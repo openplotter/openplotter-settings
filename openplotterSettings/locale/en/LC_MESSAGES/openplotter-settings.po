@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: openplotter-settings\n"
-"POT-Creation-Date: 2020-10-09 17:25+0200\n"
-"PO-Revision-Date: 2020-10-19 12:49+0200\n"
+"POT-Creation-Date: 2020-11-26 18:09+0100\n"
+"PO-Revision-Date: 2020-12-02 19:25+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -113,63 +113,63 @@ msgstr ""
 msgid "You can not select this GPIO to do this job."
 msgstr ""
 
-#: installSources.py:44
+#: installSources.py:52
 msgid "Added OpenCPN packages source"
 msgstr ""
 
-#: installSources.py:46
+#: installSources.py:54
 msgid "OpenCPN packages source already exists"
 msgstr ""
 
-#: installSources.py:51
+#: installSources.py:59
 msgid "Added XyGrib packages source"
 msgstr ""
 
-#: installSources.py:53
+#: installSources.py:61
 msgid "XyGrib packages source already exists"
 msgstr ""
 
-#: installSources.py:58
+#: installSources.py:66
 msgid "Added OpenPlotter packages source"
 msgstr ""
 
-#: installSources.py:60
+#: installSources.py:68
 msgid "OpenPlotter packages source already exists"
 msgstr ""
 
-#: installSources.py:66
+#: installSources.py:74
 msgid "Added OpenPlotter beta packages source"
 msgstr ""
 
-#: installSources.py:68
+#: installSources.py:76
 msgid "OpenPlotter beta packages source already exists"
 msgstr ""
 
-#: installSources.py:73
+#: installSources.py:81
 msgid "Added InfluxDB packages source"
 msgstr ""
 
-#: installSources.py:75
+#: installSources.py:83
 msgid "InfluxDB packages source already exists"
 msgstr ""
 
-#: installSources.py:80
+#: installSources.py:88
 msgid "Added Grafana packages source"
 msgstr ""
 
-#: installSources.py:82
+#: installSources.py:90
 msgid "Grafana packages source already exists"
 msgstr ""
 
-#: installSources.py:87
+#: installSources.py:99
 msgid "Added Node.js 10 packages source"
 msgstr ""
 
-#: installSources.py:89
+#: installSources.py:101
 msgid "Node.js 10 packages source already exists"
 msgstr ""
 
-#: installSources.py:117 settingsPreUninstall.py:32
+#: installSources.py:129 settingsPreUninstall.py:32
 msgid "FAILED: "
 msgstr ""
 
