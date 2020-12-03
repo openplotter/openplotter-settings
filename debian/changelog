@@ -1,5 +1,6 @@
-openplotter-settings (2.6.0-stable) bionic; urgency=medium
+openplotter-settings (2.6.2-stable) bionic; urgency=medium
 
+  * Remove password request for sudoers
   * Fix errors in Ubuntu for Raspberyy
   * Fix errors in Linux Mint
   * Add Linux codenames management (Debian, Ubuntu, Mint)
