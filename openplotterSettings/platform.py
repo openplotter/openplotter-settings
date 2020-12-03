@@ -34,13 +34,20 @@ class Platform:
 				if row: self.RELEASE_DATA[row[0]] = row[1]
 
 		try:
+			if self.RELEASE_DATA['ID'] == 'raspbian': self.admin = 'sudo'
+			else:
+				try: 
+					subprocess.check_output(['sudo', '-n', 'echo', 'x'])
+					self.admin = 'sudo'
+				except: self.admin = 'pkexec'
+		except Exception as e: print('Error getting user permissions: '+str(e))
+
+		try:
 			modelfile = open('/sys/firmware/devicetree/base/model', 'r', 2000)
 			rpimodel = modelfile.read()
 			modelfile.close()
-			if 'Raspberry' in rpimodel: 
-				self.isRPI = True
-				self.admin = 'sudo'
-		except: pass
+			if 'Raspberry' in rpimodel: self.isRPI = True
+		except Exception as e: print('Error getting raspberry model: '+str(e))
 
 		try: 
 			service = '/etc/systemd/system/signalk.service'
@@ -55,7 +62,7 @@ class Platform:
 					if 'WorkingDirectory=' in line:
 						lineList = line.split('=')
 						self.skDir = lineList[1].rstrip()
-		except: pass
+		except Exception as e: print('Error getting signal k settings: '+str(e))
 
 	def isInstalled(self,package):
 		installed = False
