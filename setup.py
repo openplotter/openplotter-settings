@@ -26,7 +26,7 @@ setup (
 	author="Sailoog",
 	author_email='info@sailoog.com',
 	url='https://github.com/openplotter/openplotter-settings',
-        install_requires=['wxgtk4.0','pyudev','ujson'],
+        install_requires=['wxPython','pyudev','ujson'],
 	packages=['openplotterSettings'],
 	classifiers = ['Natural Language :: English',
 	'Operating System :: POSIX :: Linux',
