@@ -232,7 +232,7 @@ class AppsList:
 		'package': 'openplotter-signalk-installer',
 		'preUninstall': platform2.admin+' signalkPreUninstall',
 		'uninstall': 'openplotter-signalk-installer',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu','https://deb.nodesource.com/node_10.x'],
+		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
 		'dev': 'no',
 		'entryPoint': 'openplotter-signalk-installer',
 		'postInstall': platform2.admin+' signalkPostInstall',

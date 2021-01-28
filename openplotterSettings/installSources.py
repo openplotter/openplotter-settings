@@ -94,12 +94,16 @@ def main():
 		elif RELEASE_DATA['ID'] == 'linuxmint': codename_node = codename_ubuntu
 		else: codename_node = codename_debian
 
-		deb = 'deb https://deb.nodesource.com/node_10.x '+codename_node+' main\ndeb-src https://deb.nodesource.com/node_10.x '+codename_node+' main'
-		if not 'https://deb.nodesource.com/node_10.x '+codename_node in sources:
-			if not deb in fileData: fileDataList.append(deb)
-			print(_('Added Node.js 10 packages source'))
-		else: 
-			print(_('Node.js 10 packages source already exists'))
+		nodejs = subprocess.check_output('node -v', shell=True).decode(sys.stdin.encoding)
+		if nodejs[0:3] in ['v10','v12','v14']:
+			pass
+		else:
+			deb = 'deb https://deb.nodesource.com/node_10.x '+codename_node+' main\ndeb-src https://deb.nodesource.com/node_10.x '+codename_node+' main'
+			if not 'https://deb.nodesource.com/node_10.x '+codename_node in sources:
+				if not deb in fileData: fileDataList.append(deb)
+				print(_('Added Node.js 10 packages source'))
+			else: 
+				print(_('Node.js 10 packages source already exists'))
 
 		removeList = []
 		removeList.append('deb https://www.free-x.de/debian buster main contrib non-free')

@@ -1,3 +1,9 @@
+openplotter-settings (2.6.3-stable) bionic; urgency=medium
+
+  * Remove force load of nodejs v10 if nodejs is installed v10, v12, v14
+
+ -- Sailoog <info@sailoog.com>  Thu, 28 Jan 2021 16:35:02 +0100
+
 openplotter-settings (2.6.2-stable) bionic; urgency=medium
 
   * Remove password request for sudoers
