@@ -101,6 +101,7 @@ class GpioMap(wx.Dialog):
 		self.conf = Conf()
 		self.allowed = allowed
 		self.edit = edit
+		self.selected = False
 		self.currentdir = os.path.dirname(os.path.abspath(__file__))
 		self.currentLanguage = self.conf.get('GENERAL', 'lang')
 		self.language = Language(self.currentdir,'openplotter-settings',self.currentLanguage)

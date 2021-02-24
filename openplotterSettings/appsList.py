@@ -100,7 +100,7 @@ class AppsList:
 
 		app = {
 		'name': 'GPIO',
-		'platform': 'rpi',
+		'platform': 'both',
 		'package': 'openplotter-gpio',
 		'preUninstall': platform2.admin+' gpioPreUninstall',
 		'uninstall': 'openplotter-gpio',
