@@ -97,10 +97,11 @@ class Gpio:
 #################################################
 
 class GpioMap(wx.Dialog):
-	def __init__(self, allowed='0', edit='0'):
+	def __init__(self, allowed='0', edit='0', remote='0'):
 		self.conf = Conf()
 		self.allowed = allowed
 		self.edit = edit
+		self.remote = remote
 		self.selected = False
 		self.currentdir = os.path.dirname(os.path.abspath(__file__))
 		self.currentLanguage = self.conf.get('GENERAL', 'lang')
@@ -162,9 +163,9 @@ class GpioMap(wx.Dialog):
 		if self.allowed != '0':
 			cancelBtn = wx.Button(panel, wx.ID_CANCEL)
 			self.okBtn = wx.Button(panel, wx.ID_OK)
-
-		refresh =wx.Button(panel, label=_('Refresh'))
-		refresh.Bind(wx.EVT_BUTTON, self.refresh)
+		if self.remote == '0':
+			refresh =wx.Button(panel, label=_('Refresh'))
+			refresh.Bind(wx.EVT_BUTTON, self.refresh)
 
 		left = wx.BoxSizer(wx.VERTICAL)
 		left.AddSpacer(6)
@@ -233,7 +234,8 @@ class GpioMap(wx.Dialog):
 
 		right2 = wx.BoxSizer(wx.VERTICAL)
 		right2.Add(self.logger, 1, wx.ALL | wx.EXPAND, 5)
-		right2.Add(refresh, 0, wx.ALL | wx.EXPAND, 5)
+		if self.remote == '0':
+			right2.Add(refresh, 0, wx.ALL | wx.EXPAND, 5)
 		if self.allowed != '0':
 			right2.Add(self.okBtn, 0, wx.ALL | wx.EXPAND, 5)
 			right2.Add(cancelBtn, 0, wx.ALL | wx.EXPAND, 5)
@@ -250,7 +252,7 @@ class GpioMap(wx.Dialog):
 
 	def refresh(self,e=0):
 		self.gpio = Gpio()
-		self.gpio.addUsedGpios()
+		if self.remote == '0': self.gpio.addUsedGpios()
 		self.gpioMap = self.gpio.gpioMap
 		self.logger.Clear()
 
@@ -286,6 +288,12 @@ class GpioMap(wx.Dialog):
 		pin = self.gpioMap[selected.GetId()-1]
 		self.logger.Clear()
 		self.logger.BeginTextColour((55, 55, 55))
+		self.logger.BeginBold()
+		self.logger.WriteText(_('Host'))
+		self.logger.EndBold()
+		if self.remote == '0': self.logger.WriteText(': localhost')
+		else: self.logger.WriteText(': '+self.remote)
+		self.logger.Newline()		
 		self.logger.BeginBold()
 		self.logger.WriteText(_('Physical pin'))
 		self.logger.EndBold()
