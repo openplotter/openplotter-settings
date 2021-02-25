@@ -227,22 +227,6 @@ class AppsList:
 		self.appsDict.append(app)
 
 		app = {
-		'name': _('Signal K Installer'),
-		'platform': 'both',
-		'package': 'openplotter-signalk-installer',
-		'preUninstall': platform2.admin+' signalkPreUninstall',
-		'uninstall': 'openplotter-signalk-installer',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu','https://deb.nodesource.com/node_10.x'],
-		'dev': 'no',
-		'entryPoint': 'openplotter-signalk-installer',
-		'postInstall': platform2.admin+' signalkPostInstall',
-		'reboot': 'no',
-		'module': 'openplotterSignalkInstaller',
-		'conf': 'signalk'
-		}
-		self.appsDict.append(app)
-
-		app = {
 		'name': 'XyGrib',
 		'platform': 'both',
 		'package': 'xygrib',
@@ -255,6 +239,38 @@ class AppsList:
 		'reboot': 'no',
 		'module': '',
 		'conf': ''
+		}
+		self.appsDict.append(app)
+
+		app = {
+		'name': _('AvNav Installer'),
+		'platform': 'both',
+		'package': 'openplotter-avnav',
+		'preUninstall': platform2.admin+' avPreUninstall',
+		'uninstall': 'openplotter-avnav',
+		'sources': ['https://www.free-x.de/deb4op'],
+		'dev': 'no',
+		'entryPoint': 'openplotter-avnav',
+		'postInstall': platform2.admin+' avPostInstall',
+		'reboot': 'no',
+		'module': 'openplotterAvnav',
+		'conf': 'avnav'
+		}
+		self.appsDict.append(app)
+		
+		app = {
+		'name': _('Signal K Installer'),
+		'platform': 'both',
+		'package': 'openplotter-signalk-installer',
+		'preUninstall': platform2.admin+' signalkPreUninstall',
+		'uninstall': 'openplotter-signalk-installer',
+		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu','https://deb.nodesource.com/node_10.x'],
+		'dev': 'no',
+		'entryPoint': 'openplotter-signalk-installer',
+		'postInstall': platform2.admin+' signalkPostInstall',
+		'reboot': 'no',
+		'module': 'openplotterSignalkInstaller',
+		'conf': 'signalk'
 		}
 		self.appsDict.append(app)
 		
