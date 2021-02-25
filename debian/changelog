@@ -1,3 +1,9 @@
+openplotter-settings (2.6.3-beta) bionic; urgency=medium
+
+  * Beta
+
+ -- Sailoog <info@sailoog.com>  Thu, 25 Feb 2021 19:54:24 +0100
+
 openplotter-settings (2.6.2-stable) bionic; urgency=medium
 
   * Remove password request for sudoers
