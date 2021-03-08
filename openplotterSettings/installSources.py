@@ -35,7 +35,8 @@ def main():
 		if RELEASE_DATA['VERSION_CODENAME'] == 'focal': codename_ubuntu = 'focal' #ubuntu
 		if RELEASE_DATA['VERSION_CODENAME'] == 'groovy': codename_ubuntu = 'focal' #ubuntu for rasberry
 		if RELEASE_DATA['VERSION_CODENAME'] == 'ulyana': codename_ubuntu = 'focal' #mint
-
+		if RELEASE_DATA['VERSION_CODENAME'] == 'ulyssa': codename_ubuntu = 'focal' #mint
+		
 		sources = subprocess.check_output('apt-cache policy', shell=True).decode(sys.stdin.encoding)
 
 		fileData = ''
