@@ -1,3 +1,14 @@
+openplotter-settings (2.7.0-stable) bionic; urgency=medium
+
+  * Improve depencies format
+  * make openplotter-gpio app for all DEbian derivatives
+  * add remote GPIOs
+  * add AvNav app
+  * add support for linux mint ulyssa
+  * update translations
+
+ -- Sailoog <sailoog@sailoog.com>  Mon, 08 Mar 2021 20:09:54 +0100
+
 openplotter-settings (2.6.3-beta) bionic; urgency=medium
 
   * Beta
