@@ -34,6 +34,7 @@ def main():
 		RELEASE_DATA = platform2.RELEASE_DATA
 		if RELEASE_DATA['VERSION_CODENAME'] == 'focal': codename_ubuntu = 'focal' #ubuntu
 		if RELEASE_DATA['VERSION_CODENAME'] == 'groovy': codename_ubuntu = 'focal' #ubuntu for rasberry
+		if RELEASE_DATA['VERSION_CODENAME'] == 'hirsute': codename_ubuntu = 'focal' #ubuntu for rasberry
 		if RELEASE_DATA['VERSION_CODENAME'] == 'ulyana': codename_ubuntu = 'focal' #mint
 		if RELEASE_DATA['VERSION_CODENAME'] == 'ulyssa': codename_ubuntu = 'focal' #mint
 		
