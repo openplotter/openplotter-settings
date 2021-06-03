@@ -23,6 +23,8 @@ class Ports:
 	def __init__(self):
 		self.conf = Conf()
 		self.currentLanguage = self.conf.get('GENERAL', 'lang')
+		if self.conf.get('GENERAL', 'debug') == 'yes': self.debug = True
+		else: self.debug = False
 
 	def getUsedPorts(self):
 		usedPorts=[]
@@ -40,7 +42,8 @@ class Ports:
 						if targetPorts:
 							for i in targetPorts:
 								usedPorts.append(i)
-				except Exception as e: print(str(e))
+				except Exception as e: 
+					if self.debug: print(str(e))
 		return usedPorts
 
 	def conflicts(self):

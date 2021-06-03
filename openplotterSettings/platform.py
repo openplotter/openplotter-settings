@@ -28,6 +28,9 @@ class Platform:
 		self.conf = Conf()
 		self.RELEASE_DATA = {}
 
+		if self.conf.get('GENERAL', 'debug') == 'yes': self.debug = True
+		else: self.debug = False
+
 		with open("/etc/os-release") as f:
 			reader = csv.reader(f, delimiter="=")
 			for row in reader:
@@ -40,14 +43,16 @@ class Platform:
 					subprocess.check_output(['sudo', '-n', 'echo', 'x'])
 					self.admin = 'sudo'
 				except: self.admin = 'pkexec'
-		except Exception as e: print('Error getting user permissions: '+str(e))
+		except Exception as e: 
+			if self.debug: print('Error getting user permissions: '+str(e))
 
 		try:
 			modelfile = open('/sys/firmware/devicetree/base/model', 'r', 2000)
 			rpimodel = modelfile.read()
 			modelfile.close()
 			if 'Raspberry' in rpimodel: self.isRPI = True
-		except Exception as e: print('Error getting raspberry model: '+str(e))
+		except Exception as e: 
+			if self.debug: print('Error getting raspberry model: '+str(e))
 
 		try: 
 			service = '/etc/systemd/system/signalk.service'
@@ -62,7 +67,8 @@ class Platform:
 					if 'WorkingDirectory=' in line:
 						lineList = line.split('=')
 						self.skDir = lineList[1].rstrip()
-		except Exception as e: print('Error getting signal k settings: '+str(e))
+		except Exception as e: 
+			if self.debug: print('Error getting signal k settings: '+str(e))
 
 	def isInstalled(self,package):
 		installed = False

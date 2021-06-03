@@ -105,7 +105,7 @@ class MyFrame(wx.Frame):
 					self.warnings_flag = True
 					self.logger.Newline()
 					self.logger.BeginTextColour((130, 0, 0))
-					self.logger.WriteText(self.logger_data['red'])
+					self.logger.WriteText(' ↳'+self.logger_data['red'])
 					self.logger.EndTextColour()
 				self.logger.Newline()
 				self.logger.ShowPosition(self.logger.GetLastPosition())
@@ -142,6 +142,22 @@ class MyFrame(wx.Frame):
 		else:
 			self.add_logger_data({'green':_('enabled'),'black':'','red':''})
 
+		self.add_logger_data(_('Checking debugging mode...'))
+		debug = self.conf.get('GENERAL', 'debug')
+		if debug == 'yes': 
+			self.add_logger_data({'green':'','black':'','red':_('enabled')})
+		else:
+			self.add_logger_data({'green':_('disabled'),'black':'','red':''})
+
+		logMaxSize = self.conf.get('GENERAL', 'logMaxSize')
+		if logMaxSize:
+			self.add_logger_data(_('Checking system log file size...'))
+			try:
+				mb = os.path.getsize("/var/log/syslog")/1e+6
+				if mb >= int(logMaxSize): self.add_logger_data({'green':'','black':'','red':_('System log file size: ')+str(round(mb,2))+' MB'})
+				else: self.add_logger_data({'green': _('System log file size: ')+str(round(mb,2))+' MB','black':'','red':''})
+			except Exception as e: self.add_logger_data({'green':'','black':'','red':str(e)})
+
 		if self.isRPI:
 			self.add_logger_data(_('Checking user "pi" password...'))
 			out = subprocess.check_output([self.platform.admin, '-n', 'grep', '-E', '^pi:', '/etc/shadow']).decode(sys.stdin.encoding)
@@ -151,7 +167,7 @@ class MyFrame(wx.Frame):
 			salt = tmp[2]
 			passw_b = subprocess.check_output(['mkpasswd', '-msha-512', 'raspberry', salt]).decode(sys.stdin.encoding)
 			if passw_a.rstrip() == passw_b.rstrip():
-				self.add_logger_data({'green':'','black':'','red':_('Security warning: You are using the default password for "pi" user.\nPlease change password in Menu > Preferences > Raspberry Pi Configuration.')})
+				self.add_logger_data({'green':'','black':'','red':_('Security warning: You are using the default password for "pi" user.')+'\n    '+_('Please change password in Menu > Preferences > Raspberry Pi Configuration.')})
 			else: self.add_logger_data({'green':_('changed'),'black':'','red':''})
 
 			self.add_logger_data(_('Checking screensaver state...'))
@@ -190,7 +206,8 @@ class MyFrame(wx.Frame):
 				try:
 					startup = importlib.import_module(name+'.startup')
 					if startup: self.processApp(startup)
-				except Exception as e: print(str(e))
+				except Exception as e: 
+					if debug == 'yes': print(str(e))
 		
 		try:
 			self.add_logger_data(_('Checking serial connections conflicts...'))
@@ -199,10 +216,10 @@ class MyFrame(wx.Frame):
 			if conflicts:
 				red = _('There are conflicts between the following serial connections:')
 				for i in conflicts: 
-					red += '\n'+i
+					red += '\n    '+i
 				self.add_logger_data({'green':'','black':'','red':red})
 			else: self.add_logger_data({'green':_('no conflicts'),'black':'','red':''})
-		except Exception as e: self.add_logger_data({'green':'','black':'','red':print(str(e))})
+		except Exception as e: self.add_logger_data({'green':'','black':'','red':str(e)})
 
 		try:
 			self.add_logger_data(_('Checking network connections conflicts...'))
@@ -211,10 +228,10 @@ class MyFrame(wx.Frame):
 			if conflicts:
 				red = _('There are conflicts between the following server connections:')
 				for i in conflicts: 
-					red += '\n'+i['description']+' ('+i['mode']+'): '+i['type']+' '+i['address']+':'+i['port']
+					red += '\n    '+i['description']+' ('+i['mode']+'): '+i['type']+' '+i['address']+':'+i['port']
 				self.add_logger_data({'green':'','black':'','red':red})
 			else: self.add_logger_data({'green':_('no conflicts'),'black':'','red':''})
-		except Exception as e: self.add_logger_data({'green':'','black':'','red':print(str(e))})
+		except Exception as e: self.add_logger_data({'green':'','black':'','red':str(e)})
 
 		if self.isRPI:
 			try:
@@ -230,15 +247,15 @@ class MyFrame(wx.Frame):
 						for ii in i['usedBy']:
 							if line: line += ', '
 							line += ii['app']+' - '+ii['id']
-						red += '\n'+line
+						red += '\n    '+line
 				if red: self.add_logger_data({'green':'','black':'','red':red})
 				else: self.add_logger_data({'green':_('no conflicts'),'black':'','red':''})
-			except Exception as e: self.add_logger_data({'green':'','black':'','red':print(str(e))})
+			except Exception as e: self.add_logger_data({'green':'','black':'','red':str(e)})
 
 		try:
 			play = self.conf.get('GENERAL', 'play')
 			if play: subprocess.Popen(['cvlc', '--play-and-exit', play])
-		except Exception as e: self.add_logger_data({'green':'','black':'','red':print(str(e))})
+		except Exception as e: self.add_logger_data({'green':'','black':'','red':str(e)})
 
 		if self.mode == 'start': self.add_logger_data(_('STARTUP FINISHED'))
 		else: self.add_logger_data(_('CHECK SYSTEM FINISHED'))

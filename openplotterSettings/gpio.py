@@ -27,6 +27,8 @@ class Gpio:
 		self.currentdir = os.path.dirname(os.path.abspath(__file__))
 		self.currentLanguage = self.conf.get('GENERAL', 'lang')
 		self.language = Language(self.currentdir,'openplotter-settings',self.currentLanguage)
+		if self.conf.get('GENERAL', 'debug') == 'yes': self.debug = True
+		else: self.debug = False
 
 		self.gpioMap = [
 			{'physical':'1', 'BCM': '3v3', 'feature': _('Power'), 'shared': True, 'usedBy': []},
@@ -87,7 +89,8 @@ class Gpio:
 						if targetGpios:
 							for i in targetGpios:
 								UsedGpios.append(i)
-				except Exception as e: print(str(e))
+				except Exception as e: 
+					if self.debug: print(str(e))
 
 		for i in UsedGpios:
 			for ii in self.gpioMap:

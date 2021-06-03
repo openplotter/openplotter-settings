@@ -63,22 +63,26 @@ class MyFrame(wx.Frame):
 		self.apps = wx.Panel(self.notebook)
 		self.genSettings = wx.Panel(self.notebook)
 		self.raspSettings = wx.Panel(self.notebook)
+		self.log = wx.Panel(self.notebook)
 		self.output = wx.Panel(self.notebook)
 		self.notebook.AddPage(self.apps, _('OpenPlotter Apps'))
 		self.notebook.AddPage(self.genSettings, _('General Settings'))
 		self.notebook.AddPage(self.raspSettings, _('Raspberry Settings'))
+		self.notebook.AddPage(self.log, _('System log'))
 		self.notebook.AddPage(self.output, '')
 
 		self.il = wx.ImageList(24, 24)
 		img0 = self.il.Add(wx.Bitmap(self.currentdir+"/data/openplotter-24.png", wx.BITMAP_TYPE_PNG))
 		img1 = self.il.Add(wx.Bitmap(self.currentdir+"/data/debian.png", wx.BITMAP_TYPE_PNG))
 		img2 = self.il.Add(wx.Bitmap(self.currentdir+"/data/rpi.png", wx.BITMAP_TYPE_PNG))
-		img3 = self.il.Add(wx.Bitmap(self.currentdir+"/data/output.png", wx.BITMAP_TYPE_PNG))
+		img3 = self.il.Add(wx.Bitmap(self.currentdir+"/data/log.png", wx.BITMAP_TYPE_PNG))
+		img4 = self.il.Add(wx.Bitmap(self.currentdir+"/data/output.png", wx.BITMAP_TYPE_PNG))
 		self.notebook.AssignImageList(self.il)
 		self.notebook.SetPageImage(0, img0)
 		self.notebook.SetPageImage(1, img1)
 		self.notebook.SetPageImage(2, img2)
 		self.notebook.SetPageImage(3, img3)
+		self.notebook.SetPageImage(4, img4)
 
 		vbox = wx.BoxSizer(wx.VERTICAL)
 		vbox.Add(self.toolbar1, 0, wx.EXPAND)
@@ -88,6 +92,7 @@ class MyFrame(wx.Frame):
 		self.pageGeneral()
 		self.pageRpi()
 		self.pageOutput()
+		self.pageLog()
 		self.pageApps()
 		self.onListAppsDeselected()
 
@@ -129,6 +134,8 @@ class MyFrame(wx.Frame):
 			if name == i[0]: short = i[1]
 		self.conf.set('GENERAL', 'lang', short)
 		wx.MessageBox(_('Close and open again the window to see changes.'), _('Info'), wx.OK | wx.ICON_INFORMATION)
+
+	###################################################################################
 
 	def pageGeneral(self):
 		self.toolbar3 = wx.ToolBar(self.genSettings, style=wx.TB_TEXT)
@@ -222,6 +229,170 @@ class MyFrame(wx.Frame):
 		else:
 			self.conf.set('GENERAL', 'maximize', '0')
 			self.ShowStatusBarGREEN(_('Disabled maximized OpenPlotter apps'))
+
+	###################################################################################
+
+	def pageLog(self):
+		self.toolbar7 = wx.ToolBar(self.log, style=wx.TB_TEXT)
+		toolDebug = self.toolbar7.AddCheckTool(701, _('Debugging mode'), wx.Bitmap(self.currentdir+"/data/bug.png"))
+		self.Bind(wx.EVT_TOOL, self.OnToolDebug, toolDebug)
+		self.toolbar7.AddSeparator()
+		toolSeeAll= self.toolbar7.AddTool(702, _('See all'), wx.Bitmap(self.currentdir+"/data/logsee.png"))
+		self.Bind(wx.EVT_TOOL, self.OnToolSeeAll, toolSeeAll)
+		toolSeeCat = self.toolbar7.AddTool(703, _('See category'), wx.Bitmap(self.currentdir+"/data/logcategory.png"))
+		self.Bind(wx.EVT_TOOL, self.OnToolSeeCat, toolSeeCat)
+		toolLogSearch = self.toolbar7.AddTool(705, _('Search'), wx.Bitmap(self.currentdir+"/data/logsearch.png"))
+		self.Bind(wx.EVT_TOOL, self.OnToolLogSearch, toolLogSearch)
+		self.toolbar7.AddSeparator()
+		toolDeleteLogs = self.toolbar7.AddTool(704, _('Delete all logs'), wx.Bitmap(self.currentdir+"/data/logremove.png"))
+		self.Bind(wx.EVT_TOOL, self.OnToolDeleteLogs, toolDeleteLogs)
+
+		logMaxSizeLabel = wx.StaticText(self.log, label=_('Notify if the system log file is larger than: '))
+
+		self.logMaxSize = wx.SpinCtrl(self.log, min=1, max=1000)
+		logMaxSize = self.conf.get('GENERAL', 'logMaxSize')
+		if not logMaxSize: 
+			logMaxSize2 = 100
+			self.conf.set('GENERAL', 'logMaxSize', str(logMaxSize2))
+		else:
+			try: logMaxSize2 = int(logMaxSize)
+			except: 
+				logMaxSize2 = 100
+				self.conf.set('GENERAL', 'logMaxSize', str(logMaxSize2))
+		self.logMaxSize.SetValue(logMaxSize2)
+
+		logMaxSizeLabel2 = wx.StaticText(self.log, label='MB')
+
+		saveLogMaxSize = wx.Button(self.log, label=_('Save'))
+		saveLogMaxSize.Bind(wx.EVT_BUTTON, self.onSaveLogMaxSize)
+
+		h1 = wx.BoxSizer(wx.HORIZONTAL)
+		h1.AddSpacer(5)
+		h1.Add(logMaxSizeLabel, 0, wx.UP| wx.EXPAND, 10)
+		h1.Add(self.logMaxSize, 0, wx.ALL | wx.EXPAND, 5)
+		h1.AddSpacer(5)
+		h1.Add(logMaxSizeLabel2, 0, wx.UP | wx.EXPAND, 10)
+		h1.AddSpacer(5)
+		h1.Add(saveLogMaxSize, 0, wx.ALL | wx.EXPAND, 5)
+
+		sizer = wx.BoxSizer(wx.VERTICAL)
+		sizer.Add(self.toolbar7, 0, wx.EXPAND, 0)
+		sizer.Add(h1, 0, wx.ALL | wx.EXPAND, 10)
+		self.log.SetSizer(sizer)
+
+		if self.conf.get('GENERAL', 'debug') == 'yes': self.toolbar7.ToggleTool(701,True)
+
+	def OnToolDebug(self,e):
+		if self.toolbar7.GetToolState(701):
+			self.conf.set('GENERAL', 'debug', 'yes')
+			self.ShowStatusBarGREEN(_('Debugging mode enabled. Additional info about errors in OpenPlotter apps will be saved in the system log'))
+		else:
+			self.conf.set('GENERAL', 'debug', 'no')
+			self.ShowStatusBarGREEN(_('Debugging mode disabled'))
+
+	def OnToolSeeAll(self,e):
+		self.ShowStatusBarYELLOW(_('Reading log, please wait...'))
+		self.logger.Clear()
+		self.notebook.ChangeSelection(4)
+		try:
+			path = '/var/log/syslog'
+			data = open(path,'r')
+			syslog = data.read()
+			self.logger.WriteText(syslog)
+			self.ShowStatusBarGREEN(_('Done'))
+			data.close()
+		except Exception as e: 
+			self.logger.WriteText('Error reading /var/log/syslog: '+str(e))
+			self.ShowStatusBarRED(_('Error reading  log'))
+		self.logger.ShowPosition(self.logger.GetLastPosition())
+
+	def OnToolSeeCat(self,e):
+		self.ShowStatusBarYELLOW(_('Reading log, please wait...'))
+		self.logger.Clear()
+		self.notebook.ChangeSelection(4)
+		categories = []
+		try:
+			path = '/var/log/syslog'
+			data = open(path,'r')
+			while True:
+				line = data.readline()
+				if not line: break
+				items = line.split(' ')
+				if not items[5] in categories: categories.append(items[5])
+			data.close()
+			categories.sort()
+			selected = ''
+			out = ''
+			dlg = selectCategory(categories)
+			res = dlg.ShowModal()
+			if res == wx.ID_OK: selected = dlg.categories.GetValue()
+			dlg.Destroy()
+			if selected:
+				data = open(path,'r')
+				while True:
+					line = data.readline()
+					if not line: break
+					items = line.split(' ')
+					if items[5] == selected: out += line
+				data.close()
+			self.logger.WriteText(out)
+			self.ShowStatusBarGREEN(_('Done'))
+		except Exception as e: 
+			self.logger.WriteText('Error reading /var/log/syslog: '+str(e))
+			self.ShowStatusBarRED(_('Error reading log'))
+		self.logger.ShowPosition(self.logger.GetLastPosition())
+
+	def OnToolLogSearch(self,e):
+		try:
+			search = ''
+			out = ''
+			dlg = logSearch()
+			res = dlg.ShowModal()
+			if res == wx.ID_OK: search = dlg.search.GetValue()
+			dlg.Destroy()
+			if search:
+				self.ShowStatusBarYELLOW(_('Reading log, please wait...'))
+				self.logger.Clear()
+				self.notebook.ChangeSelection(4)
+				path = '/var/log/syslog'
+				data = open(path,'r')
+				while True:
+					line = data.readline()
+					if not line: break
+					if search in line: out += line
+				data.close()
+				self.logger.WriteText(out)
+				self.ShowStatusBarGREEN(_('Done'))
+		except Exception as e: 
+			self.logger.WriteText('Error reading /var/log/syslog: '+str(e))
+			self.ShowStatusBarRED(_('Error reading log'))
+		self.logger.ShowPosition(self.logger.GetLastPosition())
+
+	def OnToolDeleteLogs(self,e):
+		try:
+			msg = _('Current and archived system log files will be deleted. A new system log file will be created after reboot.\n\n Are you sure?')
+			dlg = wx.MessageDialog(None, msg, _('Question'), wx.YES_NO | wx.NO_DEFAULT | wx.ICON_EXCLAMATION)
+			if dlg.ShowModal() == wx.ID_YES: 
+				os.system(self.platform.admin+' rm -f /var/log/syslog*')
+				self.ShowStatusBarGREEN(_('Current and archived system log files have been deleted'))
+			dlg.Destroy()
+		except Exception as e: self.ShowStatusBarRED('Error deleting log files: '+str(e))
+
+	def onSaveLogMaxSize(self,e):
+		logMaxSize = self.logMaxSize.GetValue()
+		if not logMaxSize: 
+			logMaxSize2 = 100
+			self.conf.set('GENERAL', 'logMaxSize', str(logMaxSize2))
+		else:
+			try: 
+				logMaxSize2 = int(logMaxSize)
+				self.conf.set('GENERAL', 'logMaxSize', str(logMaxSize2))
+				self.ShowStatusBarGREEN(_('Done'))
+			except: 
+				logMaxSize2 = 100
+				self.conf.set('GENERAL', 'logMaxSize', str(logMaxSize2))
+
+	###################################################################################
 
 	def pageRpi(self):
 		self.toolbar5 = wx.ToolBar(self.raspSettings, style=wx.TB_TEXT)
@@ -392,7 +563,7 @@ class MyFrame(wx.Frame):
 
 	def OnToolUpdate(self, event=0):
 		self.logger.Clear()
-		self.notebook.ChangeSelection(3)
+		self.notebook.ChangeSelection(4)
 		command = self.platform.admin+' apt update'
 		popen = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
 		for line in popen.stdout:
@@ -405,7 +576,7 @@ class MyFrame(wx.Frame):
 	def OnToolSources(self, e):
 		self.ShowStatusBarYELLOW(_('Adding packages sources, please wait... '))
 		self.logger.Clear()
-		self.notebook.ChangeSelection(3)
+		self.notebook.ChangeSelection(4)
 		command = self.platform.admin+' settingsSourcesInstall'
 		popen = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
 		for line in popen.stdout:
@@ -429,7 +600,7 @@ class MyFrame(wx.Frame):
 				dlg = wx.MessageDialog(None, msg, _('Question'), wx.YES_NO | wx.NO_DEFAULT | wx.ICON_EXCLAMATION)
 				if dlg.ShowModal() == wx.ID_YES:
 					self.logger.Clear()
-					self.notebook.ChangeSelection(3)
+					self.notebook.ChangeSelection(4)
 					command = self.platform.admin+' apt install -y '+package
 					popen = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
 					for line in popen.stdout:
@@ -467,7 +638,7 @@ class MyFrame(wx.Frame):
 		dlg = wx.MessageDialog(None, msg, _('Question'), wx.YES_NO | wx.NO_DEFAULT | wx.ICON_EXCLAMATION)
 		if dlg.ShowModal() == wx.ID_YES:
 			self.logger.Clear()
-			self.notebook.ChangeSelection(3)
+			self.notebook.ChangeSelection(4)
 			command = self.platform.admin+' apt install -y '+package
 			popen = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
 			for line in popen.stdout:
@@ -503,7 +674,7 @@ class MyFrame(wx.Frame):
 		dlg = wx.MessageDialog(None, msg, _('Question'), wx.YES_NO | wx.NO_DEFAULT | wx.ICON_EXCLAMATION)
 		if dlg.ShowModal() == wx.ID_YES:
 			self.logger.Clear()
-			self.notebook.ChangeSelection(3)
+			self.notebook.ChangeSelection(4)
 			preUninstall = apps[index]['preUninstall']
 			if preUninstall:
 				popen = subprocess.Popen(preUninstall, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
@@ -540,7 +711,7 @@ class MyFrame(wx.Frame):
 		if index == -1: return
 		apps = list(reversed(self.appsDict))
 		self.logger.Clear()
-		self.notebook.ChangeSelection(3)
+		self.notebook.ChangeSelection(4)
 		command = 'apt changelog '+apps[index]['package']
 		popen = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
 		for line in popen.stdout:
@@ -623,14 +794,6 @@ class MyFrame(wx.Frame):
 		self.toolbar2.EnableTool(202,False)
 		self.toolbar2.EnableTool(203,False)
 		self.toolbar2.EnableTool(204,False)
-	
-	def pageOutput(self):
-		self.logger = rt.RichTextCtrl(self.output, style=wx.TE_MULTILINE|wx.TE_READONLY|wx.TE_DONTWRAP|wx.LC_SORT_ASCENDING)
-		self.logger.SetMargins((10,10))
-
-		sizer = wx.BoxSizer(wx.VERTICAL)
-		sizer.Add(self.logger, 1, wx.EXPAND, 0)
-		self.output.SetSizer(sizer)
 
 	def onListAppsSelected(self, e):
 		i = e.GetIndex()
@@ -650,6 +813,78 @@ class MyFrame(wx.Frame):
 		self.toolbar2.EnableTool(202,False)
 		self.toolbar2.EnableTool(203,False)
 		self.toolbar2.EnableTool(204,False)
+
+	###################################################################################
+
+	def pageOutput(self):
+		self.logger = rt.RichTextCtrl(self.output, style=wx.TE_MULTILINE|wx.TE_READONLY|wx.TE_DONTWRAP|wx.LC_SORT_ASCENDING)
+		self.logger.SetMargins((10,10))
+
+		sizer = wx.BoxSizer(wx.VERTICAL)
+		sizer.Add(self.logger, 1, wx.EXPAND, 0)
+		self.output.SetSizer(sizer)
+
+###################################################################################
+
+class selectCategory(wx.Dialog):
+
+	def __init__(self,categories):
+
+		wx.Dialog.__init__(self, None, title=_('Select system log category'), size=(500, 150))
+		self.SetFont(wx.Font(10, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
+		panel = wx.Panel(self)
+
+		self.categories = wx.ComboBox(panel, choices = categories, style=wx.CB_READONLY)
+
+		cancelBtn = wx.Button(panel, wx.ID_CANCEL)
+		okBtn = wx.Button(panel, wx.ID_OK)
+
+		actionbox = wx.BoxSizer(wx.HORIZONTAL)
+		actionbox.AddStretchSpacer(1)
+		actionbox.Add(cancelBtn, 0, wx.LEFT | wx.EXPAND, 10)
+		actionbox.Add(okBtn, 0, wx.LEFT | wx.EXPAND, 10)
+
+		vbox = wx.BoxSizer(wx.VERTICAL)
+		vbox.AddSpacer(10)
+		vbox.Add(self.categories, 0, wx.ALL| wx.EXPAND, 10)
+		vbox.AddStretchSpacer(1)
+		vbox.Add(actionbox, 0, wx.ALL | wx.EXPAND, 10)
+
+		panel.SetSizer(vbox)
+		self.panel = panel
+
+		self.Centre() 
+
+class logSearch(wx.Dialog):
+
+	def __init__(self):
+
+		wx.Dialog.__init__(self, None, title=_('Search in system log file'), size=(500, 150))
+		self.SetFont(wx.Font(10, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
+		panel = wx.Panel(self)
+
+		self.search = wx.TextCtrl(panel)
+
+		cancelBtn = wx.Button(panel, wx.ID_CANCEL)
+		okBtn = wx.Button(panel, wx.ID_OK)
+
+		actionbox = wx.BoxSizer(wx.HORIZONTAL)
+		actionbox.AddStretchSpacer(1)
+		actionbox.Add(cancelBtn, 0, wx.LEFT | wx.EXPAND, 10)
+		actionbox.Add(okBtn, 0, wx.LEFT | wx.EXPAND, 10)
+
+		vbox = wx.BoxSizer(wx.VERTICAL)
+		vbox.AddSpacer(10)
+		vbox.Add(self.search, 0, wx.ALL| wx.EXPAND, 10)
+		vbox.AddStretchSpacer(1)
+		vbox.Add(actionbox, 0, wx.ALL | wx.EXPAND, 10)
+
+		panel.SetSizer(vbox)
+		self.panel = panel
+
+		self.Centre() 
+
+###################################################################################
 
 def main():
 	app = wx.App()
