@@ -99,6 +99,22 @@ class AppsList:
 		self.appsDict.append(app)
 
 		app = {
+		'name': _('Notifications'),
+		'platform': 'both',
+		'package': 'openplotter-notifications',
+		'preUninstall': 'iotPreUninstall',
+		'uninstall': 'openplotter-notifications',
+		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'dev': 'no',
+		'entryPoint': 'openplotter-notifications',
+		'postInstall': platform2.admin+' notificationsPostInstall',
+		'reboot': 'no',
+		'module': 'openplotterNotifications',
+		'conf': 'notifications'
+		}
+		self.appsDict.append(app)
+
+		app = {
 		'name': 'GPIO',
 		'platform': 'rpi',
 		'package': 'openplotter-gpio',
