@@ -1,3 +1,13 @@
+openplotter-settings (2.8.0-stable) bionic; urgency=medium
+
+  * Make openplotter-gpio app only for raspberry
+  * Add openplotter-notifications app
+  * Add system log tools
+  * Add support for ubuntu hirsute for raspberry
+  * Update translations
+
+ -- Sailoog <info@sailoog.com>  Thu, 03 Jun 2021 19:08:53 +0200
+
 openplotter-settings (2.7.0-stable) bionic; urgency=medium
 
   * Improve depencies format
@@ -7,7 +17,7 @@ openplotter-settings (2.7.0-stable) bionic; urgency=medium
   * add support for linux mint ulyssa
   * update translations
 
- -- Sailoog <sailoog@sailoog.com>  Mon, 08 Mar 2021 20:09:54 +0100
+ -- Sailoog <info@sailoog.com>  Mon, 08 Mar 2021 20:09:54 +0100
 
 openplotter-settings (2.6.3-beta) bionic; urgency=medium
 
