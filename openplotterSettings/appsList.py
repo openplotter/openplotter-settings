@@ -102,7 +102,7 @@ class AppsList:
 		'name': _('Notifications'),
 		'platform': 'both',
 		'package': 'openplotter-notifications',
-		'preUninstall': 'iotPreUninstall',
+		'preUninstall': 'notificationsPreUninstall',
 		'uninstall': 'openplotter-notifications',
 		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
 		'dev': 'no',
