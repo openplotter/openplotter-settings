@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openplotter\n"
 "POT-Creation-Date: 2021-06-02 20:50+0200\n"
-"PO-Revision-Date: 2021-06-03 19:00+0200\n"
+"PO-Revision-Date: 2021-06-04 20:56+0200\n"
 "Last-Translator: \n"
 "Language-Team: Polish\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.3\n"
+"X-Generator: Poedit 2.3\n"
 "X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -26,7 +26,7 @@ msgstr "Filtr Signal K"
 
 #: appsList.py:102
 msgid "Notifications"
-msgstr ""
+msgstr "Powiadomienia"
 
 #: appsList.py:134
 msgid "I2C Sensors"
@@ -71,31 +71,31 @@ msgstr "Ustawienia"
 
 #: data/openplotter-check.desktop:3
 msgid "Check system"
-msgstr ""
+msgstr "Sprawdź system"
 
 #: data/openplotter-check.desktop:5
 msgid "openplotter-check"
-msgstr ""
+msgstr "sprawdzanie openplotter"
 
 #: data/openplotter-settings.desktop:5
 msgid "openplotter-settings"
-msgstr ""
+msgstr "ustawienia OpenPlotter"
 
 #: data/xygrib.desktop:4
 msgid "XyGrib GRIB file viewer"
-msgstr ""
+msgstr "Przeglądarka plików GRIB XyGrib"
 
 #: data/xygrib.desktop:5
 msgid "GRIB file viewer"
-msgstr ""
+msgstr "Przeglądarka plików GRIB"
 
 #: data/xygrib.desktop:6
 msgid "Meterological file viewer"
-msgstr ""
+msgstr "Przeglądarka plików meteorologicznych"
 
 #: data/xygrib.desktop:8
 msgid "xygrib.png"
-msgstr ""
+msgstr "xygrib.png"
 
 #: gpio.py:32 gpio.py:33 gpio.py:35 gpio.py:37 gpio.py:40 gpio.py:45 gpio.py:48
 #: gpio.py:51 gpio.py:56 gpio.py:61 gpio.py:65 gpio.py:70
@@ -245,7 +245,7 @@ msgstr "Ustawienia Raspberry Pi"
 
 #: openplotterSettings.py:71
 msgid "System log"
-msgstr ""
+msgstr "Dziennik systemu"
 
 #: openplotterSettings.py:136
 msgid "Close and open again the window to see changes."
@@ -318,44 +318,44 @@ msgstr "Komponenty OpenPlotter nie otworzą się zmaksymalizowane"
 
 #: openplotterSettings.py:237
 msgid "Debugging mode"
-msgstr ""
+msgstr "Tryb debugowania"
 
 #: openplotterSettings.py:240
 msgid "See all"
-msgstr ""
+msgstr "Pokaż wszystko"
 
 #: openplotterSettings.py:242
 msgid "See category"
-msgstr ""
+msgstr "Pokaż kategorię"
 
 #: openplotterSettings.py:244
 msgid "Search"
-msgstr ""
+msgstr "Wyszukaj"
 
 #: openplotterSettings.py:247
 msgid "Delete all logs"
-msgstr ""
+msgstr "Usuń wszystkie dzienniki systemowe"
 
 #: openplotterSettings.py:250
 msgid "Notify if the system log file is larger than: "
-msgstr ""
+msgstr "Powiadom jeśli plik dziennika systemu jest większy niż: "
 
 #: openplotterSettings.py:266
 msgid "Save"
-msgstr ""
+msgstr "Zapisz"
 
 #: openplotterSettings.py:288
 msgid "Debugging mode enabled. Additional info about errors in OpenPlotter apps will be saved in the system log"
-msgstr ""
+msgstr "Tryb debugowania włączony. Dodatkowe informacje o błędach w aplikacjach OpenPlotter zostaną zapisane w dzienniku systemowym"
 
 #: openplotterSettings.py:291
 msgid "Debugging mode disabled"
-msgstr ""
+msgstr "Tryb debugowania wyłączony"
 
 #: openplotterSettings.py:294 openplotterSettings.py:310
 #: openplotterSettings.py:354
 msgid "Reading log, please wait..."
-msgstr ""
+msgstr "Czytanie dziennika systemowego, proszę czekać..."
 
 #: openplotterSettings.py:302 openplotterSettings.py:339
 #: openplotterSettings.py:365 openplotterSettings.py:390
@@ -365,11 +365,11 @@ msgstr "Gotowe"
 
 #: openplotterSettings.py:306
 msgid "Error reading  log"
-msgstr ""
+msgstr "Błąd odczytu dziennika"
 
 #: openplotterSettings.py:342 openplotterSettings.py:368
 msgid "Error reading log"
-msgstr ""
+msgstr "Błąd odczytu dziennika"
 
 #: openplotterSettings.py:373
 msgid ""
@@ -377,6 +377,9 @@ msgid ""
 "\n"
 " Are you sure?"
 msgstr ""
+"Aktualne i zarchiwizowane pliki dziennika systemu zostaną usunięte. Nowy plik dziennika systemu zostanie utworzony po ponownym uruchomieniu.\n"
+"\n"
+" Jesteś pewien?"
 
 #: openplotterSettings.py:374 openplotterSettings.py:600
 #: openplotterSettings.py:638 openplotterSettings.py:674
@@ -385,7 +388,7 @@ msgstr "Pytanie"
 
 #: openplotterSettings.py:377
 msgid "Current and archived system log files have been deleted"
-msgstr ""
+msgstr "Aktualne i zarchiwizowane pliki dziennika systemowego zostały usunięte"
 
 #: openplotterSettings.py:399
 msgid "Disable Screensaver"
@@ -548,11 +551,11 @@ msgstr "Otwórz aby zastosować i odświeżyć"
 
 #: openplotterSettings.py:833
 msgid "Select system log category"
-msgstr ""
+msgstr "Wybierz kategorię dziennika systemowego"
 
 #: openplotterSettings.py:862
 msgid "Search in system log file"
-msgstr ""
+msgstr "Szukaj w pliku dziennika systemowego"
 
 #: postInstall.py:14
 msgid "Post-installation actions"
@@ -712,7 +715,7 @@ msgstr "włączone"
 
 #: startup.py:145
 msgid "Checking debugging mode..."
-msgstr ""
+msgstr "Sprawdzanie trybu debugowania..."
 
 #: startup.py:150 startup.py:179 startup.py:191
 msgid "disabled"
@@ -720,11 +723,11 @@ msgstr "wyłączone"
 
 #: startup.py:154
 msgid "Checking system log file size..."
-msgstr ""
+msgstr "Sprawdzanie rozmiaru pliku dziennika systemowego..."
 
 #: startup.py:157 startup.py:158
 msgid "System log file size: "
-msgstr ""
+msgstr "Rozmiar pliku dziennika systemu: "
 
 #: startup.py:162
 msgid "Checking user \"pi\" password..."
@@ -732,11 +735,11 @@ msgstr "Sprawdzanie hasła użytkownika \"pi\"..."
 
 #: startup.py:170
 msgid "Security warning: You are using the default password for \"pi\" user."
-msgstr ""
+msgstr "Ostrzeżenie bezpieczeństwa: Używasz domyślnego hasła dla użytkownika \"pi\"."
 
 #: startup.py:170
 msgid "Please change password in Menu > Preferences > Raspberry Pi Configuration."
-msgstr ""
+msgstr "Proszę zmienić hasło w Menu > Ustawienia > Konfiguracja Raspberry Pi."
 
 #: startup.py:171
 msgid "changed"
