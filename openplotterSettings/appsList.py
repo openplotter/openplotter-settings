@@ -35,18 +35,18 @@ class AppsList:
 			except Exception as e: print ("wrong external app format: "+str(e))
 
 		app = {
-		'name': 'SDR VHF',
-		'platform': 'both',
-		'package': 'openplotter-sdr-vhf',
-		'preUninstall': platform2.admin+' sdrVhfPreUninstall',
-		'uninstall': 'openplotter-sdr-vhf',
+		'name': 'Moitessier HAT',
+		'platform': 'rpi',
+		'package': 'openplotter-moitessier',
+		'preUninstall': platform2.admin+' moitessierPreUninstall',
+		'uninstall': 'openplotter-moitessier',
 		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
 		'dev': 'no',
-		'entryPoint': 'openplotter-sdr-vhf',
-		'postInstall': platform2.admin+' sdrVhfPostInstall',
+		'entryPoint': 'openplotter-moitessier',
+		'postInstall': platform2.admin+' moitessierPostInstall',
 		'reboot': 'no',
-		'module': 'openplotterSdrVhf',
-		'conf': 'sdr_vhf'
+		'module': 'openplotterMoitessier',
+		'conf': 'moitessier'
 		}
 		self.appsDict.append(app)
 
@@ -79,6 +79,22 @@ class AppsList:
 		'reboot': 'no',
 		'module': 'openplotterSKfilter',
 		'conf': 'SKfilter'
+		}
+		self.appsDict.append(app)
+
+		app = {
+		'name': 'SDR VHF',
+		'platform': 'both',
+		'package': 'openplotter-sdr-vhf',
+		'preUninstall': platform2.admin+' sdrVhfPreUninstall',
+		'uninstall': 'openplotter-sdr-vhf',
+		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'dev': 'no',
+		'entryPoint': 'openplotter-sdr-vhf',
+		'postInstall': platform2.admin+' sdrVhfPostInstall',
+		'reboot': 'no',
+		'module': 'openplotterSdrVhf',
+		'conf': 'sdr_vhf'
 		}
 		self.appsDict.append(app)
 
@@ -147,22 +163,6 @@ class AppsList:
 		self.appsDict.append(app)
 
 		app = {
-		'name': 'Moitessier HAT',
-		'platform': 'rpi',
-		'package': 'openplotter-moitessier',
-		'preUninstall': platform2.admin+' moitessierPreUninstall',
-		'uninstall': 'openplotter-moitessier',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'no',
-		'entryPoint': 'openplotter-moitessier',
-		'postInstall': platform2.admin+' moitessierPostInstall',
-		'reboot': 'no',
-		'module': 'openplotterMoitessier',
-		'conf': 'moitessier'
-		}
-		self.appsDict.append(app)
-
-		app = {
 		'name': 'Pypilot',
 		'platform': 'rpi',
 		'package': 'openplotter-pypilot',
@@ -191,6 +191,38 @@ class AppsList:
 		'reboot': 'no',
 		'module': 'openplotterCan',
 		'conf': 'can'
+		}
+		self.appsDict.append(app)
+
+		app = {
+		'name': 'OpenMarine Box',
+		'platform': 'both',
+		'package': 'openplotter-openmarinebox',
+		'preUninstall': '',
+		'uninstall': 'openplotter-openmarinebox',
+		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'dev': 'no',
+		'entryPoint': 'openplotter-openmarinebox',
+		'postInstall': '',
+		'reboot': 'no',
+		'module': 'openplotterOpenmarinebox',
+		'conf': ''
+		}
+		self.appsDict.append(app)
+
+		app = {
+		'name': _('MAIANA AIS transponder'),
+		'platform': 'both',
+		'package': 'openplotter-maiana',
+		'preUninstall': '',
+		'uninstall': 'openplotter-maiana',
+		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'dev': 'no',
+		'entryPoint': 'openplotter-maiana',
+		'postInstall': '',
+		'reboot': 'no',
+		'module': 'openplotterMaiana',
+		'conf': ''
 		}
 		self.appsDict.append(app)
 
