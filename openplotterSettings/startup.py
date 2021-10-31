@@ -68,7 +68,7 @@ class MyFrame(wx.Frame):
 
 		self.thread1=threading.Thread(target=self.starting)
 		self.thread1.daemon = True
-		if not self.thread1.isAlive(): self.thread1.start()
+		if not self.thread1.is_alive(): self.thread1.start()
 
 		self.timer.Start(self.ttimer)
 
@@ -111,7 +111,7 @@ class MyFrame(wx.Frame):
 				self.logger.ShowPosition(self.logger.GetLastPosition())
 			self.logger_data = False
 
-		if not self.thread1.isAlive(): self.OnCloseButton()
+		if not self.thread1.is_alive(): self.OnCloseButton()
 
 	def add_logger_data(self, msg):
 		while self.logger_data:
