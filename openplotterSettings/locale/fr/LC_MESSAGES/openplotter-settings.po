@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: openplotter\n"
-"POT-Creation-Date: 2021-06-02 20:50+0200\n"
-"PO-Revision-Date: 2021-06-04 20:57+0200\n"
+"POT-Creation-Date: 2021-10-31 12:17+0100\n"
+"PO-Revision-Date: 2021-10-31 12:23+0100\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -24,11 +24,11 @@ msgstr ""
 msgid "Signal K Filter"
 msgstr "Filtre Signal K"
 
-#: appsList.py:102
+#: appsList.py:118
 msgid "Notifications"
-msgstr ""
+msgstr "Notifications"
 
-#: appsList.py:134
+#: appsList.py:150
 msgid "I2C Sensors"
 msgstr "Capteurs I2C"
 
@@ -36,186 +36,190 @@ msgstr "Capteurs I2C"
 msgid "CAN Bus"
 msgstr "Bus CAN"
 
-#: appsList.py:198
+#: appsList.py:214
+msgid "MAIANA AIS transponder"
+msgstr ""
+
+#: appsList.py:230
 msgid "Serial"
 msgstr "Série"
 
-#: appsList.py:214
+#: appsList.py:246
 msgid "Network"
 msgstr "Réseau"
 
-#: appsList.py:230
+#: appsList.py:262
 msgid "Dashboards"
 msgstr "Tableaux de bord"
 
-#: appsList.py:262
+#: appsList.py:294
 msgid "AvNav Installer"
 msgstr "Installateur AvNav"
 
-#: appsList.py:278
+#: appsList.py:310
 msgid "Signal K Installer"
 msgstr "Installeur Signal K"
 
-#: appsList.py:294
+#: appsList.py:326
 msgid "OpenCPN Installer"
 msgstr "Installeur OpenCPN"
 
-#: appsList.py:310
+#: appsList.py:342
 msgid "Documentation"
 msgstr "Documentation"
 
-#: appsList.py:326 data/openplotter-settings.desktop:3
+#: appsList.py:358 data/openplotter-settings.desktop:3
 #: openplotterSettings.py:39
 msgid "Settings"
 msgstr "Paramètres"
 
 #: data/openplotter-check.desktop:3
 msgid "Check system"
-msgstr ""
+msgstr "Vérifier le système"
 
 #: data/openplotter-check.desktop:5
 msgid "openplotter-check"
-msgstr ""
+msgstr "openplotter-check"
 
 #: data/openplotter-settings.desktop:5
 msgid "openplotter-settings"
-msgstr ""
+msgstr "openplotter-settings"
 
 #: data/xygrib.desktop:4
 msgid "XyGrib GRIB file viewer"
-msgstr ""
+msgstr "Visionneuse de fichier GRIB XyGrib"
 
 #: data/xygrib.desktop:5
 msgid "GRIB file viewer"
-msgstr ""
+msgstr "Visionneuse de fichiers GRIB"
 
 #: data/xygrib.desktop:6
 msgid "Meterological file viewer"
-msgstr ""
+msgstr "Visionneuse de fichiers météorologiques"
 
 #: data/xygrib.desktop:8
 msgid "xygrib.png"
-msgstr ""
+msgstr "xygrib.png"
 
-#: gpio.py:32 gpio.py:33 gpio.py:35 gpio.py:37 gpio.py:40 gpio.py:45 gpio.py:48
-#: gpio.py:51 gpio.py:56 gpio.py:61 gpio.py:65 gpio.py:70
+#: gpio.py:34 gpio.py:35 gpio.py:37 gpio.py:39 gpio.py:42 gpio.py:47 gpio.py:50
+#: gpio.py:53 gpio.py:58 gpio.py:63 gpio.py:67 gpio.py:72
 msgid "Power"
 msgstr "Alimentation"
 
-#: gpio.py:37 gpio.py:40 gpio.py:45 gpio.py:51 gpio.py:56 gpio.py:61 gpio.py:65
-#: gpio.py:70
+#: gpio.py:39 gpio.py:42 gpio.py:47 gpio.py:53 gpio.py:58 gpio.py:63 gpio.py:67
+#: gpio.py:72
 msgid "Ground"
 msgstr "Terre"
 
-#: gpio.py:110
+#: gpio.py:113
 msgid "Select GPIO"
 msgstr "Sélectionner GPIO"
 
-#: gpio.py:111 openplotterSettings.py:405
+#: gpio.py:114 openplotterSettings.py:405
 msgid "GPIO Map"
 msgstr "Carte GPIO"
 
-#: gpio.py:167 openplotterSettings.py:515 selectKey.py:40
+#: gpio.py:170 openplotterSettings.py:515 selectKey.py:40
 msgid "Refresh"
 msgstr "Actualiser"
 
-#: gpio.py:292
+#: gpio.py:295
 msgid "Host"
 msgstr "Hôte"
 
-#: gpio.py:298
+#: gpio.py:301
 msgid "Physical pin"
 msgstr "Broche"
 
-#: gpio.py:303
+#: gpio.py:306
 msgid "BCM name"
 msgstr "Nom BCM"
 
-#: gpio.py:308
+#: gpio.py:311
 msgid "Interface"
 msgstr "Interface"
 
-#: gpio.py:313
+#: gpio.py:316
 msgid "Shared"
 msgstr "Partagé"
 
-#: gpio.py:316
+#: gpio.py:319
 msgid "Yes"
 msgstr "Oui"
 
-#: gpio.py:318
+#: gpio.py:321
 msgid "No"
 msgstr "Non"
 
-#: gpio.py:322
+#: gpio.py:325
 msgid "Used by"
 msgstr "Utilisé par"
 
-#: gpio.py:334
+#: gpio.py:337
 msgid "There is a conflict with this GPIO."
 msgstr "Il y a un conflit avec ce GPIO."
 
-#: gpio.py:344 gpio.py:355
+#: gpio.py:347 gpio.py:358
 msgid "You can not select this GPIO to do this job."
 msgstr "Vous ne pouvez pas sélectionner ce GPIO pour effectuer cette tâche."
 
-#: installSources.py:54
+#: installSources.py:55
 msgid "Added OpenCPN packages source"
 msgstr "La source des paquets OpenCPN a été ajoutée"
 
-#: installSources.py:56
+#: installSources.py:57
 msgid "OpenCPN packages source already exists"
 msgstr "La source des paquets OpenCPN existe déjà"
 
-#: installSources.py:61
+#: installSources.py:62
 msgid "Added XyGrib packages source"
 msgstr "La source des paquets XyGrib a été ajoutée"
 
-#: installSources.py:63
+#: installSources.py:64
 msgid "XyGrib packages source already exists"
 msgstr "La source des paquets XyGrib existe déjà"
 
-#: installSources.py:68
+#: installSources.py:69
 msgid "Added OpenPlotter packages source"
 msgstr "La source des paquets OpenPlotter a été ajoutée"
 
-#: installSources.py:70
+#: installSources.py:71
 msgid "OpenPlotter packages source already exists"
 msgstr "La source des paquets OpenPlotter existe déjà"
 
-#: installSources.py:76
+#: installSources.py:77
 msgid "Added OpenPlotter beta packages source"
 msgstr "La source des paquets beta d'OpenPlotter a été ajoutée"
 
-#: installSources.py:78
+#: installSources.py:79
 msgid "OpenPlotter beta packages source already exists"
 msgstr "La source des paquets beta d'OpenPlotter existe déjà"
 
-#: installSources.py:83
+#: installSources.py:84
 msgid "Added InfluxDB packages source"
 msgstr "La source des paquets InfluxDB a été ajoutée"
 
-#: installSources.py:85
+#: installSources.py:86
 msgid "InfluxDB packages source already exists"
 msgstr "La source des paquets InfluxDB existe déjà"
 
-#: installSources.py:90
+#: installSources.py:91
 msgid "Added Grafana packages source"
 msgstr "La source des paquets Grafana a été ajoutée"
 
-#: installSources.py:92
+#: installSources.py:93
 msgid "Grafana packages source already exists"
 msgstr "La source des paquets Grafana existe déjà"
 
-#: installSources.py:101
+#: installSources.py:102
 msgid "Added Node.js 10 packages source"
 msgstr "La source des paquets Node.js 10 a été ajoutée"
 
-#: installSources.py:103
+#: installSources.py:104
 msgid "Node.js 10 packages source already exists"
 msgstr "La source des paquets Node.js 10 existe déjà"
 
-#: installSources.py:131 settingsPreUninstall.py:32
+#: installSources.py:132 settingsPreUninstall.py:32
 msgid "FAILED: "
 msgstr "ÉCHEC: "
 
@@ -245,7 +249,7 @@ msgstr "Paramètres Raspberry Pi"
 
 #: openplotterSettings.py:71
 msgid "System log"
-msgstr ""
+msgstr "Journal système"
 
 #: openplotterSettings.py:136
 msgid "Close and open again the window to see changes."
@@ -318,44 +322,44 @@ msgstr "Applis OpenPlotter maximisées désactivées"
 
 #: openplotterSettings.py:237
 msgid "Debugging mode"
-msgstr ""
+msgstr "Mode débogage"
 
 #: openplotterSettings.py:240
 msgid "See all"
-msgstr ""
+msgstr "Tout afficher"
 
 #: openplotterSettings.py:242
 msgid "See category"
-msgstr ""
+msgstr "Voir la catégorie"
 
 #: openplotterSettings.py:244
 msgid "Search"
-msgstr ""
+msgstr "Rechercher"
 
 #: openplotterSettings.py:247
 msgid "Delete all logs"
-msgstr ""
+msgstr "Supprimer tous les journaux"
 
 #: openplotterSettings.py:250
 msgid "Notify if the system log file is larger than: "
-msgstr ""
+msgstr "Notifier si le fichier du journal du système est plus grand que: "
 
 #: openplotterSettings.py:266
 msgid "Save"
-msgstr ""
+msgstr "Sauvegarder"
 
 #: openplotterSettings.py:288
 msgid "Debugging mode enabled. Additional info about errors in OpenPlotter apps will be saved in the system log"
-msgstr ""
+msgstr "Mode de débogage activé. Des informations supplémentaires sur les erreurs dans les applications OpenPlotter seront enregistrées dans le journal du système"
 
 #: openplotterSettings.py:291
 msgid "Debugging mode disabled"
-msgstr ""
+msgstr "Mode débogage désactivé"
 
 #: openplotterSettings.py:294 openplotterSettings.py:310
 #: openplotterSettings.py:354
 msgid "Reading log, please wait..."
-msgstr ""
+msgstr "Lecture du journal, veuillez patienter..."
 
 #: openplotterSettings.py:302 openplotterSettings.py:339
 #: openplotterSettings.py:365 openplotterSettings.py:390
@@ -365,11 +369,11 @@ msgstr "Terminé"
 
 #: openplotterSettings.py:306
 msgid "Error reading  log"
-msgstr ""
+msgstr "Erreur lors de la lecture du journal"
 
 #: openplotterSettings.py:342 openplotterSettings.py:368
 msgid "Error reading log"
-msgstr ""
+msgstr "Erreur lors de la lecture du journal"
 
 #: openplotterSettings.py:373
 msgid ""
@@ -377,6 +381,9 @@ msgid ""
 "\n"
 " Are you sure?"
 msgstr ""
+"Les journaux système actuels et archivés seront supprimés. Un nouveau fichier journal système sera créé après le redémarrage.\n"
+"\n"
+" Êtes-vous sûr?"
 
 #: openplotterSettings.py:374 openplotterSettings.py:600
 #: openplotterSettings.py:638 openplotterSettings.py:674
@@ -385,7 +392,7 @@ msgstr "Question"
 
 #: openplotterSettings.py:377
 msgid "Current and archived system log files have been deleted"
-msgstr ""
+msgstr "Les journaux système actuels et archivés ont été supprimés"
 
 #: openplotterSettings.py:399
 msgid "Disable Screensaver"
@@ -548,11 +555,11 @@ msgstr "Ouvrir pour appliquer et actualiser"
 
 #: openplotterSettings.py:833
 msgid "Select system log category"
-msgstr ""
+msgstr "Sélectionnez la catégorie du journal système"
 
 #: openplotterSettings.py:862
 msgid "Search in system log file"
-msgstr ""
+msgstr "Rechercher dans le journal système"
 
 #: postInstall.py:14
 msgid "Post-installation actions"
@@ -638,11 +645,11 @@ msgstr "Erreur. Caractères non autorisés."
 msgid "Failed. Replace * by some text."
 msgstr "Échec. Remplacez * par du texte."
 
-#: serialPorts.py:71
+#: serialPorts.py:74
 msgid "connection ID: "
 msgstr "ID de la connexion: "
 
-#: serialPorts.py:71
+#: serialPorts.py:74
 msgid "device: "
 msgstr "périphique: "
 
@@ -712,7 +719,7 @@ msgstr "activé"
 
 #: startup.py:145
 msgid "Checking debugging mode..."
-msgstr ""
+msgstr "Vérification du mode de débogage..."
 
 #: startup.py:150 startup.py:179 startup.py:191
 msgid "disabled"
@@ -720,11 +727,11 @@ msgstr "désactivé"
 
 #: startup.py:154
 msgid "Checking system log file size..."
-msgstr ""
+msgstr "Vérification de la taille des journaux du système..."
 
 #: startup.py:157 startup.py:158
 msgid "System log file size: "
-msgstr ""
+msgstr "Taille du fichier du journal système : "
 
 #: startup.py:162
 msgid "Checking user \"pi\" password..."
@@ -732,11 +739,11 @@ msgstr "Vérification du mot de passe de l'utilisateur \"pi\"..."
 
 #: startup.py:170
 msgid "Security warning: You are using the default password for \"pi\" user."
-msgstr ""
+msgstr "Avertissement de sécurité: Vous utilisez le mot de passe par défaut pour l'utilisateur \"pi\"."
 
 #: startup.py:170
 msgid "Please change password in Menu > Preferences > Raspberry Pi Configuration."
-msgstr ""
+msgstr "Veuillez changer le mot de passe dans Menu > Préférences > Configuration Raspberry Pi."
 
 #: startup.py:171
 msgid "changed"

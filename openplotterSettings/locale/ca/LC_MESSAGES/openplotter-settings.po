@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: openplotter\n"
-"POT-Creation-Date: 2021-06-02 20:50+0200\n"
-"PO-Revision-Date: 2021-06-04 20:57+0200\n"
+"POT-Creation-Date: 2021-10-31 12:17+0100\n"
+"PO-Revision-Date: 2021-10-31 12:24+0100\n"
 "Last-Translator: \n"
 "Language-Team: Catalan\n"
 "Language: ca\n"
@@ -24,11 +24,11 @@ msgstr ""
 msgid "Signal K Filter"
 msgstr "Filtre Signal K"
 
-#: appsList.py:102
+#: appsList.py:118
 msgid "Notifications"
-msgstr ""
+msgstr "Notificacions"
 
-#: appsList.py:134
+#: appsList.py:150
 msgid "I2C Sensors"
 msgstr "Sensors I2C"
 
@@ -36,186 +36,190 @@ msgstr "Sensors I2C"
 msgid "CAN Bus"
 msgstr "Bus CAN"
 
-#: appsList.py:198
+#: appsList.py:214
+msgid "MAIANA AIS transponder"
+msgstr ""
+
+#: appsList.py:230
 msgid "Serial"
 msgstr "Sèrie"
 
-#: appsList.py:214
+#: appsList.py:246
 msgid "Network"
 msgstr "Xarxa"
 
-#: appsList.py:230
+#: appsList.py:262
 msgid "Dashboards"
 msgstr "Tauler d'instruments"
 
-#: appsList.py:262
+#: appsList.py:294
 msgid "AvNav Installer"
 msgstr "Instal·lador AvNav"
 
-#: appsList.py:278
+#: appsList.py:310
 msgid "Signal K Installer"
 msgstr "Instal·lador de Signal K"
 
-#: appsList.py:294
+#: appsList.py:326
 msgid "OpenCPN Installer"
 msgstr "Instal·lador de OpenCPN"
 
-#: appsList.py:310
+#: appsList.py:342
 msgid "Documentation"
 msgstr "Documentació"
 
-#: appsList.py:326 data/openplotter-settings.desktop:3
+#: appsList.py:358 data/openplotter-settings.desktop:3
 #: openplotterSettings.py:39
 msgid "Settings"
 msgstr "Configuració"
 
 #: data/openplotter-check.desktop:3
 msgid "Check system"
-msgstr ""
+msgstr "Comprovació de sistema"
 
 #: data/openplotter-check.desktop:5
 msgid "openplotter-check"
-msgstr ""
+msgstr "openplotter-check"
 
 #: data/openplotter-settings.desktop:5
 msgid "openplotter-settings"
-msgstr ""
+msgstr "openplotter-settings"
 
 #: data/xygrib.desktop:4
 msgid "XyGrib GRIB file viewer"
-msgstr ""
+msgstr "Visor de fitxers GRID de XyGrib"
 
 #: data/xygrib.desktop:5
 msgid "GRIB file viewer"
-msgstr ""
+msgstr "Visor de fitxers GRIB"
 
 #: data/xygrib.desktop:6
 msgid "Meterological file viewer"
-msgstr ""
+msgstr "Visor de fitxers meteorològics"
 
 #: data/xygrib.desktop:8
 msgid "xygrib.png"
-msgstr ""
+msgstr "xygrib.png"
 
-#: gpio.py:32 gpio.py:33 gpio.py:35 gpio.py:37 gpio.py:40 gpio.py:45 gpio.py:48
-#: gpio.py:51 gpio.py:56 gpio.py:61 gpio.py:65 gpio.py:70
+#: gpio.py:34 gpio.py:35 gpio.py:37 gpio.py:39 gpio.py:42 gpio.py:47 gpio.py:50
+#: gpio.py:53 gpio.py:58 gpio.py:63 gpio.py:67 gpio.py:72
 msgid "Power"
 msgstr "Potència"
 
-#: gpio.py:37 gpio.py:40 gpio.py:45 gpio.py:51 gpio.py:56 gpio.py:61 gpio.py:65
-#: gpio.py:70
+#: gpio.py:39 gpio.py:42 gpio.py:47 gpio.py:53 gpio.py:58 gpio.py:63 gpio.py:67
+#: gpio.py:72
 msgid "Ground"
 msgstr "Terra"
 
-#: gpio.py:110
+#: gpio.py:113
 msgid "Select GPIO"
 msgstr "Selecciona GPIO"
 
-#: gpio.py:111 openplotterSettings.py:405
+#: gpio.py:114 openplotterSettings.py:405
 msgid "GPIO Map"
 msgstr "Mapa GPIO"
 
-#: gpio.py:167 openplotterSettings.py:515 selectKey.py:40
+#: gpio.py:170 openplotterSettings.py:515 selectKey.py:40
 msgid "Refresh"
-msgstr "Actualitzar"
+msgstr "Actualitza"
 
-#: gpio.py:292
+#: gpio.py:295
 msgid "Host"
 msgstr "Amfitrió"
 
-#: gpio.py:298
+#: gpio.py:301
 msgid "Physical pin"
 msgstr "Connector físic"
 
-#: gpio.py:303
+#: gpio.py:306
 msgid "BCM name"
 msgstr "Nom BCM"
 
-#: gpio.py:308
+#: gpio.py:311
 msgid "Interface"
 msgstr "Interfície"
 
-#: gpio.py:313
+#: gpio.py:316
 msgid "Shared"
 msgstr "Compartit"
 
-#: gpio.py:316
+#: gpio.py:319
 msgid "Yes"
 msgstr "Sí"
 
-#: gpio.py:318
+#: gpio.py:321
 msgid "No"
 msgstr "No"
 
-#: gpio.py:322
+#: gpio.py:325
 msgid "Used by"
 msgstr "Utilitzat per"
 
-#: gpio.py:334
+#: gpio.py:337
 msgid "There is a conflict with this GPIO."
 msgstr "Hi ha un conflicte amb aquest GPIO."
 
-#: gpio.py:344 gpio.py:355
+#: gpio.py:347 gpio.py:358
 msgid "You can not select this GPIO to do this job."
 msgstr "No pots seleccionar aquest GPIO per a aquesta tasca."
 
-#: installSources.py:54
+#: installSources.py:55
 msgid "Added OpenCPN packages source"
 msgstr "Paquet de fonts d'OpenCPN afegit"
 
-#: installSources.py:56
+#: installSources.py:57
 msgid "OpenCPN packages source already exists"
 msgstr "El paquet de fonts d'OpenCPN ja existeix"
 
-#: installSources.py:61
+#: installSources.py:62
 msgid "Added XyGrib packages source"
 msgstr "Paquet de fonts de XyGrib afegit"
 
-#: installSources.py:63
+#: installSources.py:64
 msgid "XyGrib packages source already exists"
 msgstr "El paquet de fonts de XyGrib ja existeix"
 
-#: installSources.py:68
+#: installSources.py:69
 msgid "Added OpenPlotter packages source"
 msgstr "Paquet de fonts d'OpenPlotter afegit"
 
-#: installSources.py:70
+#: installSources.py:71
 msgid "OpenPlotter packages source already exists"
 msgstr "El paquet de fonts d'OpenPlotter ja existeix"
 
-#: installSources.py:76
+#: installSources.py:77
 msgid "Added OpenPlotter beta packages source"
 msgstr "Paquet de fonts d'OpenPlotter beta afegit"
 
-#: installSources.py:78
+#: installSources.py:79
 msgid "OpenPlotter beta packages source already exists"
 msgstr "El paquet de fonts d'OpenPlotter beta ja existeix"
 
-#: installSources.py:83
+#: installSources.py:84
 msgid "Added InfluxDB packages source"
 msgstr "Paquet de fonts de InfluxDB afegit"
 
-#: installSources.py:85
+#: installSources.py:86
 msgid "InfluxDB packages source already exists"
 msgstr "El paquet de fonts de InfluxDB ja existeix"
 
-#: installSources.py:90
+#: installSources.py:91
 msgid "Added Grafana packages source"
 msgstr "Paquet de fonts de Grafana afegit"
 
-#: installSources.py:92
+#: installSources.py:93
 msgid "Grafana packages source already exists"
 msgstr "El paquet de fonts de Grafana ja existeix"
 
-#: installSources.py:101
+#: installSources.py:102
 msgid "Added Node.js 10 packages source"
 msgstr "Paquet de fonts de Node.js 10 afegit"
 
-#: installSources.py:103
+#: installSources.py:104
 msgid "Node.js 10 packages source already exists"
 msgstr "El paquet de fonts de Node.js 10 ja existeix"
 
-#: installSources.py:131 settingsPreUninstall.py:32
+#: installSources.py:132 settingsPreUninstall.py:32
 msgid "FAILED: "
 msgstr "ERROR: "
 
@@ -245,7 +249,7 @@ msgstr "Configuració de Raspberry"
 
 #: openplotterSettings.py:71
 msgid "System log"
-msgstr ""
+msgstr "Registre del sistema"
 
 #: openplotterSettings.py:136
 msgid "Close and open again the window to see changes."
@@ -318,44 +322,44 @@ msgstr "Aplicacions d'OpenPlotter maximitzades desactivades"
 
 #: openplotterSettings.py:237
 msgid "Debugging mode"
-msgstr ""
+msgstr "Mode de depuració"
 
 #: openplotterSettings.py:240
 msgid "See all"
-msgstr ""
+msgstr "Veure tots"
 
 #: openplotterSettings.py:242
 msgid "See category"
-msgstr ""
+msgstr "Veure categoria"
 
 #: openplotterSettings.py:244
 msgid "Search"
-msgstr ""
+msgstr "Cerca"
 
 #: openplotterSettings.py:247
 msgid "Delete all logs"
-msgstr ""
+msgstr "Esborra tots els registres"
 
 #: openplotterSettings.py:250
 msgid "Notify if the system log file is larger than: "
-msgstr ""
+msgstr "Notifica si el fitxer de registre del sistema pesa més de: "
 
 #: openplotterSettings.py:266
 msgid "Save"
-msgstr ""
+msgstr "Guarda"
 
 #: openplotterSettings.py:288
 msgid "Debugging mode enabled. Additional info about errors in OpenPlotter apps will be saved in the system log"
-msgstr ""
+msgstr "Mode de depuració activat. La informació adicional sobre errors en aplicacions de OpenPlotter es guardaran al registre del sistema"
 
 #: openplotterSettings.py:291
 msgid "Debugging mode disabled"
-msgstr ""
+msgstr "Mode de depuració desactivat"
 
 #: openplotterSettings.py:294 openplotterSettings.py:310
 #: openplotterSettings.py:354
 msgid "Reading log, please wait..."
-msgstr ""
+msgstr "Llegint el registre de canvis, esperi si us plau..."
 
 #: openplotterSettings.py:302 openplotterSettings.py:339
 #: openplotterSettings.py:365 openplotterSettings.py:390
@@ -365,11 +369,11 @@ msgstr "Fet"
 
 #: openplotterSettings.py:306
 msgid "Error reading  log"
-msgstr ""
+msgstr "Error en llegir el registre"
 
 #: openplotterSettings.py:342 openplotterSettings.py:368
 msgid "Error reading log"
-msgstr ""
+msgstr "Error en llegir el registre"
 
 #: openplotterSettings.py:373
 msgid ""
@@ -377,6 +381,9 @@ msgid ""
 "\n"
 " Are you sure?"
 msgstr ""
+"S'eliminaran els fitxer de registre de sistema actuals i arxivats. Es crearà un nou fitxer de registre després de reiniciar.\n"
+"\n"
+" Estàs segur?"
 
 #: openplotterSettings.py:374 openplotterSettings.py:600
 #: openplotterSettings.py:638 openplotterSettings.py:674
@@ -385,7 +392,7 @@ msgstr "Pregunta"
 
 #: openplotterSettings.py:377
 msgid "Current and archived system log files have been deleted"
-msgstr ""
+msgstr "Els fitxers de registre de sistema actuals i arxivats s'han eliminat"
 
 #: openplotterSettings.py:399
 msgid "Disable Screensaver"
@@ -548,11 +555,11 @@ msgstr "Obre per a aplicar i refrescar"
 
 #: openplotterSettings.py:833
 msgid "Select system log category"
-msgstr ""
+msgstr "Selecciona la categoria del registre de sistema"
 
 #: openplotterSettings.py:862
 msgid "Search in system log file"
-msgstr ""
+msgstr "Cerca en el fitxer de registre de sistema"
 
 #: postInstall.py:14
 msgid "Post-installation actions"
@@ -638,11 +645,11 @@ msgstr "Error. Caràcters no permesos."
 msgid "Failed. Replace * by some text."
 msgstr "Error. Substitueix * per algun text."
 
-#: serialPorts.py:71
+#: serialPorts.py:74
 msgid "connection ID: "
 msgstr "iD de la connexió: "
 
-#: serialPorts.py:71
+#: serialPorts.py:74
 msgid "device: "
 msgstr "dispositiu: "
 
@@ -712,7 +719,7 @@ msgstr "activat"
 
 #: startup.py:145
 msgid "Checking debugging mode..."
-msgstr ""
+msgstr "Comprovant mode de depuració..."
 
 #: startup.py:150 startup.py:179 startup.py:191
 msgid "disabled"
@@ -720,11 +727,11 @@ msgstr "deshabilitat"
 
 #: startup.py:154
 msgid "Checking system log file size..."
-msgstr ""
+msgstr "Comprovant tamany del fitxer de registre de sistema..."
 
 #: startup.py:157 startup.py:158
 msgid "System log file size: "
-msgstr ""
+msgstr "Tamany del fitxer de registre: "
 
 #: startup.py:162
 msgid "Checking user \"pi\" password..."
@@ -732,11 +739,11 @@ msgstr "Comprovant contrasenya de l'usuari \"pi\"..."
 
 #: startup.py:170
 msgid "Security warning: You are using the default password for \"pi\" user."
-msgstr ""
+msgstr "Alertat de seguretat: Estàs fent servir la contrasenya per defecte per a l'usuari \"pi\"."
 
 #: startup.py:170
 msgid "Please change password in Menu > Preferences > Raspberry Pi Configuration."
-msgstr ""
+msgstr "Si us plau canvia la contrasenya a Menu > Preferències > Configuració de Raspberry Pi."
 
 #: startup.py:171
 msgid "changed"
