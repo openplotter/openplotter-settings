@@ -1,3 +1,11 @@
+openplotter-settings (2.9.0-stable) bionic; urgency=medium
+
+  * Replace isAlive by is_alive()
+  * Add MAIANA and OpenMarine Box apps
+  * Update translations
+
+ -- Sailoog <info@sailoog.com>  Sun, 31 Oct 2021 12:26:45 +0100
+
 openplotter-settings (2.8.1-stable) bionic; urgency=medium
 
   * Make openplotter-gpio app only for raspberry
