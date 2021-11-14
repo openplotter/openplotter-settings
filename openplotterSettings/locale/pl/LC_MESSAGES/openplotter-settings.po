@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openplotter\n"
 "POT-Creation-Date: 2021-10-31 12:17+0100\n"
-"PO-Revision-Date: 2021-10-31 12:23+0100\n"
+"PO-Revision-Date: 2021-11-14 14:39+0100\n"
 "Last-Translator: \n"
 "Language-Team: Polish\n"
 "Language: pl\n"
@@ -38,7 +38,7 @@ msgstr "Magistrala CAN"
 
 #: appsList.py:214
 msgid "MAIANA AIS transponder"
-msgstr ""
+msgstr "transponder AIS MAIANA"
 
 #: appsList.py:230
 msgid "Serial"
