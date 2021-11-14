@@ -1,4 +1,4 @@
-openplotter-settings (2.9.0-stable) bionic; urgency=medium
+openplotter-settings (2.9.1-stable) bionic; urgency=medium
 
   * Replace isAlive by is_alive()
   * Add MAIANA and OpenMarine Box apps
