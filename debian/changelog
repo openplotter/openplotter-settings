@@ -1,3 +1,9 @@
+openplotter-settings (3.0.6-alpha) bullseye; urgency=medium
+
+  * Alpha
+
+ -- Sailoog <info@sailoog.com>  Wed, 17 Nov 2021 19:29:59 +0100
+
 openplotter-settings (2.9.1-stable) bionic; urgency=medium
 
   * Replace isAlive by is_alive()

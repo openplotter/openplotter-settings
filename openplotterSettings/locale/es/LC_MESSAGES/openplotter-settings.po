@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openplotter\n"
 "POT-Creation-Date: 2021-10-31 12:17+0100\n"
-"PO-Revision-Date: 2021-11-14 14:40+0100\n"
+"PO-Revision-Date: 2021-12-10 12:41\n"
 "Last-Translator: \n"
 "Language-Team: Spanish\n"
 "Language: es\n"
@@ -13,12 +13,12 @@ msgstr ""
 "X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
 "X-Crowdin-Project: openplotter\n"
 "X-Crowdin-Project-ID: 289888\n"
 "X-Crowdin-Language: es-ES\n"
 "X-Crowdin-File: openplotter-settings.po\n"
 "X-Crowdin-File-ID: 4\n"
-"X-Poedit-SearchPath-0: .\n"
 
 #: appsList.py:70
 msgid "Signal K Filter"
@@ -38,7 +38,7 @@ msgstr "Bus CAN"
 
 #: appsList.py:214
 msgid "MAIANA AIS transponder"
-msgstr ""
+msgstr "MAIANA AIS transpondedor"
 
 #: appsList.py:230
 msgid "Serial"
@@ -376,13 +376,9 @@ msgid "Error reading log"
 msgstr "Error de lectura"
 
 #: openplotterSettings.py:373
-msgid ""
-"Current and archived system log files will be deleted. A new system log file will be created after reboot.\n"
-"\n"
+msgid "Current and archived system log files will be deleted. A new system log file will be created after reboot.\n\n"
 " Are you sure?"
-msgstr ""
-"Los archivos de registro del sistema actuales y archivados se eliminarán. Se creará un nuevo archivo de registro del sistema después del reinicio.\n"
-"\n"
+msgstr "Los archivos de registro del sistema actuales y archivados se eliminarán. Se creará un nuevo archivo de registro del sistema después del reinicio.\n\n"
 " ¿Está seguro?"
 
 #: openplotterSettings.py:374 openplotterSettings.py:600
@@ -804,3 +800,4 @@ msgstr "ARRANQUE FINALIZADO"
 #: startup.py:261
 msgid "CHECK SYSTEM FINISHED"
 msgstr "COMPROBACION DEL SISTEMA FINALIZADA"
+

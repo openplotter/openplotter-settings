@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # This file is part of Openplotter.
-# Copyright (C) 2019 by Sailoog <https://github.com/openplotter/openplotter-settings>
+# Copyright (C) 2022 by Sailoog <https://github.com/openplotter/openplotter-settings>
 #                  
 # Openplotter is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -33,14 +33,14 @@ class AppsList:
 		for app in externalApps:
 			try: self.appsDict.append(app)
 			except Exception as e: print ("wrong external app format: "+str(e))
-
+		'''
 		app = {
 		'name': 'Moitessier HAT',
 		'platform': 'rpi',
 		'package': 'openplotter-moitessier',
 		'preUninstall': platform2.admin+' moitessierPreUninstall',
 		'uninstall': 'openplotter-moitessier',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
 		'dev': 'no',
 		'entryPoint': 'openplotter-moitessier',
 		'postInstall': platform2.admin+' moitessierPostInstall',
@@ -51,44 +51,12 @@ class AppsList:
 		self.appsDict.append(app)
 
 		app = {
-		'name': 'Kplex',
-		'platform': 'both',
-		'package': 'openplotter-kplex',
-		'preUninstall': platform2.admin+' kplexPreUninstall',
-		'uninstall': 'openplotter-kplex',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'no',
-		'entryPoint': 'openplotter-kplex',
-		'postInstall': platform2.admin+' kplexPostInstall',
-		'reboot': 'no',
-		'module': 'openplotterKplex',
-		'conf': 'kplex'
-		}
-		self.appsDict.append(app)
-
-		app = {
-		'name': _('Signal K Filter'),
-		'platform': 'both',
-		'package': 'openplotter-skfilter',
-		'preUninstall': platform2.admin+' SKfilterPreUninstall',
-		'uninstall': 'openplotter-skfilter',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
-		'dev': 'no',
-		'entryPoint': 'openplotter-SKfilter',
-		'postInstall': platform2.admin+' SKfilterPostInstall',
-		'reboot': 'no',
-		'module': 'openplotterSKfilter',
-		'conf': 'SKfilter'
-		}
-		self.appsDict.append(app)
-
-		app = {
 		'name': 'SDR VHF',
 		'platform': 'both',
 		'package': 'openplotter-sdr-vhf',
 		'preUninstall': platform2.admin+' sdrVhfPreUninstall',
 		'uninstall': 'openplotter-sdr-vhf',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
 		'dev': 'no',
 		'entryPoint': 'openplotter-sdr-vhf',
 		'postInstall': platform2.admin+' sdrVhfPostInstall',
@@ -104,7 +72,7 @@ class AppsList:
 		'package': 'openplotter-iot',
 		'preUninstall': platform2.admin+' iotPreUninstall',
 		'uninstall': 'openplotter-iot',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
 		'dev': 'no',
 		'entryPoint': 'openplotter-iot',
 		'postInstall': platform2.admin+' iotPostInstall',
@@ -120,7 +88,7 @@ class AppsList:
 		'package': 'openplotter-notifications',
 		'preUninstall': 'notificationsPreUninstall',
 		'uninstall': 'openplotter-notifications',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
 		'dev': 'no',
 		'entryPoint': 'openplotter-notifications',
 		'postInstall': platform2.admin+' notificationsPostInstall',
@@ -136,7 +104,7 @@ class AppsList:
 		'package': 'openplotter-gpio',
 		'preUninstall': platform2.admin+' gpioPreUninstall',
 		'uninstall': 'openplotter-gpio',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
 		'dev': 'no',
 		'entryPoint': 'openplotter-gpio',
 		'postInstall': platform2.admin+' gpioPostInstall',
@@ -152,7 +120,7 @@ class AppsList:
 		'package': 'openplotter-i2c',
 		'preUninstall': platform2.admin+' i2cPreUninstall',
 		'uninstall': 'openplotter-i2c',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
 		'dev': 'no',
 		'entryPoint': 'openplotter-i2c',
 		'postInstall': platform2.admin+' i2cPostInstall',
@@ -168,7 +136,7 @@ class AppsList:
 		'package': 'openplotter-pypilot',
 		'preUninstall': platform2.admin+' pypilotPreUninstall',
 		'uninstall': 'openplotter-pypilot',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
 		'dev': 'no',
 		'entryPoint': 'openplotter-pypilot',
 		'postInstall': platform2.admin+' pypilotPostInstall',
@@ -184,7 +152,7 @@ class AppsList:
 		'package': 'openplotter-can',
 		'preUninstall': platform2.admin+' canPreUninstall',
 		'uninstall': 'openplotter-can',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
 		'dev': 'no',
 		'entryPoint': 'openplotter-can',
 		'postInstall': platform2.admin+' canPostInstall',
@@ -200,7 +168,7 @@ class AppsList:
 		'package': 'openplotter-openmarinebox',
 		'preUninstall': '',
 		'uninstall': 'openplotter-openmarinebox',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
 		'dev': 'no',
 		'entryPoint': 'openplotter-openmarinebox',
 		'postInstall': '',
@@ -216,7 +184,7 @@ class AppsList:
 		'package': 'openplotter-maiana',
 		'preUninstall': platform2.admin+' maianaPreUninstall',
 		'uninstall': 'openplotter-maiana',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
 		'dev': 'no',
 		'entryPoint': 'openplotter-maiana',
 		'postInstall': platform2.admin+' maianaPostInstall',
@@ -227,20 +195,21 @@ class AppsList:
 		self.appsDict.append(app)
 
 		app = {
-		'name': _('Serial'),
+		'name': _('Dashboards'),
 		'platform': 'both',
-		'package': 'openplotter-serial',
-		'preUninstall': platform2.admin+' serialPreUninstall',
-		'uninstall': 'openplotter-serial',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'package': 'openplotter-dashboards',
+		'preUninstall': '',
+		'uninstall': 'openplotter-dashboards',
+		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
 		'dev': 'no',
-		'entryPoint': 'openplotter-serial',
-		'postInstall': platform2.admin+' serialPostInstall',
+		'entryPoint': 'openplotter-dashboards',
+		'postInstall': '',
 		'reboot': 'no',
-		'module': 'openplotterSerial',
-		'conf': 'serial'
+		'module': 'openplotterDashboards',
+		'conf': ''
 		}
 		self.appsDict.append(app)
+		'''
 
 		app = {
 		'name': _('Network'),
@@ -248,7 +217,7 @@ class AppsList:
 		'package': 'openplotter-network',
 		'preUninstall': platform2.admin+' networkPreUninstall',
 		'uninstall': 'openplotter-network',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
 		'dev': 'no',
 		'entryPoint': 'openplotter-network',
 		'postInstall': platform2.admin+' networkPostInstall',
@@ -257,20 +226,20 @@ class AppsList:
 		'conf': 'network'
 		}
 		self.appsDict.append(app)
-
+		
 		app = {
-		'name': _('Dashboards'),
+		'name': _('Serial'),
 		'platform': 'both',
-		'package': 'openplotter-dashboards',
-		'preUninstall': '',
-		'uninstall': 'openplotter-dashboards',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu','https://repos.influxdata.com/debian','https://packages.grafana.com/oss/deb'],
+		'package': 'openplotter-serial',
+		'preUninstall': platform2.admin+' serialPreUninstall',
+		'uninstall': 'openplotter-serial',
+		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
 		'dev': 'no',
-		'entryPoint': 'openplotter-dashboards',
-		'postInstall': '',
+		'entryPoint': 'openplotter-serial',
+		'postInstall': platform2.admin+' serialPostInstall',
 		'reboot': 'no',
-		'module': 'openplotterDashboards',
-		'conf': ''
+		'module': 'openplotterSerial',
+		'conf': 'serial'
 		}
 		self.appsDict.append(app)
 
@@ -307,34 +276,34 @@ class AppsList:
 		self.appsDict.append(app)
 		
 		app = {
+		'name': _('OpenCPN Installer'),
+		'platform': 'both',
+		'package': 'openplotter-opencpn-installer',
+		'preUninstall': platform2.admin+' opencpnPreUninstall',
+		'uninstall': 'openplotter-opencpn-installer opencpn',
+		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
+		'dev': 'no',
+		'entryPoint': 'openplotter-opencpn-installer',
+		'postInstall': platform2.admin+' opencpnPostInstall',
+		'reboot': 'no',
+		'module': 'openplotterOpencpnInstaller',
+		'conf': ''
+		}
+		self.appsDict.append(app)
+		
+		app = {
 		'name': _('Signal K Installer'),
 		'platform': 'both',
 		'package': 'openplotter-signalk-installer',
 		'preUninstall': platform2.admin+' signalkPreUninstall',
 		'uninstall': 'openplotter-signalk-installer',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu','https://deb.nodesource.com/node_10.x'],
+		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
 		'dev': 'no',
 		'entryPoint': 'openplotter-signalk-installer',
 		'postInstall': platform2.admin+' signalkPostInstall',
 		'reboot': 'no',
 		'module': 'openplotterSignalkInstaller',
 		'conf': 'signalk'
-		}
-		self.appsDict.append(app)
-		
-		app = {
-		'name': _('OpenCPN Installer'),
-		'platform': 'both',
-		'package': 'openplotter-opencpn-installer',
-		'preUninstall': '',
-		'uninstall': 'openplotter-opencpn-installer opencpn',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu','http://ppa.launchpad.net/opencpn/opencpn/ubuntu'],
-		'dev': 'no',
-		'entryPoint': 'openplotter-opencpn-installer',
-		'postInstall': '',
-		'reboot': 'no',
-		'module': 'openplotterOpencpnInstaller',
-		'conf': ''
 		}
 		self.appsDict.append(app)
 
@@ -344,7 +313,7 @@ class AppsList:
 		'package': 'openplotter-doc',
 		'preUninstall': '',
 		'uninstall': 'openplotter-doc',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
 		'dev': 'no',
 		'entryPoint': 'x-www-browser /usr/share/openplotter-doc/index.html',
 		'postInstall': '',
@@ -360,7 +329,7 @@ class AppsList:
 		'package': 'openplotter-settings',
 		'preUninstall': platform2.admin+' settingsPreUninstall',
 		'uninstall': 'openplotter-settings',
-		'sources': ['http://ppa.launchpad.net/openplotter/openplotter/ubuntu'],
+		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
 		'dev': 'no',
 		'entryPoint': 'openplotter-settings',
 		'postInstall': '',

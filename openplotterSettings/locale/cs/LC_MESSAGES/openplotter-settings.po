@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openplotter\n"
 "POT-Creation-Date: 2021-10-31 12:17+0100\n"
-"PO-Revision-Date: 2021-11-14 14:40+0100\n"
+"PO-Revision-Date: 2021-11-25 18:05\n"
 "Last-Translator: \n"
 "Language-Team: Czech\n"
 "Language: cs\n"
@@ -13,12 +13,12 @@ msgstr ""
 "X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=4; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 3;\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
 "X-Crowdin-Project: openplotter\n"
 "X-Crowdin-Project-ID: 289888\n"
 "X-Crowdin-Language: cs\n"
 "X-Crowdin-File: openplotter-settings.po\n"
 "X-Crowdin-File-ID: 4\n"
-"X-Poedit-SearchPath-0: .\n"
 
 #: appsList.py:70
 msgid "Signal K Filter"
@@ -376,13 +376,9 @@ msgid "Error reading log"
 msgstr "Chyba při čtení logu"
 
 #: openplotterSettings.py:373
-msgid ""
-"Current and archived system log files will be deleted. A new system log file will be created after reboot.\n"
-"\n"
+msgid "Current and archived system log files will be deleted. A new system log file will be created after reboot.\n\n"
 " Are you sure?"
-msgstr ""
-"Aktuální a archivované soubory protokolů systému budou smazány. Po restartu bude vytvořen nový systémový log soubor.\n"
-"\n"
+msgstr "Aktuální a archivované soubory protokolů systému budou smazány. Po restartu bude vytvořen nový systémový log soubor.\n\n"
 " Jste si jisti?"
 
 #: openplotterSettings.py:374 openplotterSettings.py:600
@@ -804,3 +800,4 @@ msgstr "Spuštění dokončeno"
 #: startup.py:261
 msgid "CHECK SYSTEM FINISHED"
 msgstr "Kontrola systému dokončena"
+

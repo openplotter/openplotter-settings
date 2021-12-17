@@ -6,7 +6,7 @@ Main OpenPlotter app
 
 Install dependencies (for production and development):
 
-`sudo apt install python3-wxgtk4.0 python3-ujson python3-pyudev whois vlc`
+`sudo apt install python3-wxgtk4.0 python3-ujson python3-pyudev vlc`
 
 #### For production
 
@@ -37,7 +37,7 @@ Run:
 
 `openplotter-settings`
 
-Pull request your changes to github and we will check and add them to the next version of the [Debian package](https://launchpad.net/~openplotter/+archive/ubuntu/openplotter).
+Pull request your changes to github and we will check and add them to the next version of the [Debian package](https://cloudsmith.io/~openplotter/repos/openplotter/packages/).
 
 ### Documentation
 

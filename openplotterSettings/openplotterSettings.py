@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
-# This file is part of Openplotter.
-# Copyright (C) 2019 by Sailoog <https://github.com/openplotter/openplotter-settings>
+# This file is part of OpenPlotter.
+# Copyright (C) 2022 by Sailoog <https://github.com/openplotter/openplotter-settings>
 #                  
 # Openplotter is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -399,9 +399,6 @@ class MyFrame(wx.Frame):
 		toolScreensaver = self.toolbar5.AddCheckTool(501, _('Disable Screensaver'), wx.Bitmap(self.currentdir+"/data/screen.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolScreensaver, toolScreensaver)
 		self.toolbar5.AddSeparator()
-		toolHeadless = self.toolbar5.AddCheckTool(502, _('Headless'), wx.Bitmap(self.currentdir+"/data/headless.png"))
-		self.Bind(wx.EVT_TOOL, self.OnToolHeadless, toolHeadless)
-		self.toolbar5.AddSeparator()
 		toolGpio = self.toolbar5.AddTool(503, _('GPIO Map'), wx.Bitmap(self.currentdir+"/data/chip.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolGpio, toolGpio)
 
@@ -436,40 +433,6 @@ class MyFrame(wx.Frame):
 			subprocess.call(['xset', 's', 'blank'])
 			subprocess.call(['xset', 's', 'on'])
 			subprocess.call(['xset', '+dpms'])
-
-	def OnToolHeadless(self, e):
-		onoff = self.toolbar5.GetToolState(502)
-		config = '/boot/config.txt'
-		boot = '/boot'
-		try: file = open(config, 'r')
-		except:
-			config = '/boot/firmware/config.txt'
-			boot = '/boot/firmware'
-			file = open(config, 'r')
-		file1 = open(self.home+'/config.txt', 'w')
-		exists = False
-		while True:
-			line = file.readline()
-			if not line: break
-			if onoff and 'hdmi_force_hotplug=1' in line: 
-				file1.write('hdmi_force_hotplug=1\n')
-				exists = True
-			elif not onoff and 'hdmi_force_hotplug=1' in line: 
-				file1.write('#hdmi_force_hotplug=1\n')
-				exists = True
-			else: file1.write(line)
-		if onoff and not exists: 
-			file1.write('\nhdmi_force_hotplug=1\n')
-		file.close()
-		file1.close()
-
-		reset = False
-		if os.system('diff '+self.home+'/config.txt '+config+' > /dev/null'):
-			os.system(self.platform.admin+' mv '+self.home+'/config.txt '+boot)
-			reset = True
-		else: os.system('rm -f '+self.home+'/config.txt')
-
-		if reset: self.ShowStatusBarGREEN(_('Changes will be applied after restarting'))
 
 	def OnToolGpio(self,e):
 		dlg = GpioMap()
@@ -508,7 +471,7 @@ class MyFrame(wx.Frame):
 		self.toolbar6 = wx.ToolBar(self.apps, style=wx.TB_TEXT | wx.TB_HORIZONTAL)
 		toolSources = self.toolbar6.AddTool(605, _('Add Sources'), wx.Bitmap(self.currentdir+"/data/sources.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolSources, toolSources)
-		toolUpdate = self.toolbar6.AddTool(604, _('Update Candidates'), wx.Bitmap(self.currentdir+"/data/update.png"))
+		toolUpdate = self.toolbar6.AddTool(604, _('Get Candidates'), wx.Bitmap(self.currentdir+"/data/update.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolUpdate, toolUpdate)
 		toolUpdateAvailable = self.toolbar6.AddTool(607, _('Install all available updates'), wx.Bitmap(self.currentdir+"/data/install.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolUpdateAvailable, toolUpdateAvailable)
@@ -528,10 +491,10 @@ class MyFrame(wx.Frame):
 
 		sizerh = wx.BoxSizer(wx.HORIZONTAL)
 		sizerh.Add(self.listApps, 1, wx.EXPAND, 0)
-		sizerh.Add(self.toolbar2, 0)
+		sizerh.Add(self.toolbar2, 0, wx.EXPAND, 0)
 
 		sizer = wx.BoxSizer(wx.VERTICAL)
-		sizer.Add(self.toolbar6, 0)
+		sizer.Add(self.toolbar6, 0, wx.EXPAND, 0)
 		sizer.Add(sizerh, 1, wx.EXPAND, 0)
 
 		self.apps.SetSizer(sizer)
@@ -770,7 +733,7 @@ class MyFrame(wx.Frame):
 			if not candidate:
 				self.listApps.SetItemBackgroundColour(item,(200,200,200))
 
-			if installed and candidate:
+			if installed and candidate and not missing:
 				if installed != candidate: 
 					self.listApps.SetItemBackgroundColour(item,(220,255,220))
 					pending = _('Install')

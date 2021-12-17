@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # This file is part of Openplotter.
-# Copyright (C) 2015 by sailoog <https://github.com/sailoog/openplotter>
+# Copyright (C) 2022 by Sailoog <https://github.com/openplotter/openplotter-settings>
 #
 # Openplotter is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -29,15 +29,11 @@ def main():
 		Language(currentdir,'openplotter-settings',currentLanguage)
 		beta = conf2.get('GENERAL', 'beta')
 
-		codename_debian = 'buster'
-		codename_ubuntu = 'bionic'
+		codename_debian = 'bullseye'
+		conf2.set('GENERAL', 'debianCodeName', codename_debian)
 		RELEASE_DATA = platform2.RELEASE_DATA
-		if RELEASE_DATA['VERSION_CODENAME'] == 'focal': codename_ubuntu = 'focal' #ubuntu
-		if RELEASE_DATA['VERSION_CODENAME'] == 'groovy': codename_ubuntu = 'focal' #ubuntu for rasberry
-		if RELEASE_DATA['VERSION_CODENAME'] == 'hirsute': codename_ubuntu = 'focal' #ubuntu for rasberry
-		if RELEASE_DATA['VERSION_CODENAME'] == 'ulyana': codename_ubuntu = 'focal' #mint
-		if RELEASE_DATA['VERSION_CODENAME'] == 'ulyssa': codename_ubuntu = 'focal' #mint
-		
+		conf2.set('GENERAL', 'hostID', RELEASE_DATA['ID'])
+
 		sources = subprocess.check_output('apt-cache policy', shell=True).decode(sys.stdin.encoding)
 
 		fileData = ''
@@ -49,66 +45,31 @@ def main():
 
 		fileDataList = fileData.splitlines()
 
-		deb = 'deb http://ppa.launchpad.net/opencpn/opencpn/ubuntu '+codename_ubuntu+' main'
-		if not 'http://ppa.launchpad.net/opencpn/opencpn/ubuntu '+codename_ubuntu in sources:
-			if not deb in fileData: fileDataList.append(deb)
-			print(_('Added OpenCPN packages source'))
-		else: 
-			print(_('OpenCPN packages source already exists'))
-
-		deb = 'deb https://www.free-x.de/deb4op '+codename_debian+' main'
-		if not 'https://www.free-x.de/deb4op '+codename_debian in sources:
-			if not deb in fileData: fileDataList.append(deb)
-			print(_('Added XyGrib packages source'))
-		else: 
-			print(_('XyGrib packages source already exists'))
-
-		deb = 'deb http://ppa.launchpad.net/openplotter/openplotter/ubuntu '+codename_ubuntu+' main'
-		if not 'http://ppa.launchpad.net/openplotter/openplotter/ubuntu '+codename_ubuntu in sources:
+		deb = 'deb https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian '+codename_debian+' main'
+		if not 'https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian '+codename_debian in sources:
 			if not deb in fileData: fileDataList.append(deb)
 			print(_('Added OpenPlotter packages source'))
 		else: 
 			print(_('OpenPlotter packages source already exists'))
 
 		if beta == 'yes':
-			deb = 'deb http://ppa.launchpad.net/sailoog/openplotter/ubuntu '+codename_ubuntu+' main'
-			if not 'http://ppa.launchpad.net/sailoog/openplotter/ubuntu '+codename_ubuntu in sources:
+			deb = 'deb https://dl.cloudsmith.io/public/openplotter/openplotter-beta/deb/debian '+codename_debian+' main'
+			if not 'https://dl.cloudsmith.io/public/openplotter/openplotter-beta/deb/debian '+codename_debian in sources:
 				if not deb in fileData: fileDataList.append(deb)
 				print(_('Added OpenPlotter beta packages source'))
 			else: 
 				print(_('OpenPlotter beta packages source already exists'))
 
-		deb = 'deb https://repos.influxdata.com/debian '+codename_debian+' stable'
-		if not 'https://repos.influxdata.com/debian '+codename_debian in sources:
+		deb = 'deb https://www.free-x.de/deb4op '+codename_debian+' main'
+		if not 'https://www.free-x.de/deb4op '+codename_debian in sources:
 			if not deb in fileData: fileDataList.append(deb)
-			print(_('Added InfluxDB packages source'))
+			print(_('Added AvNav packages source'))
 		else: 
-			print(_('InfluxDB packages source already exists'))
-
-		deb = 'deb https://packages.grafana.com/oss/deb stable main'
-		if not 'https://packages.grafana.com/oss/deb stable' in sources:
-			if not deb in fileData: fileDataList.append(deb)
-			print(_('Added Grafana packages source'))
-		else: 
-			print(_('Grafana packages source already exists'))
-
-		if RELEASE_DATA['ID'] == 'ubuntu': codename_node = codename_ubuntu
-		elif RELEASE_DATA['ID'] == 'linuxmint': codename_node = codename_ubuntu
-		else: codename_node = codename_debian
-
-		deb = 'deb https://deb.nodesource.com/node_10.x '+codename_node+' main\ndeb-src https://deb.nodesource.com/node_10.x '+codename_node+' main'
-		if not 'https://deb.nodesource.com/node_10.x '+codename_node in sources:
-			if not deb in fileData: fileDataList.append(deb)
-			print(_('Added Node.js 10 packages source'))
-		else: 
-			print(_('Node.js 10 packages source already exists'))
+			print(_('AvNav packages source already exists'))
 
 		removeList = []
-		removeList.append('deb https://www.free-x.de/debian buster main contrib non-free')
-		removeList.append('deb https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian buster main')
-		removeList.append('deb https://dl.cloudsmith.io/public/openplotter/openplotter-beta/deb/debian buster main')
 		if beta != 'yes':
-			removeList.append('deb http://ppa.launchpad.net/sailoog/openplotter/ubuntu '+codename_ubuntu+' main')
+			removeList.append('deb https://dl.cloudsmith.io/public/openplotter/openplotter-beta/deb/debian '+codename_debian+' main')
 
 		finalList = []
 		for i in fileDataList:
@@ -120,14 +81,9 @@ def main():
 			fo.write(fileData)
 			fo.close()
 
-		os.system('cp -f '+currentdir+'/data/sources/99openplotter /etc/apt/preferences.d')
-		os.system('apt-key add - < '+currentdir+'/data/sources/opencpn.gpg.key')
 		os.system('apt-key add - < '+currentdir+'/data/sources/oss.boating.gpg.key')
 		os.system('apt-key add - < '+currentdir+'/data/sources/openplotter.gpg.key')
 		if beta == 'yes': os.system('apt-key add - < '+currentdir+'/data/sources/openplotter.beta.gpg.key')
-		os.system('apt-key add - < '+currentdir+'/data/sources/grafana.gpg.key')
-		os.system('apt-key add - < '+currentdir+'/data/sources/influxdb.gpg.key')
-		os.system('apt-key add - < '+currentdir+'/data/sources/nodesource.gpg.key')
 
 	except Exception as e: print(_('FAILED: ')+str(e))
 

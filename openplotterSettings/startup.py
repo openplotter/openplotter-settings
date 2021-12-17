@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # This file is part of Openplotter.
-# Copyright (C) 2019 by sailoog <https://github.com/sailoog/openplotter>
+# Copyright (C) 2022 by sailoog <https://github.com/openplotter/openplotter-settings>
 #                     e-sailing <https://github.com/e-sailing/openplotter>
 # Openplotter is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -14,6 +14,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Openplotter. If not, see <http://www.gnu.org/licenses/>.
+
 import wx, os, sys, time, threading, subprocess, importlib
 import wx.richtext as rt
 from .conf import Conf
@@ -159,17 +160,6 @@ class MyFrame(wx.Frame):
 			except Exception as e: self.add_logger_data({'green':'','black':'','red':str(e)})
 
 		if self.isRPI:
-			self.add_logger_data(_('Checking user "pi" password...'))
-			out = subprocess.check_output([self.platform.admin, '-n', 'grep', '-E', '^pi:', '/etc/shadow']).decode(sys.stdin.encoding)
-			tmp = out.split(':')
-			passw_a = tmp[1]
-			tmp = passw_a.split('$')
-			salt = tmp[2]
-			passw_b = subprocess.check_output(['mkpasswd', '-msha-512', 'raspberry', salt]).decode(sys.stdin.encoding)
-			if passw_a.rstrip() == passw_b.rstrip():
-				self.add_logger_data({'green':'','black':'','red':_('Security warning: You are using the default password for "pi" user.')+'\n    '+_('Please change password in Menu > Preferences > Raspberry Pi Configuration.')})
-			else: self.add_logger_data({'green':_('changed'),'black':'','red':''})
-
 			self.add_logger_data(_('Checking screensaver state...'))
 			screensaver = self.conf.get('GENERAL', 'screensaver')
 			if screensaver == '1':
@@ -182,18 +172,10 @@ class MyFrame(wx.Frame):
 				subprocess.call(['xset', 's', 'on'])
 				subprocess.call(['xset', '+dpms'])
 				self.add_logger_data({'green':_('enabled'),'black':'','red':''})
-
-			self.add_logger_data(_('Checking headless state...'))
-			try: config = open('/boot/config.txt', 'r')
-			except: config = open('/boot/firmware/config.txt', 'r')
-			data = config.read()
-			config.close()
-			if '#hdmi_force_hotplug=1' in data: self.add_logger_data({'green':'','black':_('disabled'),'red':''})
-			else: self.add_logger_data({'green':_('enabled'),'black':'','red':''})
-
+		
 		self.add_logger_data(_('Checking OpenPlotter packages source...'))
 		sources = subprocess.check_output(['apt-cache', 'policy']).decode(sys.stdin.encoding)
-		if 'http://ppa.launchpad.net/openplotter/openplotter/ubuntu' in sources:
+		if 'https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian' in sources:
 			self.add_logger_data({'green':_('added'),'black':'','red':''})
 		else: self.add_logger_data({'green':'','black':'','red':_('There are missing packages sources. Please add sources in "OpenPlotter Settings".')})
 

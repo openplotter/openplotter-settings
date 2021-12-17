@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openplotter\n"
 "POT-Creation-Date: 2021-10-31 12:17+0100\n"
-"PO-Revision-Date: 2021-11-14 14:40+0100\n"
+"PO-Revision-Date: 2021-11-25 18:05\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -13,12 +13,12 @@ msgstr ""
 "X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
 "X-Crowdin-Project: openplotter\n"
 "X-Crowdin-Project-ID: 289888\n"
 "X-Crowdin-Language: fr\n"
 "X-Crowdin-File: openplotter-settings.po\n"
 "X-Crowdin-File-ID: 4\n"
-"X-Poedit-SearchPath-0: .\n"
 
 #: appsList.py:70
 msgid "Signal K Filter"
@@ -38,7 +38,7 @@ msgstr "Bus CAN"
 
 #: appsList.py:214
 msgid "MAIANA AIS transponder"
-msgstr "MAIANA AIS transpondeur"
+msgstr "Transpondeur SIA MAIANA"
 
 #: appsList.py:230
 msgid "Serial"
@@ -334,7 +334,7 @@ msgstr "Voir la catégorie"
 
 #: openplotterSettings.py:244
 msgid "Search"
-msgstr "Rechercher"
+msgstr "Chercher"
 
 #: openplotterSettings.py:247
 msgid "Delete all logs"
@@ -376,13 +376,9 @@ msgid "Error reading log"
 msgstr "Erreur lors de la lecture du journal"
 
 #: openplotterSettings.py:373
-msgid ""
-"Current and archived system log files will be deleted. A new system log file will be created after reboot.\n"
-"\n"
+msgid "Current and archived system log files will be deleted. A new system log file will be created after reboot.\n\n"
 " Are you sure?"
-msgstr ""
-"Les journaux système actuels et archivés seront supprimés. Un nouveau fichier journal système sera créé après le redémarrage.\n"
-"\n"
+msgstr "Les journaux système actuels et archivés seront supprimés. Un nouveau fichier journal système sera créé après le redémarrage.\n\n"
 " Êtes-vous sûr?"
 
 #: openplotterSettings.py:374 openplotterSettings.py:600
@@ -476,7 +472,7 @@ msgstr "appli uniquement pour les ordis Raspberry"
 
 #: openplotterSettings.py:561
 msgid "Press Refresh"
-msgstr "Actualiser"
+msgstr "Appuyez sur Actualiser"
 
 #: openplotterSettings.py:572
 msgid "Updating packages data, please wait... "
@@ -559,7 +555,7 @@ msgstr "Sélectionnez la catégorie du journal système"
 
 #: openplotterSettings.py:862
 msgid "Search in system log file"
-msgstr "Rechercher dans le journal système"
+msgstr "Chercher dans le journal système"
 
 #: postInstall.py:14
 msgid "Post-installation actions"
@@ -804,3 +800,4 @@ msgstr "DÉMARRAGE TERMINÉ"
 #: startup.py:261
 msgid "CHECK SYSTEM FINISHED"
 msgstr "VÉRIFICATION DU SYSTÈME TERMINÉ"
+
