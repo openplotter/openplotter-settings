@@ -83,22 +83,6 @@ class AppsList:
 		self.appsDict.append(app)
 
 		app = {
-		'name': _('Notifications'),
-		'platform': 'both',
-		'package': 'openplotter-notifications',
-		'preUninstall': 'notificationsPreUninstall',
-		'uninstall': 'openplotter-notifications',
-		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
-		'dev': 'no',
-		'entryPoint': 'openplotter-notifications',
-		'postInstall': platform2.admin+' notificationsPostInstall',
-		'reboot': 'no',
-		'module': 'openplotterNotifications',
-		'conf': 'notifications'
-		}
-		self.appsDict.append(app)
-
-		app = {
 		'name': 'GPIO',
 		'platform': 'rpi',
 		'package': 'openplotter-gpio',
@@ -147,22 +131,6 @@ class AppsList:
 		self.appsDict.append(app)
 
 		app = {
-		'name': _('CAN Bus'),
-		'platform': 'both',
-		'package': 'openplotter-can',
-		'preUninstall': platform2.admin+' canPreUninstall',
-		'uninstall': 'openplotter-can',
-		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
-		'dev': 'no',
-		'entryPoint': 'openplotter-can',
-		'postInstall': platform2.admin+' canPostInstall',
-		'reboot': 'no',
-		'module': 'openplotterCan',
-		'conf': 'can'
-		}
-		self.appsDict.append(app)
-
-		app = {
 		'name': 'OpenMarine Box',
 		'platform': 'both',
 		'package': 'openplotter-openmarinebox',
@@ -193,7 +161,8 @@ class AppsList:
 		'conf': ''
 		}
 		self.appsDict.append(app)
-
+		'''
+		
 		app = {
 		'name': _('Dashboards'),
 		'platform': 'both',
@@ -209,7 +178,22 @@ class AppsList:
 		'conf': ''
 		}
 		self.appsDict.append(app)
-		'''
+
+		app = {
+		'name': _('Notifications'),
+		'platform': 'both',
+		'package': 'openplotter-notifications',
+		'preUninstall': 'notificationsPreUninstall',
+		'uninstall': 'openplotter-notifications',
+		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
+		'dev': 'no',
+		'entryPoint': 'openplotter-notifications',
+		'postInstall': platform2.admin+' notificationsPostInstall',
+		'reboot': 'no',
+		'module': 'openplotterNotifications',
+		'conf': 'notifications'
+		}
+		self.appsDict.append(app)
 
 		app = {
 		'name': _('Network'),
@@ -226,7 +210,23 @@ class AppsList:
 		'conf': 'network'
 		}
 		self.appsDict.append(app)
-		
+
+		app = {
+		'name': _('CAN Bus'),
+		'platform': 'both',
+		'package': 'openplotter-can',
+		'preUninstall': platform2.admin+' canPreUninstall',
+		'uninstall': 'openplotter-can',
+		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
+		'dev': 'no',
+		'entryPoint': 'openplotter-can',
+		'postInstall': platform2.admin+' canPostInstall',
+		'reboot': 'no',
+		'module': 'openplotterCan',
+		'conf': 'can'
+		}
+		self.appsDict.append(app)
+
 		app = {
 		'name': _('Serial'),
 		'platform': 'both',

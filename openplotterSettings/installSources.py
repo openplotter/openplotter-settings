@@ -63,9 +63,9 @@ def main():
 		deb = 'deb https://www.free-x.de/deb4op '+codename_debian+' main'
 		if not 'https://www.free-x.de/deb4op '+codename_debian in sources:
 			if not deb in fileData: fileDataList.append(deb)
-			print(_('Added AvNav packages source'))
+			print(_('Added free-x packages source'))
 		else: 
-			print(_('AvNav packages source already exists'))
+			print(_('free-x packages source already exists'))
 
 		removeList = []
 		if beta != 'yes':
