@@ -10,7 +10,7 @@ Install dependencies (for production and development):
 
 #### For production
 
-Download the latest .deb file from [releases](https://github.com/openplotter/openplotter-settings/releases) and install it:
+Download and install the latest .deb file from [![Latest version of 'openplotter-settings' @ Cloudsmith](https://api-prd.cloudsmith.io/v1/badges/version/openplotter/openplotter/deb/openplotter-settings/latest/a=all;d=debian%252Fbullseye;t=binary/?render=true&show_latest=true)](https://cloudsmith.io/~openplotter/repos/openplotter/packages/detail/deb/openplotter-settings/latest/a=all;d=debian%252Fbullseye;t=binary/)
 
 `sudo dpkg -i openplotter-settings_x.x.x-xxx_all.deb`
 

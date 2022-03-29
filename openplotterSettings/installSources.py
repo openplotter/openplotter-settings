@@ -81,9 +81,10 @@ def main():
 			fo.write(fileData)
 			fo.close()
 
-		os.system('apt-key add - < '+currentdir+'/data/sources/oss.boating.gpg.key')
-		os.system('apt-key add - < '+currentdir+'/data/sources/openplotter.gpg.key')
-		if beta == 'yes': os.system('apt-key add - < '+currentdir+'/data/sources/openplotter.beta.gpg.key')
+		os.system('cat '+currentdir+'/data/sources/oss.boating.gpg.key | gpg --dearmor > "/etc/apt/trusted.gpg.d/oss.boating.gpg"')
+		os.system('cat '+currentdir+'/data/sources/openplotter.gpg.key | gpg --dearmor > "/etc/apt/trusted.gpg.d/openplotter.gpg"')
+
+		if beta == 'yes': os.system('cat '+currentdir+'/data/sources/openplotter.beta.gpg.key | gpg --dearmor > "/etc/apt/trusted.gpg.d/openplotter.beta.gpg"')
 
 	except Exception as e: print(_('FAILED: ')+str(e))
 

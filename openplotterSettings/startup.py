@@ -55,13 +55,18 @@ class MyFrame(wx.Frame):
 		self.logger = rt.RichTextCtrl(panel, style=wx.TE_MULTILINE|wx.TE_READONLY|wx.TE_DONTWRAP|wx.LC_SORT_ASCENDING)
 		self.logger.SetMargins((10,10))
 
-		self.closeButton =wx.Button(panel, label=_('Close'))
-		self.closeButton.Bind(wx.EVT_BUTTON, self.OnCloseButton)
-		self.closeButton.Disable()
-
-		vbox = wx.BoxSizer(wx.VERTICAL)
+		self.toolbar1 = wx.ToolBar(panel, style=wx.TB_TEXT | wx.TB_VERTICAL)
+		toolClose = self.toolbar1.AddTool(102, _('Close'), wx.Bitmap(self.currentdir+"/data/close.png"))
+		self.Bind(wx.EVT_TOOL, self.OnCloseButton, toolClose)
+		self.toolbar1.EnableTool(102,False)
+		self.toolbar1.AddSeparator()
+		toolRescue = self.toolbar1.AddCheckTool(101, _('Rescue'), wx.Bitmap(self.currentdir+"/data/rescue.png"))
+		self.Bind(wx.EVT_TOOL, self.onToolRescue, toolRescue)
+		if self.conf.get('GENERAL', 'rescue') == 'yes': self.toolbar1.ToggleTool(101,True)
+		
+		vbox = wx.BoxSizer(wx.HORIZONTAL)
 		vbox.Add(self.logger, 1, wx.ALL | wx.EXPAND, 5)
-		vbox.Add(self.closeButton, 0, wx.ALL | wx.EXPAND, 5)
+		vbox.Add(self.toolbar1, 0, wx.ALL | wx.EXPAND, 0)
 		panel.SetSizer(vbox)
 
 		self.timer = wx.Timer(self)
@@ -78,7 +83,7 @@ class MyFrame(wx.Frame):
 	def refresh(self,event):
 		if self.logger_data:
 			if isinstance(self.logger_data, int):
-				self.closeButton.Enable()
+				self.toolbar1.EnableTool(102,True)
 				if self.warnings_flag:
 					self.GetStatusBar().SetForegroundColour(wx.RED)
 					self.SetStatusText(_('There are some warnings. Check your system. Closing in ')+str(self.logger_data)+_(' seconds'))
@@ -142,6 +147,13 @@ class MyFrame(wx.Frame):
 			self.add_logger_data({'green':'','black':'','red':_('Autostart is not enabled and most features will not work. Please select "Autostart" in "OpenPlotter Settings"')})
 		else:
 			self.add_logger_data({'green':_('enabled'),'black':'','red':''})
+
+		self.add_logger_data(_('Checking rescue mode...'))
+		debug = self.conf.get('GENERAL', 'rescue')
+		if debug == 'yes': 
+			self.add_logger_data({'green':'','black':'','red':_('enabled')})
+		else:
+			self.add_logger_data({'green':_('disabled'),'black':'','red':''})
 
 		self.add_logger_data(_('Checking debugging mode...'))
 		debug = self.conf.get('GENERAL', 'debug')
@@ -267,6 +279,10 @@ class MyFrame(wx.Frame):
 	def OnCloseButton(self,e=0):
 		self.timer.Stop()
 		self.Destroy()
+
+	def onToolRescue(self,e=0):
+		if self.toolbar1.GetToolState(101): self.conf.set('GENERAL', 'rescue', 'yes')
+		else: self.conf.set('GENERAL', 'rescue', 'no')
 
 def print_help():
 	print('This is part of OpenPlotter software')
