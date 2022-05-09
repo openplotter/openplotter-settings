@@ -407,43 +407,16 @@ class MyFrame(wx.Frame):
 
 	def pageRpi(self):
 		self.toolbar5 = wx.ToolBar(self.raspSettings, style=wx.TB_TEXT)
-		toolScreensaver = self.toolbar5.AddCheckTool(501, _('Disable Screensaver'), wx.Bitmap(self.currentdir+"/data/screen.png"))
-		self.Bind(wx.EVT_TOOL, self.OnToolScreensaver, toolScreensaver)
-		self.toolbar5.AddSeparator()
 		toolGpio = self.toolbar5.AddTool(503, _('GPIO Map'), wx.Bitmap(self.currentdir+"/data/chip.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolGpio, toolGpio)
+		self.toolbar5.AddSeparator()
 
 		sizer = wx.BoxSizer(wx.VERTICAL)
 		sizer.Add(self.toolbar5, 0, wx.EXPAND, 0)
 		self.raspSettings.SetSizer(sizer)
 
-		if self.platform.isRPI:
-			screensaver = self.conf.get('GENERAL', 'screensaver')
-			if screensaver == '1': 
-				self.toolbar5.ToggleTool(501,True)
-			try: config = open('/boot/config.txt', 'r')
-			except: config = open('/boot/firmware/config.txt', 'r')
-			data = config.read()
-			config.close()
-			if not '#hdmi_force_hotplug=1' in data:
-				self.toolbar5.ToggleTool(502,True)
-			self.toolbar5.ToggleTool(503,True)
-		else: 
-			self.toolbar5.EnableTool(501,False)
-			self.toolbar5.EnableTool(502,False)
-			self.toolbar5.EnableTool(503,False)
-
-	def OnToolScreensaver(self, e):
-		if self.toolbar5.GetToolState(501):
-			self.conf.set('GENERAL', 'screensaver', '1')
-			subprocess.call(['xset', 's', 'noblank'])
-			subprocess.call(['xset', 's', 'off'])
-			subprocess.call(['xset', '-dpms'])
-		else: 
-			self.conf.set('GENERAL', 'screensaver', '0')
-			subprocess.call(['xset', 's', 'blank'])
-			subprocess.call(['xset', 's', 'on'])
-			subprocess.call(['xset', '+dpms'])
+		if self.platform.isRPI: self.toolbar5.ToggleTool(503,True)
+		else: self.toolbar5.EnableTool(503,False)
 
 	def OnToolGpio(self,e):
 		dlg = GpioMap()

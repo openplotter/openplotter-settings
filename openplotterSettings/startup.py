@@ -170,20 +170,6 @@ class MyFrame(wx.Frame):
 				if mb >= int(logMaxSize): self.add_logger_data({'green':'','black':'','red':_('System log file size: ')+str(round(mb,2))+' MB'})
 				else: self.add_logger_data({'green': _('System log file size: ')+str(round(mb,2))+' MB','black':'','red':''})
 			except Exception as e: self.add_logger_data({'green':'','black':'','red':str(e)})
-
-		if self.isRPI:
-			self.add_logger_data(_('Checking screensaver state...'))
-			screensaver = self.conf.get('GENERAL', 'screensaver')
-			if screensaver == '1':
-				subprocess.call(['xset', 's', 'noblank'])
-				subprocess.call(['xset', 's', 'off'])
-				subprocess.call(['xset', '-dpms'])
-				self.add_logger_data({'green':'','black':_('disabled'),'red':''})
-			else:
-				subprocess.call(['xset', 's', 'blank'])
-				subprocess.call(['xset', 's', 'on'])
-				subprocess.call(['xset', '+dpms'])
-				self.add_logger_data({'green':_('enabled'),'black':'','red':''})
 		
 		self.add_logger_data(_('Checking OpenPlotter packages source...'))
 		sources = subprocess.check_output(['apt-cache', 'policy']).decode(sys.stdin.encoding)
