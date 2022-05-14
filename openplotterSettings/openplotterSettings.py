@@ -23,7 +23,7 @@ from .language import Language
 from .platform import Platform
 from .version import version
 from .appsList import AppsList
-from .gpio import GpioMap
+from .gpio import GpioMap, Gpio
 
 class MyFrame(wx.Frame):
 	def __init__(self):
@@ -425,12 +425,224 @@ class MyFrame(wx.Frame):
 		self.Bind(wx.EVT_TOOL, self.OnToolGpio, toolGpio)
 		self.toolbar5.AddSeparator()
 
+		powerLabel = wx.StaticText(self.raspSettings, label=_('Shutdown Management'))
+
+		self.toolbar8 = wx.ToolBar(self.raspSettings, style=wx.TB_TEXT)
+		toolShutdown = self.toolbar8.AddCheckTool(801, _('Shutdown'), wx.Bitmap(self.currentdir+"/data/shutdown.png"))
+		self.Bind(wx.EVT_TOOL, self.onToolShutdown, toolShutdown)
+		self.gpioShutdown = wx.TextCtrl(self.toolbar8, 802, style=wx.CB_READONLY)
+		toolGpioShutdown = self.toolbar8.AddControl(self.gpioShutdown)
+		toolSetGpioShutdown= self.toolbar8.AddTool(803, _('GPIO'), wx.Bitmap(self.currentdir+"/data/chip.png"))
+		self.Bind(wx.EVT_TOOL, self.onToolSetGpioShutdown, toolSetGpioShutdown)
+		self.transitionShutdown = wx.ComboBox(self.toolbar8, 804, _('Transition'), choices=[_('high->low'),_('low->high')], size=(150,-1), style=wx.CB_DROPDOWN)
+		toolTransitionShutdown = self.toolbar8.AddControl(self.transitionShutdown)
+		separatorLabel = wx.StaticText(self.toolbar8, 807, label='    ')
+		toolSeparatorLabel= self.toolbar8.AddControl(separatorLabel)
+		self.gpioPullShutdown = wx.ComboBox(self.toolbar8, 805, 'GPIO Pull', choices=['pull-up','pull-down',_('off')], size=(150,-1), style=wx.CB_DROPDOWN)
+		toolGpioPullShutdown = self.toolbar8.AddControl(self.gpioPullShutdown)
+		self.toolbar8.AddSeparator()
+		toolApplyShutdown = self.toolbar8.AddTool(806, _('Apply'), wx.Bitmap(self.currentdir+"/data/apply.png"))
+		self.Bind(wx.EVT_TOOL, self.onToolApplyShutdown, toolApplyShutdown)
+
+		self.toolbar9 = wx.ToolBar(self.raspSettings, style=wx.TB_TEXT)
+		toolPoweroff = self.toolbar9.AddCheckTool(901, _('Power off'), wx.Bitmap(self.currentdir+"/data/poweroff.png"))
+		self.Bind(wx.EVT_TOOL, self.onToolPoweroff, toolPoweroff)
+		self.gpioPoweroff = wx.TextCtrl(self.toolbar9, 902, style=wx.CB_READONLY)
+		toolGpioPoweroff = self.toolbar9.AddControl(self.gpioPoweroff)
+		toolSetGpioPoweroff = self.toolbar9.AddTool(903, _('GPIO'), wx.Bitmap(self.currentdir+"/data/chip.png"))
+		self.Bind(wx.EVT_TOOL, self.onToolSetGpioPoweroff, toolSetGpioPoweroff)
+		self.transitionPoweroff = wx.ComboBox(self.toolbar9, 904, _('Transition'), choices=[_('low->high'),_('high->low')], size=(150,-1), style=wx.CB_DROPDOWN)
+		toolTransitionPoweroff= self.toolbar9.AddControl(self.transitionPoweroff)	
+		self.toolbar9.AddSeparator()
+		toolApplyPoweroff = self.toolbar9.AddTool(905, _('Apply'), wx.Bitmap(self.currentdir+"/data/apply.png"))
+		self.Bind(wx.EVT_TOOL, self.onToolApplyPoweroff, toolApplyPoweroff)
+
 		sizer = wx.BoxSizer(wx.VERTICAL)
 		sizer.Add(self.toolbar5, 0, wx.EXPAND, 0)
+		sizer.Add(powerLabel, 0, wx.ALL | wx.EXPAND, 10)
+		sizer.Add(self.toolbar8, 0, wx.EXPAND, 0)
+		sizer.Add(self.toolbar9, 0, wx.EXPAND, 0)
 		self.raspSettings.SetSizer(sizer)
 
 		if self.platform.isRPI: self.toolbar5.ToggleTool(503,True)
 		else: self.toolbar5.EnableTool(503,False)
+
+		try: shutdown = eval(self.conf.get('GENERAL', 'shutdown'))
+		except: shutdown = {}
+		if shutdown:
+			self.gpioShutdown.SetValue(shutdown['gpio'])
+			self.transitionShutdown.SetSelection(shutdown['transition'])
+			self.gpioPullShutdown.SetSelection(shutdown['transition'])
+
+		try: poweroff = eval(self.conf.get('GENERAL', 'poweroff'))
+		except: poweroff = {}
+		if poweroff:
+			self.gpioPoweroff.SetValue(poweroff['gpio'])
+			self.transitionPoweroff.SetSelection(poweroff['transition'])
+
+		try: config = open('/boot/config.txt', 'r')
+		except: config = open('/boot/firmware/config.txt', 'r')
+		data = config.read()
+		config.close()
+		if 'dtoverlay=gpio-poweroff' in data and not '#dtoverlay=gpio-poweroff' in data: self.toolbar9.ToggleTool(901,True)
+		else: 
+			self.toolbar9.ToggleTool(901,False)
+			self.disablePowerOff()
+
+		if 'dtoverlay=gpio-shutdown' in data and not '#dtoverlay=gpio-shutdown' in data: self.toolbar8.ToggleTool(801,True)
+		else: 
+			self.toolbar8.ToggleTool(801,False)
+			self.disableShutdown()
+
+	def disablePowerOff(self):
+		self.toolbar9.EnableTool(902,False)
+		self.toolbar9.EnableTool(903,False)
+		self.toolbar9.EnableTool(904,False)
+
+	def disableShutdown(self):
+		self.toolbar8.EnableTool(802,False)
+		self.toolbar8.EnableTool(803,False)
+		self.toolbar8.EnableTool(804,False)
+		self.toolbar8.EnableTool(805,False)
+
+	def enablePowerOff(self):
+		self.toolbar9.EnableTool(902,True)
+		self.toolbar9.EnableTool(903,True)
+		self.toolbar9.EnableTool(904,True)
+
+	def enableShutdown(self):
+		self.toolbar8.EnableTool(802,True)
+		self.toolbar8.EnableTool(803,True)
+		self.toolbar8.EnableTool(804,True)
+		self.toolbar8.EnableTool(805,True)
+
+	def onToolShutdown(self,e):
+		if self.toolbar8.GetToolState(801):
+			self.enableShutdown()
+		else:
+			self.disableShutdown()
+
+	def onToolSetGpioShutdown(self,e):
+		gpioPin = '0'
+		gpioBCM = self.gpioShutdown.GetValue()
+		if gpioBCM:
+			gpioBCM = 'GPIO '+gpioBCM
+			gpios = Gpio()
+			for i in gpios.gpioMap:
+				if gpioBCM == i['BCM']: gpioPin = i['physical']
+		dlg = GpioMap(['GPIO'],gpioPin)
+		res = dlg.ShowModal()
+		if res == wx.ID_OK:
+			gpioBCM = dlg.selected['BCM'].replace('GPIO ','')
+			self.gpioShutdown.SetValue(gpioBCM)
+		dlg.Destroy()
+
+	def onToolApplyShutdown(self,e):
+		if self.toolbar8.GetToolState(801):
+			if not self.gpioShutdown.GetValue():
+				self.ShowStatusBarRED(_('Failed, you need to set a GPIO'))
+				return
+			else: gpio = self.gpioShutdown.GetValue()
+			if self.transitionShutdown.GetSelection() == -1:
+				self.ShowStatusBarRED(_('Failed, you need to set a transition mode'))
+				return
+			else: transition = self.transitionShutdown.GetSelection()
+			if self.gpioPullShutdown.GetSelection() == -1:
+				self.ShowStatusBarRED(_('Failed, you need to set a GPIO pull mode'))
+				return
+			else: pull = self.gpioPullShutdown.GetSelection()
+			data = {'gpio':gpio, 'transition':transition,'pull':pull}
+			self.conf.set('GENERAL', 'shutdown', str(data))
+			if pull == 0: pull = 'up'
+			elif pull == 1: pull = 'down'
+			elif pull == 2: pull = 'off'
+			overlay = 'dtoverlay=gpio-shutdown,gpiopin='+gpio+',active_low='+str(transition)+',gpio_pull='+pull+'\n'
+		else: 
+			self.conf.set('GENERAL', 'shutdown', '')
+			overlay = ''
+
+		config = '/boot/config.txt'
+		boot = '/boot'
+		try: file = open(config, 'r')
+		except:
+			config = '/boot/firmware/config.txt'
+			boot = '/boot/firmware'
+			file = open(config, 'r')
+		file1 = open('config.txt', 'w')
+		exists = False
+		while True:
+			line = file.readline()
+			if not line: break
+			if 'dtoverlay=gpio-shutdown' in line:
+				exists = True
+				if overlay: file1.write(overlay)
+			else: file1.write(line)
+		if not exists and overlay: file1.write(overlay)
+		file.close()
+		file1.close()
+		if os.system('diff config.txt '+config+' > /dev/null'): os.system(self.platform.admin+' mv config.txt '+boot)
+		else: os.system('rm -f config.txt')
+		self.ShowStatusBarGREEN(_('Done. Changes will be applied after the next reboot'))
+
+	def onToolPoweroff(self,e):
+		if self.toolbar9.GetToolState(901):
+			self.enablePowerOff()
+		else:
+			self.disablePowerOff()
+
+	def onToolSetGpioPoweroff(self,e):
+		gpioPin = '0'
+		gpioBCM = self.gpioPoweroff.GetValue()
+		if gpioBCM:
+			gpioBCM = 'GPIO '+gpioBCM
+			gpios = Gpio()
+			for i in gpios.gpioMap:
+				if gpioBCM == i['BCM']: gpioPin = i['physical']
+		dlg = GpioMap(['GPIO'],gpioPin)
+		res = dlg.ShowModal()
+		if res == wx.ID_OK:
+			gpioBCM = dlg.selected['BCM'].replace('GPIO ','')
+			self.gpioPoweroff.SetValue(gpioBCM)
+		dlg.Destroy()
+
+	def onToolApplyPoweroff(self,e):
+		if self.toolbar9.GetToolState(901):
+			if not self.gpioPoweroff.GetValue():
+				self.ShowStatusBarRED(_('Failed, you need to set a GPIO'))
+				return
+			else: gpio = self.gpioPoweroff.GetValue()
+			if self.transitionPoweroff.GetSelection() == -1:
+				self.ShowStatusBarRED(_('Failed, you need to set a transition mode'))
+				return
+			else: transition = self.transitionPoweroff.GetSelection()
+			data = {'gpio':gpio, 'transition':transition}
+			self.conf.set('GENERAL', 'poweroff', str(data))
+			overlay = 'dtoverlay=gpio-poweroff,gpiopin='+gpio+',active_low='+str(transition)+'\n'
+		else: 
+			self.conf.set('GENERAL', 'poweroff', '')
+			overlay = ''
+		config = '/boot/config.txt'
+		boot = '/boot'
+		try: file = open(config, 'r')
+		except:
+			config = '/boot/firmware/config.txt'
+			boot = '/boot/firmware'
+			file = open(config, 'r')
+		file1 = open('config.txt', 'w')
+		exists = False
+		while True:
+			line = file.readline()
+			if not line: break
+			if 'dtoverlay=gpio-poweroff' in line:
+				exists = True
+				if overlay: file1.write(overlay)
+			else: file1.write(line)
+		if not exists and overlay: file1.write(overlay)
+		file.close()
+		file1.close()
+		if os.system('diff config.txt '+config+' > /dev/null'): os.system(self.platform.admin+' mv config.txt '+boot)
+		else: os.system('rm -f config.txt')
+		self.ShowStatusBarGREEN(_('Done. Changes will be applied after the next reboot'))
 
 	def OnToolGpio(self,e):
 		dlg = GpioMap()
