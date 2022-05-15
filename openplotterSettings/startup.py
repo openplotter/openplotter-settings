@@ -132,35 +132,52 @@ class MyFrame(wx.Frame):
 				if delay:
 					self.add_logger_data(_('Applying delay of ')+delay+_(' seconds...'))
 					time.sleep(int(delay))
-					self.add_logger_data({'green':_('done'),'black':'','red':''})
+					self.add_logger_data({'green':'','black':_('done'),'red':''})
 			except:self.add_logger_data({'green':'','black':'','red':_('Delay failed. Is it a number?')})
 		else:
 			try:
 				if delay:
 					self.add_logger_data(_('A startup delay will apply'))
 					checkDelay = int(delay)
-					self.add_logger_data({'green':delay+_(' seconds'),'black':'','red':''})
+					self.add_logger_data({'green':'','black':delay+_(' seconds'),'red':''})
 			except:self.add_logger_data({'green':'','black':'','red':_('Delay failed. Is it a number?')})
+
+		self.add_logger_data(_('Checking NTP server...'))
+		try:
+			subprocess.check_output(['systemctl', 'is-active', 'ntp.service']).decode(sys.stdin.encoding)
+			self.add_logger_data({'green':_('running'),'black':'','red':''})
+		except: self.add_logger_data({'green':'','black':_('not running'),'red':''})
+
+		try: config = open('/boot/config.txt', 'r')
+		except: config = open('/boot/firmware/config.txt', 'r')
+		data = config.read()
+		config.close()
+		self.add_logger_data(_('Checking Shutdown management...'))
+		if 'dtoverlay=gpio-poweroff' in data and not '#dtoverlay=gpio-poweroff' in data: self.add_logger_data({'green':'','black':_('enabled'),'red':''})
+		else: self.add_logger_data({'green':'','black':_('disabled'),'red':''})
+		self.add_logger_data(_('Checking Power off management...'))
+		if 'dtoverlay=gpio-shutdown' in data and not '#dtoverlay=gpio-shutdown' in data: self.add_logger_data({'green':'','black':_('enabled'),'red':''})
+		else: self.add_logger_data({'green':'','black':_('disabled'),'red':''})
 
 		self.add_logger_data(_('Checking OpenPlotter autostart...'))
 		if not os.path.exists(self.conf.home+'/.config/autostart/openplotter-startup.desktop'):
 			self.add_logger_data({'green':'','black':'','red':_('Autostart is not enabled and most features will not work. Please select "Autostart" in "OpenPlotter Settings"')})
 		else:
-			self.add_logger_data({'green':_('enabled'),'black':'','red':''})
+			self.add_logger_data({'green':'','black':_('enabled'),'red':''})
 
 		self.add_logger_data(_('Checking rescue mode...'))
-		debug = self.conf.get('GENERAL', 'rescue')
-		if debug == 'yes': 
+		rescue = self.conf.get('GENERAL', 'rescue')
+		if rescue == 'yes': 
 			self.add_logger_data({'green':'','black':'','red':_('enabled')})
 		else:
-			self.add_logger_data({'green':_('disabled'),'black':'','red':''})
+			self.add_logger_data({'green':'','black':_('disabled'),'red':''})
 
 		self.add_logger_data(_('Checking debugging mode...'))
 		debug = self.conf.get('GENERAL', 'debug')
 		if debug == 'yes': 
 			self.add_logger_data({'green':'','black':'','red':_('enabled')})
 		else:
-			self.add_logger_data({'green':_('disabled'),'black':'','red':''})
+			self.add_logger_data({'green':'','black':_('disabled'),'red':''})
 
 		logMaxSize = self.conf.get('GENERAL', 'logMaxSize')
 		if logMaxSize:
@@ -168,13 +185,13 @@ class MyFrame(wx.Frame):
 			try:
 				mb = os.path.getsize("/var/log/syslog")/1e+6
 				if mb >= int(logMaxSize): self.add_logger_data({'green':'','black':'','red':_('System log file size: ')+str(round(mb,2))+' MB'})
-				else: self.add_logger_data({'green': _('System log file size: ')+str(round(mb,2))+' MB','black':'','red':''})
+				else: self.add_logger_data({'green':'','black':_('System log file size: ')+str(round(mb,2))+' MB','red':''})
 			except Exception as e: self.add_logger_data({'green':'','black':'','red':str(e)})
 		
 		self.add_logger_data(_('Checking OpenPlotter packages source...'))
 		sources = subprocess.check_output(['apt-cache', 'policy']).decode(sys.stdin.encoding)
 		if 'https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian' in sources:
-			self.add_logger_data({'green':_('added'),'black':'','red':''})
+			self.add_logger_data({'green':'','black':_('added'),'red':''})
 		else: self.add_logger_data({'green':'','black':'','red':_('There are missing packages sources. Please add sources in "OpenPlotter Settings".')})
 
 		appsList = AppsList()
@@ -198,7 +215,7 @@ class MyFrame(wx.Frame):
 				for i in conflicts: 
 					red += '\n    '+i
 				self.add_logger_data({'green':'','black':'','red':red})
-			else: self.add_logger_data({'green':_('no conflicts'),'black':'','red':''})
+			else: self.add_logger_data({'green':'','black':_('no conflicts'),'red':''})
 		except Exception as e: self.add_logger_data({'green':'','black':'','red':str(e)})
 
 		try:
@@ -210,7 +227,7 @@ class MyFrame(wx.Frame):
 				for i in conflicts: 
 					red += '\n    '+i['description']+' ('+i['mode']+'): '+i['type']+' '+i['address']+':'+i['port']
 				self.add_logger_data({'green':'','black':'','red':red})
-			else: self.add_logger_data({'green':_('no conflicts'),'black':'','red':''})
+			else: self.add_logger_data({'green':'','black':_('no conflicts'),'red':''})
 		except Exception as e: self.add_logger_data({'green':'','black':'','red':str(e)})
 
 		if self.isRPI:
@@ -229,7 +246,7 @@ class MyFrame(wx.Frame):
 							line += ii['app']+' - '+ii['id']
 						red += '\n    '+line
 				if red: self.add_logger_data({'green':'','black':'','red':red})
-				else: self.add_logger_data({'green':_('no conflicts'),'black':'','red':''})
+				else: self.add_logger_data({'green':'','black':_('no conflicts'),'red':''})
 			except Exception as e: self.add_logger_data({'green':'','black':'','red':str(e)})
 
 		try:
