@@ -464,34 +464,44 @@ class MyFrame(wx.Frame):
 		sizer.Add(self.toolbar9, 0, wx.EXPAND, 0)
 		self.raspSettings.SetSizer(sizer)
 
-		if self.platform.isRPI: self.toolbar5.ToggleTool(503,True)
-		else: self.toolbar5.EnableTool(503,False)
+		if self.platform.isRPI: 
+			self.toolbar5.ToggleTool(503,True)
+			self.toolbar8.EnableTool(806,True)
+			self.toolbar9.EnableTool(905,True)
 
-		try: shutdown = eval(self.conf.get('GENERAL', 'shutdown'))
-		except: shutdown = {}
-		if shutdown:
-			self.gpioShutdown.SetValue(shutdown['gpio'])
-			self.transitionShutdown.SetSelection(shutdown['transition'])
-			self.gpioPullShutdown.SetSelection(shutdown['transition'])
+			try: shutdown = eval(self.conf.get('GENERAL', 'shutdown'))
+			except: shutdown = {}
+			if shutdown:
+				self.gpioShutdown.SetValue(shutdown['gpio'])
+				self.transitionShutdown.SetSelection(shutdown['transition'])
+				self.gpioPullShutdown.SetSelection(shutdown['transition'])
 
-		try: poweroff = eval(self.conf.get('GENERAL', 'poweroff'))
-		except: poweroff = {}
-		if poweroff:
-			self.gpioPoweroff.SetValue(poweroff['gpio'])
-			self.transitionPoweroff.SetSelection(poweroff['transition'])
+			try: poweroff = eval(self.conf.get('GENERAL', 'poweroff'))
+			except: poweroff = {}
+			if poweroff:
+				self.gpioPoweroff.SetValue(poweroff['gpio'])
+				self.transitionPoweroff.SetSelection(poweroff['transition'])
 
-		try: config = open('/boot/config.txt', 'r')
-		except: config = open('/boot/firmware/config.txt', 'r')
-		data = config.read()
-		config.close()
-		if 'dtoverlay=gpio-poweroff' in data and not '#dtoverlay=gpio-poweroff' in data: self.toolbar9.ToggleTool(901,True)
+			try: config = open('/boot/config.txt', 'r')
+			except: config = open('/boot/firmware/config.txt', 'r')
+			data = config.read()
+			config.close()
+			if 'dtoverlay=gpio-poweroff' in data and not '#dtoverlay=gpio-poweroff' in data: self.toolbar9.ToggleTool(901,True)
+			else: 
+				self.toolbar9.ToggleTool(901,False)
+				self.disablePowerOff()
+
+			if 'dtoverlay=gpio-shutdown' in data and not '#dtoverlay=gpio-shutdown' in data: self.toolbar8.ToggleTool(801,True)
+			else: 
+				self.toolbar8.ToggleTool(801,False)
+				self.disableShutdown()
 		else: 
-			self.toolbar9.ToggleTool(901,False)
+			self.toolbar5.EnableTool(503,False)
+			self.toolbar8.EnableTool(801,False)
+			self.toolbar8.EnableTool(806,False)
+			self.toolbar9.EnableTool(901,False)
+			self.toolbar9.EnableTool(905,False)
 			self.disablePowerOff()
-
-		if 'dtoverlay=gpio-shutdown' in data and not '#dtoverlay=gpio-shutdown' in data: self.toolbar8.ToggleTool(801,True)
-		else: 
-			self.toolbar8.ToggleTool(801,False)
 			self.disableShutdown()
 
 	def disablePowerOff(self):
@@ -560,7 +570,6 @@ class MyFrame(wx.Frame):
 		else: 
 			self.conf.set('GENERAL', 'shutdown', '')
 			overlay = ''
-
 		config = '/boot/config.txt'
 		boot = '/boot'
 		try: file = open(config, 'r')
