@@ -148,16 +148,17 @@ class MyFrame(wx.Frame):
 			self.add_logger_data({'green':_('running'),'black':'','red':''})
 		except: self.add_logger_data({'green':'','black':_('not running'),'red':''})
 
-		try: config = open('/boot/config.txt', 'r')
-		except: config = open('/boot/firmware/config.txt', 'r')
-		data = config.read()
-		config.close()
-		self.add_logger_data(_('Checking Shutdown management...'))
-		if 'dtoverlay=gpio-poweroff' in data and not '#dtoverlay=gpio-poweroff' in data: self.add_logger_data({'green':'','black':_('enabled'),'red':''})
-		else: self.add_logger_data({'green':'','black':_('disabled'),'red':''})
-		self.add_logger_data(_('Checking Power off management...'))
-		if 'dtoverlay=gpio-shutdown' in data and not '#dtoverlay=gpio-shutdown' in data: self.add_logger_data({'green':'','black':_('enabled'),'red':''})
-		else: self.add_logger_data({'green':'','black':_('disabled'),'red':''})
+		if self.isRPI:
+			try: config = open('/boot/config.txt', 'r')
+			except: config = open('/boot/firmware/config.txt', 'r')
+			data = config.read()
+			config.close()
+			self.add_logger_data(_('Checking Power off management...'))
+			if 'dtoverlay=gpio-poweroff' in data and not '#dtoverlay=gpio-poweroff' in data: self.add_logger_data({'green':'','black':_('enabled'),'red':''})
+			else: self.add_logger_data({'green':'','black':_('disabled'),'red':''})
+			self.add_logger_data(_('Checking Shutdown management...'))
+			if 'dtoverlay=gpio-shutdown' in data and not '#dtoverlay=gpio-shutdown' in data: self.add_logger_data({'green':'','black':_('enabled'),'red':''})
+			else: self.add_logger_data({'green':'','black':_('disabled'),'red':''})
 
 		self.add_logger_data(_('Checking OpenPlotter autostart...'))
 		if not os.path.exists(self.conf.home+'/.config/autostart/openplotter-startup.desktop'):
