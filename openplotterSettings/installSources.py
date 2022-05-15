@@ -33,6 +33,7 @@ def main():
 		conf2.set('GENERAL', 'debianCodeName', codename_debian)
 		RELEASE_DATA = platform2.RELEASE_DATA
 		conf2.set('GENERAL', 'hostID', RELEASE_DATA['ID'])
+		conf2.set('GENERAL', 'codeName', RELEASE_DATA['VERSION_CODENAME'])
 
 		sources = subprocess.check_output('apt-cache policy', shell=True).decode(sys.stdin.encoding)
 
