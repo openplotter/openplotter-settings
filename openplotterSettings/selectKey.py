@@ -163,7 +163,18 @@ class SelectKey(wx.Dialog):
 
 		self.list_skpaths2 = []
 
+		if not selectvessels:
+			self.skvessels.Disable()
+			self.refreshBtn.Disable()
+		else: self.OnRefreshBtn(0)
+
 		if oldkey:
+			vessel = ''
+			if oldkey[0:5] == 'self.' or oldkey[0:12] == 'urn:mrn:imo:' or oldkey[0:16] == 'urn:mrn:signalk:':
+				items = oldkey.split('.')
+				vessel = items[0]
+				del items[0]
+				oldkey = '.'.join(items)
 			skproperties = oldkey.split(':')
 			skpath = skproperties[0].split('.')
 			try:
@@ -197,11 +208,7 @@ class SelectKey(wx.Dialog):
 							self.list_skproperties.Select(keysindex,1)
 			except:pass
 			self.SKkey.SetValue(oldkey)
-
-		if not selectvessels:
-			self.skvessels.Disable()
-			self.refreshBtn.Disable()
-		else: self.OnRefreshBtn(0)
+			if vessel: self.skvessels.SetValue(vessel)
 
 	def OnRefreshBtn(self,e):
 		self.list_vessels = ['self']
