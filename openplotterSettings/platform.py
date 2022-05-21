@@ -35,16 +35,11 @@ class Platform:
 			reader = csv.reader(f, delimiter="=")
 			for row in reader:
 				if row: self.RELEASE_DATA[row[0]] = row[1]
-
-		try:
-			if self.RELEASE_DATA['ID'] == 'raspbian': self.admin = 'sudo'
-			else:
-				try: 
-					subprocess.check_output(['sudo', '-n', 'echo', 'x'])
-					self.admin = 'sudo'
-				except: self.admin = 'pkexec'
-		except Exception as e: 
-			if self.debug: print('Error getting user permissions: '+str(e))
+				
+		try: 
+			subprocess.check_output(['sudo', '-n', 'echo', 'x'])
+			self.admin = 'sudo'
+		except: self.admin = 'pkexec'
 
 		try:
 			modelfile = open('/sys/firmware/devicetree/base/model', 'r', 2000)

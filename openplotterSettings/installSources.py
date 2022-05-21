@@ -31,9 +31,21 @@ def main():
 
 		codename_debian = 'bullseye'
 		conf2.set('GENERAL', 'debianCodeName', codename_debian)
+
+		codeName = ''
+		hostID = ''
 		RELEASE_DATA = platform2.RELEASE_DATA
-		conf2.set('GENERAL', 'hostID', RELEASE_DATA['ID'])
-		conf2.set('GENERAL', 'codeName', RELEASE_DATA['VERSION_CODENAME'])
+		if 'UBUNTU_CODENAME' in RELEASE_DATA: 
+			codeName = RELEASE_DATA['UBUNTU_CODENAME']
+			hostID = 'ubuntu'
+		else: 
+			codeName = RELEASE_DATA['VERSION_CODENAME']
+			hostID = RELEASE_DATA['ID']
+		if hostID != 'ubuntu' and hostID != 'debian':
+			print('FAILED. Unknown system: '+hostID)
+			return
+		conf2.set('GENERAL', 'hostID', hostID)
+		conf2.set('GENERAL', 'codeName', codeName)
 
 		sources = subprocess.check_output('apt-cache policy', shell=True).decode(sys.stdin.encoding)
 

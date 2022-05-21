@@ -6,7 +6,7 @@ Main OpenPlotter app
 
 Install dependencies (for production and development):
 
-`sudo apt install python3-wxgtk4.0 python3-ujson python3-pyudev vlc`
+`sudo apt install python3-wxgtk4.0 python3-ujson python3-pyudev vlc ntp`
 
 #### For production
 

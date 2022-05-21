@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: openplotter-settings\n"
-"POT-Creation-Date: 2022-05-15 18:52+0200\n"
-"PO-Revision-Date: 2022-05-15 18:52+0200\n"
+"POT-Creation-Date: 2022-05-21 20:45+0200\n"
+"PO-Revision-Date: 2022-05-21 20:45+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -154,31 +154,31 @@ msgstr ""
 msgid "You can not select this GPIO to do this job."
 msgstr ""
 
-#: installSources.py:52
+#: installSources.py:64
 msgid "Added OpenPlotter packages source"
 msgstr ""
 
-#: installSources.py:54
+#: installSources.py:66
 msgid "OpenPlotter packages source already exists"
 msgstr ""
 
-#: installSources.py:60
+#: installSources.py:72
 msgid "Added OpenPlotter beta packages source"
 msgstr ""
 
-#: installSources.py:62
+#: installSources.py:74
 msgid "OpenPlotter beta packages source already exists"
 msgstr ""
 
-#: installSources.py:67
+#: installSources.py:79
 msgid "Added free-x packages source"
 msgstr ""
 
-#: installSources.py:69
+#: installSources.py:81
 msgid "free-x packages source already exists"
 msgstr ""
 
-#: installSources.py:90 settingsPreUninstall.py:32
+#: installSources.py:102 settingsPreUninstall.py:32
 msgid "FAILED: "
 msgstr ""
 
@@ -725,94 +725,94 @@ msgstr ""
 msgid "not running"
 msgstr ""
 
-#: startup.py:155
-msgid "Checking Shutdown management..."
-msgstr ""
-
-#: startup.py:156 startup.py:159 startup.py:166 startup.py:171 startup.py:178
-msgid "enabled"
-msgstr ""
-
-#: startup.py:157 startup.py:160 startup.py:173 startup.py:180
-msgid "disabled"
-msgstr ""
-
-#: startup.py:158
+#: startup.py:156
 msgid "Checking Power off management..."
 msgstr ""
 
-#: startup.py:162
+#: startup.py:157 startup.py:160 startup.py:167 startup.py:172 startup.py:179
+msgid "enabled"
+msgstr ""
+
+#: startup.py:158 startup.py:161 startup.py:174 startup.py:181
+msgid "disabled"
+msgstr ""
+
+#: startup.py:159
+msgid "Checking Shutdown management..."
+msgstr ""
+
+#: startup.py:163
 msgid "Checking OpenPlotter autostart..."
 msgstr ""
 
-#: startup.py:164
+#: startup.py:165
 msgid ""
 "Autostart is not enabled and most features will not work. Please select "
 "\"Autostart\" in \"OpenPlotter Settings\""
 msgstr ""
 
-#: startup.py:168
+#: startup.py:169
 msgid "Checking rescue mode..."
 msgstr ""
 
-#: startup.py:175
+#: startup.py:176
 msgid "Checking debugging mode..."
 msgstr ""
 
-#: startup.py:184
+#: startup.py:185
 msgid "Checking system log file size..."
 msgstr ""
 
-#: startup.py:187 startup.py:188
+#: startup.py:188 startup.py:189
 msgid "System log file size: "
 msgstr ""
 
-#: startup.py:191
+#: startup.py:192
 msgid "Checking OpenPlotter packages source..."
 msgstr ""
 
-#: startup.py:194
+#: startup.py:195
 msgid "added"
 msgstr ""
 
-#: startup.py:195
+#: startup.py:196
 msgid ""
 "There are missing packages sources. Please add sources in \"OpenPlotter "
 "Settings\"."
 msgstr ""
 
-#: startup.py:210
+#: startup.py:211
 msgid "Checking serial connections conflicts..."
 msgstr ""
 
-#: startup.py:214
+#: startup.py:215
 msgid "There are conflicts between the following serial connections:"
 msgstr ""
 
-#: startup.py:218 startup.py:230 startup.py:249
+#: startup.py:219 startup.py:231 startup.py:250
 msgid "no conflicts"
 msgstr ""
 
-#: startup.py:222
+#: startup.py:223
 msgid "Checking network connections conflicts..."
 msgstr ""
 
-#: startup.py:226
+#: startup.py:227
 msgid "There are conflicts between the following server connections:"
 msgstr ""
 
-#: startup.py:235
+#: startup.py:236
 msgid "Checking GPIO conflicts..."
 msgstr ""
 
-#: startup.py:242
+#: startup.py:243
 msgid "There are GPIO conflicts between the following apps:"
 msgstr ""
 
-#: startup.py:257
+#: startup.py:258
 msgid "STARTUP FINISHED"
 msgstr ""
 
-#: startup.py:258
+#: startup.py:259
 msgid "CHECK SYSTEM FINISHED"
 msgstr ""
