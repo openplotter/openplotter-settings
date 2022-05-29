@@ -31,6 +31,8 @@ class MyFrame(wx.Frame):
 		self.home = self.conf.home
 		self.platform = Platform()
 		self.currentdir = os.path.dirname(os.path.abspath(__file__))
+		if self.conf.get('GENERAL', 'debug') == 'yes': self.debug = True
+		else: self.debug = False
 		currentLanguage = self.conf.get('GENERAL', 'lang')
 		self.language = Language(self.currentdir,'openplotter-settings',currentLanguage)
 		appsList = AppsList()
@@ -123,17 +125,21 @@ class MyFrame(wx.Frame):
 		url = "/usr/share/openplotter-doc/settings/settings_app.html"
 		webbrowser.open(url, new=2)
 
-	def OnToolTranslate(self, event): 
-		url = "https://crowdin.com/project/openplotter"
-		webbrowser.open(url, new=2)
+	def OnToolStartup(self, e):
+		autostartFolder = self.home+'/.config/autostart'
+		if not os.path.exists(autostartFolder):
+			print('creating autostart directory', autostartFolder)
+			os.mkdir(autostartFolder)
+		self.autostartFile = self.home+'/.config/autostart/openplotter-startup.desktop'
+		if self.toolbar1.GetToolState(102):
+			os.system('cp -f '+self.currentdir+'/data/openplotter-startup.desktop '+autostartFolder)
+			self.ShowStatusBarGREEN(_('Autostart enabled'))
+		else: 
+			os.system('rm -f '+self.autostartFile)
+			self.ShowStatusBarRED(_('Autostart disabled. Most features will not work!'))
 
-	def OnToolLanguage(self, event): 
-		short = 'en'
-		name = self.languageList.GetValue()
-		for i in self.language.available:
-			if name == i[0]: short = i[1]
-		self.conf.set('GENERAL', 'lang', short)
-		wx.MessageBox(_('Close and open again the window to see changes.'), _('Info'), wx.OK | wx.ICON_INFORMATION)
+	def OnToolCheck(self, e):
+		subprocess.call(['openplotter-startup', 'check'])
 
 	###################################################################################
 
@@ -148,7 +154,7 @@ class MyFrame(wx.Frame):
 		toolTranslate = self.toolbar3.AddTool(302, _('Translate'), wx.Bitmap(self.currentdir+"/data/crowdin.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolTranslate, toolTranslate)
 		self.toolbar3.AddSeparator()
-		toolMaxi = self.toolbar3.AddCheckTool(303, _('Maximize OpenPlotter Apps'), wx.Bitmap(self.currentdir+"/data/resize.png"))
+		toolMaxi = self.toolbar3.AddCheckTool(303, _('Maximize apps'), wx.Bitmap(self.currentdir+"/data/resize.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolMaxi, toolMaxi)
 		self.toolbar3.AddSeparator()
 		toolRescue = self.toolbar3.AddCheckTool(304, _('Rescue'), wx.Bitmap(self.currentdir+"/data/rescue.png"))
@@ -158,6 +164,22 @@ class MyFrame(wx.Frame):
 		toolTime = self.toolbar3.AddCheckTool(305, _('NTP server'), wx.Bitmap(self.currentdir+"/data/time.png"))
 		self.Bind(wx.EVT_TOOL, self.onToolTime, toolTime)
 
+		self.toolbar10 = wx.ToolBar(self.genSettings, style=wx.TB_TEXT)
+		keyboardList = []
+		try:
+			items = os.listdir('/usr/share/matchbox-keyboard')
+			for i in items:
+				if i[0:8] == 'keyboard' and '.xml' in i: keyboardList.append(i)
+		except Exception as e: 
+			if self.debug: print('Error getting virtual keyboard layouts: '+str(e))
+		self.keyboardsList = wx.ComboBox(self.toolbar10, 1001, _('Keyboard layout'), choices=keyboardList, size=(200,-1), style=wx.CB_DROPDOWN)
+		toolKeyboards = self.toolbar10.AddControl(self.keyboardsList)
+		self.Bind(wx.EVT_COMBOBOX, self.OnToolKeyboards, toolKeyboards)
+		toolMatchbox= self.toolbar10.AddTool(1002, _('Virtual keyboard'), wx.Bitmap(self.currentdir+"/data/keyboard.png"))
+		self.Bind(wx.EVT_TOOL, self.OnToolMatchbox, toolMatchbox)
+		currentKeyboard = self.conf.get('GENERAL', 'keyboard')
+		if currentKeyboard: self.keyboardsList.SetValue(currentKeyboard)
+		self.toolbar10.AddSeparator()
 		starupLabel = wx.StaticText(self.genSettings, label=_('Startup'))
 		self.toolbar4 = wx.ToolBar(self.genSettings, style=wx.TB_TEXT)
 		toolDelay = self.toolbar4.AddCheckTool(401, _('Delay (seconds)'), wx.Bitmap(self.currentdir+"/data/delay.png"))
@@ -174,6 +196,7 @@ class MyFrame(wx.Frame):
 
 		sizer = wx.BoxSizer(wx.VERTICAL)
 		sizer.Add(self.toolbar3, 0, wx.EXPAND, 0)
+		sizer.Add(self.toolbar10, 0, wx.EXPAND, 0)
 		sizer.Add(starupLabel, 0, wx.ALL | wx.EXPAND, 10)
 		sizer.Add(self.toolbar4, 0, wx.EXPAND, 0)
 		self.genSettings.SetSizer(sizer)
@@ -209,6 +232,34 @@ class MyFrame(wx.Frame):
 			self.pathFile.SetValue(file_path)
 			self.OnToolPlay()
 		dlg.Destroy()
+
+	def OnToolMatchbox(self,e=0):
+		subprocess.call(['pkill', '-f', 'matchbox-keyboard'])
+		subprocess.Popen('matchbox-keyboard')
+
+	def OnToolKeyboards(self,e=0):
+		if self.keyboardsList.GetSelection() == -1: return
+		try:
+			file = self.keyboardsList.GetValue()
+			folder = self.home+'/.matchbox'
+			if not os.path.exists(folder): os.mkdir(folder)
+			os.system('cp -f /usr/share/matchbox-keyboard/'+file+' '+folder+'/keyboard.xml')
+			self.conf.set('GENERAL', 'keyboard', file)
+			self.OnToolMatchbox()
+		except Exception as e: 
+			if self.debug: print('Error setting virtual keyboard layout: '+str(e))
+
+	def OnToolTranslate(self, event): 
+		url = "https://crowdin.com/project/openplotter"
+		webbrowser.open(url, new=2)
+
+	def OnToolLanguage(self, event): 
+		short = 'en'
+		name = self.languageList.GetValue()
+		for i in self.language.available:
+			if name == i[0]: short = i[1]
+		self.conf.set('GENERAL', 'lang', short)
+		wx.MessageBox(_('Close and open again the window to see changes.'), _('Info'), wx.OK | wx.ICON_INFORMATION)
 
 	def OnToolPlay(self,e=0):
 		if self.toolbar4.GetToolState(403):
@@ -430,11 +481,13 @@ class MyFrame(wx.Frame):
 		self.toolbar8 = wx.ToolBar(self.raspSettings, style=wx.TB_TEXT)
 		toolShutdown = self.toolbar8.AddCheckTool(801, _('Shutdown'), wx.Bitmap(self.currentdir+"/data/shutdown.png"))
 		self.Bind(wx.EVT_TOOL, self.onToolShutdown, toolShutdown)
+		separatorLabel0 = wx.StaticText(self.toolbar8, 808, label='    ')
+		toolSeparatorLabel0= self.toolbar8.AddControl(separatorLabel0)
 		self.gpioShutdown = wx.TextCtrl(self.toolbar8, 802, style=wx.CB_READONLY)
 		toolGpioShutdown = self.toolbar8.AddControl(self.gpioShutdown)
 		toolSetGpioShutdown= self.toolbar8.AddTool(803, _('GPIO'), wx.Bitmap(self.currentdir+"/data/chip.png"))
 		self.Bind(wx.EVT_TOOL, self.onToolSetGpioShutdown, toolSetGpioShutdown)
-		self.transitionShutdown = wx.ComboBox(self.toolbar8, 804, _('Transition'), choices=[_('high->low'),_('low->high')], size=(150,-1), style=wx.CB_DROPDOWN)
+		self.transitionShutdown = wx.ComboBox(self.toolbar8, 804, _('Transition'), choices=[_('low->high'),_('high->low')], size=(150,-1), style=wx.CB_DROPDOWN)
 		toolTransitionShutdown = self.toolbar8.AddControl(self.transitionShutdown)
 		separatorLabel = wx.StaticText(self.toolbar8, 807, label='    ')
 		toolSeparatorLabel= self.toolbar8.AddControl(separatorLabel)
@@ -447,6 +500,8 @@ class MyFrame(wx.Frame):
 		self.toolbar9 = wx.ToolBar(self.raspSettings, style=wx.TB_TEXT)
 		toolPoweroff = self.toolbar9.AddCheckTool(901, _('Power off'), wx.Bitmap(self.currentdir+"/data/poweroff.png"))
 		self.Bind(wx.EVT_TOOL, self.onToolPoweroff, toolPoweroff)
+		separatorLabel1 = wx.StaticText(self.toolbar9, 906, label='    ')
+		toolSeparatorLabel1 = self.toolbar9.AddControl(separatorLabel1)
 		self.gpioPoweroff = wx.TextCtrl(self.toolbar9, 902, style=wx.CB_READONLY)
 		toolGpioPoweroff = self.toolbar9.AddControl(self.gpioPoweroff)
 		toolSetGpioPoweroff = self.toolbar9.AddTool(903, _('GPIO'), wx.Bitmap(self.currentdir+"/data/chip.png"))
@@ -474,7 +529,7 @@ class MyFrame(wx.Frame):
 			if shutdown:
 				self.gpioShutdown.SetValue(shutdown['gpio'])
 				self.transitionShutdown.SetSelection(shutdown['transition'])
-				self.gpioPullShutdown.SetSelection(shutdown['transition'])
+				self.gpioPullShutdown.SetSelection(shutdown['pull'])
 
 			try: poweroff = eval(self.conf.get('GENERAL', 'poweroff'))
 			except: poweroff = {}
@@ -566,31 +621,11 @@ class MyFrame(wx.Frame):
 			if pull == 0: pull = 'up'
 			elif pull == 1: pull = 'down'
 			elif pull == 2: pull = 'off'
-			overlay = 'dtoverlay=gpio-shutdown,gpiopin='+gpio+',active_low='+str(transition)+',gpio_pull='+pull+'\n'
+			overlay = 'dtoverlay=gpio-shutdown,gpio_pin='+gpio+',active_low='+str(transition)+',gpio_pull='+pull+'\n'
 		else: 
 			self.conf.set('GENERAL', 'shutdown', '')
 			overlay = ''
-		config = '/boot/config.txt'
-		boot = '/boot'
-		try: file = open(config, 'r')
-		except:
-			config = '/boot/firmware/config.txt'
-			boot = '/boot/firmware'
-			file = open(config, 'r')
-		file1 = open('config.txt', 'w')
-		exists = False
-		while True:
-			line = file.readline()
-			if not line: break
-			if 'dtoverlay=gpio-shutdown' in line:
-				exists = True
-				if overlay: file1.write(overlay)
-			else: file1.write(line)
-		if not exists and overlay: file1.write(overlay)
-		file.close()
-		file1.close()
-		if os.system('diff config.txt '+config+' > /dev/null'): os.system(self.platform.admin+' mv config.txt '+boot)
-		else: os.system('rm -f config.txt')
+		subprocess.call([self.platform.admin, 'python3', self.currentdir+'/service.py', 'shutdown', overlay])
 		self.ShowStatusBarGREEN(_('Done. Changes will be applied after the next reboot'))
 
 	def onToolPoweroff(self,e):
@@ -630,49 +665,13 @@ class MyFrame(wx.Frame):
 		else: 
 			self.conf.set('GENERAL', 'poweroff', '')
 			overlay = ''
-		config = '/boot/config.txt'
-		boot = '/boot'
-		try: file = open(config, 'r')
-		except:
-			config = '/boot/firmware/config.txt'
-			boot = '/boot/firmware'
-			file = open(config, 'r')
-		file1 = open('config.txt', 'w')
-		exists = False
-		while True:
-			line = file.readline()
-			if not line: break
-			if 'dtoverlay=gpio-poweroff' in line:
-				exists = True
-				if overlay: file1.write(overlay)
-			else: file1.write(line)
-		if not exists and overlay: file1.write(overlay)
-		file.close()
-		file1.close()
-		if os.system('diff config.txt '+config+' > /dev/null'): os.system(self.platform.admin+' mv config.txt '+boot)
-		else: os.system('rm -f config.txt')
+		subprocess.call([self.platform.admin, 'python3', self.currentdir+'/service.py', 'poweroff', overlay])
 		self.ShowStatusBarGREEN(_('Done. Changes will be applied after the next reboot'))
 
 	def OnToolGpio(self,e):
 		dlg = GpioMap()
 		res = dlg.ShowModal()
 		dlg.Destroy()
-
-	def OnToolStartup(self, e):
-		autostartFolder = self.home+'/.config/autostart'
-		if not os.path.exists(autostartFolder):
-			print('creating autostart directory', autostartFolder)
-			os.mkdir(autostartFolder)
-		self.autostartFile = self.home+'/.config/autostart/openplotter-startup.desktop'
-		if self.toolbar1.GetToolState(102):
-			os.system('cp -f '+self.currentdir+'/data/openplotter-startup.desktop '+autostartFolder)
-			self.ShowStatusBarGREEN(_('Autostart enabled'))
-		else: 
-			os.system('rm -f '+self.autostartFile)
-			self.ShowStatusBarRED(_('Autostart disabled. Most features will not work!'))
-
-	def OnToolCheck(self, e):
-		subprocess.call(['openplotter-startup', 'check'])
 
 	###################################################################################
 

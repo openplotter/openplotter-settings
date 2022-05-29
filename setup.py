@@ -38,5 +38,12 @@ setup (
 									'openplotterSettings/data/sounds/House_Fire_Alarm.mp3',
 									'openplotterSettings/data/sounds/Ship_Bell.mp3',
 									'openplotterSettings/data/sounds/Store_Door_Chime.mp3',
-									'openplotterSettings/data/sounds/Tornado_Siren_II.mp3',])],
+									'openplotterSettings/data/sounds/Tornado_Siren_II.mp3',]),
+	('share/matchbox-keyboard', ['openplotterSettings/data/keyboards/base-fragment-CAT.xml',
+									'openplotterSettings/data/keyboards/keyboard-CAT.xml',
+									'openplotterSettings/data/keyboards/arrow2.png',
+									'openplotterSettings/data/keyboards/return2.png',
+									'openplotterSettings/data/keyboards/shift2.png',
+									'openplotterSettings/data/keyboards/shift_caps2.png'])
+	]
 	)

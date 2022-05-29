@@ -10,6 +10,6 @@ X-Python3-Version: >= 3.2
 Package: openplotter-settings
 Architecture: all
 Multi-Arch: foreign
-Depends: ${misc:Depends}, ${python3:Depends}, python3-wxgtk4.0, python3-ujson, python3-pyudev, vlc, ntp
+Depends: ${misc:Depends}, ${python3:Depends}, python3-wxgtk4.0, python3-ujson, python3-pyudev, vlc, ntp, matchbox-keyboard
 Description: Main OpenPlotter app
  Main OpenPlotter app

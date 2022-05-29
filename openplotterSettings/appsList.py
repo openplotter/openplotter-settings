@@ -39,6 +39,38 @@ class AppsList:
 				if self.debug: print("wrong external app format: "+str(e))
 
 		app = {
+		'name': 'Moitessier HAT',
+		'platform': 'rpi',
+		'package': 'openplotter-moitessier',
+		'preUninstall': platform2.admin+' moitessierPreUninstall',
+		'uninstall': 'openplotter-moitessier',
+		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
+		'dev': 'no',
+		'entryPoint': 'openplotter-moitessier',
+		'postInstall': platform2.admin+' moitessierPostInstall',
+		'reboot': 'no',
+		'module': 'openplotterMoitessier',
+		'conf': 'moitessier'
+		}
+		self.appsDict.append(app)
+
+		app = {
+		'name': 'MacArthur HAT',
+		'platform': 'rpi',
+		'package': 'openplotter-macarthur',
+		'preUninstall': platform2.admin+' macarthurPreUninstall',
+		'uninstall': 'openplotter-macarthur',
+		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
+		'dev': 'no',
+		'entryPoint': 'openplotter-macarthur',
+		'postInstall': platform2.admin+' macarthurPostInstall',
+		'reboot': 'no',
+		'module': 'openplotterMacarthur',
+		'conf': 'macarthur'
+		}
+		self.appsDict.append(app)
+
+		app = {
 		'name': 'OpenMarine Box',
 		'platform': 'both',
 		'package': 'openplotter-openmarinebox',
@@ -50,6 +82,22 @@ class AppsList:
 		'postInstall': '',
 		'reboot': 'no',
 		'module': 'openplotterOpenmarinebox',
+		'conf': ''
+		}
+		self.appsDict.append(app)
+		
+		app = {
+		'name': _('MAIANA AIS transponder'),
+		'platform': 'both',
+		'package': 'openplotter-maiana',
+		'preUninstall': platform2.admin+' maianaPreUninstall',
+		'uninstall': 'openplotter-maiana',
+		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
+		'dev': 'no',
+		'entryPoint': 'openplotter-maiana',
+		'postInstall': platform2.admin+' maianaPostInstall',
+		'reboot': 'no',
+		'module': 'openplotterMaiana',
 		'conf': ''
 		}
 		self.appsDict.append(app)
@@ -87,6 +135,22 @@ class AppsList:
 		self.appsDict.append(app)
 
 		app = {
+		'name': _('Notifications'),
+		'platform': 'both',
+		'package': 'openplotter-notifications',
+		'preUninstall': 'notificationsPreUninstall',
+		'uninstall': 'openplotter-notifications',
+		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
+		'dev': 'no',
+		'entryPoint': 'openplotter-notifications',
+		'postInstall': platform2.admin+' notificationsPostInstall',
+		'reboot': 'no',
+		'module': 'openplotterNotifications',
+		'conf': 'notifications'
+		}
+		self.appsDict.append(app)
+
+		app = {
 		'name': 'GPIO',
 		'platform': 'rpi',
 		'package': 'openplotter-gpio',
@@ -99,38 +163,6 @@ class AppsList:
 		'reboot': 'no',
 		'module': 'openplotterGpio',
 		'conf': 'gpio'
-		}
-		self.appsDict.append(app)
-
-		app = {
-		'name': 'MacArthur HAT',
-		'platform': 'rpi',
-		'package': 'openplotter-macarthur',
-		'preUninstall': platform2.admin+' macarthurPreUninstall',
-		'uninstall': 'openplotter-macarthur',
-		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
-		'dev': 'no',
-		'entryPoint': 'openplotter-macarthur',
-		'postInstall': platform2.admin+' macarthurPostInstall',
-		'reboot': 'no',
-		'module': 'openplotterMacarthur',
-		'conf': 'macarthur'
-		}
-		self.appsDict.append(app)
-
-		app = {
-		'name': 'Moitessier HAT',
-		'platform': 'rpi',
-		'package': 'openplotter-moitessier',
-		'preUninstall': platform2.admin+' moitessierPreUninstall',
-		'uninstall': 'openplotter-moitessier',
-		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
-		'dev': 'no',
-		'entryPoint': 'openplotter-moitessier',
-		'postInstall': platform2.admin+' moitessierPostInstall',
-		'reboot': 'no',
-		'module': 'openplotterMoitessier',
-		'conf': 'moitessier'
 		}
 		self.appsDict.append(app)
 
@@ -167,56 +199,24 @@ class AppsList:
 		self.appsDict.append(app)
 
 		app = {
-		'name': _('MAIANA AIS transponder'),
+		'name': _('AvNav Installer'),
 		'platform': 'both',
-		'package': 'openplotter-maiana',
-		'preUninstall': platform2.admin+' maianaPreUninstall',
-		'uninstall': 'openplotter-maiana',
-		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
+		'package': 'openplotter-avnav',
+		'preUninstall': platform2.admin+' avPreUninstall',
+		'uninstall': 'openplotter-avnav',
+		'sources': ['https://www.free-x.de/deb4op'],
 		'dev': 'no',
-		'entryPoint': 'openplotter-maiana',
-		'postInstall': platform2.admin+' maianaPostInstall',
+		'entryPoint': 'openplotter-avnav',
+		'postInstall': platform2.admin+' avPostInstall',
 		'reboot': 'no',
-		'module': 'openplotterMaiana',
-		'conf': ''
-		}
-		self.appsDict.append(app)
-
-		app = {
-		'name': _('Dashboards'),
-		'platform': 'both',
-		'package': 'openplotter-dashboards',
-		'preUninstall': '',
-		'uninstall': 'openplotter-dashboards',
-		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
-		'dev': 'no',
-		'entryPoint': 'openplotter-dashboards',
-		'postInstall': '',
-		'reboot': 'no',
-		'module': 'openplotterDashboards',
-		'conf': ''
-		}
-		self.appsDict.append(app)
-
-		app = {
-		'name': _('Notifications'),
-		'platform': 'both',
-		'package': 'openplotter-notifications',
-		'preUninstall': 'notificationsPreUninstall',
-		'uninstall': 'openplotter-notifications',
-		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
-		'dev': 'no',
-		'entryPoint': 'openplotter-notifications',
-		'postInstall': platform2.admin+' notificationsPostInstall',
-		'reboot': 'no',
-		'module': 'openplotterNotifications',
-		'conf': 'notifications'
+		'module': 'openplotterAvnav',
+		'conf': 'avnav'
 		}
 		self.appsDict.append(app)
 
 		app = {
 		'name': _('Network'),
-		'platform': 'both',
+		'platform': 'rpi',
 		'package': 'openplotter-network',
 		'preUninstall': platform2.admin+' networkPreUninstall',
 		'uninstall': 'openplotter-network',
@@ -263,6 +263,22 @@ class AppsList:
 		self.appsDict.append(app)
 
 		app = {
+		'name': _('Dashboards'),
+		'platform': 'both',
+		'package': 'openplotter-dashboards',
+		'preUninstall': '',
+		'uninstall': 'openplotter-dashboards',
+		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
+		'dev': 'no',
+		'entryPoint': 'openplotter-dashboards',
+		'postInstall': '',
+		'reboot': 'no',
+		'module': 'openplotterDashboards',
+		'conf': ''
+		}
+		self.appsDict.append(app)
+
+		app = {
 		'name': 'XyGrib',
 		'platform': 'both',
 		'package': 'xygrib',
@@ -275,22 +291,6 @@ class AppsList:
 		'reboot': 'no',
 		'module': '',
 		'conf': ''
-		}
-		self.appsDict.append(app)
-
-		app = {
-		'name': _('AvNav Installer'),
-		'platform': 'both',
-		'package': 'openplotter-avnav',
-		'preUninstall': platform2.admin+' avPreUninstall',
-		'uninstall': 'openplotter-avnav',
-		'sources': ['https://www.free-x.de/deb4op'],
-		'dev': 'no',
-		'entryPoint': 'openplotter-avnav',
-		'postInstall': platform2.admin+' avPostInstall',
-		'reboot': 'no',
-		'module': 'openplotterAvnav',
-		'conf': 'avnav'
 		}
 		self.appsDict.append(app)
 		
