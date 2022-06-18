@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # This file is part of Openplotter.
-# Copyright (C) 2019 by sailoog <https://github.com/sailoog/openplotter>
+# Copyright (C) 2022 by sailoog <https://github.com/openplotter/openplotter-settings>
 #                     e-sailing <https://github.com/e-sailing/openplotter>
 # Openplotter is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -14,6 +14,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Openplotter. If not, see <http://www.gnu.org/licenses/>.
+
 import wx, os, sys, time, threading, subprocess, importlib
 import wx.richtext as rt
 from .conf import Conf
@@ -54,13 +55,18 @@ class MyFrame(wx.Frame):
 		self.logger = rt.RichTextCtrl(panel, style=wx.TE_MULTILINE|wx.TE_READONLY|wx.TE_DONTWRAP|wx.LC_SORT_ASCENDING)
 		self.logger.SetMargins((10,10))
 
-		self.closeButton =wx.Button(panel, label=_('Close'))
-		self.closeButton.Bind(wx.EVT_BUTTON, self.OnCloseButton)
-		self.closeButton.Disable()
-
-		vbox = wx.BoxSizer(wx.VERTICAL)
+		self.toolbar1 = wx.ToolBar(panel, style=wx.TB_TEXT | wx.TB_VERTICAL)
+		toolClose = self.toolbar1.AddTool(102, _('Close'), wx.Bitmap(self.currentdir+"/data/close.png"))
+		self.Bind(wx.EVT_TOOL, self.OnCloseButton, toolClose)
+		self.toolbar1.EnableTool(102,False)
+		self.toolbar1.AddSeparator()
+		toolRescue = self.toolbar1.AddCheckTool(101, _('Rescue'), wx.Bitmap(self.currentdir+"/data/rescue.png"))
+		self.Bind(wx.EVT_TOOL, self.onToolRescue, toolRescue)
+		if self.conf.get('GENERAL', 'rescue') == 'yes': self.toolbar1.ToggleTool(101,True)
+		
+		vbox = wx.BoxSizer(wx.HORIZONTAL)
 		vbox.Add(self.logger, 1, wx.ALL | wx.EXPAND, 5)
-		vbox.Add(self.closeButton, 0, wx.ALL | wx.EXPAND, 5)
+		vbox.Add(self.toolbar1, 0, wx.ALL | wx.EXPAND, 0)
 		panel.SetSizer(vbox)
 
 		self.timer = wx.Timer(self)
@@ -77,7 +83,7 @@ class MyFrame(wx.Frame):
 	def refresh(self,event):
 		if self.logger_data:
 			if isinstance(self.logger_data, int):
-				self.closeButton.Enable()
+				self.toolbar1.EnableTool(102,True)
 				if self.warnings_flag:
 					self.GetStatusBar().SetForegroundColour(wx.RED)
 					self.SetStatusText(_('There are some warnings. Check your system. Closing in ')+str(self.logger_data)+_(' seconds'))
@@ -126,28 +132,53 @@ class MyFrame(wx.Frame):
 				if delay:
 					self.add_logger_data(_('Applying delay of ')+delay+_(' seconds...'))
 					time.sleep(int(delay))
-					self.add_logger_data({'green':_('done'),'black':'','red':''})
+					self.add_logger_data({'green':'','black':_('done'),'red':''})
 			except:self.add_logger_data({'green':'','black':'','red':_('Delay failed. Is it a number?')})
 		else:
 			try:
 				if delay:
 					self.add_logger_data(_('A startup delay will apply'))
 					checkDelay = int(delay)
-					self.add_logger_data({'green':delay+_(' seconds'),'black':'','red':''})
+					self.add_logger_data({'green':'','black':delay+_(' seconds'),'red':''})
 			except:self.add_logger_data({'green':'','black':'','red':_('Delay failed. Is it a number?')})
+
+		self.add_logger_data(_('Checking NTP server...'))
+		try:
+			subprocess.check_output(['systemctl', 'is-active', 'ntp.service']).decode(sys.stdin.encoding)
+			self.add_logger_data({'green':_('running'),'black':'','red':''})
+		except: self.add_logger_data({'green':'','black':_('not running'),'red':''})
+
+		if self.isRPI:
+			try: config = open('/boot/config.txt', 'r')
+			except: config = open('/boot/firmware/config.txt', 'r')
+			data = config.read()
+			config.close()
+			self.add_logger_data(_('Checking Power off management...'))
+			if 'dtoverlay=gpio-poweroff' in data and not '#dtoverlay=gpio-poweroff' in data: self.add_logger_data({'green':'','black':_('enabled'),'red':''})
+			else: self.add_logger_data({'green':'','black':_('disabled'),'red':''})
+			self.add_logger_data(_('Checking Shutdown management...'))
+			if 'dtoverlay=gpio-shutdown' in data and not '#dtoverlay=gpio-shutdown' in data: self.add_logger_data({'green':'','black':_('enabled'),'red':''})
+			else: self.add_logger_data({'green':'','black':_('disabled'),'red':''})
 
 		self.add_logger_data(_('Checking OpenPlotter autostart...'))
 		if not os.path.exists(self.conf.home+'/.config/autostart/openplotter-startup.desktop'):
 			self.add_logger_data({'green':'','black':'','red':_('Autostart is not enabled and most features will not work. Please select "Autostart" in "OpenPlotter Settings"')})
 		else:
-			self.add_logger_data({'green':_('enabled'),'black':'','red':''})
+			self.add_logger_data({'green':'','black':_('enabled'),'red':''})
+
+		self.add_logger_data(_('Checking rescue mode...'))
+		rescue = self.conf.get('GENERAL', 'rescue')
+		if rescue == 'yes': 
+			self.add_logger_data({'green':'','black':'','red':_('enabled')})
+		else:
+			self.add_logger_data({'green':'','black':_('disabled'),'red':''})
 
 		self.add_logger_data(_('Checking debugging mode...'))
 		debug = self.conf.get('GENERAL', 'debug')
 		if debug == 'yes': 
 			self.add_logger_data({'green':'','black':'','red':_('enabled')})
 		else:
-			self.add_logger_data({'green':_('disabled'),'black':'','red':''})
+			self.add_logger_data({'green':'','black':_('disabled'),'red':''})
 
 		logMaxSize = self.conf.get('GENERAL', 'logMaxSize')
 		if logMaxSize:
@@ -155,46 +186,13 @@ class MyFrame(wx.Frame):
 			try:
 				mb = os.path.getsize("/var/log/syslog")/1e+6
 				if mb >= int(logMaxSize): self.add_logger_data({'green':'','black':'','red':_('System log file size: ')+str(round(mb,2))+' MB'})
-				else: self.add_logger_data({'green': _('System log file size: ')+str(round(mb,2))+' MB','black':'','red':''})
+				else: self.add_logger_data({'green':'','black':_('System log file size: ')+str(round(mb,2))+' MB','red':''})
 			except Exception as e: self.add_logger_data({'green':'','black':'','red':str(e)})
-
-		if self.isRPI:
-			self.add_logger_data(_('Checking user "pi" password...'))
-			out = subprocess.check_output([self.platform.admin, '-n', 'grep', '-E', '^pi:', '/etc/shadow']).decode(sys.stdin.encoding)
-			tmp = out.split(':')
-			passw_a = tmp[1]
-			tmp = passw_a.split('$')
-			salt = tmp[2]
-			passw_b = subprocess.check_output(['mkpasswd', '-msha-512', 'raspberry', salt]).decode(sys.stdin.encoding)
-			if passw_a.rstrip() == passw_b.rstrip():
-				self.add_logger_data({'green':'','black':'','red':_('Security warning: You are using the default password for "pi" user.')+'\n    '+_('Please change password in Menu > Preferences > Raspberry Pi Configuration.')})
-			else: self.add_logger_data({'green':_('changed'),'black':'','red':''})
-
-			self.add_logger_data(_('Checking screensaver state...'))
-			screensaver = self.conf.get('GENERAL', 'screensaver')
-			if screensaver == '1':
-				subprocess.call(['xset', 's', 'noblank'])
-				subprocess.call(['xset', 's', 'off'])
-				subprocess.call(['xset', '-dpms'])
-				self.add_logger_data({'green':'','black':_('disabled'),'red':''})
-			else:
-				subprocess.call(['xset', 's', 'blank'])
-				subprocess.call(['xset', 's', 'on'])
-				subprocess.call(['xset', '+dpms'])
-				self.add_logger_data({'green':_('enabled'),'black':'','red':''})
-
-			self.add_logger_data(_('Checking headless state...'))
-			try: config = open('/boot/config.txt', 'r')
-			except: config = open('/boot/firmware/config.txt', 'r')
-			data = config.read()
-			config.close()
-			if '#hdmi_force_hotplug=1' in data: self.add_logger_data({'green':'','black':_('disabled'),'red':''})
-			else: self.add_logger_data({'green':_('enabled'),'black':'','red':''})
-
+		
 		self.add_logger_data(_('Checking OpenPlotter packages source...'))
 		sources = subprocess.check_output(['apt-cache', 'policy']).decode(sys.stdin.encoding)
-		if 'http://ppa.launchpad.net/openplotter/openplotter/ubuntu' in sources:
-			self.add_logger_data({'green':_('added'),'black':'','red':''})
+		if 'https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian' in sources:
+			self.add_logger_data({'green':'','black':_('added'),'red':''})
 		else: self.add_logger_data({'green':'','black':'','red':_('There are missing packages sources. Please add sources in "OpenPlotter Settings".')})
 
 		appsList = AppsList()
@@ -218,7 +216,7 @@ class MyFrame(wx.Frame):
 				for i in conflicts: 
 					red += '\n    '+i
 				self.add_logger_data({'green':'','black':'','red':red})
-			else: self.add_logger_data({'green':_('no conflicts'),'black':'','red':''})
+			else: self.add_logger_data({'green':'','black':_('no conflicts'),'red':''})
 		except Exception as e: self.add_logger_data({'green':'','black':'','red':str(e)})
 
 		try:
@@ -230,7 +228,7 @@ class MyFrame(wx.Frame):
 				for i in conflicts: 
 					red += '\n    '+i['description']+' ('+i['mode']+'): '+i['type']+' '+i['address']+':'+i['port']
 				self.add_logger_data({'green':'','black':'','red':red})
-			else: self.add_logger_data({'green':_('no conflicts'),'black':'','red':''})
+			else: self.add_logger_data({'green':'','black':_('no conflicts'),'red':''})
 		except Exception as e: self.add_logger_data({'green':'','black':'','red':str(e)})
 
 		if self.isRPI:
@@ -249,7 +247,7 @@ class MyFrame(wx.Frame):
 							line += ii['app']+' - '+ii['id']
 						red += '\n    '+line
 				if red: self.add_logger_data({'green':'','black':'','red':red})
-				else: self.add_logger_data({'green':_('no conflicts'),'black':'','red':''})
+				else: self.add_logger_data({'green':'','black':_('no conflicts'),'red':''})
 			except Exception as e: self.add_logger_data({'green':'','black':'','red':str(e)})
 
 		try:
@@ -285,6 +283,10 @@ class MyFrame(wx.Frame):
 	def OnCloseButton(self,e=0):
 		self.timer.Stop()
 		self.Destroy()
+
+	def onToolRescue(self,e=0):
+		if self.toolbar1.GetToolState(101): self.conf.set('GENERAL', 'rescue', 'yes')
+		else: self.conf.set('GENERAL', 'rescue', 'no')
 
 def print_help():
 	print('This is part of OpenPlotter software')

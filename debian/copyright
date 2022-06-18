@@ -3,7 +3,7 @@ Upstream-Name: openplotter-settings
 Source: https://github.com/openplotter/openplotter-settings
 
 Files: *
-Copyright: 2019 Sailoog <info@sailoog.com>
+Copyright: 2022 Sailoog <info@sailoog.com>
 License: GPL-2+
  This package is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@ License: GPL-2+
  Public License version 2 can be found in "/usr/share/common-licenses/GPL-2".
 
 Files: debian/*
-Copyright: 2019 Sailoog <info@sailoog.com>
+Copyright: 2022 Sailoog <info@sailoog.com>
 License: GPL-2+
  This package is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by

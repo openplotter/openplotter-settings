@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fragment>
+
+<!--
+
+ Catalan keyboard layout by Sailoog
+
+-->
+    <row>
+        <key>
+            <default display="1" />
+        </key>
+        <key>
+            <default display="2" />
+        </key>
+        <key>
+            <default display="3" />
+        </key>
+        <key>
+            <default display="4" />
+        </key>
+        <key>
+            <default display="5" />
+        </key>
+        <key>
+            <default display="6" />
+        </key>
+        <key>
+            <default display="7" />
+        </key>
+        <key>
+            <default display="8" />
+        </key>
+        <key>
+            <default display="9" />
+        </key>
+        <key>
+            <default display="0" />
+        </key>
+        <key>
+            <default display="." />
+        </key>
+    </row>
+    
+    <row>
+        <key obey-caps="true">
+            <default display="q" />
+            <shifted display="Q" />
+            <mod2    display="&#x000B4;" action="xkeysym:dead_acute"/>
+        </key>
+        <key obey-caps="true">
+            <default display="w" />
+            <shifted display="W" />
+            <mod2    display="¨" action="xkeysym:dead_diaeresis"/>
+        </key>
+        <key obey-caps="true">
+            <default display="e" />
+            <shifted display="E" />
+            <mod2    display="&#x00060;" action="xkeysym:dead_grave"/>
+        </key>
+        <key obey-caps="true">
+            <default display="r" />
+            <shifted display="R" />
+            <mod2    display="'" />
+        </key>
+        <key obey-caps="true">
+            <default display="t" />
+            <shifted display="T" />
+            <mod2    display='"' />
+        </key>
+        <key obey-caps="true">
+            <default display="y" />
+            <shifted display="Y" />
+            <mod2    display="·" />
+        </key>
+        <key obey-caps="true">
+            <default display="u" />
+            <shifted display="U" />
+            <mod2    display="," />
+        </key>
+        <key obey-caps="true">
+            <default display="i" />
+            <shifted display="I" />
+            <mod2    display=":" />
+        </key>
+        <key obey-caps="true">
+            <default display="o" />
+            <shifted display="O" />
+            <mod2    display=";" />
+        </key>
+        <key obey-caps="true">
+            <default display="p" />
+            <shifted display="P" />
+            <mod2    display="°" />
+        </key>
+        <key>
+            <default display="image:/usr/share/matchbox-keyboard/arrow2.png" action="backspace" />
+        </key>
+    </row>
+
+    <row>
+        <key obey-caps="true">
+            <default display="a" />
+            <shifted display="A" />
+            <mod2    display="€" />
+        </key>
+        <key obey-caps="true">
+            <default display="s" />
+            <shifted display="S" />
+            <mod2    display="$" />
+        </key>
+        <key obey-caps="true">
+            <default display="d" />
+            <shifted display="D" />
+            <mod2    display="+" />
+        </key>
+        <key obey-caps="true">
+            <default display="f" />
+            <shifted display="F" />
+            <mod2    display="-" />
+        </key>
+        <key obey-caps="true">
+            <default display="g" />
+            <shifted display="G" />
+            <mod2    display="*" />
+        </key>
+        <key obey-caps="true">
+            <default display="h" />
+            <shifted display="H" />
+            <mod2    display="/" />
+        </key>
+        <key obey-caps="true">
+            <default display="j" />
+            <shifted display="J" />
+            <mod2    display="(" />
+        </key>
+        <key obey-caps="true">
+            <default display="k" />
+            <shifted display="K" />
+            <mod2    display=")" />
+        </key>
+        <key obey-caps="true">
+            <default display="l" />
+            <shifted display="L" />
+            <mod2    display="=" />
+        </key>
+        <key obey-caps="true">
+            <default display="ç" />
+            <shifted display="Ç" />
+            <mod2    display="%" />
+        </key>
+        <key>
+            <default display="image:/usr/share/matchbox-keyboard/return2.png" action="return"/>
+        </key>
+    </row>
+
+    <row>
+         <key>
+            <default display="image:/usr/share/matchbox-keyboard/shift2.png" action="modifier:shift" />
+        </key>
+        <key obey-caps="true">
+            <default display="z" />
+            <shifted display="Z" />
+            <mod2    display="@" />
+        </key>
+        <key obey-caps="true">
+            <default display="x" />
+            <shifted display="X" />
+            <mod2    display="#" />
+        </key>
+        <key obey-caps="true">
+            <default display="c" />
+            <shifted display="C" />
+            <mod2    display="?" />
+        </key>
+        <key obey-caps="true">
+            <default display="v" />
+            <shifted display="V" />
+            <mod2    display="!" />
+        </key>
+        <key obey-caps="true">
+            <default display="b" />
+            <shifted display="B" />
+            <mod2    display="&#x00026;" />
+        </key>
+        <key obey-caps="true">
+            <default display="n" />
+            <shifted display="N" />
+            <mod2    display="&#x0003C;" />
+        </key>
+        <key obey-caps="true">
+            <default display="m" />
+            <shifted display="M" />
+            <mod2    display="&#x0003E;" />
+        </key>
+        <key width="2050">
+            <default display="espai" action="space" />
+            <mod2    display="_" />
+        </key>
+        <key>
+            <default display="image:/usr/share/matchbox-keyboard/shift_caps2.png" action="modifier:mod2"/>
+        </key>
+    </row>
+</fragment>

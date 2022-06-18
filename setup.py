@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
-# This file is part of Openplotter.
-# Copyright (C) 2019 by sailoog <https://github.com/sailoog/openplotter>
+# This file is part of OpenPlotter.
+# Copyright (C) 2022 by sailoog <https://github.com/openplotter/openplotter-settings>
 #                     e-sailing <https://github.com/e-sailing/openplotter>
 # Openplotter is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -38,5 +38,12 @@ setup (
 									'openplotterSettings/data/sounds/House_Fire_Alarm.mp3',
 									'openplotterSettings/data/sounds/Ship_Bell.mp3',
 									'openplotterSettings/data/sounds/Store_Door_Chime.mp3',
-									'openplotterSettings/data/sounds/Tornado_Siren_II.mp3',])],
+									'openplotterSettings/data/sounds/Tornado_Siren_II.mp3',]),
+	('share/matchbox-keyboard', ['openplotterSettings/data/keyboards/base-fragment-CAT.xml',
+									'openplotterSettings/data/keyboards/keyboard-CAT.xml',
+									'openplotterSettings/data/keyboards/arrow2.png',
+									'openplotterSettings/data/keyboards/return2.png',
+									'openplotterSettings/data/keyboards/shift2.png',
+									'openplotterSettings/data/keyboards/shift_caps2.png'])
+	]
 	)

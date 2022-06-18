@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
-# This file is part of Openplotter.
-# Copyright (C) 2019 by sailoog <https://github.com/sailoog/openplotter>
+# This file is part of OpenPlotter.
+# Copyright (C) 2022 by sailoog <https://github.com/openplotter/openplotter-settings>
 #                     e-sailing <https://github.com/e-sailing/openplotter>
 # Openplotter is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -35,16 +35,11 @@ class Platform:
 			reader = csv.reader(f, delimiter="=")
 			for row in reader:
 				if row: self.RELEASE_DATA[row[0]] = row[1]
-
-		try:
-			if self.RELEASE_DATA['ID'] == 'raspbian': self.admin = 'sudo'
-			else:
-				try: 
-					subprocess.check_output(['sudo', '-n', 'echo', 'x'])
-					self.admin = 'sudo'
-				except: self.admin = 'pkexec'
-		except Exception as e: 
-			if self.debug: print('Error getting user permissions: '+str(e))
+				
+		try: 
+			subprocess.check_output(['sudo', '-n', 'echo', 'x'])
+			self.admin = 'sudo'
+		except: self.admin = 'pkexec'
 
 		try:
 			modelfile = open('/sys/firmware/devicetree/base/model', 'r', 2000)

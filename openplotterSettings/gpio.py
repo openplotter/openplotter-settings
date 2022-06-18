@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Openplotter. If not, see <http://www.gnu.org/licenses/>.
 
-import importlib, wx, os
+import importlib, wx, os, subprocess, sys
 from .conf import Conf
 from .language import Language
 from .appsList import AppsList
@@ -33,14 +33,14 @@ class Gpio:
 		self.gpioMap = [
 			{'physical':'1', 'BCM': '3v3', 'feature': _('Power'), 'shared': True, 'usedBy': []},
 			{'physical':'2', 'BCM': '5v', 'feature': _('Power'), 'shared': True, 'usedBy': []},
-			{'physical':'3', 'BCM': 'GPIO 2', 'feature': 'I2C', 'shared': True, 'usedBy': []},
+			{'physical':'3', 'BCM': 'GPIO 2', 'feature': 'GPIO', 'shared': False, 'usedBy': []},
 			{'physical':'4', 'BCM': '5v', 'feature': _('Power'), 'shared': True, 'usedBy': []},
-			{'physical':'5', 'BCM': 'GPIO 3', 'feature': 'I2C', 'shared': True, 'usedBy': []},
+			{'physical':'5', 'BCM': 'GPIO 3', 'feature': 'GPIO', 'shared': False, 'usedBy': []},
 			{'physical':'6', 'BCM': _('Ground'), 'feature': _('Power'), 'shared': True, 'usedBy': []},
 			{'physical':'7', 'BCM': 'GPIO 4', 'feature': 'GPIO', 'shared': False, 'usedBy': []},
-			{'physical':'8', 'BCM': 'GPIO 14', 'feature': 'UART', 'shared': False, 'usedBy': []},
+			{'physical':'8', 'BCM': 'GPIO 14', 'feature': 'GPIO', 'shared': False, 'usedBy': []},
 			{'physical':'9', 'BCM': _('Ground'), 'feature': _('Power'), 'shared': True, 'usedBy': []},
-			{'physical':'10', 'BCM': 'GPIO 15', 'feature': 'UART', 'shared': False, 'usedBy': []},
+			{'physical':'10', 'BCM': 'GPIO 15', 'feature': 'GPIO', 'shared': False, 'usedBy': []},
 			{'physical':'11', 'BCM': 'GPIO 17', 'feature': 'GPIO', 'shared': False, 'usedBy': []},
 			{'physical':'12', 'BCM': 'GPIO 18', 'feature': 'GPIO', 'shared': False, 'usedBy': []},
 			{'physical':'13', 'BCM': 'GPIO 27', 'feature': 'GPIO', 'shared': False, 'usedBy': []},
@@ -49,16 +49,16 @@ class Gpio:
 			{'physical':'16', 'BCM': 'GPIO 23', 'feature': 'GPIO', 'shared': False, 'usedBy': []},
 			{'physical':'17', 'BCM': '3v3', 'feature': _('Power'), 'shared': True, 'usedBy': []},
 			{'physical':'18', 'BCM': 'GPIO 24', 'feature': 'GPIO', 'shared': False, 'usedBy': []},
-			{'physical':'19', 'BCM': 'GPIO 10', 'feature': 'SPI', 'shared': True, 'usedBy': []},
+			{'physical':'19', 'BCM': 'GPIO 10', 'feature': 'GPIO', 'shared': False, 'usedBy': []},
 			{'physical':'20', 'BCM': _('Ground'), 'feature': _('Power'), 'shared': True, 'usedBy': []},
-			{'physical':'21', 'BCM': 'GPIO 9', 'feature': 'SPI', 'shared': True, 'usedBy': []},
+			{'physical':'21', 'BCM': 'GPIO 9', 'feature': 'GPIO', 'shared': False, 'usedBy': []},
 			{'physical':'22', 'BCM': 'GPIO 25', 'feature': 'GPIO', 'shared': False, 'usedBy': []},
-			{'physical':'23', 'BCM': 'GPIO 11', 'feature': 'SPI', 'shared': True, 'usedBy': []},
-			{'physical':'24', 'BCM': 'GPIO 8', 'feature': 'SPI', 'shared': False, 'usedBy': []},
+			{'physical':'23', 'BCM': 'GPIO 11', 'feature': 'GPIO', 'shared': False, 'usedBy': []},
+			{'physical':'24', 'BCM': 'GPIO 8', 'feature': 'GPIO', 'shared': False, 'usedBy': []},
 			{'physical':'25', 'BCM': _('Ground'), 'feature': _('Power'), 'shared': True, 'usedBy': []},
-			{'physical':'26', 'BCM': 'GPIO 7', 'feature': 'SPI', 'shared': False, 'usedBy': []},
-			{'physical':'27', 'BCM': 'GPIO 0', 'feature': 'EEPROM', 'shared': False, 'usedBy': []},
-			{'physical':'28', 'BCM': 'GPIO 1', 'feature': 'EEPROM', 'shared': False, 'usedBy': []},
+			{'physical':'26', 'BCM': 'GPIO 7', 'feature': 'GPIO', 'shared': False, 'usedBy': []},
+			{'physical':'27', 'BCM': 'GPIO 0', 'feature': 'GPIO', 'shared': False, 'usedBy': []},
+			{'physical':'28', 'BCM': 'GPIO 1', 'feature': 'GPIO', 'shared': False, 'usedBy': []},
 			{'physical':'29', 'BCM': 'GPIO 5', 'feature': 'GPIO', 'shared': False, 'usedBy': []},
 			{'physical':'30', 'BCM': _('Ground'), 'feature': _('Power'), 'shared': True, 'usedBy': []},
 			{'physical':'31', 'BCM': 'GPIO 6', 'feature': 'GPIO', 'shared': False, 'usedBy': []},
@@ -71,7 +71,108 @@ class Gpio:
 			{'physical':'38', 'BCM': 'GPIO 20', 'feature': 'GPIO', 'shared': False, 'usedBy': []},
 			{'physical':'39', 'BCM': _('Ground'), 'feature': _('Power'), 'shared': True, 'usedBy': []},
 			{'physical':'40', 'BCM': 'GPIO 21', 'feature': 'GPIO', 'shared': False, 'usedBy': []}
-		] 
+		]
+
+		try: subprocess.check_output(['systemctl', 'is-active', 'hciuart']).decode(sys.stdin.encoding)	
+		except: 
+			self.gpioMap[7]['feature'] = 'UART'
+			self.gpioMap[7]['shared'] = False
+			self.gpioMap[9]['feature'] = 'UART'
+			self.gpioMap[9]['shared'] = False
+		try:
+			out = subprocess.check_output('ls /dev/i2c*', shell=True).decode(sys.stdin.encoding)
+			if '/dev/i2c-0' in out or '/dev/i2c-1' in out:
+				self.gpioMap[2]['feature'] = 'I2C'
+				self.gpioMap[2]['shared'] = True
+				self.gpioMap[4]['feature'] = 'I2C'
+				self.gpioMap[4]['shared'] = True
+		except: pass
+		try:
+			out = subprocess.check_output('lsmod').decode(sys.stdin.encoding)
+			if 'spi_bcm2835' in out:
+				self.gpioMap[18]['feature'] = 'SPI'
+				self.gpioMap[18]['shared'] = True
+				self.gpioMap[20]['feature'] = 'SPI'
+				self.gpioMap[20]['shared'] = True
+				self.gpioMap[22]['feature'] = 'SPI'
+				self.gpioMap[22]['shared'] = True
+				self.gpioMap[23]['feature'] = 'SPI'
+				self.gpioMap[23]['shared'] = False
+				self.gpioMap[25]['feature'] = 'SPI'
+				self.gpioMap[25]['shared'] = False
+		except: pass
+		try:
+			modelfile = open('/sys/firmware/devicetree/base/model', 'r', 2000)
+			rpimodel = modelfile.read()[:-1]
+		except: rpimodel = ''
+		self.used = []
+		config = '/boot/config.txt'
+		boot = '/boot'
+		try: file = open(config, 'r')
+		except:
+			config = '/boot/firmware/config.txt'
+			boot = '/boot/firmware'
+			file = open(config, 'r')
+		while True:
+			line = file.readline()
+			if not line: break
+			if 'enable_uart=1' in line and not '#' in line:
+				self.gpioMap[7]['feature'] = 'UART'
+				self.gpioMap[7]['shared'] = False
+				self.gpioMap[9]['feature'] = 'UART'
+				self.gpioMap[9]['shared'] = False
+			if 'Raspberry Pi 4' in rpimodel:
+				if 'dtoverlay=uart2' in line and not '#' in line:
+					self.gpioMap[26]['feature'] = 'UART'
+					self.gpioMap[26]['shared'] = False
+					self.gpioMap[27]['feature'] = 'UART'
+					self.gpioMap[27]['shared'] = False
+				if 'dtoverlay=uart3' in line and not '#' in line:
+					self.gpioMap[6]['feature'] = 'UART'
+					self.gpioMap[6]['shared'] = False
+					self.gpioMap[28]['feature'] = 'UART'
+					self.gpioMap[28]['shared'] = False
+				if 'dtoverlay=uart4' in line and not '#' in line:
+					self.gpioMap[20]['feature'] = 'UART'
+					self.gpioMap[20]['shared'] = False
+					self.gpioMap[23]['feature'] = 'UART'
+					self.gpioMap[23]['shared'] = False
+				if 'dtoverlay=uart5' in line and not '#' in line:
+					self.gpioMap[32]['feature'] = 'UART'
+					self.gpioMap[32]['shared'] = False
+					self.gpioMap[31]['feature'] = 'UART'
+					self.gpioMap[31]['shared'] = False
+			if 'dtoverlay=gpio-poweroff' in line and not '#' in line:
+				try: poweroff = eval(self.conf.get('GENERAL', 'poweroff'))
+				except: poweroff = {}
+				if 'gpio' in poweroff: 
+					gpio = poweroff['gpio']
+					for i in self.gpioMap:
+						if i['BCM'] == 'GPIO '+gpio:
+							self.used.append({'app':'Settings', 'id':'Power off', 'physical':i['physical']})
+			if 'dtoverlay=gpio-shutdown' in line and not '#' in line:
+				try: shutdown = eval(self.conf.get('GENERAL', 'shutdown'))
+				except: shutdown = {}
+				if 'gpio' in shutdown: 
+					gpio = shutdown['gpio']
+					for i in self.gpioMap:
+						if i['BCM'] == 'GPIO '+gpio:
+							self.used.append({'app':'Settings', 'id':'Shutdown', 'physical':i['physical']})
+			if 'dtoverlay=w1-gpio' in line and not '#' in line:
+				if 'gpiopin=' in line:
+					items = line.split(',')
+					for i in items:
+						if 'gpiopin=' in i:
+							items2 = i.split('=')
+							gpio = items2[1].strip()
+							for index, value in enumerate(self.gpioMap):
+								if self.gpioMap[index]['BCM'] == 'GPIO '+gpio:
+									self.gpioMap[index]['feature'] = '1W'
+									self.gpioMap[index]['shared'] = False
+				else: 
+					self.gpioMap[6]['feature'] = '1W'
+					self.gpioMap[6]['shared'] = False
+		file.close()
 
 	def addUsedGpios(self):
 		UsedGpios = []
@@ -91,6 +192,9 @@ class Gpio:
 								UsedGpios.append(i)
 				except Exception as e: 
 					if self.debug: print(str(e))
+
+		for i in self.used:
+			UsedGpios.append(i)
 
 		for i in UsedGpios:
 			for ii in self.gpioMap:
@@ -113,7 +217,7 @@ class GpioMap(wx.Dialog):
 		if self.allowed != '0': title = _('Select GPIO')
 		else: title = _('GPIO Map')
 
-		wx.Dialog.__init__(self, None, title=title, size=(600,460))
+		wx.Dialog.__init__(self, None, title=title, size=(700,480))
 		self.SetFont(wx.Font(10, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
 		panel = wx.Panel(self)
 
@@ -170,50 +274,59 @@ class GpioMap(wx.Dialog):
 			refresh =wx.Button(panel, label=_('Refresh'))
 			refresh.Bind(wx.EVT_BUTTON, self.refresh)
 
+		dist = self.conf.get('GENERAL', 'hostID')
+		leftspacer0 = 6
+		leftspacer = 4
+		rightpacer0 = 4
+		if dist == 'ubuntu':
+			leftspacer0 = 6
+			leftspacer = 5
+			rightpacer0 = 3
+
 		left = wx.BoxSizer(wx.VERTICAL)
-		left.AddSpacer(6)
+		left.AddSpacer(leftspacer0)
 		left.Add(self.pin1, 0, wx.ALIGN_RIGHT, 0)
-		left.AddSpacer(4)
+		left.AddSpacer(leftspacer)
 		left.Add(self.pin3, 0, wx.ALIGN_RIGHT, 0)
-		left.AddSpacer(4)
+		left.AddSpacer(leftspacer)
 		left.Add(self.pin5, 0, wx.ALIGN_RIGHT, 0)
-		left.AddSpacer(4)
+		left.AddSpacer(leftspacer)
 		left.Add(self.pin7, 0, wx.ALIGN_RIGHT, 0)
-		left.AddSpacer(4)
+		left.AddSpacer(leftspacer)
 		left.Add(self.pin9, 0, wx.ALIGN_RIGHT, 0)
-		left.AddSpacer(4)
+		left.AddSpacer(leftspacer)
 		left.Add(self.pin11, 0, wx.ALIGN_RIGHT, 0)
-		left.AddSpacer(4)
+		left.AddSpacer(leftspacer)
 		left.Add(self.pin13, 0, wx.ALIGN_RIGHT, 0)
-		left.AddSpacer(4)
+		left.AddSpacer(leftspacer)
 		left.Add(self.pin15, 0, wx.ALIGN_RIGHT, 0)
-		left.AddSpacer(4)
+		left.AddSpacer(leftspacer)
 		left.Add(self.pin17, 0, wx.ALIGN_RIGHT, 0)
-		left.AddSpacer(4)
+		left.AddSpacer(leftspacer)
 		left.Add(self.pin19, 0, wx.ALIGN_RIGHT, 0)
-		left.AddSpacer(4)
+		left.AddSpacer(leftspacer)
 		left.Add(self.pin21, 0, wx.ALIGN_RIGHT, 0)
-		left.AddSpacer(4)
+		left.AddSpacer(leftspacer)
 		left.Add(self.pin23, 0, wx.ALIGN_RIGHT, 0)
-		left.AddSpacer(4)
+		left.AddSpacer(leftspacer)
 		left.Add(self.pin25, 0, wx.ALIGN_RIGHT, 0)
-		left.AddSpacer(4)
+		left.AddSpacer(leftspacer)
 		left.Add(self.pin27, 0, wx.ALIGN_RIGHT, 0)
-		left.AddSpacer(4)
+		left.AddSpacer(leftspacer)
 		left.Add(self.pin29, 0, wx.ALIGN_RIGHT, 0)
-		left.AddSpacer(4)
+		left.AddSpacer(leftspacer)
 		left.Add(self.pin31, 0, wx.ALIGN_RIGHT, 0)
-		left.AddSpacer(4)
+		left.AddSpacer(leftspacer)
 		left.Add(self.pin33, 0, wx.ALIGN_RIGHT, 0)
-		left.AddSpacer(4)
+		left.AddSpacer(leftspacer)
 		left.Add(self.pin35, 0, wx.ALIGN_RIGHT, 0)
-		left.AddSpacer(4)
+		left.AddSpacer(leftspacer)
 		left.Add(self.pin37, 0, wx.ALIGN_RIGHT, 0)
-		left.AddSpacer(4)
+		left.AddSpacer(leftspacer)
 		left.Add(self.pin39, 0, wx.ALIGN_RIGHT, 0)
 
 		right = wx.BoxSizer(wx.VERTICAL)
-		right.AddSpacer(4)
+		right.AddSpacer(rightpacer0)
 		right.Add(self.pin2, 0, wx.ALIGN_LEFT, 0)
 		right.Add(self.pin4, 0, wx.ALIGN_LEFT, 0)
 		right.Add(self.pin6, 0, wx.ALIGN_LEFT, 0)
@@ -244,8 +357,8 @@ class GpioMap(wx.Dialog):
 			right2.Add(cancelBtn, 0, wx.ALL | wx.EXPAND, 5)
 
 		hbox = wx.BoxSizer(wx.HORIZONTAL)
-		hbox.Add(left, 0, wx.ALL, 0)
-		hbox.Add(right, 0, wx.ALL, 0)
+		hbox.Add(left, 1, wx.ALL, 0)
+		hbox.Add(right, 1, wx.ALL, 0)
 		hbox.Add(right2, 1, wx.ALL | wx.EXPAND, 5)
 
 		panel.SetSizer(hbox)

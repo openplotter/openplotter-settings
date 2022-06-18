@@ -2,7 +2,7 @@
 Encoding=UTF-8
 Name=XyGrib GRIB file viewer
 GenericName=GRIB file viewer
-Comment=Meterological file viewer
+Comment=Meteorological file viewer
 Exec=XyGrib
 Icon=xygrib.png
 Terminal=false
