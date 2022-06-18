@@ -1,4 +1,19 @@
-openplotter-settings (3.4.1-beta) bullseye; urgency=medium
+openplotter-settings (3.4.4-stable) bullseye; urgency=medium
+
+  * Add virtual keyboard
+  * Add NTP server
+  * Based on Debian Bullseye
+  * Migrate to cloudsmith
+  * Add rescue mode
+  * Add shutdown management
+  * Omprove compatibility with Ubuntu for Raspberry
+  * Remove screensaver management
+  * Fix errors
+  * Update translations
+
+ -- Sailoog <info@sailoog.com>  Sat, 18 Jun 2022 20:34:28 +0200
+
+openplotter-settings (3.4.3-beta) bullseye; urgency=medium
 
   * v3 Beta
 

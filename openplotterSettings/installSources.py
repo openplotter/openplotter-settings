@@ -41,6 +41,7 @@ def main():
 		else: 
 			codeName = RELEASE_DATA['VERSION_CODENAME']
 			hostID = RELEASE_DATA['ID']
+		if hostID == 'raspbian': hostID = 'debian'
 		if hostID != 'ubuntu' and hostID != 'debian':
 			print('FAILED. Unknown system: '+hostID)
 			return
