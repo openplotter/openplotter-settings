@@ -34,6 +34,7 @@ class MyFrame(wx.Frame):
 		self.currentLanguage = self.conf.get('GENERAL', 'lang')
 		self.currentdir = os.path.dirname(os.path.abspath(__file__))
 		self.language = Language(self.currentdir,'openplotter-settings',self.currentLanguage)
+		self.debug = self.conf.get('GENERAL', 'debug')
 
 		self.ttimer = 100
 		self.logger_data=False
@@ -124,8 +125,23 @@ class MyFrame(wx.Frame):
 			time.sleep(0.1)
 		self.logger_data=msg
 
-	def starting(self):
+	def startApp(self, startup):
+		start = startup.Start(self.conf,self.currentLanguage)
+		initialMessage = start.initialMessage
+		if initialMessage: 
+			self.add_logger_data(initialMessage)
+			result = start.start()
+			if result: self.add_logger_data(result)
 
+	def checkApp(self, startup):
+		check = startup.Check(self.conf,self.currentLanguage)
+		initialMessage = check.initialMessage
+		if initialMessage: 
+			self.add_logger_data(initialMessage)
+			result = check.check()
+			if result: self.add_logger_data(result)
+
+	def starting(self):
 		delay = self.conf.get('GENERAL', 'delay')
 		if self.mode == 'start':
 			try:
@@ -141,6 +157,19 @@ class MyFrame(wx.Frame):
 					checkDelay = int(delay)
 					self.add_logger_data({'green':'','black':delay+_(' seconds'),'red':''})
 			except:self.add_logger_data({'green':'','black':'','red':_('Delay failed. Is it a number?')})
+
+		appsList = AppsList()
+		appsDict = appsList.appsDict
+		if self.mode == 'start':
+			for i in appsDict:
+				name = i['module']
+				if name:
+					startup = False
+					try:
+						startup = importlib.import_module(name+'.startup')
+						if startup: self.startApp(startup)
+					except Exception as e: 
+						if self.debug == 'yes': print(str(e))
 
 		self.add_logger_data(_('Checking NTP server...'))
 		try:
@@ -174,8 +203,8 @@ class MyFrame(wx.Frame):
 			self.add_logger_data({'green':'','black':_('disabled'),'red':''})
 
 		self.add_logger_data(_('Checking debugging mode...'))
-		debug = self.conf.get('GENERAL', 'debug')
-		if debug == 'yes': 
+		
+		if self.debug == 'yes': 
 			self.add_logger_data({'green':'','black':'','red':_('enabled')})
 		else:
 			self.add_logger_data({'green':'','black':_('disabled'),'red':''})
@@ -195,18 +224,16 @@ class MyFrame(wx.Frame):
 			self.add_logger_data({'green':'','black':_('added'),'red':''})
 		else: self.add_logger_data({'green':'','black':'','red':_('There are missing packages sources. Please add sources in "OpenPlotter Settings".')})
 
-		appsList = AppsList()
-		appsDict = appsList.appsDict
 		for i in appsDict:
 			name = i['module']
 			if name:
 				startup = False
 				try:
 					startup = importlib.import_module(name+'.startup')
-					if startup: self.processApp(startup)
+					if startup: self.checkApp(startup)
 				except Exception as e: 
-					if debug == 'yes': print(str(e))
-		
+					if self.debug == 'yes': print(str(e))
+					
 		try:
 			self.add_logger_data(_('Checking serial connections conflicts...'))
 			allSerialPorts = SerialPorts()
@@ -264,21 +291,6 @@ class MyFrame(wx.Frame):
 			if c < 1: break
 			else: self.add_logger_data(c)
 			c = c - 1
-
-	def processApp(self, startup):
-		if self.mode == 'start':
-			start = startup.Start(self.conf,self.currentLanguage)
-			initialMessage = start.initialMessage
-			if initialMessage: 
-				self.add_logger_data(initialMessage)
-				result = start.start()
-				if result: self.add_logger_data(result)
-		check = startup.Check(self.conf,self.currentLanguage)
-		initialMessage = check.initialMessage
-		if initialMessage: 
-			self.add_logger_data(initialMessage)
-			result = check.check()
-			if result: self.add_logger_data(result)
 
 	def OnCloseButton(self,e=0):
 		self.timer.Stop()
