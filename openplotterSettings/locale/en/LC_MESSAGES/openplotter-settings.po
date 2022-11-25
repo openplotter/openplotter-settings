@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: openplotter-settings\n"
-"POT-Creation-Date: 2022-06-01 21:09+0200\n"
-"PO-Revision-Date: 2022-06-18 20:32+0200\n"
+"POT-Creation-Date: 2022-11-24 19:13+0100\n"
+"PO-Revision-Date: 2022-11-25 12:27+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -15,51 +15,51 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: appsList.py:90
-msgid "MAIANA AIS transponder"
-msgstr ""
-
-#: appsList.py:138
-msgid "Notifications"
-msgstr ""
-
-#: appsList.py:170
-msgid "I2C Sensors"
-msgstr ""
-
-#: appsList.py:202
+#: appsList.py:108
 msgid "AvNav Installer"
 msgstr ""
 
-#: appsList.py:218
+#: appsList.py:124
+msgid "Notifications"
+msgstr ""
+
+#: appsList.py:140
+msgid "MAIANA AIS transponder"
+msgstr ""
+
+#: appsList.py:188
+msgid "I2C Sensors"
+msgstr ""
+
+#: appsList.py:220
 msgid "Network"
 msgstr ""
 
-#: appsList.py:234
+#: appsList.py:236
 msgid "CAN Bus"
 msgstr ""
 
-#: appsList.py:250
+#: appsList.py:252
 msgid "Serial"
 msgstr ""
 
-#: appsList.py:266
+#: appsList.py:268
 msgid "Dashboards"
 msgstr ""
 
-#: appsList.py:298
+#: appsList.py:300
 msgid "OpenCPN Installer"
 msgstr ""
 
-#: appsList.py:314
+#: appsList.py:316
 msgid "Signal K Installer"
 msgstr ""
 
-#: appsList.py:330
+#: appsList.py:332
 msgid "Documentation"
 msgstr ""
 
-#: appsList.py:346 data/openplotter-settings.desktop:3
+#: appsList.py:348 data/openplotter-settings.desktop:3
 #: openplotterSettings.py:41
 msgid "Settings"
 msgstr ""
@@ -154,31 +154,31 @@ msgstr ""
 msgid "You can not select this GPIO to do this job."
 msgstr ""
 
-#: installSources.py:64
+#: installSources.py:65
 msgid "Added OpenPlotter packages source"
 msgstr ""
 
-#: installSources.py:66
+#: installSources.py:67
 msgid "OpenPlotter packages source already exists"
 msgstr ""
 
-#: installSources.py:72
+#: installSources.py:73
 msgid "Added OpenPlotter beta packages source"
 msgstr ""
 
-#: installSources.py:74
+#: installSources.py:75
 msgid "OpenPlotter beta packages source already exists"
 msgstr ""
 
-#: installSources.py:79
+#: installSources.py:80
 msgid "Added free-x packages source"
 msgstr ""
 
-#: installSources.py:81
+#: installSources.py:82
 msgid "free-x packages source already exists"
 msgstr ""
 
-#: installSources.py:102 settingsPreUninstall.py:32
+#: installSources.py:103 settingsPreUninstall.py:32
 msgid "FAILED: "
 msgstr ""
 
@@ -230,7 +230,7 @@ msgstr ""
 msgid "Maximize apps"
 msgstr ""
 
-#: openplotterSettings.py:160 startup.py:63
+#: openplotterSettings.py:160 startup.py:64
 msgid "Rescue"
 msgstr ""
 
@@ -587,7 +587,7 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: postInstall.py:50 startup.py:59
+#: postInstall.py:50 startup.py:60
 msgid "Close"
 msgstr ""
 
@@ -677,150 +677,150 @@ msgstr ""
 msgid "DONE"
 msgstr ""
 
-#: startup.py:42
+#: startup.py:43
 msgid "Starting OpenPlotter"
 msgstr ""
 
-#: startup.py:50
+#: startup.py:51
 msgid "Starting OpenPlotter. Please wait for all services to start"
 msgstr ""
 
-#: startup.py:51
+#: startup.py:52
 msgid "Checking OpenPlotter system. Please wait for all services to be checked"
 msgstr ""
 
-#: startup.py:89
+#: startup.py:90
 msgid "There are some warnings. Check your system. Closing in "
 msgstr ""
 
-#: startup.py:89 startup.py:94 startup.py:142
+#: startup.py:90 startup.py:95 startup.py:158
 msgid " seconds"
 msgstr ""
 
-#: startup.py:94
+#: startup.py:95
 msgid "There are no warnings. Closing in "
 msgstr ""
 
-#: startup.py:133
+#: startup.py:149
 msgid "Applying delay of "
 msgstr ""
 
-#: startup.py:133
+#: startup.py:149
 msgid " seconds..."
 msgstr ""
 
-#: startup.py:135
+#: startup.py:151
 msgid "done"
 msgstr ""
 
-#: startup.py:136 startup.py:143
+#: startup.py:152 startup.py:159
 msgid "Delay failed. Is it a number?"
 msgstr ""
 
-#: startup.py:140
+#: startup.py:156
 msgid "A startup delay will apply"
 msgstr ""
 
-#: startup.py:145
+#: startup.py:174
 msgid "Checking NTP server..."
 msgstr ""
 
-#: startup.py:148
+#: startup.py:177
 msgid "running"
 msgstr ""
 
-#: startup.py:149
+#: startup.py:178
 msgid "not running"
 msgstr ""
 
-#: startup.py:156
+#: startup.py:185
 msgid "Checking Power off management..."
 msgstr ""
 
-#: startup.py:157 startup.py:160 startup.py:167 startup.py:172 startup.py:179
+#: startup.py:186 startup.py:189 startup.py:196 startup.py:201 startup.py:208
 msgid "enabled"
 msgstr ""
 
-#: startup.py:158 startup.py:161 startup.py:174 startup.py:181
+#: startup.py:187 startup.py:190 startup.py:203 startup.py:210
 msgid "disabled"
 msgstr ""
 
-#: startup.py:159
+#: startup.py:188
 msgid "Checking Shutdown management..."
 msgstr ""
 
-#: startup.py:163
+#: startup.py:192
 msgid "Checking OpenPlotter autostart..."
 msgstr ""
 
-#: startup.py:165
+#: startup.py:194
 msgid ""
 "Autostart is not enabled and most features will not work. Please select "
 "\"Autostart\" in \"OpenPlotter Settings\""
 msgstr ""
 
-#: startup.py:169
+#: startup.py:198
 msgid "Checking rescue mode..."
 msgstr ""
 
-#: startup.py:176
+#: startup.py:205
 msgid "Checking debugging mode..."
 msgstr ""
 
-#: startup.py:185
+#: startup.py:214
 msgid "Checking system log file size..."
 msgstr ""
 
-#: startup.py:188 startup.py:189
+#: startup.py:217 startup.py:218
 msgid "System log file size: "
 msgstr ""
 
-#: startup.py:192
+#: startup.py:221
 msgid "Checking OpenPlotter packages source..."
 msgstr ""
 
-#: startup.py:195
+#: startup.py:224
 msgid "added"
 msgstr ""
 
-#: startup.py:196
+#: startup.py:225
 msgid ""
 "There are missing packages sources. Please add sources in \"OpenPlotter "
 "Settings\"."
 msgstr ""
 
-#: startup.py:211
+#: startup.py:238
 msgid "Checking serial connections conflicts..."
 msgstr ""
 
-#: startup.py:215
+#: startup.py:242
 msgid "There are conflicts between the following serial connections:"
 msgstr ""
 
-#: startup.py:219 startup.py:231 startup.py:250
+#: startup.py:246 startup.py:258 startup.py:277
 msgid "no conflicts"
 msgstr ""
 
-#: startup.py:223
+#: startup.py:250
 msgid "Checking network connections conflicts..."
 msgstr ""
 
-#: startup.py:227
+#: startup.py:254
 msgid "There are conflicts between the following server connections:"
 msgstr ""
 
-#: startup.py:236
+#: startup.py:263
 msgid "Checking GPIO conflicts..."
 msgstr ""
 
-#: startup.py:243
+#: startup.py:270
 msgid "There are GPIO conflicts between the following apps:"
 msgstr ""
 
-#: startup.py:258
+#: startup.py:285
 msgid "STARTUP FINISHED"
 msgstr ""
 
-#: startup.py:259
+#: startup.py:286
 msgid "CHECK SYSTEM FINISHED"
 msgstr ""

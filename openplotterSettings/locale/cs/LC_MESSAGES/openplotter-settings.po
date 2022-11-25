@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openplotter\n"
 "POT-Creation-Date: 2022-05-29 18:49+0200\n"
-"PO-Revision-Date: 2022-06-18 20:33+0200\n"
+"PO-Revision-Date: 2022-11-25 12:28+0100\n"
 "Last-Translator: \n"
 "Language-Team: Czech\n"
 "Language: cs\n"
@@ -91,7 +91,7 @@ msgstr "Prohlížeč souborů GRIB"
 
 #: data/xygrib.desktop:6
 msgid "Meteorological file viewer"
-msgstr ""
+msgstr "Prohlížeč meteorologických souborů"
 
 #: data/xygrib.desktop:8
 msgid "xygrib.png"
@@ -233,7 +233,7 @@ msgstr "Přeložit"
 
 #: openplotterSettings.py:157
 msgid "Maximize apps"
-msgstr ""
+msgstr "Maximalizovat aplikace"
 
 #: openplotterSettings.py:160 startup.py:63
 msgid "Rescue"
@@ -245,11 +245,11 @@ msgstr "NTP server"
 
 #: openplotterSettings.py:175
 msgid "Keyboard layout"
-msgstr ""
+msgstr "Rozpoložení klávesnice"
 
 #: openplotterSettings.py:178
 msgid "Virtual keyboard"
-msgstr ""
+msgstr "Virtuální klávesnice"
 
 #: openplotterSettings.py:182
 msgid "Startup"
