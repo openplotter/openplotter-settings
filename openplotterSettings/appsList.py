@@ -38,6 +38,7 @@ class AppsList:
 			except Exception as e: 
 				if self.debug: print("wrong external app format: "+str(e))
 
+		'''
 		app = {
 		'name': 'Moitessier HAT',
 		'platform': 'rpi',
@@ -69,7 +70,7 @@ class AppsList:
 		'conf': 'macarthur'
 		}
 		self.appsDict.append(app)
-
+		
 		app = {
 		'name': 'OpenMarine Box',
 		'platform': 'both',
@@ -85,22 +86,7 @@ class AppsList:
 		'conf': ''
 		}
 		self.appsDict.append(app)
-		
-		app = {
-		'name': _('MAIANA AIS transponder'),
-		'platform': 'both',
-		'package': 'openplotter-maiana',
-		'preUninstall': platform2.admin+' maianaPreUninstall',
-		'uninstall': 'openplotter-maiana',
-		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
-		'dev': 'no',
-		'entryPoint': 'openplotter-maiana',
-		'postInstall': platform2.admin+' maianaPostInstall',
-		'reboot': 'no',
-		'module': 'openplotterMaiana',
-		'conf': ''
-		}
-		self.appsDict.append(app)
+		'''
 
 		app = {
 		'name': 'SDR VHF',
@@ -119,21 +105,21 @@ class AppsList:
 		self.appsDict.append(app)
 
 		app = {
-		'name': 'IoT',
+		'name': _('AvNav Installer'),
 		'platform': 'both',
-		'package': 'openplotter-iot',
-		'preUninstall': platform2.admin+' iotPreUninstall',
-		'uninstall': 'openplotter-iot',
-		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
+		'package': 'openplotter-avnav',
+		'preUninstall': platform2.admin+' avPreUninstall',
+		'uninstall': 'openplotter-avnav',
+		'sources': ['https://www.free-x.de/deb4op'],
 		'dev': 'no',
-		'entryPoint': 'openplotter-iot',
-		'postInstall': platform2.admin+' iotPostInstall',
+		'entryPoint': 'openplotter-avnav',
+		'postInstall': platform2.admin+' avPostInstall',
 		'reboot': 'no',
-		'module': 'openplotterIot',
-		'conf': 'iot'
+		'module': 'openplotterAvnav',
+		'conf': 'avnav'
 		}
 		self.appsDict.append(app)
-
+		
 		app = {
 		'name': _('Notifications'),
 		'platform': 'both',
@@ -147,6 +133,38 @@ class AppsList:
 		'reboot': 'no',
 		'module': 'openplotterNotifications',
 		'conf': 'notifications'
+		}
+		self.appsDict.append(app)
+
+		app = {
+		'name': _('MAIANA AIS transponder'),
+		'platform': 'both',
+		'package': 'openplotter-maiana',
+		'preUninstall': platform2.admin+' maianaPreUninstall',
+		'uninstall': 'openplotter-maiana',
+		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
+		'dev': 'no',
+		'entryPoint': 'openplotter-maiana',
+		'postInstall': platform2.admin+' maianaPostInstall',
+		'reboot': 'no',
+		'module': 'openplotterMaiana',
+		'conf': ''
+		}
+		self.appsDict.append(app)
+
+		app = {
+		'name': 'IoT',
+		'platform': 'both',
+		'package': 'openplotter-iot',
+		'preUninstall': platform2.admin+' iotPreUninstall',
+		'uninstall': 'openplotter-iot',
+		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
+		'dev': 'no',
+		'entryPoint': 'openplotter-iot',
+		'postInstall': platform2.admin+' iotPostInstall',
+		'reboot': 'no',
+		'module': 'openplotterIot',
+		'conf': 'iot'
 		}
 		self.appsDict.append(app)
 
@@ -195,22 +213,6 @@ class AppsList:
 		'reboot': 'no',
 		'module': 'openplotterPypilot',
 		'conf': 'pypilot'
-		}
-		self.appsDict.append(app)
-
-		app = {
-		'name': _('AvNav Installer'),
-		'platform': 'both',
-		'package': 'openplotter-avnav',
-		'preUninstall': platform2.admin+' avPreUninstall',
-		'uninstall': 'openplotter-avnav',
-		'sources': ['https://www.free-x.de/deb4op'],
-		'dev': 'no',
-		'entryPoint': 'openplotter-avnav',
-		'postInstall': platform2.admin+' avPostInstall',
-		'reboot': 'no',
-		'module': 'openplotterAvnav',
-		'conf': 'avnav'
 		}
 		self.appsDict.append(app)
 
