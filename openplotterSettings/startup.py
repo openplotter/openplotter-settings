@@ -171,12 +171,6 @@ class MyFrame(wx.Frame):
 					except Exception as e: 
 						if self.debug == 'yes': print(str(e))
 
-		self.add_logger_data(_('Checking NTP server...'))
-		try:
-			subprocess.check_output(['systemctl', 'is-active', 'ntp.service']).decode(sys.stdin.encoding)
-			self.add_logger_data({'green':_('running'),'black':'','red':''})
-		except: self.add_logger_data({'green':'','black':_('not running'),'red':''})
-
 		if self.isRPI:
 			try: config = open('/boot/config.txt', 'r')
 			except: config = open('/boot/firmware/config.txt', 'r')

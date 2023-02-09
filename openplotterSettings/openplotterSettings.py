@@ -160,9 +160,6 @@ class MyFrame(wx.Frame):
 		toolRescue = self.toolbar3.AddCheckTool(304, _('Rescue'), wx.Bitmap(self.currentdir+"/data/rescue.png"))
 		self.Bind(wx.EVT_TOOL, self.onToolRescue, toolRescue)
 		if self.conf.get('GENERAL', 'rescue') == 'yes': self.toolbar3.ToggleTool(304,True)
-		self.toolbar3.AddSeparator()
-		toolTime = self.toolbar3.AddCheckTool(305, _('NTP server'), wx.Bitmap(self.currentdir+"/data/time.png"))
-		self.Bind(wx.EVT_TOOL, self.onToolTime, toolTime)
 
 		self.toolbar10 = wx.ToolBar(self.genSettings, style=wx.TB_TEXT)
 		keyboardList = []
@@ -217,11 +214,6 @@ class MyFrame(wx.Frame):
 			self.pathFile.SetValue(path)
 			self.toolbar4.ToggleTool(403,True)
 		else: self.pathFile.SetValue('/usr/share/sounds/openplotter/Store_Door_Chime.mp3')
-
-		try:
-			subprocess.check_output(['systemctl', 'is-active', 'ntp.service']).decode(sys.stdin.encoding)
-			self.toolbar3.ToggleTool(305,True)
-		except: self.toolbar3.ToggleTool(305,False)
 
 	def OnToolFile(self,e):
 		dlg = wx.FileDialog(self, message=_('Choose a file'), defaultDir='/usr/share/sounds/openplotter', defaultFile='',
@@ -297,14 +289,6 @@ class MyFrame(wx.Frame):
 	def onToolRescue(self,e=0):
 		if self.toolbar3.GetToolState(304): self.conf.set('GENERAL', 'rescue', 'yes')
 		else: self.conf.set('GENERAL', 'rescue', 'no')
-
-	def onToolTime(self,e):
-		if self.toolbar3.GetToolState(305):
-			subprocess.call([self.platform.admin, 'python3', self.currentdir+'/ntp.py', 'start'])
-			self.ShowStatusBarGREEN(_('NTP server enabled'))
-		else:
-			subprocess.call([self.platform.admin, 'python3', self.currentdir+'/ntp.py', 'stop'])
-			self.ShowStatusBarGREEN(_('NTP server disabled'))
 
 	###################################################################################
 

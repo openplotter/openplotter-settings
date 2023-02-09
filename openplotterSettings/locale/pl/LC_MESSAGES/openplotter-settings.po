@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openplotter\n"
 "POT-Creation-Date: 2022-05-29 18:49+0200\n"
-"PO-Revision-Date: 2022-11-25 12:27+0100\n"
+"PO-Revision-Date: 2023-02-09 18:18\n"
 "Last-Translator: \n"
 "Language-Team: Polish\n"
 "Language: pl\n"
@@ -13,12 +13,12 @@ msgstr ""
 "X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
 "X-Crowdin-Project: openplotter\n"
 "X-Crowdin-Project-ID: 289888\n"
 "X-Crowdin-Language: pl\n"
 "X-Crowdin-File: openplotter-settings.po\n"
 "X-Crowdin-File-ID: 4\n"
-"X-Poedit-SearchPath-0: .\n"
 
 #: appsList.py:90
 msgid "MAIANA AIS transponder"
@@ -91,7 +91,7 @@ msgstr "Przeglądarka plików GRIB"
 
 #: data/xygrib.desktop:6
 msgid "Meteorological file viewer"
-msgstr ""
+msgstr "Przeglądarka plików meteorologicznych"
 
 #: data/xygrib.desktop:8
 msgid "xygrib.png"
@@ -233,7 +233,7 @@ msgstr "Przetłumacz"
 
 #: openplotterSettings.py:157
 msgid "Maximize apps"
-msgstr ""
+msgstr "Maksymalizuj aplikacje"
 
 #: openplotterSettings.py:160 startup.py:63
 msgid "Rescue"
@@ -245,11 +245,11 @@ msgstr "Serwer NTP"
 
 #: openplotterSettings.py:175
 msgid "Keyboard layout"
-msgstr ""
+msgstr "Układ klawiatury"
 
 #: openplotterSettings.py:178
 msgid "Virtual keyboard"
-msgstr ""
+msgstr "Klawiatura wirtualna"
 
 #: openplotterSettings.py:182
 msgid "Startup"
@@ -372,13 +372,9 @@ msgid "Error reading log"
 msgstr "Błąd odczytu dziennika"
 
 #: openplotterSettings.py:448
-msgid ""
-"Current and archived system log files will be deleted. A new system log file will be created after reboot.\n"
-"\n"
+msgid "Current and archived system log files will be deleted. A new system log file will be created after reboot.\n\n"
 " Are you sure?"
-msgstr ""
-"Aktualne i zarchiwizowane pliki dziennika systemu zostaną usunięte. Nowy plik dziennika systemu zostanie utworzony po ponownym uruchomieniu.\n"
-"\n"
+msgstr "Aktualne i zarchiwizowane pliki dziennika systemu zostaną usunięte. Nowy plik dziennika systemu zostanie utworzony po ponownym uruchomieniu.\n\n"
 " Jesteś pewien?"
 
 #: openplotterSettings.py:449 openplotterSettings.py:773
@@ -821,3 +817,4 @@ msgstr "ROZRUCH ZAKOŃCZONY"
 #: startup.py:259
 msgid "CHECK SYSTEM FINISHED"
 msgstr "SPRAWDZENIE SYSTEMU ZAKOŃCZONE"
+

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openplotter\n"
 "POT-Creation-Date: 2022-05-29 18:49+0200\n"
-"PO-Revision-Date: 2022-11-25 12:27+0100\n"
+"PO-Revision-Date: 2022-06-01 19:10\n"
 "Last-Translator: \n"
 "Language-Team: Dutch\n"
 "Language: nl\n"
@@ -13,12 +13,12 @@ msgstr ""
 "X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
 "X-Crowdin-Project: openplotter\n"
 "X-Crowdin-Project-ID: 289888\n"
 "X-Crowdin-Language: nl\n"
 "X-Crowdin-File: openplotter-settings.po\n"
 "X-Crowdin-File-ID: 4\n"
-"X-Poedit-SearchPath-0: .\n"
 
 #: appsList.py:90
 msgid "MAIANA AIS transponder"
@@ -372,9 +372,7 @@ msgid "Error reading log"
 msgstr ""
 
 #: openplotterSettings.py:448
-msgid ""
-"Current and archived system log files will be deleted. A new system log file will be created after reboot.\n"
-"\n"
+msgid "Current and archived system log files will be deleted. A new system log file will be created after reboot.\n\n"
 " Are you sure?"
 msgstr ""
 
@@ -818,3 +816,4 @@ msgstr "Opstarten voltooid"
 #: startup.py:259
 msgid "CHECK SYSTEM FINISHED"
 msgstr "Systeem controle voltooid"
+
