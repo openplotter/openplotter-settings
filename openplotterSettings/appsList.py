@@ -38,56 +38,6 @@ class AppsList:
 			except Exception as e: 
 				if self.debug: print("wrong external app format: "+str(e))
 
-		'''
-		app = {
-		'name': 'Moitessier HAT',
-		'platform': 'rpi',
-		'package': 'openplotter-moitessier',
-		'preUninstall': platform2.admin+' moitessierPreUninstall',
-		'uninstall': 'openplotter-moitessier',
-		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
-		'dev': 'no',
-		'entryPoint': 'openplotter-moitessier',
-		'postInstall': platform2.admin+' moitessierPostInstall',
-		'reboot': 'no',
-		'module': 'openplotterMoitessier',
-		'conf': 'moitessier'
-		}
-		self.appsDict.append(app)
-
-		app = {
-		'name': 'MacArthur HAT',
-		'platform': 'rpi',
-		'package': 'openplotter-macarthur',
-		'preUninstall': platform2.admin+' macarthurPreUninstall',
-		'uninstall': 'openplotter-macarthur',
-		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
-		'dev': 'no',
-		'entryPoint': 'openplotter-macarthur',
-		'postInstall': platform2.admin+' macarthurPostInstall',
-		'reboot': 'no',
-		'module': 'openplotterMacarthur',
-		'conf': 'macarthur'
-		}
-		self.appsDict.append(app)
-		
-		app = {
-		'name': 'OpenMarine Box',
-		'platform': 'both',
-		'package': 'openplotter-openmarinebox',
-		'preUninstall': '',
-		'uninstall': 'openplotter-openmarinebox',
-		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
-		'dev': 'no',
-		'entryPoint': 'openplotter-openmarinebox',
-		'postInstall': '',
-		'reboot': 'no',
-		'module': 'openplotterOpenmarinebox',
-		'conf': ''
-		}
-		self.appsDict.append(app)
-		'''
-
 		app = {
 		'name': 'SDR VHF',
 		'platform': 'both',
@@ -153,18 +103,18 @@ class AppsList:
 		self.appsDict.append(app)
 
 		app = {
-		'name': 'IoT',
+		'name': 'IoB',
 		'platform': 'both',
-		'package': 'openplotter-iot',
-		'preUninstall': platform2.admin+' iotPreUninstall',
-		'uninstall': 'openplotter-iot',
+		'package': 'openplotter-iob',
+		'preUninstall': platform2.admin+' iobPreUninstall',
+		'uninstall': 'openplotter-iob',
 		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
 		'dev': 'no',
-		'entryPoint': 'openplotter-iot',
-		'postInstall': platform2.admin+' iotPostInstall',
+		'entryPoint': 'openplotter-iob',
+		'postInstall': platform2.admin+' iobPostInstall',
 		'reboot': 'no',
-		'module': 'openplotterIot',
-		'conf': 'iot'
+		'module': 'openplotterIob',
+		'conf': 'iob'
 		}
 		self.appsDict.append(app)
 
