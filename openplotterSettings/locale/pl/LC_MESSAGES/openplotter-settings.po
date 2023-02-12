@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openplotter\n"
 "POT-Creation-Date: 2022-05-29 18:49+0200\n"
-"PO-Revision-Date: 2023-02-09 18:18\n"
+"PO-Revision-Date: 2023-02-12 12:31+0100\n"
 "Last-Translator: \n"
 "Language-Team: Polish\n"
 "Language: pl\n"
@@ -13,12 +13,12 @@ msgstr ""
 "X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-SearchPath-0: .\n"
 "X-Crowdin-Project: openplotter\n"
 "X-Crowdin-Project-ID: 289888\n"
 "X-Crowdin-Language: pl\n"
 "X-Crowdin-File: openplotter-settings.po\n"
 "X-Crowdin-File-ID: 4\n"
+"X-Poedit-SearchPath-0: .\n"
 
 #: appsList.py:90
 msgid "MAIANA AIS transponder"
@@ -372,9 +372,13 @@ msgid "Error reading log"
 msgstr "Błąd odczytu dziennika"
 
 #: openplotterSettings.py:448
-msgid "Current and archived system log files will be deleted. A new system log file will be created after reboot.\n\n"
+msgid ""
+"Current and archived system log files will be deleted. A new system log file will be created after reboot.\n"
+"\n"
 " Are you sure?"
-msgstr "Aktualne i zarchiwizowane pliki dziennika systemu zostaną usunięte. Nowy plik dziennika systemu zostanie utworzony po ponownym uruchomieniu.\n\n"
+msgstr ""
+"Aktualne i zarchiwizowane pliki dziennika systemu zostaną usunięte. Nowy plik dziennika systemu zostanie utworzony po ponownym uruchomieniu.\n"
+"\n"
 " Jesteś pewien?"
 
 #: openplotterSettings.py:449 openplotterSettings.py:773
@@ -817,4 +821,3 @@ msgstr "ROZRUCH ZAKOŃCZONY"
 #: startup.py:259
 msgid "CHECK SYSTEM FINISHED"
 msgstr "SPRAWDZENIE SYSTEMU ZAKOŃCZONE"
-

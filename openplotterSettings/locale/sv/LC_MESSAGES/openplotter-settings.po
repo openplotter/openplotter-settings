@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openplotter\n"
 "POT-Creation-Date: 2022-05-29 18:49+0200\n"
-"PO-Revision-Date: 2023-02-09 18:18\n"
+"PO-Revision-Date: 2023-02-12 12:31+0100\n"
 "Last-Translator: \n"
 "Language-Team: Swedish\n"
 "Language: sv\n"
@@ -13,12 +13,12 @@ msgstr ""
 "X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-SearchPath-0: .\n"
 "X-Crowdin-Project: openplotter\n"
 "X-Crowdin-Project-ID: 289888\n"
 "X-Crowdin-Language: sv-SE\n"
 "X-Crowdin-File: openplotter-settings.po\n"
 "X-Crowdin-File-ID: 4\n"
+"X-Poedit-SearchPath-0: .\n"
 
 #: appsList.py:90
 msgid "MAIANA AIS transponder"
@@ -372,9 +372,13 @@ msgid "Error reading log"
 msgstr "Fel vid läsning av logg"
 
 #: openplotterSettings.py:448
-msgid "Current and archived system log files will be deleted. A new system log file will be created after reboot.\n\n"
+msgid ""
+"Current and archived system log files will be deleted. A new system log file will be created after reboot.\n"
+"\n"
 " Are you sure?"
-msgstr "Nuvarande och arkiverade systemloggfiler kommer att raderas. En ny systemloggfil kommer att skapas efter omstart.\n\n"
+msgstr ""
+"Nuvarande och arkiverade systemloggfiler kommer att raderas. En ny systemloggfil kommer att skapas efter omstart.\n"
+"\n"
 " Är du säker?"
 
 #: openplotterSettings.py:449 openplotterSettings.py:773
@@ -817,4 +821,3 @@ msgstr "UPPSTART AVSLUTAD"
 #: startup.py:259
 msgid "CHECK SYSTEM FINISHED"
 msgstr "SYSTEMKONTROLL AVSLUTAD"
-
