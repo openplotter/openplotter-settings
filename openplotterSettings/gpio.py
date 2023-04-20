@@ -217,8 +217,8 @@ class GpioMap(wx.Dialog):
 		if self.allowed != '0': title = _('Select GPIO')
 		else: title = _('GPIO Map')
 
-		wx.Dialog.__init__(self, None, title=title, size=(700,480))
-		self.SetFont(wx.Font(10, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
+		wx.Dialog.__init__(self, None, title=title, size=(700,415))
+		self.SetFont(wx.Font(8, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
 		panel = wx.Panel(self)
 
 		self.pin1 = wx.CheckBox(panel, 1, style=wx.ALIGN_RIGHT)

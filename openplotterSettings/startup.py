@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Openplotter. If not, see <http://www.gnu.org/licenses/>.
 
-import wx, os, sys, time, threading, subprocess, importlib
+import wx, os, sys, time, threading, subprocess, importlib, configparser
 import wx.richtext as rt
 from .conf import Conf
 from .language import Language
@@ -40,7 +40,10 @@ class MyFrame(wx.Frame):
 		self.logger_data=False
 		self.warnings_flag=False
 
-		wx.Frame.__init__(self, None, title=_('Starting OpenPlotter'), style=wx.STAY_ON_TOP, size=(800,475))
+		if self.mode == 'start': title = _('Starting OpenPlotter')
+		else: title = _('Checking OpenPlotter')
+
+		wx.Frame.__init__(self, None, title=title, style = wx.DEFAULT_FRAME_STYLE | wx.STAY_ON_TOP, size=(800,444))
 		self.SetFont(wx.Font(10, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
 		icon = wx.Icon(self.currentdir+"/data/openplotter-48.png", wx.BITMAP_TYPE_PNG)
 		self.SetIcon(icon)
@@ -48,8 +51,8 @@ class MyFrame(wx.Frame):
 		font_statusBar = self.GetStatusBar().GetFont()
 		font_statusBar.SetWeight(wx.BOLD)
 		self.GetStatusBar().SetFont(font_statusBar)
-		if self.mode == 'start': self.SetStatusText(_('Starting OpenPlotter. Please wait for all services to start'))
-		else: self.SetStatusText(_('Checking OpenPlotter system. Please wait for all services to be checked'))
+		if self.mode == 'start': self.SetStatusText(_('Please DO NOT CLOSE THIS WINDOW until all services have been started'))
+		else: self.SetStatusText(_('Please wait for all services to be checked'))
 
 		panel = wx.Panel(self, wx.ID_ANY)
 
@@ -79,6 +82,9 @@ class MyFrame(wx.Frame):
 
 		self.timer.Start(self.ttimer)
 
+		maxi = self.conf.get('GENERAL', 'maximize')
+		if maxi == '1': self.Maximize()
+		
 		self.Centre() 
 
 	def refresh(self,event):
@@ -170,6 +176,30 @@ class MyFrame(wx.Frame):
 						if startup: self.startApp(startup)
 					except Exception as e: 
 						if self.debug == 'yes': print(str(e))
+
+		self.add_logger_data(_('Checking touchscreen optimization...'))
+		touchscreen = self.conf.get('GENERAL', 'touchscreen')
+		gtk_overlay_scrolling = False
+		conf_file = self.conf.home+'/.config/gtk-3.0/settings.ini'
+		if os.path.exists(conf_file):
+			data_conf = configparser.ConfigParser()
+			data_conf.read(conf_file)
+			gtk_overlay_scrolling = data_conf.get('Settings','gtk-overlay-scrolling') 
+		css = False
+		css_file = self.conf.home+'/.config/gtk-3.0/gtk.css'
+		if os.path.exists(css_file):
+			with open(css_file) as f:
+				if '/*openplotter settings*/' in f.read(): css = True
+		if touchscreen == '1':
+			if not gtk_overlay_scrolling or gtk_overlay_scrolling == 'true' or not css:
+				self.add_logger_data({'green':'','black':'','red':_('There are errors in the configuration files, try to reinitialize this setting.')})
+			else:
+				self.add_logger_data({'green':'','black':_('enabled'),'red':''})
+		else:
+			if gtk_overlay_scrolling == 'false' or css:
+				self.add_logger_data({'green':'','black':'','red':_('There are errors in the configuration files, try to reinitialize this setting.')})
+			else:
+				self.add_logger_data({'green':'','black':_('disabled'),'red':''})
 
 		if self.isRPI:
 			try: config = open('/boot/config.txt', 'r')

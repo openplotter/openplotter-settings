@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Openplotter. If not, see <http://www.gnu.org/licenses/>.
 
-import wx, os, webbrowser, subprocess, sys, time
+import wx, os, webbrowser, subprocess, sys, time, configparser
 import wx.richtext as rt
 
 from .conf import Conf
@@ -154,6 +154,8 @@ class MyFrame(wx.Frame):
 		toolTranslate = self.toolbar3.AddTool(302, _('Translate'), wx.Bitmap(self.currentdir+"/data/crowdin.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolTranslate, toolTranslate)
 		self.toolbar3.AddSeparator()
+		toolTouch = self.toolbar3.AddCheckTool(305, _('Touchscreen'), wx.Bitmap(self.currentdir+"/data/touchscreen.png"))
+		self.Bind(wx.EVT_TOOL, self.OnToolTouch, toolTouch)
 		toolMaxi = self.toolbar3.AddCheckTool(303, _('Maximize apps'), wx.Bitmap(self.currentdir+"/data/resize.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolMaxi, toolMaxi)
 		self.toolbar3.AddSeparator()
@@ -197,6 +199,10 @@ class MyFrame(wx.Frame):
 		sizer.Add(starupLabel, 0, wx.ALL | wx.EXPAND, 10)
 		sizer.Add(self.toolbar4, 0, wx.EXPAND, 0)
 		self.genSettings.SetSizer(sizer)
+
+		touchscreen = self.conf.get('GENERAL', 'touchscreen')
+		if touchscreen == '1': 
+			self.toolbar3.ToggleTool(305,True)
 
 		maxi = self.conf.get('GENERAL', 'maximize')
 		if maxi == '1': 
@@ -278,13 +284,86 @@ class MyFrame(wx.Frame):
 			self.delay.SetValue('')
 			self.delay.Enable()
 
-	def OnToolMaxi(self,e):
+	def setTouchSystem(self,path,enabled):
+		if os.path.exists(path):
+			if not os.path.exists(path+'/gtk-3.0'): os.mkdir(path+'/gtk-3.0')
+			if not os.path.exists(path+'/gtk-3.0/settings.ini'):
+				file = open(path+'/gtk-3.0/settings.ini', 'w')
+				file.write('[Settings]\ngtk-overlay-scrolling = true')
+				file.close()
+			if not os.path.exists(path+'/gtk-3.0/gtk.css'):
+				file = open(path+'/gtk-3.0/gtk.css', 'w')
+				file.write('')
+				file.close()
+
+			data_conf = configparser.ConfigParser()
+			conf_file = path+'/gtk-3.0/settings.ini'
+			data_conf.read(conf_file)
+			if enabled: data_conf.set('Settings','gtk-overlay-scrolling','false')
+			else: data_conf.set('Settings','gtk-overlay-scrolling','true')
+			with open(conf_file, 'w') as file:
+				data_conf.write(file)
+
+			css = path+'/gtk-3.0/gtk.css'
+			os.system('cp -f '+css+' '+css+'_back')
+			file = open(css, 'r')
+			rule = '/*openplotter settings*/scrollbar slider {min-width: 20px;min-height: 20px;border-radius: 22px;border: 5px solid transparent;}'
+			exists = False
+			out = ''
+			while True:
+				line = file.readline()
+				if not line: break
+				if '/*openplotter settings*/' in line:
+					exists = True
+					if enabled: out += line
+					else: pass
+				else: out += line
+			if enabled and not exists: out += rule+'\n'
+			file.close()
+			try: 
+				file = open(css, 'w')
+				file.write(out)
+				file.close()
+			except Exception as e:
+				os.system('cp -f '+css+'_back '+css)
+				if self.debug: print('Error setting gtk css: '+str(e))
+
+	def setTouchOpencpn(self,path,enabled):
+		if os.path.exists(path):
+			data_conf = configparser.ConfigParser()
+			data_conf.read(path)
+			if enabled: data_conf.set('Settings','MobileTouch','1')
+			else: data_conf.set('Settings','MobileTouch','0')
+			with open(path, 'w') as file:
+				data_conf.write(file)
+
+	def OnToolTouch(self,e):
+		subprocess.call(['pkill', '-15', 'opencpn'])
+		subprocess.call(['flatpak', 'kill', 'org.opencpn.OpenCPN'])
+		if self.toolbar3.GetToolState(305):
+			self.conf.set('GENERAL', 'touchscreen', '1')
+			self.setTouchSystem(self.home+'/.config',True)
+			self.setTouchSystem(self.home+'/.var/app/org.opencpn.OpenCPN/config',True)
+			self.setTouchOpencpn(self.home+'/.opencpn/opencpn.conf',True)
+			self.setTouchOpencpn(self.home+'/.var/app/org.opencpn.OpenCPN/config/opencpn/opencpn.conf',True)
+			self.ShowStatusBarGREEN(_('Touchscreen optimization enabled'))
+		else:
+			self.conf.set('GENERAL', 'touchscreen', '0')
+			self.setTouchSystem(self.home+'/.config',False)
+			self.setTouchSystem(self.home+'/.var/app/org.opencpn.OpenCPN/config',False)
+			self.setTouchOpencpn(self.home+'/.opencpn/opencpn.conf',False)
+			self.setTouchOpencpn(self.home+'/.var/app/org.opencpn.OpenCPN/config/opencpn/opencpn.conf',False)
+			self.ShowStatusBarGREEN(_('Touchscreen optimization disabled'))
+
+	def OnToolMaxi(self,e=0):
 		if self.toolbar3.GetToolState(303):
 			self.conf.set('GENERAL', 'maximize', '1')
 			self.ShowStatusBarGREEN(_('OpenPlotter apps will open maximized'))
+			self.Maximize(True)
 		else:
 			self.conf.set('GENERAL', 'maximize', '0')
 			self.ShowStatusBarGREEN(_('Disabled maximized OpenPlotter apps'))
+			self.Maximize(False)
 
 	def onToolRescue(self,e=0):
 		if self.toolbar3.GetToolState(304): self.conf.set('GENERAL', 'rescue', 'yes')
@@ -661,7 +740,7 @@ class MyFrame(wx.Frame):
 
 	def pageApps(self):
 		self.listApps = wx.ListCtrl(self.apps, -1, style=wx.LC_REPORT | wx.LC_SINGLE_SEL | wx.LC_HRULES, size=(-1,200))
-		self.listApps.InsertColumn(0, _('Name'), width=240)
+		self.listApps.InsertColumn(0, _('Name'), width=220)
 		self.listApps.InsertColumn(1, _('Installed'), width=120)
 		self.listApps.InsertColumn(2, _('Candidate'), width=120)
 		self.listApps.InsertColumn(3, _('Pending tasks'), width=190)
