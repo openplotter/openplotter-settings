@@ -25,6 +25,12 @@ def main():
 	currentLanguage = conf2.get('GENERAL', 'lang')
 	Language(currentdir,'openplotter-settings',currentLanguage)
 
+	print(_('Removing installed packages...'))
+	try:
+		subprocess.call(['python3', currentdir+'/backlight.py', 'uninstall'])
+		print(_('DONE'))
+	except Exception as e: print(_('FAILED: ')+str(e))
+
 	print(_('Removing packages sources...'))
 	try:
 		subprocess.call(['rm', '-f', '/etc/apt/sources.list.d/openplotter.list'])

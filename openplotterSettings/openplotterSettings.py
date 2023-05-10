@@ -538,6 +538,10 @@ class MyFrame(wx.Frame):
 		toolGpio = self.toolbar5.AddTool(503, _('GPIO Map'), wx.Bitmap(self.currentdir+"/data/chip.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolGpio, toolGpio)
 		self.toolbar5.AddSeparator()
+		toolbacklightInstall = self.toolbar5.AddCheckTool(504, _('Install backlight'), wx.Bitmap(self.currentdir+"/data/brightness-install.png"))
+		self.Bind(wx.EVT_TOOL, self.OnToolbacklightInstall, toolbacklightInstall)
+		toolbacklightSet = self.toolbar5.AddTool(505, _('Set backlight'), wx.Bitmap(self.currentdir+"/data/brightness.png"))
+		self.Bind(wx.EVT_TOOL, self.OnToolbacklightSet, toolbacklightSet)
 
 		powerLabel = wx.StaticText(self.raspSettings, label=_('Shutdown Management'))
 
@@ -584,8 +588,16 @@ class MyFrame(wx.Frame):
 
 		if self.platform.isRPI: 
 			self.toolbar5.ToggleTool(503,True)
+			self.toolbar5.EnableTool(504,True)
 			self.toolbar8.EnableTool(806,True)
 			self.toolbar9.EnableTool(905,True)
+
+			if os.path.exists('/usr/share/applications/openplotter-brightness.desktop'):
+				self.toolbar5.ToggleTool(504,True)
+				self.toolbar5.EnableTool(505,True)
+			else:
+				self.toolbar5.ToggleTool(504,False)
+				self.toolbar5.EnableTool(505,False)
 
 			try: shutdown = eval(self.conf.get('GENERAL', 'shutdown'))
 			except: shutdown = {}
@@ -615,6 +627,8 @@ class MyFrame(wx.Frame):
 				self.disableShutdown()
 		else: 
 			self.toolbar5.EnableTool(503,False)
+			self.toolbar5.EnableTool(504,False)
+			self.toolbar5.EnableTool(505,False)
 			self.toolbar8.EnableTool(801,False)
 			self.toolbar8.EnableTool(806,False)
 			self.toolbar9.EnableTool(901,False)
@@ -730,6 +744,39 @@ class MyFrame(wx.Frame):
 			overlay = ''
 		subprocess.call([self.platform.admin, 'python3', self.currentdir+'/service.py', 'poweroff', overlay])
 		self.ShowStatusBarGREEN(_('Done. Changes will be applied after the next reboot'))
+
+	def OnToolbacklightInstall(self,e):
+		if self.toolbar5.GetToolState(504):
+			self.ShowStatusBarYELLOW(_('Installing rpi-backlight, please wait...'))
+			msg = _('rpi-backlight will be installed.\n')
+			msg += _('Are you sure?')
+			dlg = wx.MessageDialog(None, msg, _('Question'), wx.YES_NO | wx.NO_DEFAULT | wx.ICON_EXCLAMATION)
+			if dlg.ShowModal() == wx.ID_YES: 
+				self.toolbar5.EnableTool(505,True)
+				subprocess.call([self.platform.admin, 'python3', self.currentdir+'/backlight.py', 'install'])
+				self.ShowStatusBarGREEN(_('rpi-backlight installed'))
+			else:
+				self.toolbar5.ToggleTool(504,False)
+				self.toolbar5.EnableTool(505,False)
+				self.ShowStatusBarRED(_('Installation canceled'))
+		else:
+			self.ShowStatusBarYELLOW(_('Uninstalling rpi-backlight, please wait...'))
+			msg = _('rpi-backlight will be uninstalled.\n')
+			msg += _('Are you sure?')
+			dlg = wx.MessageDialog(None, msg, _('Question'), wx.YES_NO | wx.NO_DEFAULT | wx.ICON_EXCLAMATION)
+			if dlg.ShowModal() == wx.ID_YES: 
+				self.toolbar5.EnableTool(505,False)
+				subprocess.call([self.platform.admin, 'python3', self.currentdir+'/backlight.py', 'uninstall'])
+				self.ShowStatusBarGREEN(_('rpi-backlight uninstalled'))
+			else:
+				self.toolbar5.ToggleTool(504,True)
+				self.toolbar5.EnableTool(505,True)
+				self.ShowStatusBarRED(_('Uninstallation canceled'))
+		dlg.Destroy()
+
+	def OnToolbacklightSet(self,e):
+			subprocess.call(['pkill', '-f', 'rpi-backlight-gui'])
+			subprocess.Popen('rpi-backlight-gui')
 
 	def OnToolGpio(self,e):
 		dlg = GpioMap()

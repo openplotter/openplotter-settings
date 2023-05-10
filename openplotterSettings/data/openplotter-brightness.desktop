@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=rpi-backlight
+Exec=rpi-backlight-gui
+Icon=brightness-48
+StartupNotify=true
+Terminal=false
+Type=Application
+Categories=Utility;
