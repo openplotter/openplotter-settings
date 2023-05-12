@@ -1,6 +1,8 @@
-openplotter-settings (3.5.24-stable) bullseye; urgency=medium
+openplotter-settings (3.6.0-stable) bullseye; urgency=medium
 
-  * x
+  * Add rpi-backlight
+  * Add touchscreen
+  * Update translations
 
  -- Sailoog <info@sailoog.com>  Wed, 19 Apr 2023 17:15:16 +0200
 
