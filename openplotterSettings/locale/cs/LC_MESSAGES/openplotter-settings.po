@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: openplotter\n"
-"POT-Creation-Date: 2022-05-29 18:49+0200\n"
-"PO-Revision-Date: 2023-02-12 12:31+0100\n"
+"POT-Creation-Date: 2023-05-10 10:41+0200\n"
+"PO-Revision-Date: 2023-05-12 11:45+0200\n"
 "Last-Translator: \n"
 "Language-Team: Czech\n"
 "Language: cs\n"
@@ -20,54 +20,62 @@ msgstr ""
 "X-Crowdin-File-ID: 4\n"
 "X-Poedit-SearchPath-0: .\n"
 
+#: appsList.py:58
+msgid "AvNav Installer"
+msgstr "AvNav instalátor"
+
+#: appsList.py:74
+msgid "Notifications"
+msgstr "Oznámení"
+
 #: appsList.py:90
 msgid "MAIANA AIS transponder"
 msgstr "MAIANA AIS vysílač"
 
 #: appsList.py:138
-msgid "Notifications"
-msgstr "Oznámení"
-
-#: appsList.py:170
 msgid "I2C Sensors"
 msgstr "I2C senzory"
 
-#: appsList.py:202
-msgid "AvNav Installer"
-msgstr "AvNav instalátor"
-
-#: appsList.py:218
+#: appsList.py:170
 msgid "Network"
 msgstr "Síť"
 
-#: appsList.py:234
+#: appsList.py:186
 msgid "CAN Bus"
 msgstr "Sběrnice CAN"
 
-#: appsList.py:250
+#: appsList.py:202
 msgid "Serial"
 msgstr "Sériová linka"
 
-#: appsList.py:266
+#: appsList.py:218
 msgid "Dashboards"
 msgstr "Řídicí panely"
 
-#: appsList.py:298
+#: appsList.py:250
 msgid "OpenCPN Installer"
 msgstr "Instalátor OpenCPN"
 
-#: appsList.py:314
+#: appsList.py:266
 msgid "Signal K Installer"
 msgstr "Signálu K - instalátor"
 
-#: appsList.py:330
+#: appsList.py:282
 msgid "Documentation"
 msgstr "Dokumentace"
 
-#: appsList.py:346 data/openplotter-settings.desktop:3
+#: appsList.py:298 data/openplotter-settings.desktop:3
 #: openplotterSettings.py:41
 msgid "Settings"
 msgstr "Nastavení"
+
+#: data/openplotter-brightness.desktop:3
+msgid "rpi-backlight"
+msgstr ""
+
+#: data/openplotter-brightness.desktop:5
+msgid "brightness-48"
+msgstr ""
 
 #: data/openplotter-check.desktop:3
 msgid "Check system"
@@ -111,11 +119,11 @@ msgstr "Zem"
 msgid "Select GPIO"
 msgstr "Vyberte GPIO pin"
 
-#: gpio.py:218 openplotterSettings.py:474
+#: gpio.py:218 openplotterSettings.py:538
 msgid "GPIO Map"
 msgstr "Mapa GPIO"
 
-#: gpio.py:274 openplotterSettings.py:693 selectKey.py:40
+#: gpio.py:274 openplotterSettings.py:804 selectKey.py:40
 msgid "Refresh"
 msgstr "Obnovit"
 
@@ -159,31 +167,31 @@ msgstr "Je zde konflikt s tímto GPIO pinem."
 msgid "You can not select this GPIO to do this job."
 msgstr "Nelze vybrat tento GPIO pin pro tuto úlohu."
 
-#: installSources.py:64
+#: installSources.py:65
 msgid "Added OpenPlotter packages source"
 msgstr "Přidání zdrojů balíčků OpenPlotteru"
 
-#: installSources.py:66
+#: installSources.py:67
 msgid "OpenPlotter packages source already exists"
 msgstr "Zdroje balíčků OpenPlotteru již existují"
 
-#: installSources.py:72
+#: installSources.py:73
 msgid "Added OpenPlotter beta packages source"
 msgstr "Přidání zdrojů balíčků OpenPlotteru Beta"
 
-#: installSources.py:74
+#: installSources.py:75
 msgid "OpenPlotter beta packages source already exists"
 msgstr "Zdroje balíčků Openplotter Beta již existují"
 
-#: installSources.py:79
+#: installSources.py:80
 msgid "Added free-x packages source"
 msgstr "Přidán zdroj pro balíčky free-x"
 
-#: installSources.py:81
+#: installSources.py:82
 msgid "free-x packages source already exists"
 msgstr "zdroj balíčků pro free-x již existuje"
 
-#: installSources.py:102 settingsPreUninstall.py:32
+#: installSources.py:103 settingsPreUninstall.py:32 settingsPreUninstall.py:38
 msgid "FAILED: "
 msgstr "Chyba: "
 
@@ -232,22 +240,22 @@ msgid "Translate"
 msgstr "Přeložit"
 
 #: openplotterSettings.py:157
+msgid "Touchscreen"
+msgstr ""
+
+#: openplotterSettings.py:159
 msgid "Maximize apps"
 msgstr "Maximalizovat aplikace"
 
-#: openplotterSettings.py:160 startup.py:63
+#: openplotterSettings.py:162 startup.py:67
 msgid "Rescue"
 msgstr "Záchrana"
 
-#: openplotterSettings.py:164
-msgid "NTP server"
-msgstr "NTP server"
-
-#: openplotterSettings.py:175
+#: openplotterSettings.py:174
 msgid "Keyboard layout"
 msgstr "Rozpoložení klávesnice"
 
-#: openplotterSettings.py:178
+#: openplotterSettings.py:177
 msgid "Virtual keyboard"
 msgstr "Virtuální klávesnice"
 
@@ -263,115 +271,115 @@ msgstr "Zpoždění (sekundy)"
 msgid "Play"
 msgstr "Přehrát zvuk"
 
-#: openplotterSettings.py:226
+#: openplotterSettings.py:225
 msgid "Choose a file"
 msgstr "Vybrat soubor"
 
-#: openplotterSettings.py:227
+#: openplotterSettings.py:226
 msgid "Audio files"
 msgstr "Zvukové soubory"
 
-#: openplotterSettings.py:227
+#: openplotterSettings.py:226
 msgid "All files"
 msgstr "Všechny soubory"
 
-#: openplotterSettings.py:261
+#: openplotterSettings.py:260
 msgid "Close and open again the window to see changes."
 msgstr "Zavřete a znovu otevřete okno pro zobrazení změn."
 
-#: openplotterSettings.py:261 openplotterSettings.py:793
-#: openplotterSettings.py:806
+#: openplotterSettings.py:260 openplotterSettings.py:904
+#: openplotterSettings.py:917
 msgid "Info"
 msgstr "Info"
 
-#: openplotterSettings.py:268
+#: openplotterSettings.py:267
 msgid "Sound to play at startup set to: "
 msgstr "Přehrát zvuk po spuštění: "
 
-#: openplotterSettings.py:272
+#: openplotterSettings.py:271
 msgid "Removed sound to play at startup"
 msgstr "Byl odebrán zvuk po spuštění"
 
-#: openplotterSettings.py:279
+#: openplotterSettings.py:278
 msgid "Delay at startup set to: "
 msgstr "Zpožděné spuštění bylo nastaveno na: "
 
-#: openplotterSettings.py:284
+#: openplotterSettings.py:283
 msgid "Removed delay at startup"
 msgstr "Bylo odebráno zpoždění po spuštění"
 
-#: openplotterSettings.py:291
+#: openplotterSettings.py:349
+msgid "Touchscreen optimization enabled"
+msgstr ""
+
+#: openplotterSettings.py:356
+msgid "Touchscreen optimization disabled"
+msgstr ""
+
+#: openplotterSettings.py:361
 msgid "OpenPlotter apps will open maximized"
 msgstr "Aplikace OpenPlotteru se budou otevírat na celou obrazovku"
 
-#: openplotterSettings.py:294
+#: openplotterSettings.py:365
 msgid "Disabled maximized OpenPlotter apps"
 msgstr "Aplikace OpenPlotteru se nebudou otevírat na celou obrazovku"
 
-#: openplotterSettings.py:303
-msgid "NTP server enabled"
-msgstr "NTP server povolen"
-
-#: openplotterSettings.py:306
-msgid "NTP server disabled"
-msgstr "NTP server zakázán"
-
-#: openplotterSettings.py:312
+#: openplotterSettings.py:376
 msgid "Debugging mode"
 msgstr "Režim ladění"
 
-#: openplotterSettings.py:315
+#: openplotterSettings.py:379
 msgid "See all"
 msgstr "Zobrazit vše"
 
-#: openplotterSettings.py:317
+#: openplotterSettings.py:381
 msgid "See category"
 msgstr "Zobrazit kategorii"
 
-#: openplotterSettings.py:319
+#: openplotterSettings.py:383
 msgid "Search"
 msgstr "Vyhledat"
 
-#: openplotterSettings.py:322
+#: openplotterSettings.py:386
 msgid "Delete all logs"
 msgstr "Smazat všechny logy"
 
-#: openplotterSettings.py:325
+#: openplotterSettings.py:389
 msgid "Notify if the system log file is larger than: "
 msgstr "Upozornit, pokud je soubor protokolu systému větší než: "
 
-#: openplotterSettings.py:341
+#: openplotterSettings.py:405
 msgid "Save"
 msgstr "Uložit"
 
-#: openplotterSettings.py:363
+#: openplotterSettings.py:427
 msgid "Debugging mode enabled. Additional info about errors in OpenPlotter apps will be saved in the system log"
 msgstr "Ladící režim povolen. Další informace o chybách v aplikacích OpenPlotter budou uloženy v systémovém protokolu"
 
-#: openplotterSettings.py:366
+#: openplotterSettings.py:430
 msgid "Debugging mode disabled"
 msgstr "Ladící režim zakázán"
 
-#: openplotterSettings.py:369 openplotterSettings.py:385
-#: openplotterSettings.py:429
+#: openplotterSettings.py:433 openplotterSettings.py:449
+#: openplotterSettings.py:493
 msgid "Reading log, please wait..."
 msgstr "Čtení logu, čekejte prosím..."
 
-#: openplotterSettings.py:377 openplotterSettings.py:414
-#: openplotterSettings.py:440 openplotterSettings.py:465
-#: openplotterSettings.py:856 openplotterSettings.py:926
+#: openplotterSettings.py:441 openplotterSettings.py:478
+#: openplotterSettings.py:504 openplotterSettings.py:529
+#: openplotterSettings.py:967 openplotterSettings.py:1037
 msgid "Done"
 msgstr "Hotovo"
 
-#: openplotterSettings.py:381
+#: openplotterSettings.py:445
 msgid "Error reading  log"
 msgstr "Chyba při čtení logu"
 
-#: openplotterSettings.py:417 openplotterSettings.py:443
+#: openplotterSettings.py:481 openplotterSettings.py:507
 msgid "Error reading log"
 msgstr "Chyba při čtení logu"
 
-#: openplotterSettings.py:448
+#: openplotterSettings.py:512
 msgid ""
 "Current and archived system log files will be deleted. A new system log file will be created after reboot.\n"
 "\n"
@@ -381,200 +389,245 @@ msgstr ""
 "\n"
 " Jste si jisti?"
 
-#: openplotterSettings.py:449 openplotterSettings.py:773
-#: openplotterSettings.py:809
+#: openplotterSettings.py:513 openplotterSettings.py:753
+#: openplotterSettings.py:766 openplotterSettings.py:884
+#: openplotterSettings.py:920
 msgid "Question"
 msgstr "Otázka"
 
-#: openplotterSettings.py:452
+#: openplotterSettings.py:516
 msgid "Current and archived system log files have been deleted"
 msgstr "Aktuální a archivované systémové protokoly byly smazány"
 
-#: openplotterSettings.py:478
+#: openplotterSettings.py:541
+msgid "Install backlight"
+msgstr ""
+
+#: openplotterSettings.py:543
+msgid "Set backlight"
+msgstr ""
+
+#: openplotterSettings.py:546
 msgid "Shutdown Management"
 msgstr "Správa vypnutí"
 
-#: openplotterSettings.py:481
+#: openplotterSettings.py:549
 msgid "Shutdown"
 msgstr "Vypnout"
 
-#: openplotterSettings.py:487 openplotterSettings.py:506
+#: openplotterSettings.py:555 openplotterSettings.py:574
 msgid "GPIO"
 msgstr "GPIO"
 
-#: openplotterSettings.py:489 openplotterSettings.py:508
+#: openplotterSettings.py:557 openplotterSettings.py:576
 msgid "Transition"
 msgstr "Typ signálu"
 
-#: openplotterSettings.py:489 openplotterSettings.py:508
+#: openplotterSettings.py:557 openplotterSettings.py:576
 msgid "low->high"
 msgstr "nízký->vysoký"
 
-#: openplotterSettings.py:489 openplotterSettings.py:508
+#: openplotterSettings.py:557 openplotterSettings.py:576
 msgid "high->low"
 msgstr "vysoký->nízký"
 
-#: openplotterSettings.py:493
+#: openplotterSettings.py:561
 msgid "off"
 msgstr "vypnutý"
 
-#: openplotterSettings.py:496 openplotterSettings.py:511
+#: openplotterSettings.py:564 openplotterSettings.py:579
 msgid "Apply"
 msgstr "Použít"
 
-#: openplotterSettings.py:500
+#: openplotterSettings.py:568
 msgid "Power off"
 msgstr "Vypnout"
 
-#: openplotterSettings.py:607 openplotterSettings.py:654
+#: openplotterSettings.py:685 openplotterSettings.py:732
 msgid "Failed, you need to set a GPIO"
 msgstr "Neúspěch, je potřeba nastavit GPIO"
 
-#: openplotterSettings.py:611 openplotterSettings.py:658
+#: openplotterSettings.py:689 openplotterSettings.py:736
 msgid "Failed, you need to set a transition mode"
 msgstr "Neúspěch, je potřeba nastavit typ signálu"
 
-#: openplotterSettings.py:615
+#: openplotterSettings.py:693
 msgid "Failed, you need to set a GPIO pull mode"
 msgstr "Neúspěch, je potřeba nastavit GPIO režim resistoru"
 
-#: openplotterSettings.py:628 openplotterSettings.py:668
+#: openplotterSettings.py:706 openplotterSettings.py:746
 msgid "Done. Changes will be applied after the next reboot"
 msgstr "Hotovo. Změny budou provedeny po příštím restartu"
 
-#: openplotterSettings.py:679
+#: openplotterSettings.py:750
+msgid "Installing rpi-backlight, please wait..."
+msgstr ""
+
+#: openplotterSettings.py:751
+msgid "rpi-backlight will be installed.\n"
+msgstr ""
+
+#: openplotterSettings.py:752 openplotterSettings.py:765
+msgid "Are you sure?"
+msgstr ""
+
+#: openplotterSettings.py:757
+msgid "rpi-backlight installed"
+msgstr ""
+
+#: openplotterSettings.py:761
+msgid "Installation canceled"
+msgstr ""
+
+#: openplotterSettings.py:763
+msgid "Uninstalling rpi-backlight, please wait..."
+msgstr ""
+
+#: openplotterSettings.py:764
+msgid "rpi-backlight will be uninstalled.\n"
+msgstr ""
+
+#: openplotterSettings.py:770
+msgid "rpi-backlight uninstalled"
+msgstr ""
+
+#: openplotterSettings.py:774
+msgid "Uninstallation canceled"
+msgstr ""
+
+#: openplotterSettings.py:790
 msgid "Name"
 msgstr "Jméno"
 
-#: openplotterSettings.py:680
+#: openplotterSettings.py:791
 msgid "Installed"
 msgstr "Instalováno"
 
-#: openplotterSettings.py:681
+#: openplotterSettings.py:792
 msgid "Candidate"
 msgstr "Kandidát"
 
-#: openplotterSettings.py:682
+#: openplotterSettings.py:793
 msgid "Pending tasks"
 msgstr "Nezpracované úkoly"
 
-#: openplotterSettings.py:689
+#: openplotterSettings.py:800
 msgid "Add Sources"
 msgstr "Přidat zdroje"
 
-#: openplotterSettings.py:691
+#: openplotterSettings.py:802
 msgid "Get Candidates"
 msgstr "Zjistit kandidáty"
 
-#: openplotterSettings.py:697 openplotterSettings.py:911
+#: openplotterSettings.py:808 openplotterSettings.py:1022
 msgid "Install"
 msgstr "Instalovat"
 
-#: openplotterSettings.py:699
+#: openplotterSettings.py:810
 msgid "Uninstall"
 msgstr "Odinstalovat"
 
-#: openplotterSettings.py:702
+#: openplotterSettings.py:813
 msgid "Open"
 msgstr "Otevřít"
 
-#: openplotterSettings.py:704
+#: openplotterSettings.py:815
 msgid "Change Log"
 msgstr "Seznam změn ve verzích"
 
-#: openplotterSettings.py:727 openplotterSettings.py:889
+#: openplotterSettings.py:838 openplotterSettings.py:1000
 msgid "missing source: "
 msgstr "chybí zdroj: "
 
-#: openplotterSettings.py:729 openplotterSettings.py:893
+#: openplotterSettings.py:840 openplotterSettings.py:1004
 msgid "coming soon"
 msgstr "již brzy"
 
-#: openplotterSettings.py:732 openplotterSettings.py:899
+#: openplotterSettings.py:843 openplotterSettings.py:1010
 msgid "app only for non Raspberry machines"
 msgstr "aplikace pro jiné počítače než Raspberry"
 
-#: openplotterSettings.py:735 openplotterSettings.py:903
+#: openplotterSettings.py:846 openplotterSettings.py:1014
 msgid "app only for Raspberry machines"
 msgstr "aplikace pouze pro počítače Raspberry"
 
-#: openplotterSettings.py:739
+#: openplotterSettings.py:850
 msgid "Press Refresh"
 msgstr "Aktualizovat stiskem"
 
-#: openplotterSettings.py:750
+#: openplotterSettings.py:861
 msgid "Updating packages data, please wait... "
 msgstr "Probíhá aktualizace dat balíků, čekejte prosím... "
 
-#: openplotterSettings.py:755 openplotterSettings.py:763
+#: openplotterSettings.py:866 openplotterSettings.py:874
 msgid "Adding packages sources, please wait... "
 msgstr "Přidávání zdrojů balíčků, čekejte prosím... "
 
-#: openplotterSettings.py:765
+#: openplotterSettings.py:876
 msgid "Sources updated. Get candidates to see changes"
 msgstr "Zdroje aktualizovány. Získejte kandidáty pro zobrazení změn"
 
-#: openplotterSettings.py:772
+#: openplotterSettings.py:883
 msgid "Are you sure you want to install "
 msgstr "Opravdu chcete nainstalovat "
 
-#: openplotterSettings.py:772 openplotterSettings.py:808
+#: openplotterSettings.py:883 openplotterSettings.py:919
 msgid " and its dependencies?"
 msgstr " a všechny závislé balíčky?"
 
-#: openplotterSettings.py:782
+#: openplotterSettings.py:893
 msgid "Installing package, please wait... "
 msgstr "Instaluji balíček, prosím čekejte... "
 
-#: openplotterSettings.py:790
+#: openplotterSettings.py:901
 msgid "Running post-installation scripts, please wait... "
 msgstr "Spouštím skripty pro instalaci, čekejte prosím... "
 
-#: openplotterSettings.py:793
+#: openplotterSettings.py:904
 msgid "This app will close to apply the changes."
 msgstr "Tato aplikace se zavře, aby došlo k provedení změn."
 
-#: openplotterSettings.py:796 openplotterSettings.py:828
+#: openplotterSettings.py:907 openplotterSettings.py:939
 msgid "Done. Restart to apply changes"
 msgstr "Hotovo. Restartujte systém"
 
-#: openplotterSettings.py:797 openplotterSettings.py:829
+#: openplotterSettings.py:908 openplotterSettings.py:940
 msgid "Done. Press Refresh"
 msgstr "Hotovo. Stiskněte tlačítko Obnovit"
 
-#: openplotterSettings.py:806
+#: openplotterSettings.py:917
 msgid "You have to uninstall the rest of the apps before uninstalling openplotter-settings."
 msgstr "Před odinstalací aplikace openplotter-settings musíte odinstalovat všechny ostatní aplikace."
 
-#: openplotterSettings.py:808
+#: openplotterSettings.py:919
 msgid "Are you sure you want to uninstall "
 msgstr "Opravdu chcete odinstalovat "
 
-#: openplotterSettings.py:819
+#: openplotterSettings.py:930
 msgid "Running pre-uninstall scripts, please wait... "
 msgstr "Spouštím skripty před odebráním balíčků, prosím čekejte... "
 
-#: openplotterSettings.py:826
+#: openplotterSettings.py:937
 msgid "Uninstalling packages, please wait... "
 msgstr "Odebírám balíčky, prosím čekejte... "
 
-#: openplotterSettings.py:855
+#: openplotterSettings.py:966
 msgid "Reading changelog, please wait... "
 msgstr "Čtení seznamu změn, čekejte prosím... "
 
-#: openplotterSettings.py:861
+#: openplotterSettings.py:972
 msgid "Checking apps list, please wait... "
 msgstr "Kontroluji seznam aplikací, čekejte prosím... "
 
-#: openplotterSettings.py:917
+#: openplotterSettings.py:1028
 msgid "Open to apply and refresh"
 msgstr "Otevřít pro aplikaci a obnovit"
 
-#: openplotterSettings.py:968
+#: openplotterSettings.py:1079
 msgid "Select system log category"
 msgstr "Vyberte systémovou kategorii protokolu"
 
-#: openplotterSettings.py:997
+#: openplotterSettings.py:1108
 msgid "Search in system log file"
 msgstr "Hledat v souboru protokolu systému"
 
@@ -590,7 +643,7 @@ msgstr "Spustit"
 msgid "Cancel"
 msgstr "Storno"
 
-#: postInstall.py:50 startup.py:59
+#: postInstall.py:50 startup.py:63
 msgid "Close"
 msgstr "Zavřít"
 
@@ -671,153 +724,167 @@ msgid "device: "
 msgstr "zařízení: "
 
 #: settingsPreUninstall.py:28
-msgid "Removing packages sources..."
-msgstr "Odstraňování zdrojů balíčků..."
+msgid "Removing installed packages..."
+msgstr ""
 
-#: settingsPreUninstall.py:31
+#: settingsPreUninstall.py:31 settingsPreUninstall.py:37
 msgid "DONE"
 msgstr "Hotovo"
 
-#: startup.py:42
+#: settingsPreUninstall.py:34
+msgid "Removing packages sources..."
+msgstr "Odstraňování zdrojů balíčků..."
+
+#: startup.py:43
 msgid "Starting OpenPlotter"
 msgstr "Spouštím OpenPlotter"
 
-#: startup.py:50
-msgid "Starting OpenPlotter. Please wait for all services to start"
-msgstr "Spouštím OpenPlotter. Počkejte prosím na spuštění všech služeb"
+#: startup.py:44
+msgid "Checking OpenPlotter"
+msgstr ""
 
-#: startup.py:51
-msgid "Checking OpenPlotter system. Please wait for all services to be checked"
-msgstr "Probíhá kontrola systému OpenPlotter. Počkejte prosím na kontrolu všech služeb"
+#: startup.py:54
+msgid "Please DO NOT CLOSE THIS WINDOW until all services have been started"
+msgstr ""
 
-#: startup.py:89
+#: startup.py:55
+msgid "Please wait for all services to be checked"
+msgstr ""
+
+#: startup.py:96
 msgid "There are some warnings. Check your system. Closing in "
 msgstr "Byly nalezeny nějaké problémy. Prosím, zkontrolujte váš systém. Uzavření "
 
-#: startup.py:89 startup.py:94 startup.py:142
+#: startup.py:96 startup.py:101 startup.py:164
 msgid " seconds"
 msgstr " vteřin"
 
-#: startup.py:94
+#: startup.py:101
 msgid "There are no warnings. Closing in "
 msgstr "Systém je v pořádku, uzavírám za "
 
-#: startup.py:133
+#: startup.py:155
 msgid "Applying delay of "
 msgstr "Je aktivní zpožděný start, čekám "
 
-#: startup.py:133
+#: startup.py:155
 msgid " seconds..."
 msgstr " sekund..."
 
-#: startup.py:135
+#: startup.py:157
 msgid "done"
 msgstr "hotovo"
 
-#: startup.py:136 startup.py:143
+#: startup.py:158 startup.py:165
 msgid "Delay failed. Is it a number?"
 msgstr "Zpožděné spuštění se nezdařilo, je zadaná hodnota číslo?"
 
-#: startup.py:140
+#: startup.py:162
 msgid "A startup delay will apply"
 msgstr "Bude aplikováno zpoždění při spuštění"
 
-#: startup.py:145
-msgid "Checking NTP server..."
-msgstr "Kontroluji NTP server..."
+#: startup.py:180
+msgid "Checking touchscreen optimization..."
+msgstr ""
 
-#: startup.py:148
-msgid "running"
-msgstr "běží"
+#: startup.py:196 startup.py:201
+msgid "There are errors in the configuration files, try to reinitialize this setting."
+msgstr ""
 
-#: startup.py:149
-msgid "not running"
-msgstr "není spuštěno"
-
-#: startup.py:156
-msgid "Checking Power off management..."
-msgstr "Kontrola řízení vypnutí..."
-
-#: startup.py:157 startup.py:160 startup.py:167 startup.py:172 startup.py:179
+#: startup.py:198 startup.py:213 startup.py:223 startup.py:226 startup.py:233
+#: startup.py:238 startup.py:245
 msgid "enabled"
 msgstr "povoleno"
 
-#: startup.py:158 startup.py:161 startup.py:174 startup.py:181
+#: startup.py:203 startup.py:215 startup.py:224 startup.py:227 startup.py:240
+#: startup.py:247
 msgid "disabled"
 msgstr "zakázáno"
 
-#: startup.py:159
+#: startup.py:207
+msgid "Checking backlight..."
+msgstr ""
+
+#: startup.py:213
+msgid "Value (0-100):"
+msgstr ""
+
+#: startup.py:222
+msgid "Checking Power off management..."
+msgstr "Kontrola řízení vypnutí..."
+
+#: startup.py:225
 msgid "Checking Shutdown management..."
 msgstr "Kontrola řízení vypnutí..."
 
-#: startup.py:163
+#: startup.py:229
 msgid "Checking OpenPlotter autostart..."
 msgstr "Kontroluji automatické spuštění OpenPlotteru..."
 
-#: startup.py:165
+#: startup.py:231
 msgid "Autostart is not enabled and most features will not work. Please select \"Autostart\" in \"OpenPlotter Settings\""
 msgstr "Automatické spuštění není povoleno, většina funkcí nebude fungovat. Prosím vyberte \"Automatické spuštění\" v \"Nastavení OpenPlotter\""
 
-#: startup.py:169
+#: startup.py:235
 msgid "Checking rescue mode..."
 msgstr "Kontrola záchranného režimu..."
 
-#: startup.py:176
+#: startup.py:242
 msgid "Checking debugging mode..."
 msgstr "Kontrola režimu ladění..."
 
-#: startup.py:185
+#: startup.py:251
 msgid "Checking system log file size..."
 msgstr "Kontrola velikosti souboru protokolu..."
 
-#: startup.py:188 startup.py:189
+#: startup.py:254 startup.py:255
 msgid "System log file size: "
 msgstr "Velikost souboru systémového protokolu: "
 
-#: startup.py:192
+#: startup.py:258
 msgid "Checking OpenPlotter packages source..."
 msgstr "Kontrola zdroje OpenPlotter balíčků..."
 
-#: startup.py:195
+#: startup.py:261
 msgid "added"
 msgstr "přidáno"
 
-#: startup.py:196
+#: startup.py:262
 msgid "There are missing packages sources. Please add sources in \"OpenPlotter Settings\"."
 msgstr "Zjistili jsme, že některé zdroje balíčků nejsou přidané. Prosím přidejte zdroje v \"Nastavení OpenPlotter\"."
 
-#: startup.py:211
+#: startup.py:275
 msgid "Checking serial connections conflicts..."
 msgstr "Kontrola konfliktů sériových připojení..."
 
-#: startup.py:215
+#: startup.py:279
 msgid "There are conflicts between the following serial connections:"
 msgstr "Existují konflikty mezi následujícími sériovými spojeními:"
 
-#: startup.py:219 startup.py:231 startup.py:250
+#: startup.py:283 startup.py:295 startup.py:314
 msgid "no conflicts"
 msgstr "žádné konflikty"
 
-#: startup.py:223
+#: startup.py:287
 msgid "Checking network connections conflicts..."
 msgstr "Kontrola konfliktu síťového připojení..."
 
-#: startup.py:227
+#: startup.py:291
 msgid "There are conflicts between the following server connections:"
 msgstr "Existují konflikty mezi následujícími připojeními k serveru:"
 
-#: startup.py:236
+#: startup.py:300
 msgid "Checking GPIO conflicts..."
 msgstr "Kontrola GPIO konfliktů..."
 
-#: startup.py:243
+#: startup.py:307
 msgid "There are GPIO conflicts between the following apps:"
 msgstr "Existují konflikty GPIO mezi následujícími aplikacemi:"
 
-#: startup.py:258
+#: startup.py:322
 msgid "STARTUP FINISHED"
 msgstr "Spuštění dokončeno"
 
-#: startup.py:259
+#: startup.py:323
 msgid "CHECK SYSTEM FINISHED"
 msgstr "Kontrola systému dokončena"

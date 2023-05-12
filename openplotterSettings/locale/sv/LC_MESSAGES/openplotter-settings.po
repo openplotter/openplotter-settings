@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: openplotter\n"
-"POT-Creation-Date: 2022-05-29 18:49+0200\n"
-"PO-Revision-Date: 2023-02-12 12:31+0100\n"
+"POT-Creation-Date: 2023-05-10 10:41+0200\n"
+"PO-Revision-Date: 2023-05-12 11:45+0200\n"
 "Last-Translator: \n"
 "Language-Team: Swedish\n"
 "Language: sv\n"
@@ -20,54 +20,62 @@ msgstr ""
 "X-Crowdin-File-ID: 4\n"
 "X-Poedit-SearchPath-0: .\n"
 
+#: appsList.py:58
+msgid "AvNav Installer"
+msgstr "AvNav installerare"
+
+#: appsList.py:74
+msgid "Notifications"
+msgstr "Notifieringar"
+
 #: appsList.py:90
 msgid "MAIANA AIS transponder"
 msgstr "MAIANA AIS transponder"
 
 #: appsList.py:138
-msgid "Notifications"
-msgstr "Notifieringar"
-
-#: appsList.py:170
 msgid "I2C Sensors"
 msgstr "I2C Sensorer"
 
-#: appsList.py:202
-msgid "AvNav Installer"
-msgstr "AvNav installerare"
-
-#: appsList.py:218
+#: appsList.py:170
 msgid "Network"
 msgstr "Nätverk"
 
-#: appsList.py:234
+#: appsList.py:186
 msgid "CAN Bus"
 msgstr "CAN Bus"
 
-#: appsList.py:250
+#: appsList.py:202
 msgid "Serial"
 msgstr "Seriell"
 
-#: appsList.py:266
+#: appsList.py:218
 msgid "Dashboards"
 msgstr "Instrumentpaneler"
 
-#: appsList.py:298
+#: appsList.py:250
 msgid "OpenCPN Installer"
 msgstr "OpenCPN Installerare"
 
-#: appsList.py:314
+#: appsList.py:266
 msgid "Signal K Installer"
 msgstr "Signal K Installerare"
 
-#: appsList.py:330
+#: appsList.py:282
 msgid "Documentation"
 msgstr "Dokumentation"
 
-#: appsList.py:346 data/openplotter-settings.desktop:3
+#: appsList.py:298 data/openplotter-settings.desktop:3
 #: openplotterSettings.py:41
 msgid "Settings"
 msgstr "Inställningar"
+
+#: data/openplotter-brightness.desktop:3
+msgid "rpi-backlight"
+msgstr "rpi-backlight"
+
+#: data/openplotter-brightness.desktop:5
+msgid "brightness-48"
+msgstr "ljusstyrka-48"
 
 #: data/openplotter-check.desktop:3
 msgid "Check system"
@@ -111,11 +119,11 @@ msgstr "Jord"
 msgid "Select GPIO"
 msgstr "Välj GPIO"
 
-#: gpio.py:218 openplotterSettings.py:474
+#: gpio.py:218 openplotterSettings.py:538
 msgid "GPIO Map"
 msgstr "GPIO karta"
 
-#: gpio.py:274 openplotterSettings.py:693 selectKey.py:40
+#: gpio.py:274 openplotterSettings.py:804 selectKey.py:40
 msgid "Refresh"
 msgstr "Uppdatera"
 
@@ -159,31 +167,31 @@ msgstr "Det finns en konflikt med detta GPIO."
 msgid "You can not select this GPIO to do this job."
 msgstr "Denna GPIO kan inte användas för denna funktion."
 
-#: installSources.py:64
+#: installSources.py:65
 msgid "Added OpenPlotter packages source"
 msgstr "Lade till paketkälla för OpenPlotter"
 
-#: installSources.py:66
+#: installSources.py:67
 msgid "OpenPlotter packages source already exists"
 msgstr "OpenPlotter paketkälla finns redan"
 
-#: installSources.py:72
+#: installSources.py:73
 msgid "Added OpenPlotter beta packages source"
 msgstr "Lade till betapaketkälla för OpenPlotter"
 
-#: installSources.py:74
+#: installSources.py:75
 msgid "OpenPlotter beta packages source already exists"
 msgstr "Betapaketkälla för OpenPlotter finns redan"
 
-#: installSources.py:79
+#: installSources.py:80
 msgid "Added free-x packages source"
 msgstr "Lade till free-x paket arkiv"
 
-#: installSources.py:81
+#: installSources.py:82
 msgid "free-x packages source already exists"
 msgstr "paketkälla för free-x finns redan"
 
-#: installSources.py:102 settingsPreUninstall.py:32
+#: installSources.py:103 settingsPreUninstall.py:32 settingsPreUninstall.py:38
 msgid "FAILED: "
 msgstr "MISSLYCKADES: "
 
@@ -232,22 +240,22 @@ msgid "Translate"
 msgstr "Översätt"
 
 #: openplotterSettings.py:157
+msgid "Touchscreen"
+msgstr "Pekskärm"
+
+#: openplotterSettings.py:159
 msgid "Maximize apps"
 msgstr "Maximera appar"
 
-#: openplotterSettings.py:160 startup.py:63
+#: openplotterSettings.py:162 startup.py:67
 msgid "Rescue"
 msgstr "Rädda"
 
-#: openplotterSettings.py:164
-msgid "NTP server"
-msgstr "NTP-server"
-
-#: openplotterSettings.py:175
+#: openplotterSettings.py:174
 msgid "Keyboard layout"
 msgstr "Tangentbordslayout"
 
-#: openplotterSettings.py:178
+#: openplotterSettings.py:177
 msgid "Virtual keyboard"
 msgstr "Virtuellt tangentbord"
 
@@ -263,115 +271,115 @@ msgstr "Fördröjning (sek)"
 msgid "Play"
 msgstr "Spela upp"
 
-#: openplotterSettings.py:226
+#: openplotterSettings.py:225
 msgid "Choose a file"
 msgstr "Välj en fil"
 
-#: openplotterSettings.py:227
+#: openplotterSettings.py:226
 msgid "Audio files"
 msgstr "Ljudfiler"
 
-#: openplotterSettings.py:227
+#: openplotterSettings.py:226
 msgid "All files"
 msgstr "Alla filer"
 
-#: openplotterSettings.py:261
+#: openplotterSettings.py:260
 msgid "Close and open again the window to see changes."
 msgstr "Stäng och öppna fönstret igen för att se ändringarna."
 
-#: openplotterSettings.py:261 openplotterSettings.py:793
-#: openplotterSettings.py:806
+#: openplotterSettings.py:260 openplotterSettings.py:904
+#: openplotterSettings.py:917
 msgid "Info"
 msgstr "Information"
 
-#: openplotterSettings.py:268
+#: openplotterSettings.py:267
 msgid "Sound to play at startup set to: "
 msgstr "Valt uppstartsljud: "
 
-#: openplotterSettings.py:272
+#: openplotterSettings.py:271
 msgid "Removed sound to play at startup"
 msgstr "Avaktiverade uppstartsljud"
 
-#: openplotterSettings.py:279
+#: openplotterSettings.py:278
 msgid "Delay at startup set to: "
 msgstr "Fördröjning vid uppstart: "
 
-#: openplotterSettings.py:284
+#: openplotterSettings.py:283
 msgid "Removed delay at startup"
 msgstr "Avaktiverade fördröjd uppstart"
 
-#: openplotterSettings.py:291
+#: openplotterSettings.py:349
+msgid "Touchscreen optimization enabled"
+msgstr "Pekskärmsoptimering aktiverad"
+
+#: openplotterSettings.py:356
+msgid "Touchscreen optimization disabled"
+msgstr "Pekskärmsoptimering inaktiverad"
+
+#: openplotterSettings.py:361
 msgid "OpenPlotter apps will open maximized"
 msgstr "OppenPlotter applikationer kommer starta i fullskärmsläge"
 
-#: openplotterSettings.py:294
+#: openplotterSettings.py:365
 msgid "Disabled maximized OpenPlotter apps"
 msgstr "Avaktiverade fullskärmsläge för OpenPlotter applikationerna"
 
-#: openplotterSettings.py:303
-msgid "NTP server enabled"
-msgstr "NTP server aktiverad"
-
-#: openplotterSettings.py:306
-msgid "NTP server disabled"
-msgstr "NTP server inaktiverad"
-
-#: openplotterSettings.py:312
+#: openplotterSettings.py:376
 msgid "Debugging mode"
 msgstr "Felsökningsläge"
 
-#: openplotterSettings.py:315
+#: openplotterSettings.py:379
 msgid "See all"
 msgstr "Visa allt"
 
-#: openplotterSettings.py:317
+#: openplotterSettings.py:381
 msgid "See category"
 msgstr "Visa kategori"
 
-#: openplotterSettings.py:319
+#: openplotterSettings.py:383
 msgid "Search"
 msgstr "Sök"
 
-#: openplotterSettings.py:322
+#: openplotterSettings.py:386
 msgid "Delete all logs"
 msgstr "Radera alla loggar"
 
-#: openplotterSettings.py:325
+#: openplotterSettings.py:389
 msgid "Notify if the system log file is larger than: "
 msgstr "Meddela om systemloggfilen är större än: "
 
-#: openplotterSettings.py:341
+#: openplotterSettings.py:405
 msgid "Save"
 msgstr "Spara"
 
-#: openplotterSettings.py:363
+#: openplotterSettings.py:427
 msgid "Debugging mode enabled. Additional info about errors in OpenPlotter apps will be saved in the system log"
 msgstr "Felsökningsläge aktiverat. Utökad information om fel i OpenPlotter-appar kommer att sparas i systemloggen"
 
-#: openplotterSettings.py:366
+#: openplotterSettings.py:430
 msgid "Debugging mode disabled"
 msgstr "Felsökningsläge inaktiverat"
 
-#: openplotterSettings.py:369 openplotterSettings.py:385
-#: openplotterSettings.py:429
+#: openplotterSettings.py:433 openplotterSettings.py:449
+#: openplotterSettings.py:493
 msgid "Reading log, please wait..."
 msgstr "Läser in loggen, vänligen vänta..."
 
-#: openplotterSettings.py:377 openplotterSettings.py:414
-#: openplotterSettings.py:440 openplotterSettings.py:465
-#: openplotterSettings.py:856 openplotterSettings.py:926
+#: openplotterSettings.py:441 openplotterSettings.py:478
+#: openplotterSettings.py:504 openplotterSettings.py:529
+#: openplotterSettings.py:967 openplotterSettings.py:1037
 msgid "Done"
 msgstr "Klart"
 
-#: openplotterSettings.py:381
+#: openplotterSettings.py:445
 msgid "Error reading  log"
 msgstr "Fel vid läsning av logg"
 
-#: openplotterSettings.py:417 openplotterSettings.py:443
+#: openplotterSettings.py:481 openplotterSettings.py:507
 msgid "Error reading log"
 msgstr "Fel vid läsning av logg"
 
-#: openplotterSettings.py:448
+#: openplotterSettings.py:512
 msgid ""
 "Current and archived system log files will be deleted. A new system log file will be created after reboot.\n"
 "\n"
@@ -381,200 +389,245 @@ msgstr ""
 "\n"
 " Är du säker?"
 
-#: openplotterSettings.py:449 openplotterSettings.py:773
-#: openplotterSettings.py:809
+#: openplotterSettings.py:513 openplotterSettings.py:753
+#: openplotterSettings.py:766 openplotterSettings.py:884
+#: openplotterSettings.py:920
 msgid "Question"
 msgstr "Fråga"
 
-#: openplotterSettings.py:452
+#: openplotterSettings.py:516
 msgid "Current and archived system log files have been deleted"
 msgstr "Nuvarande och arkiverade systemloggfiler har tagits bort"
 
-#: openplotterSettings.py:478
+#: openplotterSettings.py:541
+msgid "Install backlight"
+msgstr "Installera bakgrundsbelysning"
+
+#: openplotterSettings.py:543
+msgid "Set backlight"
+msgstr "Ställ in bakgrundsbelysning"
+
+#: openplotterSettings.py:546
 msgid "Shutdown Management"
 msgstr "Hantering vid avstängning"
 
-#: openplotterSettings.py:481
+#: openplotterSettings.py:549
 msgid "Shutdown"
 msgstr "Stäng av datorn"
 
-#: openplotterSettings.py:487 openplotterSettings.py:506
+#: openplotterSettings.py:555 openplotterSettings.py:574
 msgid "GPIO"
 msgstr "GPIO"
 
-#: openplotterSettings.py:489 openplotterSettings.py:508
+#: openplotterSettings.py:557 openplotterSettings.py:576
 msgid "Transition"
 msgstr "Villkor"
 
-#: openplotterSettings.py:489 openplotterSettings.py:508
+#: openplotterSettings.py:557 openplotterSettings.py:576
 msgid "low->high"
 msgstr "låg > hög"
 
-#: openplotterSettings.py:489 openplotterSettings.py:508
+#: openplotterSettings.py:557 openplotterSettings.py:576
 msgid "high->low"
 msgstr "hög > låg"
 
-#: openplotterSettings.py:493
+#: openplotterSettings.py:561
 msgid "off"
 msgstr "av"
 
-#: openplotterSettings.py:496 openplotterSettings.py:511
+#: openplotterSettings.py:564 openplotterSettings.py:579
 msgid "Apply"
 msgstr "Verkställ"
 
-#: openplotterSettings.py:500
+#: openplotterSettings.py:568
 msgid "Power off"
 msgstr "Stäng av"
 
-#: openplotterSettings.py:607 openplotterSettings.py:654
+#: openplotterSettings.py:685 openplotterSettings.py:732
 msgid "Failed, you need to set a GPIO"
 msgstr "Misslyckades, du måste ange en GPIO"
 
-#: openplotterSettings.py:611 openplotterSettings.py:658
+#: openplotterSettings.py:689 openplotterSettings.py:736
 msgid "Failed, you need to set a transition mode"
 msgstr "Misslyckades, du måste ange ett villkor"
 
-#: openplotterSettings.py:615
+#: openplotterSettings.py:693
 msgid "Failed, you need to set a GPIO pull mode"
 msgstr "Misslyckades, du måste ställa in ett GPIO pull-läge"
 
-#: openplotterSettings.py:628 openplotterSettings.py:668
+#: openplotterSettings.py:706 openplotterSettings.py:746
 msgid "Done. Changes will be applied after the next reboot"
 msgstr "Klar. Ändringarna kommer att gälla efter nästa omstart"
 
-#: openplotterSettings.py:679
+#: openplotterSettings.py:750
+msgid "Installing rpi-backlight, please wait..."
+msgstr "Installerar rpi-backlight, var god vänta..."
+
+#: openplotterSettings.py:751
+msgid "rpi-backlight will be installed.\n"
+msgstr "rpi-backlight kommer att installeras.\n"
+
+#: openplotterSettings.py:752 openplotterSettings.py:765
+msgid "Are you sure?"
+msgstr "Är du säker?"
+
+#: openplotterSettings.py:757
+msgid "rpi-backlight installed"
+msgstr "rpi-backlight installerad"
+
+#: openplotterSettings.py:761
+msgid "Installation canceled"
+msgstr "Installationen avbröts"
+
+#: openplotterSettings.py:763
+msgid "Uninstalling rpi-backlight, please wait..."
+msgstr "Avinstallerar rpi-backlight, var god vänta..."
+
+#: openplotterSettings.py:764
+msgid "rpi-backlight will be uninstalled.\n"
+msgstr "rpi-backlight kommer att avinstalleras.\n"
+
+#: openplotterSettings.py:770
+msgid "rpi-backlight uninstalled"
+msgstr "rpi-backlight avinstallerad"
+
+#: openplotterSettings.py:774
+msgid "Uninstallation canceled"
+msgstr "Avinstallationen avbröts"
+
+#: openplotterSettings.py:790
 msgid "Name"
 msgstr "Namn"
 
-#: openplotterSettings.py:680
+#: openplotterSettings.py:791
 msgid "Installed"
 msgstr "Installerad"
 
-#: openplotterSettings.py:681
+#: openplotterSettings.py:792
 msgid "Candidate"
 msgstr "Kandidat"
 
-#: openplotterSettings.py:682
+#: openplotterSettings.py:793
 msgid "Pending tasks"
 msgstr "Väntande uppgifter"
 
-#: openplotterSettings.py:689
+#: openplotterSettings.py:800
 msgid "Add Sources"
 msgstr "Lägg till källor"
 
-#: openplotterSettings.py:691
+#: openplotterSettings.py:802
 msgid "Get Candidates"
 msgstr "Hämta kandidater"
 
-#: openplotterSettings.py:697 openplotterSettings.py:911
+#: openplotterSettings.py:808 openplotterSettings.py:1022
 msgid "Install"
 msgstr "Installera"
 
-#: openplotterSettings.py:699
+#: openplotterSettings.py:810
 msgid "Uninstall"
 msgstr "Avinstallera"
 
-#: openplotterSettings.py:702
+#: openplotterSettings.py:813
 msgid "Open"
 msgstr "Öppna"
 
-#: openplotterSettings.py:704
+#: openplotterSettings.py:815
 msgid "Change Log"
 msgstr "Ändringslogg"
 
-#: openplotterSettings.py:727 openplotterSettings.py:889
+#: openplotterSettings.py:838 openplotterSettings.py:1000
 msgid "missing source: "
 msgstr "saknar källa: "
 
-#: openplotterSettings.py:729 openplotterSettings.py:893
+#: openplotterSettings.py:840 openplotterSettings.py:1004
 msgid "coming soon"
 msgstr "kommer snart"
 
-#: openplotterSettings.py:732 openplotterSettings.py:899
+#: openplotterSettings.py:843 openplotterSettings.py:1010
 msgid "app only for non Raspberry machines"
 msgstr "app finns enbart till icke Raspberry Pi maskiner"
 
-#: openplotterSettings.py:735 openplotterSettings.py:903
+#: openplotterSettings.py:846 openplotterSettings.py:1014
 msgid "app only for Raspberry machines"
 msgstr "appen finns endast till Raspberry Pi"
 
-#: openplotterSettings.py:739
+#: openplotterSettings.py:850
 msgid "Press Refresh"
 msgstr "Tryck Uppdatera"
 
-#: openplotterSettings.py:750
+#: openplotterSettings.py:861
 msgid "Updating packages data, please wait... "
 msgstr "Uppdaterar paketdata, vänligen vänta... "
 
-#: openplotterSettings.py:755 openplotterSettings.py:763
+#: openplotterSettings.py:866 openplotterSettings.py:874
 msgid "Adding packages sources, please wait... "
 msgstr "Lägger till paketkällor, vänligen vänta... "
 
-#: openplotterSettings.py:765
+#: openplotterSettings.py:876
 msgid "Sources updated. Get candidates to see changes"
 msgstr "Källor uppdaterade. Hämta kandidater för att se ändringarna"
 
-#: openplotterSettings.py:772
+#: openplotterSettings.py:883
 msgid "Are you sure you want to install "
 msgstr "Är du säker på att du vill installera "
 
-#: openplotterSettings.py:772 openplotterSettings.py:808
+#: openplotterSettings.py:883 openplotterSettings.py:919
 msgid " and its dependencies?"
 msgstr " och dess beroenden?"
 
-#: openplotterSettings.py:782
+#: openplotterSettings.py:893
 msgid "Installing package, please wait... "
 msgstr "Installerar paket, vänligen vänta... "
 
-#: openplotterSettings.py:790
+#: openplotterSettings.py:901
 msgid "Running post-installation scripts, please wait... "
 msgstr "Kör efter-installationsscript, vänligen vänta... "
 
-#: openplotterSettings.py:793
+#: openplotterSettings.py:904
 msgid "This app will close to apply the changes."
 msgstr "Denna appen kommer att stängas för att verkställa ändringarna."
 
-#: openplotterSettings.py:796 openplotterSettings.py:828
+#: openplotterSettings.py:907 openplotterSettings.py:939
 msgid "Done. Restart to apply changes"
 msgstr "Klar. Starta om för att verkställa ändringar"
 
-#: openplotterSettings.py:797 openplotterSettings.py:829
+#: openplotterSettings.py:908 openplotterSettings.py:940
 msgid "Done. Press Refresh"
 msgstr "Klar. Tryck på Uppdatera"
 
-#: openplotterSettings.py:806
+#: openplotterSettings.py:917
 msgid "You have to uninstall the rest of the apps before uninstalling openplotter-settings."
 msgstr "Du måste avinstallera resten av apparna innan du avinstallerar openplotter-settings."
 
-#: openplotterSettings.py:808
+#: openplotterSettings.py:919
 msgid "Are you sure you want to uninstall "
 msgstr "Är du säker på att du vill avinstallera "
 
-#: openplotterSettings.py:819
+#: openplotterSettings.py:930
 msgid "Running pre-uninstall scripts, please wait... "
 msgstr "Kör för-avinstallationsscript, vänligen vänta... "
 
-#: openplotterSettings.py:826
+#: openplotterSettings.py:937
 msgid "Uninstalling packages, please wait... "
 msgstr "Avinstallerar paket, vänligen vänta... "
 
-#: openplotterSettings.py:855
+#: openplotterSettings.py:966
 msgid "Reading changelog, please wait... "
 msgstr "Läser in beskrivning av ändringar, vänligen vänta... "
 
-#: openplotterSettings.py:861
+#: openplotterSettings.py:972
 msgid "Checking apps list, please wait... "
 msgstr "Kontrollerar applikations-lista, vänligen vänta... "
 
-#: openplotterSettings.py:917
+#: openplotterSettings.py:1028
 msgid "Open to apply and refresh"
 msgstr "Öppna för att tillämpa och uppdatera"
 
-#: openplotterSettings.py:968
+#: openplotterSettings.py:1079
 msgid "Select system log category"
 msgstr "Välj kategori för systemlogg"
 
-#: openplotterSettings.py:997
+#: openplotterSettings.py:1108
 msgid "Search in system log file"
 msgstr "Sök i systemloggfilen"
 
@@ -590,7 +643,7 @@ msgstr "Starta"
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: postInstall.py:50 startup.py:59
+#: postInstall.py:50 startup.py:63
 msgid "Close"
 msgstr "Stäng"
 
@@ -671,153 +724,167 @@ msgid "device: "
 msgstr "enhet: "
 
 #: settingsPreUninstall.py:28
-msgid "Removing packages sources..."
-msgstr "Tar bort paketkällor..."
+msgid "Removing installed packages..."
+msgstr "Tar bort installerade paket..."
 
-#: settingsPreUninstall.py:31
+#: settingsPreUninstall.py:31 settingsPreUninstall.py:37
 msgid "DONE"
 msgstr "KLAR"
 
-#: startup.py:42
+#: settingsPreUninstall.py:34
+msgid "Removing packages sources..."
+msgstr "Tar bort paketkällor..."
+
+#: startup.py:43
 msgid "Starting OpenPlotter"
 msgstr "Startar OpenPlotter"
 
-#: startup.py:50
-msgid "Starting OpenPlotter. Please wait for all services to start"
-msgstr "Startar OpenPlotter. Vänta på att alla tjänster ska starta"
+#: startup.py:44
+msgid "Checking OpenPlotter"
+msgstr "Kontrollerar OpenPlotter"
 
-#: startup.py:51
-msgid "Checking OpenPlotter system. Please wait for all services to be checked"
-msgstr "Kontrollerar OpenPlotter system. Vänta på att alla tjänster kontrolleras"
+#: startup.py:54
+msgid "Please DO NOT CLOSE THIS WINDOW until all services have been started"
+msgstr "Var snäll och STÄNG INTE DETTA FÖNSTER innan alla tjänster har startats"
 
-#: startup.py:89
+#: startup.py:55
+msgid "Please wait for all services to be checked"
+msgstr "Vänligen vänta på kontroll av samtliga tjänster"
+
+#: startup.py:96
 msgid "There are some warnings. Check your system. Closing in "
 msgstr "Hittade varningar. Kontrollera ditt system. stänger om "
 
-#: startup.py:89 startup.py:94 startup.py:142
+#: startup.py:96 startup.py:101 startup.py:164
 msgid " seconds"
 msgstr " sekunder"
 
-#: startup.py:94
+#: startup.py:101
 msgid "There are no warnings. Closing in "
 msgstr "Det finns inga varningar. Stänger om "
 
-#: startup.py:133
+#: startup.py:155
 msgid "Applying delay of "
 msgstr "Lägger till fördröjning "
 
-#: startup.py:133
+#: startup.py:155
 msgid " seconds..."
 msgstr " sekunder..."
 
-#: startup.py:135
+#: startup.py:157
 msgid "done"
 msgstr "klar"
 
-#: startup.py:136 startup.py:143
+#: startup.py:158 startup.py:165
 msgid "Delay failed. Is it a number?"
 msgstr "Fördröjning misslyckades. Är det en siffra?"
 
-#: startup.py:140
+#: startup.py:162
 msgid "A startup delay will apply"
 msgstr "En uppstartsfördröjning kommer att tillämpas"
 
-#: startup.py:145
-msgid "Checking NTP server..."
-msgstr "Kontrollerar NTP-servern..."
+#: startup.py:180
+msgid "Checking touchscreen optimization..."
+msgstr "Kontrollerar pekskärmsoptimering..."
 
-#: startup.py:148
-msgid "running"
-msgstr "körs"
+#: startup.py:196 startup.py:201
+msgid "There are errors in the configuration files, try to reinitialize this setting."
+msgstr "Det finns fel i konfigurationsfilerna, försök att återinitiera denna inställning."
 
-#: startup.py:149
-msgid "not running"
-msgstr "körs inte"
-
-#: startup.py:156
-msgid "Checking Power off management..."
-msgstr "Kontrollerar hantering av avstängning..."
-
-#: startup.py:157 startup.py:160 startup.py:167 startup.py:172 startup.py:179
+#: startup.py:198 startup.py:213 startup.py:223 startup.py:226 startup.py:233
+#: startup.py:238 startup.py:245
 msgid "enabled"
 msgstr "aktiverad"
 
-#: startup.py:158 startup.py:161 startup.py:174 startup.py:181
+#: startup.py:203 startup.py:215 startup.py:224 startup.py:227 startup.py:240
+#: startup.py:247
 msgid "disabled"
 msgstr "inaktiverad"
 
-#: startup.py:159
+#: startup.py:207
+msgid "Checking backlight..."
+msgstr "Kontrollerar bakgrundsljus..."
+
+#: startup.py:213
+msgid "Value (0-100):"
+msgstr "Värde (0-100):"
+
+#: startup.py:222
+msgid "Checking Power off management..."
+msgstr "Kontrollerar hantering av avstängning..."
+
+#: startup.py:225
 msgid "Checking Shutdown management..."
 msgstr "Kontrollerar avstängningshantering..."
 
-#: startup.py:163
+#: startup.py:229
 msgid "Checking OpenPlotter autostart..."
 msgstr "Kontrollerar OpenPlotter autostart..."
 
-#: startup.py:165
+#: startup.py:231
 msgid "Autostart is not enabled and most features will not work. Please select \"Autostart\" in \"OpenPlotter Settings\""
 msgstr "Autostart är inte aktiverat så de flesta funktioner kommer inte fungera. Välj \"Autostart\" i \"OpenPlotter Inställningar\""
 
-#: startup.py:169
+#: startup.py:235
 msgid "Checking rescue mode..."
 msgstr "Kontrollerar räddningsläget..."
 
-#: startup.py:176
+#: startup.py:242
 msgid "Checking debugging mode..."
 msgstr "Kontrollerar felsökningsläget..."
 
-#: startup.py:185
+#: startup.py:251
 msgid "Checking system log file size..."
 msgstr "Kontrollerar systemets loggfilstorlek..."
 
-#: startup.py:188 startup.py:189
+#: startup.py:254 startup.py:255
 msgid "System log file size: "
 msgstr "Storlek på systemloggfil: "
 
-#: startup.py:192
+#: startup.py:258
 msgid "Checking OpenPlotter packages source..."
 msgstr "Kontrollerar paketkälla för OpenPlotter..."
 
-#: startup.py:195
+#: startup.py:261
 msgid "added"
 msgstr "tillagd"
 
-#: startup.py:196
+#: startup.py:262
 msgid "There are missing packages sources. Please add sources in \"OpenPlotter Settings\"."
 msgstr "Det saknas paketkällor. Lägg till källor i \"OpenPlotter Inställningar\"."
 
-#: startup.py:211
+#: startup.py:275
 msgid "Checking serial connections conflicts..."
 msgstr "Kontrollerar konflikter i de seriella anslutningarna..."
 
-#: startup.py:215
+#: startup.py:279
 msgid "There are conflicts between the following serial connections:"
 msgstr "Det finns konflikter mellan följande seriella kopplingar:"
 
-#: startup.py:219 startup.py:231 startup.py:250
+#: startup.py:283 startup.py:295 startup.py:314
 msgid "no conflicts"
 msgstr "inga konflikter"
 
-#: startup.py:223
+#: startup.py:287
 msgid "Checking network connections conflicts..."
 msgstr "Kontrollerar nätverkskonflikter..."
 
-#: startup.py:227
+#: startup.py:291
 msgid "There are conflicts between the following server connections:"
 msgstr "Det finns konflikter mellan dessa serverkopplingar:"
 
-#: startup.py:236
+#: startup.py:300
 msgid "Checking GPIO conflicts..."
 msgstr "Kontrollerar GPIO konflikter..."
 
-#: startup.py:243
+#: startup.py:307
 msgid "There are GPIO conflicts between the following apps:"
 msgstr "Det finns GPIO konflikter mellan följande appar:"
 
-#: startup.py:258
+#: startup.py:322
 msgid "STARTUP FINISHED"
 msgstr "UPPSTART AVSLUTAD"
 
-#: startup.py:259
+#: startup.py:323
 msgid "CHECK SYSTEM FINISHED"
 msgstr "SYSTEMKONTROLL AVSLUTAD"
