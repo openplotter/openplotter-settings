@@ -179,30 +179,61 @@ class MyFrame(wx.Frame):
 
 		self.add_logger_data(_('Checking touchscreen optimization...'))
 		try:
-			touchscreen = self.conf.get('GENERAL', 'touchscreen')
-			gtk_overlay_scrolling = False
 			conf_file = self.conf.home+'/.config/gtk-3.0/settings.ini'
-			if os.path.exists(conf_file):
-				data_conf = configparser.ConfigParser()
-				data_conf.read(conf_file)
-				gtk_overlay_scrolling = data_conf.get('Settings','gtk-overlay-scrolling') 
-			css = False
 			css_file = self.conf.home+'/.config/gtk-3.0/gtk.css'
-			if os.path.exists(css_file):
-				with open(css_file) as f:
-					if '/*openplotter settings*/' in f.read(): css = True
-			if touchscreen == '1':
-				if not gtk_overlay_scrolling or gtk_overlay_scrolling == 'true' or not css:
-					self.add_logger_data({'green':'','black':'','red':_('There are errors in the configuration files, try to reinitialize this setting.')})
+			rule = '/*openplotter settings*/scrollbar slider { min-width: 20px;min-height: 20px;border-radius: 22px;border: 5px solid transparent; }\n'
+			if not os.path.exists(self.conf.home+'/.config/gtk-3.0'): os.mkdir(self.conf.home+'/.config/gtk-3.0')
+			if self.conf.get('GENERAL', 'touchscreen') == '1':
+				if not os.path.exists(conf_file):
+					with open(conf_file, 'w') as file:
+						file.write('[Settings]\ngtk-overlay-scrolling = false')
 				else:
-					self.add_logger_data({'green':'','black':_('enabled'),'red':''})
+					data_conf = configparser.ConfigParser()
+					data_conf.read(conf_file)
+					if data_conf.get('Settings','gtk-overlay-scrolling') != 'false': 
+						data_conf.set('Settings','gtk-overlay-scrolling', 'false')
+						with open(conf_file, 'w') as file:
+							data_conf.write(file)
+				if not os.path.exists(css_file):
+					with open(css_file, 'w') as file:
+						file.write(rule)
+				else:
+					with open(css_file, 'r') as file:
+						if '/*openplotter settings*/' not in file.read(): css = False
+						else: css = True
+					if not css:
+						with open(css_file, 'a') as file:
+							file.write(rule)
+				self.add_logger_data({'green':'','black':_('enabled'),'red':''})
 			else:
-				if gtk_overlay_scrolling == 'false' or css:
-					self.add_logger_data({'green':'','black':'','red':_('There are errors in the configuration files, try to reinitialize this setting.')})
+				if not os.path.exists(conf_file):
+					with open(conf_file, 'w') as file:
+						file.write('[Settings]\ngtk-overlay-scrolling = true')
 				else:
-					self.add_logger_data({'green':'','black':_('disabled'),'red':''})
+					data_conf = configparser.ConfigParser()
+					data_conf.read(conf_file)
+					if data_conf.get('Settings','gtk-overlay-scrolling') != 'true': 
+						data_conf.set('Settings','gtk-overlay-scrolling', 'true')
+						with open(conf_file, 'w') as file:
+							data_conf.write(file)
+				if os.path.exists(css_file):
+					with open(css_file, 'r') as file:
+						if '/*openplotter settings*/' not in file.read(): css = False
+						else: css = True
+					if css:
+						file = open(css_file, 'r')
+						out = ''
+						while True:
+							line = file.readline()
+							if not line: break
+							if '/*openplotter settings*/' in line: pass
+							else: out += line
+						file.close()
+						with open(css_file, 'w') as file:
+							file.write(out)
+				self.add_logger_data({'green':'','black':_('disabled'),'red':''})
 		except Exception as e: self.add_logger_data({'green':'','black':'','red':str(e)})
-		
+
 		if self.isRPI:
 			self.add_logger_data(_('Checking backlight...'))
 			try:

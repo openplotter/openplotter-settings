@@ -307,7 +307,7 @@ class MyFrame(wx.Frame):
 			css = path+'/gtk-3.0/gtk.css'
 			os.system('cp -f '+css+' '+css+'_back')
 			file = open(css, 'r')
-			rule = '/*openplotter settings*/scrollbar slider {min-width: 20px;min-height: 20px;border-radius: 22px;border: 5px solid transparent;}'
+			rule = '/*openplotter settings*/scrollbar slider { min-width: 20px;min-height: 20px;border-radius: 22px;border: 5px solid transparent; }'
 			exists = False
 			out = ''
 			while True:
