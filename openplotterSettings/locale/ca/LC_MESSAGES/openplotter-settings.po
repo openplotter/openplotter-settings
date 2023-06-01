@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: openplotter\n"
-"POT-Creation-Date: 2023-05-10 10:41+0200\n"
-"PO-Revision-Date: 2023-05-12 11:45+0200\n"
+"POT-Creation-Date: 2023-05-30 14:40+0200\n"
+"PO-Revision-Date: 2023-06-01 10:23+0200\n"
 "Last-Translator: \n"
 "Language-Team: Catalan\n"
 "Language: ca\n"
@@ -787,104 +787,100 @@ msgstr "S'aplicarà un retard a l'inici"
 msgid "Checking touchscreen optimization..."
 msgstr "Comprovant optimització de pantalla tàctil..."
 
-#: startup.py:196 startup.py:201
-msgid "There are errors in the configuration files, try to reinitialize this setting."
-msgstr "Hi ha errors en els fitxers de configuració, prova de reiniciar aquesta configuració."
-
-#: startup.py:198 startup.py:213 startup.py:223 startup.py:226 startup.py:233
-#: startup.py:238 startup.py:245
+#: startup.py:207 startup.py:244 startup.py:254 startup.py:257 startup.py:264
+#: startup.py:269 startup.py:276
 msgid "enabled"
 msgstr "activat"
 
-#: startup.py:203 startup.py:215 startup.py:224 startup.py:227 startup.py:240
-#: startup.py:247
+#: startup.py:234 startup.py:246 startup.py:255 startup.py:258 startup.py:271
+#: startup.py:278
 msgid "disabled"
 msgstr "deshabilitat"
 
-#: startup.py:207
+#: startup.py:238
 msgid "Checking backlight..."
 msgstr "Comprovant il·luminació de fons..."
 
-#: startup.py:213
+#: startup.py:244
 msgid "Value (0-100):"
 msgstr "Valor (0-100):"
 
-#: startup.py:222
+#: startup.py:253
 msgid "Checking Power off management..."
 msgstr "Comprovant gestió d'energia..."
 
-#: startup.py:225
+#: startup.py:256
 msgid "Checking Shutdown management..."
 msgstr "Comrpovant preferències d'apagat..."
 
-#: startup.py:229
+#: startup.py:260
 msgid "Checking OpenPlotter autostart..."
 msgstr "Comprovant l'inici automàtic d'OpenPlotter..."
 
-#: startup.py:231
+#: startup.py:262
 msgid "Autostart is not enabled and most features will not work. Please select \"Autostart\" in \"OpenPlotter Settings\""
 msgstr "L'inici automàtic no està activat i moltes funcions no funcionaran. Si us plau, selecciona \"Inici automàtic\" als \"Ajustaments d'OpenPlotter\""
 
-#: startup.py:235
+#: startup.py:266
 msgid "Checking rescue mode..."
 msgstr "Comprovant mode de rescat..."
 
-#: startup.py:242
+#: startup.py:273
 msgid "Checking debugging mode..."
 msgstr "Comprovant mode de depuració..."
 
-#: startup.py:251
+#: startup.py:282
 msgid "Checking system log file size..."
 msgstr "Comprovant tamany del fitxer de registre de sistema..."
 
-#: startup.py:254 startup.py:255
+#: startup.py:285 startup.py:286
 msgid "System log file size: "
 msgstr "Tamany del fitxer de registre: "
 
-#: startup.py:258
+#: startup.py:289
 msgid "Checking OpenPlotter packages source..."
 msgstr "Comprovant les fonts de paquets de OpenPlotter..."
 
-#: startup.py:261
+#: startup.py:292
 msgid "added"
 msgstr "afegit"
 
-#: startup.py:262
+#: startup.py:293
 msgid "There are missing packages sources. Please add sources in \"OpenPlotter Settings\"."
 msgstr "Falten algunes fonts de paquets. Si us plau afegeix les fonts a les preferències d'\"OpenPlotter\"."
 
-#: startup.py:275
+#: startup.py:306
 msgid "Checking serial connections conflicts..."
 msgstr "Comprovant els conflictes de connexions sèrie..."
 
-#: startup.py:279
+#: startup.py:310
 msgid "There are conflicts between the following serial connections:"
 msgstr "Hi ha conflictes entre les següents connexions en sèrie:"
 
-#: startup.py:283 startup.py:295 startup.py:314
+#: startup.py:314 startup.py:326 startup.py:345
 msgid "no conflicts"
 msgstr "no hi ha conflictes"
 
-#: startup.py:287
+#: startup.py:318
 msgid "Checking network connections conflicts..."
 msgstr "Comprovació de conflictes de xarxa..."
 
-#: startup.py:291
+#: startup.py:322
 msgid "There are conflicts between the following server connections:"
 msgstr "Hi ha conflictes entre les següents connexions al servidor:"
 
-#: startup.py:300
+#: startup.py:331
 msgid "Checking GPIO conflicts..."
 msgstr "Comprovant conflictes de GPIO..."
 
-#: startup.py:307
+#: startup.py:338
 msgid "There are GPIO conflicts between the following apps:"
 msgstr "Hi ha conflictes de GPIO entre les següents aplicacions:"
 
-#: startup.py:322
+#: startup.py:353
 msgid "STARTUP FINISHED"
 msgstr "INICI FINALITZAT"
 
-#: startup.py:323
+#: startup.py:354
 msgid "CHECK SYSTEM FINISHED"
 msgstr "COMPROVACIÓ DE SISTEMA FINALITZADA"

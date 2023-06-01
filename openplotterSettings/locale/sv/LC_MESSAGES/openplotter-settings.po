@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: openplotter\n"
-"POT-Creation-Date: 2023-05-10 10:41+0200\n"
-"PO-Revision-Date: 2023-05-12 11:45+0200\n"
+"POT-Creation-Date: 2023-05-30 14:40+0200\n"
+"PO-Revision-Date: 2023-06-01 10:22+0200\n"
 "Last-Translator: \n"
 "Language-Team: Swedish\n"
 "Language: sv\n"
@@ -787,104 +787,100 @@ msgstr "En uppstartsfördröjning kommer att tillämpas"
 msgid "Checking touchscreen optimization..."
 msgstr "Kontrollerar pekskärmsoptimering..."
 
-#: startup.py:196 startup.py:201
-msgid "There are errors in the configuration files, try to reinitialize this setting."
-msgstr "Det finns fel i konfigurationsfilerna, försök att återinitiera denna inställning."
-
-#: startup.py:198 startup.py:213 startup.py:223 startup.py:226 startup.py:233
-#: startup.py:238 startup.py:245
+#: startup.py:207 startup.py:244 startup.py:254 startup.py:257 startup.py:264
+#: startup.py:269 startup.py:276
 msgid "enabled"
 msgstr "aktiverad"
 
-#: startup.py:203 startup.py:215 startup.py:224 startup.py:227 startup.py:240
-#: startup.py:247
+#: startup.py:234 startup.py:246 startup.py:255 startup.py:258 startup.py:271
+#: startup.py:278
 msgid "disabled"
 msgstr "inaktiverad"
 
-#: startup.py:207
+#: startup.py:238
 msgid "Checking backlight..."
 msgstr "Kontrollerar bakgrundsljus..."
 
-#: startup.py:213
+#: startup.py:244
 msgid "Value (0-100):"
 msgstr "Värde (0-100):"
 
-#: startup.py:222
+#: startup.py:253
 msgid "Checking Power off management..."
 msgstr "Kontrollerar hantering av avstängning..."
 
-#: startup.py:225
+#: startup.py:256
 msgid "Checking Shutdown management..."
 msgstr "Kontrollerar avstängningshantering..."
 
-#: startup.py:229
+#: startup.py:260
 msgid "Checking OpenPlotter autostart..."
 msgstr "Kontrollerar OpenPlotter autostart..."
 
-#: startup.py:231
+#: startup.py:262
 msgid "Autostart is not enabled and most features will not work. Please select \"Autostart\" in \"OpenPlotter Settings\""
 msgstr "Autostart är inte aktiverat så de flesta funktioner kommer inte fungera. Välj \"Autostart\" i \"OpenPlotter Inställningar\""
 
-#: startup.py:235
+#: startup.py:266
 msgid "Checking rescue mode..."
 msgstr "Kontrollerar räddningsläget..."
 
-#: startup.py:242
+#: startup.py:273
 msgid "Checking debugging mode..."
 msgstr "Kontrollerar felsökningsläget..."
 
-#: startup.py:251
+#: startup.py:282
 msgid "Checking system log file size..."
 msgstr "Kontrollerar systemets loggfilstorlek..."
 
-#: startup.py:254 startup.py:255
+#: startup.py:285 startup.py:286
 msgid "System log file size: "
 msgstr "Storlek på systemloggfil: "
 
-#: startup.py:258
+#: startup.py:289
 msgid "Checking OpenPlotter packages source..."
 msgstr "Kontrollerar paketkälla för OpenPlotter..."
 
-#: startup.py:261
+#: startup.py:292
 msgid "added"
 msgstr "tillagd"
 
-#: startup.py:262
+#: startup.py:293
 msgid "There are missing packages sources. Please add sources in \"OpenPlotter Settings\"."
 msgstr "Det saknas paketkällor. Lägg till källor i \"OpenPlotter Inställningar\"."
 
-#: startup.py:275
+#: startup.py:306
 msgid "Checking serial connections conflicts..."
 msgstr "Kontrollerar konflikter i de seriella anslutningarna..."
 
-#: startup.py:279
+#: startup.py:310
 msgid "There are conflicts between the following serial connections:"
 msgstr "Det finns konflikter mellan följande seriella kopplingar:"
 
-#: startup.py:283 startup.py:295 startup.py:314
+#: startup.py:314 startup.py:326 startup.py:345
 msgid "no conflicts"
 msgstr "inga konflikter"
 
-#: startup.py:287
+#: startup.py:318
 msgid "Checking network connections conflicts..."
 msgstr "Kontrollerar nätverkskonflikter..."
 
-#: startup.py:291
+#: startup.py:322
 msgid "There are conflicts between the following server connections:"
 msgstr "Det finns konflikter mellan dessa serverkopplingar:"
 
-#: startup.py:300
+#: startup.py:331
 msgid "Checking GPIO conflicts..."
 msgstr "Kontrollerar GPIO konflikter..."
 
-#: startup.py:307
+#: startup.py:338
 msgid "There are GPIO conflicts between the following apps:"
 msgstr "Det finns GPIO konflikter mellan följande appar:"
 
-#: startup.py:322
+#: startup.py:353
 msgid "STARTUP FINISHED"
 msgstr "UPPSTART AVSLUTAD"
 
-#: startup.py:323
+#: startup.py:354
 msgid "CHECK SYSTEM FINISHED"
 msgstr "SYSTEMKONTROLL AVSLUTAD"
