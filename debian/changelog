@@ -1,3 +1,10 @@
+openplotter-settings (3.6.2-stable) bullseye; urgency=medium
+
+  * Rebuild touchscreen settings when failing at startup
+  * Update translations
+
+ -- Sailoog <info@sailoog.com>  Tue, 30 May 2023 14:16:12 +0200
+
 openplotter-settings (3.6.0-stable) bullseye; urgency=medium
 
   * Add rpi-backlight
