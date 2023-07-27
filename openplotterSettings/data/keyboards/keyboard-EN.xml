@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<keyboard>
+
+<!--
+
+ Basic keyboard layout
+
+-->
+
+<options>
+<!-- not yet implemented -->
+</options>
+
+<layout id="OpenPlotter QWERTY-EN">
+    <include file="base-fragment-EN.xml"/>
+</layout>
+</keyboard>

@@ -3,7 +3,7 @@
 
 <!--
 
- Catalan keyboard layout by Sailoog
+ English keyboard layout by Sailoog
 
 -->
     <row>
@@ -72,7 +72,7 @@
         <key obey-caps="true">
             <default display="y" />
             <shifted display="Y" />
-            <mod2    display="·" />
+            <mod2    display="^" action="xkeysym:dead_circumflex"/>
         </key>
         <key obey-caps="true">
             <default display="u" />
@@ -113,42 +113,42 @@
         <key obey-caps="true">
             <default display="d" />
             <shifted display="D" />
-            <mod2    display="+" />
+            <mod2    display="£" />
         </key>
         <key obey-caps="true">
             <default display="f" />
             <shifted display="F" />
-            <mod2    display="-" />
+            <mod2    display="+" />
         </key>
         <key obey-caps="true">
             <default display="g" />
             <shifted display="G" />
-            <mod2    display="*" />
+            <mod2    display="-" />
         </key>
         <key obey-caps="true">
             <default display="h" />
             <shifted display="H" />
-            <mod2    display="/" />
+            <mod2    display="*" />
         </key>
         <key obey-caps="true">
             <default display="j" />
             <shifted display="J" />
-            <mod2    display="(" />
+            <mod2    display="/" />
         </key>
         <key obey-caps="true">
             <default display="k" />
             <shifted display="K" />
-            <mod2    display=")" />
+            <mod2    display="(" />
         </key>
         <key obey-caps="true">
             <default display="l" />
             <shifted display="L" />
-            <mod2    display="=" />
+            <mod2    display=")" />
         </key>
         <key obey-caps="true">
-            <default display="ç" />
-            <shifted display="Ç" />
-            <mod2    display="%" />
+            <default display="@" />
+            <shifted display="@" />
+            <mod2    display="=" />
         </key>
         <key>
             <default display="image:/usr/share/matchbox-keyboard/return2.png" action="return"/>
@@ -162,7 +162,7 @@
         <key obey-caps="true">
             <default display="z" />
             <shifted display="Z" />
-            <mod2    display="@" />
+            <mod2    display="%" />
         </key>
         <key obey-caps="true">
             <default display="x" />
@@ -195,7 +195,7 @@
             <mod2    display="&#x0003E;" />
         </key>
         <key width="2050">
-            <default display="espai" action="space" />
+            <default display="space" action="space" />
             <mod2    display="_" />
         </key>
         <key>

@@ -41,6 +41,8 @@ setup (
 									'openplotterSettings/data/sounds/Tornado_Siren_II.mp3',]),
 	('share/matchbox-keyboard', ['openplotterSettings/data/keyboards/base-fragment-CAT.xml',
 									'openplotterSettings/data/keyboards/keyboard-CAT.xml',
+									'openplotterSettings/data/keyboards/base-fragment-EN.xml',
+									'openplotterSettings/data/keyboards/keyboard-EN.xml',
 									'openplotterSettings/data/keyboards/arrow2.png',
 									'openplotterSettings/data/keyboards/return2.png',
 									'openplotterSettings/data/keyboards/shift2.png',

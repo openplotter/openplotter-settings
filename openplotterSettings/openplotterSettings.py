@@ -178,6 +178,15 @@ class MyFrame(wx.Frame):
 		self.Bind(wx.EVT_TOOL, self.OnToolMatchbox, toolMatchbox)
 		currentKeyboard = self.conf.get('GENERAL', 'keyboard')
 		if currentKeyboard: self.keyboardsList.SetValue(currentKeyboard)
+		else:
+			try:
+				folder = self.home+'/.matchbox'
+				if not os.path.exists(folder): os.mkdir(folder)
+				os.system('cp -f '+self.currentdir+'/data/keyboards/keyboard-EN.xml '+folder+'/keyboard.xml')
+				self.conf.set('GENERAL', 'keyboard', 'keyboard-EN.xml')
+				self.keyboardsList.SetValue('keyboard-EN.xml')
+			except Exception as e: 
+				if self.debug: print('Error setting virtual keyboard layout: '+str(e))
 		self.toolbar10.AddSeparator()
 		starupLabel = wx.StaticText(self.genSettings, label=_('Startup'))
 		self.toolbar4 = wx.ToolBar(self.genSettings, style=wx.TB_TEXT)
