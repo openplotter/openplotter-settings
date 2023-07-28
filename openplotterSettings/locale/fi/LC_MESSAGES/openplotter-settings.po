@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: openplotter\n"
-"POT-Creation-Date: 2023-05-30 14:40+0200\n"
-"PO-Revision-Date: 2023-06-01 10:22+0200\n"
+"POT-Creation-Date: 2023-07-27 19:48+0200\n"
+"PO-Revision-Date: 2023-07-28 20:04+0200\n"
 "Last-Translator: \n"
 "Language-Team: Finnish\n"
 "Language: fi\n"
@@ -119,11 +119,11 @@ msgstr "Maa"
 msgid "Select GPIO"
 msgstr "Valitse GPIO"
 
-#: gpio.py:218 openplotterSettings.py:538
+#: gpio.py:218 openplotterSettings.py:547
 msgid "GPIO Map"
 msgstr "GPIO Kartta"
 
-#: gpio.py:274 openplotterSettings.py:804 selectKey.py:40
+#: gpio.py:274 openplotterSettings.py:813 selectKey.py:40
 msgid "Refresh"
 msgstr "Päivitä"
 
@@ -259,127 +259,127 @@ msgstr "Näppäimistöasettelu"
 msgid "Virtual keyboard"
 msgstr "Virtuaalinen näppäimistö"
 
-#: openplotterSettings.py:182
+#: openplotterSettings.py:191
 msgid "Startup"
 msgstr "Käynnistys"
 
-#: openplotterSettings.py:184
+#: openplotterSettings.py:193
 msgid "Delay (seconds)"
 msgstr "Viive (sekuntia)"
 
-#: openplotterSettings.py:189
+#: openplotterSettings.py:198
 msgid "Play"
 msgstr "Toista"
 
-#: openplotterSettings.py:225
+#: openplotterSettings.py:234
 msgid "Choose a file"
 msgstr "Valitse tiedosto"
 
-#: openplotterSettings.py:226
+#: openplotterSettings.py:235
 msgid "Audio files"
 msgstr "Audiotiedostot"
 
-#: openplotterSettings.py:226
+#: openplotterSettings.py:235
 msgid "All files"
 msgstr "Kaikki tiedostot"
 
-#: openplotterSettings.py:260
+#: openplotterSettings.py:269
 msgid "Close and open again the window to see changes."
 msgstr "Sulje ja avaa ikkuna uudelleen, niin näet muutokset."
 
-#: openplotterSettings.py:260 openplotterSettings.py:904
-#: openplotterSettings.py:917
+#: openplotterSettings.py:269 openplotterSettings.py:913
+#: openplotterSettings.py:926
 msgid "Info"
 msgstr "Tietoja"
 
-#: openplotterSettings.py:267
+#: openplotterSettings.py:276
 msgid "Sound to play at startup set to: "
 msgstr "Käynnistyksen ääni asetettu: "
 
-#: openplotterSettings.py:271
+#: openplotterSettings.py:280
 msgid "Removed sound to play at startup"
 msgstr "Poistettu käynnistyksen ääni"
 
-#: openplotterSettings.py:278
+#: openplotterSettings.py:287
 msgid "Delay at startup set to: "
 msgstr "Käynnistyksen viive asetettu: "
 
-#: openplotterSettings.py:283
+#: openplotterSettings.py:292
 msgid "Removed delay at startup"
 msgstr "Käynnistyksen viive poistettu"
 
-#: openplotterSettings.py:349
+#: openplotterSettings.py:358
 msgid "Touchscreen optimization enabled"
 msgstr "Kosketusnäytön optimointi käytössä"
 
-#: openplotterSettings.py:356
+#: openplotterSettings.py:365
 msgid "Touchscreen optimization disabled"
 msgstr "Kosketusnäytön optimointi estetty"
 
-#: openplotterSettings.py:361
+#: openplotterSettings.py:370
 msgid "OpenPlotter apps will open maximized"
 msgstr "OpenPlotter sovelmat avataan maksimoituna"
 
-#: openplotterSettings.py:365
+#: openplotterSettings.py:374
 msgid "Disabled maximized OpenPlotter apps"
 msgstr "Estetty maksimoidut OpenPlotter sovelmat"
 
-#: openplotterSettings.py:376
+#: openplotterSettings.py:385
 msgid "Debugging mode"
 msgstr "Virheenkorjauksen tila"
 
-#: openplotterSettings.py:379
+#: openplotterSettings.py:388
 msgid "See all"
 msgstr "Näytä kaikki"
 
-#: openplotterSettings.py:381
+#: openplotterSettings.py:390
 msgid "See category"
 msgstr "Katso kategoria"
 
-#: openplotterSettings.py:383
+#: openplotterSettings.py:392
 msgid "Search"
 msgstr "Etsi"
 
-#: openplotterSettings.py:386
+#: openplotterSettings.py:395
 msgid "Delete all logs"
 msgstr "Poista kaikki lokit"
 
-#: openplotterSettings.py:389
+#: openplotterSettings.py:398
 msgid "Notify if the system log file is larger than: "
 msgstr "Ilmoita, jos järjestelmän lokitiedosto on suurempi kuin: "
 
-#: openplotterSettings.py:405
+#: openplotterSettings.py:414
 msgid "Save"
 msgstr "Tallenna"
 
-#: openplotterSettings.py:427
+#: openplotterSettings.py:436
 msgid "Debugging mode enabled. Additional info about errors in OpenPlotter apps will be saved in the system log"
 msgstr "Virheenkorjaus tila otettu käyttöön. Lisätietoja virheistä OpenPlotter sovelluksissa tallennetaan järjestelmän lokiin"
 
-#: openplotterSettings.py:430
+#: openplotterSettings.py:439
 msgid "Debugging mode disabled"
 msgstr "Vianetsintätila pois käytöstä"
 
-#: openplotterSettings.py:433 openplotterSettings.py:449
-#: openplotterSettings.py:493
+#: openplotterSettings.py:442 openplotterSettings.py:458
+#: openplotterSettings.py:502
 msgid "Reading log, please wait..."
 msgstr "Luetaan lokia, odota hetki..."
 
-#: openplotterSettings.py:441 openplotterSettings.py:478
-#: openplotterSettings.py:504 openplotterSettings.py:529
-#: openplotterSettings.py:967 openplotterSettings.py:1037
+#: openplotterSettings.py:450 openplotterSettings.py:487
+#: openplotterSettings.py:513 openplotterSettings.py:538
+#: openplotterSettings.py:976 openplotterSettings.py:1046
 msgid "Done"
 msgstr "Tehty"
 
-#: openplotterSettings.py:445
+#: openplotterSettings.py:454
 msgid "Error reading  log"
 msgstr "Virhe luettaessa lokia"
 
-#: openplotterSettings.py:481 openplotterSettings.py:507
+#: openplotterSettings.py:490 openplotterSettings.py:516
 msgid "Error reading log"
 msgstr "Virhe luettaessa lokia"
 
-#: openplotterSettings.py:512
+#: openplotterSettings.py:521
 msgid ""
 "Current and archived system log files will be deleted. A new system log file will be created after reboot.\n"
 "\n"
@@ -389,245 +389,245 @@ msgstr ""
 "\n"
 " Oletko varma?"
 
-#: openplotterSettings.py:513 openplotterSettings.py:753
-#: openplotterSettings.py:766 openplotterSettings.py:884
-#: openplotterSettings.py:920
+#: openplotterSettings.py:522 openplotterSettings.py:762
+#: openplotterSettings.py:775 openplotterSettings.py:893
+#: openplotterSettings.py:929
 msgid "Question"
 msgstr "Kysymys"
 
-#: openplotterSettings.py:516
+#: openplotterSettings.py:525
 msgid "Current and archived system log files have been deleted"
 msgstr "Nykyiset ja arkistoidut järjestelmälokitiedostot on poistettu"
 
-#: openplotterSettings.py:541
+#: openplotterSettings.py:550
 msgid "Install backlight"
 msgstr "Asenna taustavalo"
 
-#: openplotterSettings.py:543
+#: openplotterSettings.py:552
 msgid "Set backlight"
 msgstr "Aseta taustavalo"
 
-#: openplotterSettings.py:546
+#: openplotterSettings.py:555
 msgid "Shutdown Management"
 msgstr "Sulkemisen Hallinta"
 
-#: openplotterSettings.py:549
+#: openplotterSettings.py:558
 msgid "Shutdown"
 msgstr "Sammutus"
 
-#: openplotterSettings.py:555 openplotterSettings.py:574
+#: openplotterSettings.py:564 openplotterSettings.py:583
 msgid "GPIO"
 msgstr "GPIO"
 
-#: openplotterSettings.py:557 openplotterSettings.py:576
+#: openplotterSettings.py:566 openplotterSettings.py:585
 msgid "Transition"
 msgstr "Siirtymä"
 
-#: openplotterSettings.py:557 openplotterSettings.py:576
+#: openplotterSettings.py:566 openplotterSettings.py:585
 msgid "low->high"
 msgstr "matala->korkea"
 
-#: openplotterSettings.py:557 openplotterSettings.py:576
+#: openplotterSettings.py:566 openplotterSettings.py:585
 msgid "high->low"
 msgstr "korkea->matala"
 
-#: openplotterSettings.py:561
+#: openplotterSettings.py:570
 msgid "off"
 msgstr "pois"
 
-#: openplotterSettings.py:564 openplotterSettings.py:579
+#: openplotterSettings.py:573 openplotterSettings.py:588
 msgid "Apply"
 msgstr "Käytä"
 
-#: openplotterSettings.py:568
+#: openplotterSettings.py:577
 msgid "Power off"
 msgstr "Virta pois"
 
-#: openplotterSettings.py:685 openplotterSettings.py:732
+#: openplotterSettings.py:694 openplotterSettings.py:741
 msgid "Failed, you need to set a GPIO"
 msgstr "Epäonnistui, sinun täytyy asettaa GPIO"
 
-#: openplotterSettings.py:689 openplotterSettings.py:736
+#: openplotterSettings.py:698 openplotterSettings.py:745
 msgid "Failed, you need to set a transition mode"
 msgstr "Epäonnistui, sinun täytyy asettaa siirtotila"
 
-#: openplotterSettings.py:693
+#: openplotterSettings.py:702
 msgid "Failed, you need to set a GPIO pull mode"
 msgstr "Epäonnistui, sinun täytyy asettaa GPIO lukutilaan"
 
-#: openplotterSettings.py:706 openplotterSettings.py:746
+#: openplotterSettings.py:715 openplotterSettings.py:755
 msgid "Done. Changes will be applied after the next reboot"
 msgstr "Tehty. Muutokset otetaan käyttöön seuraavassa uudelleenkäynnistyksessä"
 
-#: openplotterSettings.py:750
+#: openplotterSettings.py:759
 msgid "Installing rpi-backlight, please wait..."
 msgstr "Asennetaan rpi-taustavaloa, odota hetki..."
 
-#: openplotterSettings.py:751
+#: openplotterSettings.py:760
 msgid "rpi-backlight will be installed.\n"
 msgstr "rpi-taustavalo asennetaan.\n"
 
-#: openplotterSettings.py:752 openplotterSettings.py:765
+#: openplotterSettings.py:761 openplotterSettings.py:774
 msgid "Are you sure?"
 msgstr "Oletko varma?"
 
-#: openplotterSettings.py:757
+#: openplotterSettings.py:766
 msgid "rpi-backlight installed"
 msgstr "rpi-taustavalo asennettu"
 
-#: openplotterSettings.py:761
+#: openplotterSettings.py:770
 msgid "Installation canceled"
 msgstr "Asennus peruttu"
 
-#: openplotterSettings.py:763
+#: openplotterSettings.py:772
 msgid "Uninstalling rpi-backlight, please wait..."
 msgstr "Poistetaan rpi-taustavaloa, odota hetki..."
 
-#: openplotterSettings.py:764
+#: openplotterSettings.py:773
 msgid "rpi-backlight will be uninstalled.\n"
 msgstr "rpi-taustavalo poistetaan.\n"
 
-#: openplotterSettings.py:770
+#: openplotterSettings.py:779
 msgid "rpi-backlight uninstalled"
 msgstr "rpi-taustavalo poistettu"
 
-#: openplotterSettings.py:774
+#: openplotterSettings.py:783
 msgid "Uninstallation canceled"
 msgstr "Poisto peruttu"
 
-#: openplotterSettings.py:790
+#: openplotterSettings.py:799
 msgid "Name"
 msgstr "Nimi"
 
-#: openplotterSettings.py:791
+#: openplotterSettings.py:800
 msgid "Installed"
 msgstr "Asennettu"
 
-#: openplotterSettings.py:792
+#: openplotterSettings.py:801
 msgid "Candidate"
 msgstr "Ehdokas"
 
-#: openplotterSettings.py:793
+#: openplotterSettings.py:802
 msgid "Pending tasks"
 msgstr "Odottavat tehtävät"
 
-#: openplotterSettings.py:800
+#: openplotterSettings.py:809
 msgid "Add Sources"
 msgstr "Lisää Sorsat"
 
-#: openplotterSettings.py:802
+#: openplotterSettings.py:811
 msgid "Get Candidates"
 msgstr "Hanki Ehdokkaat"
 
-#: openplotterSettings.py:808 openplotterSettings.py:1022
+#: openplotterSettings.py:817 openplotterSettings.py:1031
 msgid "Install"
 msgstr "Asenna"
 
-#: openplotterSettings.py:810
+#: openplotterSettings.py:819
 msgid "Uninstall"
 msgstr "Poista"
 
-#: openplotterSettings.py:813
+#: openplotterSettings.py:822
 msgid "Open"
 msgstr "Avaa"
 
-#: openplotterSettings.py:815
+#: openplotterSettings.py:824
 msgid "Change Log"
 msgstr "Muutosloki"
 
-#: openplotterSettings.py:838 openplotterSettings.py:1000
+#: openplotterSettings.py:847 openplotterSettings.py:1009
 msgid "missing source: "
 msgstr "puuttuva sorsa: "
 
-#: openplotterSettings.py:840 openplotterSettings.py:1004
+#: openplotterSettings.py:849 openplotterSettings.py:1013
 msgid "coming soon"
 msgstr "tulossa pian"
 
-#: openplotterSettings.py:843 openplotterSettings.py:1010
+#: openplotterSettings.py:852 openplotterSettings.py:1019
 msgid "app only for non Raspberry machines"
 msgstr "sovelma ei ole Raspberry koneille"
 
-#: openplotterSettings.py:846 openplotterSettings.py:1014
+#: openplotterSettings.py:855 openplotterSettings.py:1023
 msgid "app only for Raspberry machines"
 msgstr "sovelma on vain Raspberry koneille"
 
-#: openplotterSettings.py:850
+#: openplotterSettings.py:859
 msgid "Press Refresh"
 msgstr "Paina päivitä"
 
-#: openplotterSettings.py:861
+#: openplotterSettings.py:870
 msgid "Updating packages data, please wait... "
 msgstr "Pakettien dataa päivitetään, odottele... "
 
-#: openplotterSettings.py:866 openplotterSettings.py:874
+#: openplotterSettings.py:875 openplotterSettings.py:883
 msgid "Adding packages sources, please wait... "
 msgstr "Pakettien sorsia lisätään, odottele... "
 
-#: openplotterSettings.py:876
+#: openplotterSettings.py:885
 msgid "Sources updated. Get candidates to see changes"
 msgstr "Lähteet päivitetty. Hae ehdokkaat nähdäksesi muutokset"
 
-#: openplotterSettings.py:883
+#: openplotterSettings.py:892
 msgid "Are you sure you want to install "
 msgstr "Oletko varma, että haluat asentaa "
 
-#: openplotterSettings.py:883 openplotterSettings.py:919
+#: openplotterSettings.py:892 openplotterSettings.py:928
 msgid " and its dependencies?"
 msgstr " ja sen riippuvuudet?"
 
-#: openplotterSettings.py:893
+#: openplotterSettings.py:902
 msgid "Installing package, please wait... "
 msgstr "Paketti asennetaan, odottele... "
 
-#: openplotterSettings.py:901
+#: openplotterSettings.py:910
 msgid "Running post-installation scripts, please wait... "
 msgstr "Ajetaan asennuksen jälkeisiä komentoja, odottele... "
 
-#: openplotterSettings.py:904
+#: openplotterSettings.py:913
 msgid "This app will close to apply the changes."
 msgstr "Tämä sovelma suljetaan muutosten lisäämiseksi."
 
-#: openplotterSettings.py:907 openplotterSettings.py:939
+#: openplotterSettings.py:916 openplotterSettings.py:948
 msgid "Done. Restart to apply changes"
 msgstr "Tehty. Käynnistä uudelleen, niin mutokset lisätään"
 
-#: openplotterSettings.py:908 openplotterSettings.py:940
+#: openplotterSettings.py:917 openplotterSettings.py:949
 msgid "Done. Press Refresh"
 msgstr "Tehty. Paina päivitä"
 
-#: openplotterSettings.py:917
+#: openplotterSettings.py:926
 msgid "You have to uninstall the rest of the apps before uninstalling openplotter-settings."
 msgstr "Sinun on poistettava loput sovelmat ennen openplotterasetusten poistoa."
 
-#: openplotterSettings.py:919
+#: openplotterSettings.py:928
 msgid "Are you sure you want to uninstall "
 msgstr "Oletko varma, että haluat poistaa "
 
-#: openplotterSettings.py:930
+#: openplotterSettings.py:939
 msgid "Running pre-uninstall scripts, please wait... "
 msgstr "Ajetaan asennuksen alustus komentoja, odottele... "
 
-#: openplotterSettings.py:937
+#: openplotterSettings.py:946
 msgid "Uninstalling packages, please wait... "
 msgstr "Paketteja poistetaan, odottele... "
 
-#: openplotterSettings.py:966
+#: openplotterSettings.py:975
 msgid "Reading changelog, please wait... "
 msgstr "Luetaan muutoslokeja, odottele... "
 
-#: openplotterSettings.py:972
+#: openplotterSettings.py:981
 msgid "Checking apps list, please wait... "
 msgstr "Tarkistetaan sovelmaluetteloita, odota... "
 
-#: openplotterSettings.py:1028
+#: openplotterSettings.py:1037
 msgid "Open to apply and refresh"
 msgstr "Avaa lisättäväksi ja päivitetäväksi"
 
-#: openplotterSettings.py:1079
+#: openplotterSettings.py:1088
 msgid "Select system log category"
 msgstr "Valitse järjestelmälokin kategoria"
 
-#: openplotterSettings.py:1108
+#: openplotterSettings.py:1117
 msgid "Search in system log file"
 msgstr "Etsi järjestelmän lokitiedostosta"
 
@@ -787,100 +787,104 @@ msgstr "Lisätään käynnistysviive"
 msgid "Checking touchscreen optimization..."
 msgstr "Tarkistetaan kosketusnäytön optimointia..."
 
-#: startup.py:207 startup.py:244 startup.py:254 startup.py:257 startup.py:264
-#: startup.py:269 startup.py:276
+#: startup.py:207 startup.py:257 startup.py:267 startup.py:270 startup.py:277
+#: startup.py:282 startup.py:288
 msgid "enabled"
 msgstr "käytössä"
 
-#: startup.py:234 startup.py:246 startup.py:255 startup.py:258 startup.py:271
-#: startup.py:278
+#: startup.py:234 startup.py:259 startup.py:268 startup.py:271 startup.py:284
+#: startup.py:290
 msgid "disabled"
 msgstr "estetty"
 
-#: startup.py:238
+#: startup.py:237
+msgid "Checking virtual keyboard..."
+msgstr ""
+
+#: startup.py:251
 msgid "Checking backlight..."
 msgstr "Tarkistetaan taustavaloa..."
 
-#: startup.py:244
+#: startup.py:257
 msgid "Value (0-100):"
 msgstr "Arvo (0-100):"
 
-#: startup.py:253
+#: startup.py:266
 msgid "Checking Power off management..."
 msgstr "Tarkistetaan Power off -hallintaa..."
 
-#: startup.py:256
+#: startup.py:269
 msgid "Checking Shutdown management..."
 msgstr "Tarkistetaan sammutuksen hallintaa..."
 
-#: startup.py:260
+#: startup.py:273
 msgid "Checking OpenPlotter autostart..."
 msgstr "Tarkistetaan OpenPlotter autokäynnistys..."
 
-#: startup.py:262
+#: startup.py:275
 msgid "Autostart is not enabled and most features will not work. Please select \"Autostart\" in \"OpenPlotter Settings\""
 msgstr "Autokäynnistys ei ole sallittu ja useimmat ominaisuudet eivät toimi. Valitse \"Autokäynnistys\" OpenPlotter Asetuksissa\""
 
-#: startup.py:266
+#: startup.py:279
 msgid "Checking rescue mode..."
 msgstr "Tarkistetaan pelastustilaa..."
 
-#: startup.py:273
+#: startup.py:286
 msgid "Checking debugging mode..."
 msgstr "Tarkistetaan vianetsintätilaa..."
 
-#: startup.py:282
+#: startup.py:294
 msgid "Checking system log file size..."
 msgstr "Tarkistetaan järjestelmän lokitiedoston kokoa..."
 
-#: startup.py:285 startup.py:286
+#: startup.py:297 startup.py:298
 msgid "System log file size: "
 msgstr "Järjestelmän lokitiedoston koko: "
 
-#: startup.py:289
+#: startup.py:301
 msgid "Checking OpenPlotter packages source..."
 msgstr "Tarkistetaan OpenCPN pakettien sorsia..."
 
-#: startup.py:292
+#: startup.py:304
 msgid "added"
 msgstr "lisätty"
 
-#: startup.py:293
+#: startup.py:305
 msgid "There are missing packages sources. Please add sources in \"OpenPlotter Settings\"."
 msgstr "Pakettien sorsia puuttuu. Lisääthän sorsat \"OpenPlotter Asetuksissa\"."
 
-#: startup.py:306
+#: startup.py:318
 msgid "Checking serial connections conflicts..."
 msgstr "Tutkitaan sarjaliitäntöjen ristiriitoja..."
 
-#: startup.py:310
+#: startup.py:322
 msgid "There are conflicts between the following serial connections:"
 msgstr "Seuraavien sarjakytkentöjen välillä on ristiriitoja:"
 
-#: startup.py:314 startup.py:326 startup.py:345
+#: startup.py:326 startup.py:338 startup.py:357
 msgid "no conflicts"
 msgstr "ei ristiriitoja"
 
-#: startup.py:318
+#: startup.py:330
 msgid "Checking network connections conflicts..."
 msgstr "Tutkitaan verkkoliitäntöjen ristiriitoja..."
 
-#: startup.py:322
+#: startup.py:334
 msgid "There are conflicts between the following server connections:"
 msgstr "Seuraavien serverikytkentöjen välillä on ristiriitoja:"
 
-#: startup.py:331
+#: startup.py:343
 msgid "Checking GPIO conflicts..."
 msgstr "Tarkistetaan GPIO konflikteja..."
 
-#: startup.py:338
+#: startup.py:350
 msgid "There are GPIO conflicts between the following apps:"
 msgstr "Seuraavien sovellusten välillä on GPIO-ristiriitoja:"
 
-#: startup.py:353
+#: startup.py:365
 msgid "STARTUP FINISHED"
 msgstr "KÄYNNISTYS PÄÄTTYNYT"
 
-#: startup.py:354
+#: startup.py:366
 msgid "CHECK SYSTEM FINISHED"
 msgstr "SYSTEEMITARKISTUS PÄÄTTYNYT"
