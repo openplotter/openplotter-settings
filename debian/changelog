@@ -1,3 +1,10 @@
+openplotter-settings (3.6.6-stable) bullseye; urgency=medium
+
+  * Add English virtual keyboard
+  * Update translations
+
+ -- Sailoog <info@sailoog.com>  Wed, 26 Jul 2023 13:19:28 +0200
+
 openplotter-settings (3.6.2-stable) bullseye; urgency=medium
 
   * Rebuild touchscreen settings when failing at startup
