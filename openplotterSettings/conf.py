@@ -27,7 +27,7 @@ class Conf:
 			except:
 				import pwd
 				self.user = pwd.getpwuid(int(os.environ["PKEXEC_UID"])).pw_name
-		self.home = '/home/'+self.user
+		self.home = os.path.expanduser('~'+self.user)
 
 		self.data_conf = configparser.ConfigParser()
 
