@@ -21,7 +21,7 @@ class Language:
 	def __init__(self, currentdir, module, language):
 		self.available = [['Català','ca'],['Čeština','cs'],['Dansk','da'],['Deutsch','de'],['ελληνικά','el'],['English','en'],['Español','es'],['Suomi','fi'],['Français','fr'],['Italiano','it'],['Dutch','nl'],['Polski','pl'],['Svenska','sv'],['Norsk','nb']]
 		locale_folder = currentdir+'/locale'
-		gettext.install(module, locale_folder, False)
+		gettext.install(module, locale_folder)
 		try: presLan = gettext.translation(module, locale_folder, languages=[language])
 		except: presLan = gettext.translation(module, locale_folder, languages=['en'])
 		presLan.install()
