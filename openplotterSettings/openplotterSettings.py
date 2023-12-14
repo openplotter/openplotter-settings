@@ -862,26 +862,27 @@ class MyFrame(wx.Frame):
 	def OnToolUpdate(self, event=0):
 		self.logger.Clear()
 		self.notebook.ChangeSelection(4)
+		self.ShowStatusBarYELLOW(_('Updating packages data, please wait... '))
 		command = self.platform.admin+' apt update'
 		popen = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
 		for line in popen.stdout:
 			if not 'Warning' in line and not 'WARNING' in line:
 				self.logger.WriteText(line)
-				self.ShowStatusBarYELLOW(_('Updating packages data, please wait... ')+line)
 				self.logger.ShowPosition(self.logger.GetLastPosition())
+				wx.GetApp().Yield()
 		self.OnRefreshButton()
 
 	def OnToolSources(self, e):
-		self.ShowStatusBarYELLOW(_('Adding packages sources, please wait... '))
 		self.logger.Clear()
 		self.notebook.ChangeSelection(4)
+		self.ShowStatusBarYELLOW(_('Adding packages sources, please wait... '))
 		command = self.platform.admin+' settingsSourcesInstall'
 		popen = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
 		for line in popen.stdout:
 			if not 'Warning' in line and not 'WARNING' in line:
 				self.logger.WriteText(line)
-				self.ShowStatusBarYELLOW(_('Adding packages sources, please wait... ')+line)
 				self.logger.ShowPosition(self.logger.GetLastPosition())
+				wx.GetApp().Yield()
 		self.ShowStatusBarGREEN(_('Sources updated. Get candidates to see changes'))
 
 	def OnInstallButton(self,e):
@@ -894,21 +895,23 @@ class MyFrame(wx.Frame):
 		if dlg.ShowModal() == wx.ID_YES:
 			self.logger.Clear()
 			self.notebook.ChangeSelection(4)
+			self.ShowStatusBarYELLOW(_('Installing package, please wait... '))
 			command = self.platform.admin+' apt install -y '+package
 			popen = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
 			for line in popen.stdout:
 				if not 'Warning' in line and not 'WARNING' in line:
 					self.logger.WriteText(line)
-					self.ShowStatusBarYELLOW(_('Installing package, please wait... ')+line)
 					self.logger.ShowPosition(self.logger.GetLastPosition())
+					wx.GetApp().Yield()
 			postInstall = apps[index]['postInstall']
 			if postInstall:
+				self.ShowStatusBarYELLOW(_('Running post-installation scripts, please wait... '))
 				popen = subprocess.Popen(postInstall, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
 				for line in popen.stdout:
 					if not 'Warning' in line and not 'WARNING' in line:
 						self.logger.WriteText(line)
-						self.ShowStatusBarYELLOW(_('Running post-installation scripts, please wait... ')+line)
 						self.logger.ShowPosition(self.logger.GetLastPosition())
+						wx.GetApp().Yield()
 			if package == 'openplotter-settings':
 				wx.MessageBox(_('This app will close to apply the changes.'), _('Info'), wx.OK | wx.ICON_INFORMATION)
 				self.Close()
@@ -932,19 +935,21 @@ class MyFrame(wx.Frame):
 			self.notebook.ChangeSelection(4)
 			preUninstall = apps[index]['preUninstall']
 			if preUninstall:
+				self.ShowStatusBarYELLOW(_('Running pre-uninstall scripts, please wait... '))
 				popen = subprocess.Popen(preUninstall, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
 				for line in popen.stdout:
 					if not 'Warning' in line and not 'WARNING' in line:
 						self.logger.WriteText(line)
-						self.ShowStatusBarYELLOW(_('Running pre-uninstall scripts, please wait... ')+line)
-						self.logger.ShowPosition(self.logger.GetLastPosition())	
+						self.logger.ShowPosition(self.logger.GetLastPosition())
+						wx.GetApp().Yield()
+			self.ShowStatusBarYELLOW(_('Uninstalling packages, please wait... '))
 			command = self.platform.admin+' apt autoremove -y '+package
 			popen = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
 			for line in popen.stdout:
 				if not 'Warning' in line and not 'WARNING' in line:
 					self.logger.WriteText(line)
-					self.ShowStatusBarYELLOW(_('Uninstalling packages, please wait... ')+line)
 					self.logger.ShowPosition(self.logger.GetLastPosition())
+					wx.GetApp().Yield()
 			if apps[index]['reboot'] == 'yes': self.ShowStatusBarRED(_('Done. Restart to apply changes'))
 			else: self.ShowStatusBarGREEN(_('Done. Press Refresh'))
 		dlg.Destroy()
@@ -967,18 +972,20 @@ class MyFrame(wx.Frame):
 		apps = list(reversed(self.appsDict))
 		self.logger.Clear()
 		self.notebook.ChangeSelection(4)
+		self.ShowStatusBarYELLOW(_('Reading changelog, please wait... '))
 		command = 'apt changelog '+apps[index]['package']
 		popen = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
 		for line in popen.stdout:
 			if not 'Warning' in line and not 'WARNING' in line:
 				self.logger.WriteText(line)
-				self.ShowStatusBarYELLOW(_('Reading changelog, please wait... ')+line)
+				wx.GetApp().Yield()
 		self.ShowStatusBarGREEN(_('Done'))
 
 	def readApps(self):
 		self.notebook.ChangeSelection(0)
 		self.listApps.DeleteAllItems()
 		self.ShowStatusBarYELLOW(_('Checking apps list, please wait... '))
+		wx.GetApp().Yield()
 		self.installedFlag = False
 		sources = subprocess.check_output(['apt-cache', 'policy']).decode(sys.stdin.encoding)
 		for i in self.appsDict:
@@ -1040,6 +1047,8 @@ class MyFrame(wx.Frame):
 			self.listApps.SetItem(item, 2, candidate)
 			self.listApps.SetItem(item, 3, pending)
 			if installed and i['package'] != 'openplotter-settings': self.installedFlag = True
+			self.ShowStatusBarYELLOW(_('Checking apps list, please wait... '))
+			wx.GetApp().Yield()
 
 		if not self.platform.isInstalled('openplotter-doc'): self.toolbar1.EnableTool(101,False)
 		else:self.toolbar1.EnableTool(101,True)
