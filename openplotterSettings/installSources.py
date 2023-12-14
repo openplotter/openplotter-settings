@@ -29,8 +29,10 @@ def main():
 		Language(currentdir,'openplotter-settings',currentLanguage)
 		beta = conf2.get('GENERAL', 'beta')
 
-		codename_debian = 'bullseye'
+		codename_debian = 'bookworm'
 		conf2.set('GENERAL', 'debianCodeName', codename_debian)
+		codename_ubuntu = ['jammy']
+		conf2.set('GENERAL', 'ubuntuCodeName', str(codename_ubuntu))
 
 		codeName = ''
 		hostID = ''
@@ -41,9 +43,16 @@ def main():
 		else: 
 			codeName = RELEASE_DATA['VERSION_CODENAME']
 			hostID = RELEASE_DATA['ID']
-		if hostID == 'raspbian': hostID = 'debian'
 		if hostID != 'ubuntu' and hostID != 'debian':
-			print('FAILED. Unknown system: '+hostID)
+			print(_('FAILED. Unknown system:')+' '+hostID)
+			return
+		if hostID == 'debian' and codeName != codename_debian:
+			print(_('Current Debian version:')+' '+codeName)
+			print(_('FAILED. This version of OpenPlotter only works on this version of Debian:')+' '+codename_debian)
+			return
+		if hostID == 'ubuntu' and codeName not in codename_ubuntu:
+			print(_('Current Ubuntu version:')+' '+codeName)
+			print(_('FAILED. This version of OpenPlotter only works on these versions of Ubuntu:')+' '+str(codename_ubuntu))
 			return
 		conf2.set('GENERAL', 'hostID', hostID)
 		conf2.set('GENERAL', 'codeName', codeName)
