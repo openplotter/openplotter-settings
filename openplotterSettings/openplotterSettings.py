@@ -551,6 +551,9 @@ class MyFrame(wx.Frame):
 		self.Bind(wx.EVT_TOOL, self.OnToolbacklightInstall, toolbacklightInstall)
 		toolbacklightSet = self.toolbar5.AddTool(505, _('Set backlight'), wx.Bitmap(self.currentdir+"/data/brightness.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolbacklightSet, toolbacklightSet)
+		self.toolbar5.AddSeparator()
+		toolWayland = self.toolbar5.AddCheckTool(506, 'Wayland', wx.Bitmap(self.currentdir+"/data/wayland.png"))
+		self.Bind(wx.EVT_TOOL, self.OnToolWayland, toolWayland)
 
 		powerLabel = wx.StaticText(self.raspSettings, label=_('Shutdown Management'))
 
@@ -596,10 +599,6 @@ class MyFrame(wx.Frame):
 		self.raspSettings.SetSizer(sizer)
 
 		if self.platform.isRPI: 
-			self.toolbar5.ToggleTool(503,True)
-			self.toolbar5.EnableTool(504,True)
-			self.toolbar8.EnableTool(806,True)
-			self.toolbar9.EnableTool(905,True)
 
 			if os.path.exists('/usr/share/applications/openplotter-brightness.desktop'):
 				self.toolbar5.ToggleTool(504,True)
@@ -608,6 +607,9 @@ class MyFrame(wx.Frame):
 				self.toolbar5.ToggleTool(504,False)
 				self.toolbar5.EnableTool(505,False)
 
+			out = subprocess.check_output('echo $XDG_SESSION_TYPE', shell=True).decode(sys.stdin.encoding)
+			if 'wayland' in out: self.toolbar5.ToggleTool(506,True)
+				
 			try: shutdown = eval(self.conf.get('GENERAL', 'shutdown'))
 			except: shutdown = {}
 			if shutdown:
@@ -638,6 +640,7 @@ class MyFrame(wx.Frame):
 			self.toolbar5.EnableTool(503,False)
 			self.toolbar5.EnableTool(504,False)
 			self.toolbar5.EnableTool(505,False)
+			self.toolbar5.EnableTool(506,False)
 			self.toolbar8.EnableTool(801,False)
 			self.toolbar8.EnableTool(806,False)
 			self.toolbar9.EnableTool(901,False)
@@ -786,6 +789,35 @@ class MyFrame(wx.Frame):
 	def OnToolbacklightSet(self,e):
 			subprocess.call(['pkill', '-f', 'rpi-backlight-gui'])
 			subprocess.Popen('rpi-backlight-gui')
+
+	def OnToolWayland(self,e):
+		if self.toolbar5.GetToolState(506):
+			msg = _('Wayland will be enabled and X11 disabled. Some programs may not yet work correctly for Wayland.')
+			msg += _('\n')
+			msg += _('OpenPlotter will reboot. Are you sure?')
+			dlg = wx.MessageDialog(None, msg, _('Question'), wx.YES_NO | wx.NO_DEFAULT | wx.ICON_EXCLAMATION)
+			if dlg.ShowModal() == wx.ID_YES: 
+				subprocess.call([self.platform.admin, 'raspi-config', 'nonint', 'do_wayland', 'W2'])
+				out = subprocess.check_output('raspi-config nonint get_vnc', shell=True).decode(sys.stdin.encoding)
+				if '0' in out: self.conf.set('GENERAL', 'forceVNC', '1')
+				os.system('shutdown -r now')
+			else:
+				self.toolbar5.ToggleTool(506,False)
+				self.ShowStatusBarRED(_('Canceled'))
+		else:
+			msg = _('Wayland will be disabled and X11 enabled.')
+			msg += _('\n')
+			msg += _('OpenPlotter will reboot. Are you sure?')
+			dlg = wx.MessageDialog(None, msg, _('Question'), wx.YES_NO | wx.NO_DEFAULT | wx.ICON_EXCLAMATION)
+			if dlg.ShowModal() == wx.ID_YES: 
+				subprocess.call([self.platform.admin, 'raspi-config', 'nonint', 'do_wayland', 'W1'])
+				out = subprocess.check_output('raspi-config nonint get_vnc', shell=True).decode(sys.stdin.encoding)
+				if '0' in out: self.conf.set('GENERAL', 'forceVNC', '1')
+				os.system('shutdown -r now')
+			else:
+				self.toolbar5.ToggleTool(506,True)
+				self.ShowStatusBarRED(_('Canceled'))
+		dlg.Destroy()
 
 	def OnToolGpio(self,e):
 		dlg = GpioMap()

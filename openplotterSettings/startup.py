@@ -148,6 +148,21 @@ class MyFrame(wx.Frame):
 			if result: self.add_logger_data(result)
 
 	def starting(self):
+
+		self.add_logger_data(_('Checking display server...'))
+		try:
+			out = subprocess.check_output('echo $XDG_SESSION_TYPE', shell=True).decode(sys.stdin.encoding)
+			out = out.replace("\n","")
+			out = out.strip()
+			self.add_logger_data({'green':'','black':out,'red':''})
+			if self.mode == 'start':
+				if self.isRPI:
+					forceVNC = self.conf.get('GENERAL', 'forceVNC')
+					if forceVNC == '1': 
+						subprocess.Popen(['sudo', 'raspi-config', 'nonint', 'do_vnc', '0'])
+						self.conf.set('GENERAL', 'forceVNC', '0')
+		except Exception as e: self.add_logger_data({'green':'','black':'','red':str(e)})
+
 		delay = self.conf.get('GENERAL', 'delay')
 		if self.mode == 'start':
 			try:
@@ -269,6 +284,11 @@ class MyFrame(wx.Frame):
 			self.add_logger_data(_('Checking Shutdown management...'))
 			if 'dtoverlay=gpio-shutdown' in data and not '#dtoverlay=gpio-shutdown' in data: self.add_logger_data({'green':'','black':_('enabled'),'red':''})
 			else: self.add_logger_data({'green':'','black':_('disabled'),'red':''})
+
+			forceVNC = self.conf.get('GENERAL', 'forceVNC')
+			if forceVNC == '1': 
+				subprocess.Popen(['sudo', 'raspi-config', 'nonint', 'do_vnc', '0'])
+				self.conf.set('GENERAL', 'forceVNC', '0')
 
 		self.add_logger_data(_('Checking OpenPlotter autostart...'))
 		if not os.path.exists(self.conf.home+'/.config/autostart/openplotter-startup.desktop'):
