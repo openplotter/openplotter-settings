@@ -218,6 +218,9 @@ class MyFrame(wx.Frame):
 			self.toolbar3.ToggleTool(303,True)
 			self.Maximize()
 
+		out = subprocess.check_output('echo $XDG_SESSION_TYPE', shell=True).decode(sys.stdin.encoding)
+		if 'wayland' in out: self.toolbar10.EnableTool(1001,False)
+
 		delay = self.conf.get('GENERAL', 'delay')
 		if delay:
 			self.delay.SetValue(delay)
@@ -242,7 +245,9 @@ class MyFrame(wx.Frame):
 
 	def OnToolMatchbox(self,e=0):
 		subprocess.call(['pkill', '-f', 'matchbox-keyboard'])
-		subprocess.Popen('matchbox-keyboard')
+		out = subprocess.check_output('echo $XDG_SESSION_TYPE', shell=True).decode(sys.stdin.encoding)
+		if 'wayland' in out: subprocess.Popen('toggle-wvkbd')
+		else: subprocess.Popen('matchbox-keyboard')
 
 	def OnToolKeyboards(self,e=0):
 		if self.keyboardsList.GetSelection() == -1: return
@@ -797,7 +802,7 @@ class MyFrame(wx.Frame):
 			msg += _('OpenPlotter will reboot. Are you sure?')
 			dlg = wx.MessageDialog(None, msg, _('Question'), wx.YES_NO | wx.NO_DEFAULT | wx.ICON_EXCLAMATION)
 			if dlg.ShowModal() == wx.ID_YES: 
-				subprocess.call([self.platform.admin, 'raspi-config', 'nonint', 'do_wayland', 'W2'])
+				subprocess.call([self.platform.admin, 'python3', self.currentdir+'/wayland.py', 'W2'])
 				out = subprocess.check_output('raspi-config nonint get_vnc', shell=True).decode(sys.stdin.encoding)
 				if '0' in out: self.conf.set('GENERAL', 'forceVNC', '1')
 				os.system('shutdown -r now')
@@ -810,7 +815,7 @@ class MyFrame(wx.Frame):
 			msg += _('OpenPlotter will reboot. Are you sure?')
 			dlg = wx.MessageDialog(None, msg, _('Question'), wx.YES_NO | wx.NO_DEFAULT | wx.ICON_EXCLAMATION)
 			if dlg.ShowModal() == wx.ID_YES: 
-				subprocess.call([self.platform.admin, 'raspi-config', 'nonint', 'do_wayland', 'W1'])
+				subprocess.call([self.platform.admin, 'python3', self.currentdir+'/wayland.py', 'W1'])
 				out = subprocess.check_output('raspi-config nonint get_vnc', shell=True).decode(sys.stdin.encoding)
 				if '0' in out: self.conf.set('GENERAL', 'forceVNC', '1')
 				os.system('shutdown -r now')

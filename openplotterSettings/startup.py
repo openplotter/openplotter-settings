@@ -249,18 +249,20 @@ class MyFrame(wx.Frame):
 				self.add_logger_data({'green':'','black':_('disabled'),'red':''})
 		except Exception as e: self.add_logger_data({'green':'','black':'','red':str(e)})
 
-		self.add_logger_data(_('Checking virtual keyboard...'))
-		currentKeyboard = self.conf.get('GENERAL', 'keyboard')
-		if currentKeyboard: self.add_logger_data({'green':'','black':currentKeyboard,'red':''})
-		else:
-			try:
-				folder = self.conf.home+'/.matchbox'
-				if not os.path.exists(folder): os.mkdir(folder)
-				os.system('cp -f '+self.currentdir+'/data/keyboards/keyboard-EN.xml '+folder+'/keyboard.xml')
-				self.conf.set('GENERAL', 'keyboard', 'keyboard-EN.xml')
-				self.add_logger_data({'green':'','black':'keyboard-EN.xml','red':''})
-			except Exception as e: 
-				self.add_logger_data({'green':'','black':'','red':str(e)})
+		out = subprocess.check_output('echo $XDG_SESSION_TYPE', shell=True).decode(sys.stdin.encoding)
+		if not 'wayland' in out:
+			self.add_logger_data(_('Checking virtual keyboard...'))
+			currentKeyboard = self.conf.get('GENERAL', 'keyboard')
+			if currentKeyboard: self.add_logger_data({'green':'','black':currentKeyboard,'red':''})
+			else:
+				try:
+					folder = self.conf.home+'/.matchbox'
+					if not os.path.exists(folder): os.mkdir(folder)
+					os.system('cp -f '+self.currentdir+'/data/keyboards/keyboard-EN.xml '+folder+'/keyboard.xml')
+					self.conf.set('GENERAL', 'keyboard', 'keyboard-EN.xml')
+					self.add_logger_data({'green':'','black':'keyboard-EN.xml','red':''})
+				except Exception as e: 
+					self.add_logger_data({'green':'','black':'','red':str(e)})
 
 		if self.isRPI:
 			self.add_logger_data(_('Checking backlight...'))
