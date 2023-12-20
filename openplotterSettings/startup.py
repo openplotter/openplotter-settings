@@ -265,6 +265,7 @@ class MyFrame(wx.Frame):
 					self.add_logger_data({'green':'','black':'','red':str(e)})
 
 		if self.isRPI:
+			'''
 			self.add_logger_data(_('Checking backlight...'))
 			try:
 				if os.path.exists('/usr/share/applications/openplotter-brightness.desktop'):
@@ -275,7 +276,7 @@ class MyFrame(wx.Frame):
 				else: 
 					self.add_logger_data({'green':'','black':_('disabled'),'red':''})
 			except Exception as e: self.add_logger_data({'green':'','black':'','red':str(e)})
-
+			'''
 			try: config = open('/boot/config.txt', 'r')
 			except: config = open('/boot/firmware/config.txt', 'r')
 			data = config.read()
