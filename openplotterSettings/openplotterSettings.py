@@ -300,39 +300,26 @@ class MyFrame(wx.Frame):
 
 	def setTouchSystem(self,path,enabled):
 		if os.path.exists(path):
+			css = path+'/gtk-3.0/gtk.css'
 			if not os.path.exists(path+'/gtk-3.0'): os.mkdir(path+'/gtk-3.0')
-			if not os.path.exists(path+'/gtk-3.0/settings.ini'):
-				file = open(path+'/gtk-3.0/settings.ini', 'w')
-				file.write('[Settings]\ngtk-overlay-scrolling = true')
-				file.close()
-			if not os.path.exists(path+'/gtk-3.0/gtk.css'):
+			if not os.path.exists(css):
 				file = open(path+'/gtk-3.0/gtk.css', 'w')
 				file.write('')
 				file.close()
 
-			data_conf = configparser.ConfigParser()
-			conf_file = path+'/gtk-3.0/settings.ini'
-			data_conf.read(conf_file)
-			if enabled: data_conf.set('Settings','gtk-overlay-scrolling','false')
-			else: data_conf.set('Settings','gtk-overlay-scrolling','true')
-			with open(conf_file, 'w') as file:
-				data_conf.write(file)
-
-			css = path+'/gtk-3.0/gtk.css'
 			os.system('cp -f '+css+' '+css+'_back')
 			file = open(css, 'r')
-			rule = '/*openplotter settings*/scrollbar slider { min-width: 20px;min-height: 20px;border-radius: 22px;border: 5px solid transparent; }'
 			exists = False
 			out = ''
 			while True:
 				line = file.readline()
 				if not line: break
-				if '/*openplotter settings*/' in line:
+				if '@import url("openplotter.css");' in line:
 					exists = True
 					if enabled: out += line
 					else: pass
 				else: out += line
-			if enabled and not exists: out += rule+'\n'
+			if enabled and not exists: out += '@import url("openplotter.css");\n'
 			file.close()
 			try: 
 				file = open(css, 'w')
@@ -341,6 +328,15 @@ class MyFrame(wx.Frame):
 			except Exception as e:
 				os.system('cp -f '+css+'_back '+css)
 				if self.debug: print('Error setting gtk css: '+str(e))
+
+			try:
+				opcss = path+'/gtk-3.0/openplotter.css'
+				file = open(opcss, 'w')
+				file.write('scrollbar slider { min-width: 20px;min-height: 20px;border-radius: 22px;border: 5px solid transparent; }')
+				file.close()
+			except Exception as e:
+				if self.debug: print('Error setting gtk css: '+str(e))
+
 
 	def setTouchOpencpn(self,path,enabled):
 		if os.path.exists(path):
@@ -353,21 +349,22 @@ class MyFrame(wx.Frame):
 
 	def OnToolTouch(self,e):
 		subprocess.call(['pkill', '-15', 'opencpn'])
-		subprocess.call(['flatpak', 'kill', 'org.opencpn.OpenCPN'])
+		try: subprocess.call(['flatpak', 'kill', 'org.opencpn.OpenCPN'])
+		except: pass
 		if self.toolbar3.GetToolState(305):
 			self.conf.set('GENERAL', 'touchscreen', '1')
-			self.setTouchSystem(self.home+'/.config',True)
-			self.setTouchSystem(self.home+'/.var/app/org.opencpn.OpenCPN/config',True)
+			subprocess.call([self.platform.admin, 'python3', self.currentdir+'/service.py', 'touch', '1'])
+			self.setTouchSystem(self.home+'/.var/app/org.opencpn.OpenCPN/config','1')
 			self.setTouchOpencpn(self.home+'/.opencpn/opencpn.conf',True)
 			self.setTouchOpencpn(self.home+'/.var/app/org.opencpn.OpenCPN/config/opencpn/opencpn.conf',True)
-			self.ShowStatusBarGREEN(_('Touchscreen optimization enabled'))
+			self.ShowStatusBarGREEN(_('Enabled. Changes will be applied after the next reboot'))
 		else:
 			self.conf.set('GENERAL', 'touchscreen', '0')
-			self.setTouchSystem(self.home+'/.config',False)
-			self.setTouchSystem(self.home+'/.var/app/org.opencpn.OpenCPN/config',False)
+			subprocess.call([self.platform.admin, 'python3', self.currentdir+'/service.py', 'touch', ''])
+			self.setTouchSystem(self.home+'/.var/app/org.opencpn.OpenCPN/config','')
 			self.setTouchOpencpn(self.home+'/.opencpn/opencpn.conf',False)
 			self.setTouchOpencpn(self.home+'/.var/app/org.opencpn.OpenCPN/config/opencpn/opencpn.conf',False)
-			self.ShowStatusBarGREEN(_('Touchscreen optimization disabled'))
+			self.ShowStatusBarGREEN(_('Disabled. Changes will be applied after the next reboot'))
 
 	def OnToolMaxi(self,e=0):
 		if self.toolbar3.GetToolState(303):

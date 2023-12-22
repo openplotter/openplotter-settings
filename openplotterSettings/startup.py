@@ -149,19 +149,9 @@ class MyFrame(wx.Frame):
 
 	def starting(self):
 
-		self.add_logger_data(_('Checking display server...'))
-		try:
-			out = subprocess.check_output('echo $XDG_SESSION_TYPE', shell=True).decode(sys.stdin.encoding)
-			out = out.replace("\n","")
-			out = out.strip()
-			self.add_logger_data({'green':'','black':out,'red':''})
-			if self.mode == 'start':
-				if self.isRPI:
-					forceVNC = self.conf.get('GENERAL', 'forceVNC')
-					if forceVNC == '1': 
-						subprocess.Popen(['sudo', 'raspi-config', 'nonint', 'do_vnc', '0'])
-						self.conf.set('GENERAL', 'forceVNC', '0')
-		except Exception as e: self.add_logger_data({'green':'','black':'','red':str(e)})
+		appsList = AppsList()
+		appsDict = appsList.appsDict
+
 
 		delay = self.conf.get('GENERAL', 'delay')
 		if self.mode == 'start':
@@ -179,8 +169,62 @@ class MyFrame(wx.Frame):
 					self.add_logger_data({'green':'','black':delay+_(' seconds'),'red':''})
 			except:self.add_logger_data({'green':'','black':'','red':_('Delay failed. Is it a number?')})
 
-		appsList = AppsList()
-		appsDict = appsList.appsDict
+
+		self.add_logger_data(_('Checking display server...'))
+		try:
+			out = subprocess.check_output('echo $XDG_SESSION_TYPE', shell=True).decode(sys.stdin.encoding)
+			out = out.replace("\n","")
+			out = out.strip()
+			self.add_logger_data({'green':'','black':out,'red':''})
+			if self.mode == 'start':
+				if self.isRPI:
+					forceVNC = self.conf.get('GENERAL', 'forceVNC')
+					if forceVNC == '1': 
+						subprocess.Popen(['sudo', 'raspi-config', 'nonint', 'do_vnc', '0'])
+						self.conf.set('GENERAL', 'forceVNC', '0')
+			if not 'wayland' in out:
+				self.add_logger_data(_('Checking virtual keyboard...'))
+				currentKeyboard = self.conf.get('GENERAL', 'keyboard')
+				if currentKeyboard: self.add_logger_data({'green':'','black':currentKeyboard,'red':''})
+				else:
+					try:
+						folder = self.conf.home+'/.matchbox'
+						if not os.path.exists(folder): os.mkdir(folder)
+						os.system('cp -f '+self.currentdir+'/data/keyboards/keyboard-EN.xml '+folder+'/keyboard.xml')
+						self.conf.set('GENERAL', 'keyboard', 'keyboard-EN.xml')
+						self.add_logger_data({'green':'','black':'keyboard-EN.xml','red':''})
+					except Exception as e: 
+						self.add_logger_data({'green':'','black':'','red':str(e)})
+		except Exception as e: self.add_logger_data({'green':'','black':'','red':str(e)})
+
+
+		self.add_logger_data(_('Checking OpenPlotter autostart...'))
+		if not os.path.exists(self.conf.home+'/.config/autostart/openplotter-startup.desktop'):
+			self.add_logger_data({'green':'','black':'','red':_('Autostart is not enabled and most features will not work. Please select "Autostart" in "OpenPlotter Settings"')})
+		else:
+			self.add_logger_data({'green':'','black':_('enabled'),'red':''})
+
+
+		self.add_logger_data(_('Checking OpenPlotter packages source...'))
+		sources = subprocess.check_output(['apt-cache', 'policy']).decode(sys.stdin.encoding)
+		if 'https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian' in sources:
+			self.add_logger_data({'green':'','black':_('added'),'red':''})
+		else: self.add_logger_data({'green':'','black':'','red':_('There are missing packages sources. Please add sources in "OpenPlotter Settings".')})
+
+
+		'''
+		logMaxSize = self.conf.get('GENERAL', 'logMaxSize')
+		if logMaxSize:
+			self.add_logger_data(_('Checking system log file size...'))
+			try:
+				mb = os.path.getsize("/var/log/syslog")/1e+6
+				if mb >= int(logMaxSize): self.add_logger_data({'green':'','black':'','red':_('System log file size: ')+str(round(mb,2))+' MB'})
+				else: self.add_logger_data({'green':'','black':_('System log file size: ')+str(round(mb,2))+' MB','red':''})
+			except Exception as e: self.add_logger_data({'green':'','black':'','red':str(e)})
+		'''
+
+
+		#starts apps
 		if self.mode == 'start':
 			for i in appsDict:
 				name = i['module']
@@ -192,141 +236,8 @@ class MyFrame(wx.Frame):
 					except Exception as e: 
 						if self.debug == 'yes': print(str(e))
 
-		self.add_logger_data(_('Checking touchscreen optimization...'))
-		try:
-			conf_file = self.conf.home+'/.config/gtk-3.0/settings.ini'
-			css_file = self.conf.home+'/.config/gtk-3.0/gtk.css'
-			rule = '/*openplotter settings*/scrollbar slider { min-width: 20px;min-height: 20px;border-radius: 22px;border: 5px solid transparent; }\n'
-			if not os.path.exists(self.conf.home+'/.config/gtk-3.0'): os.mkdir(self.conf.home+'/.config/gtk-3.0')
-			if self.conf.get('GENERAL', 'touchscreen') == '1':
-				if not os.path.exists(conf_file):
-					with open(conf_file, 'w') as file:
-						file.write('[Settings]\ngtk-overlay-scrolling = false')
-				else:
-					data_conf = configparser.ConfigParser()
-					data_conf.read(conf_file)
-					if data_conf.get('Settings','gtk-overlay-scrolling') != 'false': 
-						data_conf.set('Settings','gtk-overlay-scrolling', 'false')
-						with open(conf_file, 'w') as file:
-							data_conf.write(file)
-				if not os.path.exists(css_file):
-					with open(css_file, 'w') as file:
-						file.write(rule)
-				else:
-					with open(css_file, 'r') as file:
-						if '/*openplotter settings*/' not in file.read(): css = False
-						else: css = True
-					if not css:
-						with open(css_file, 'a') as file:
-							file.write(rule)
-				self.add_logger_data({'green':'','black':_('enabled'),'red':''})
-			else:
-				if not os.path.exists(conf_file):
-					with open(conf_file, 'w') as file:
-						file.write('[Settings]\ngtk-overlay-scrolling = true')
-				else:
-					data_conf = configparser.ConfigParser()
-					data_conf.read(conf_file)
-					if data_conf.get('Settings','gtk-overlay-scrolling') != 'true': 
-						data_conf.set('Settings','gtk-overlay-scrolling', 'true')
-						with open(conf_file, 'w') as file:
-							data_conf.write(file)
-				if os.path.exists(css_file):
-					with open(css_file, 'r') as file:
-						if '/*openplotter settings*/' not in file.read(): css = False
-						else: css = True
-					if css:
-						file = open(css_file, 'r')
-						out = ''
-						while True:
-							line = file.readline()
-							if not line: break
-							if '/*openplotter settings*/' in line: pass
-							else: out += line
-						file.close()
-						with open(css_file, 'w') as file:
-							file.write(out)
-				self.add_logger_data({'green':'','black':_('disabled'),'red':''})
-		except Exception as e: self.add_logger_data({'green':'','black':'','red':str(e)})
 
-		out = subprocess.check_output('echo $XDG_SESSION_TYPE', shell=True).decode(sys.stdin.encoding)
-		if not 'wayland' in out:
-			self.add_logger_data(_('Checking virtual keyboard...'))
-			currentKeyboard = self.conf.get('GENERAL', 'keyboard')
-			if currentKeyboard: self.add_logger_data({'green':'','black':currentKeyboard,'red':''})
-			else:
-				try:
-					folder = self.conf.home+'/.matchbox'
-					if not os.path.exists(folder): os.mkdir(folder)
-					os.system('cp -f '+self.currentdir+'/data/keyboards/keyboard-EN.xml '+folder+'/keyboard.xml')
-					self.conf.set('GENERAL', 'keyboard', 'keyboard-EN.xml')
-					self.add_logger_data({'green':'','black':'keyboard-EN.xml','red':''})
-				except Exception as e: 
-					self.add_logger_data({'green':'','black':'','red':str(e)})
-
-		if self.isRPI:
-			'''
-			self.add_logger_data(_('Checking backlight...'))
-			try:
-				if os.path.exists('/usr/share/applications/openplotter-brightness.desktop'):
-					value = subprocess.check_output(['rpi-backlight','--get-brightness']).decode(sys.stdin.encoding)
-					value = value.replace('\n','')
-					value = value.strip()
-					self.add_logger_data({'green':'','black':_('enabled')+' | '+_('Value (0-100):')+' '+value,'red':''})
-				else: 
-					self.add_logger_data({'green':'','black':_('disabled'),'red':''})
-			except Exception as e: self.add_logger_data({'green':'','black':'','red':str(e)})
-			'''
-			try: config = open('/boot/config.txt', 'r')
-			except: config = open('/boot/firmware/config.txt', 'r')
-			data = config.read()
-			config.close()
-			self.add_logger_data(_('Checking Power off management...'))
-			if 'dtoverlay=gpio-poweroff' in data and not '#dtoverlay=gpio-poweroff' in data: self.add_logger_data({'green':'','black':_('enabled'),'red':''})
-			else: self.add_logger_data({'green':'','black':_('disabled'),'red':''})
-			self.add_logger_data(_('Checking Shutdown management...'))
-			if 'dtoverlay=gpio-shutdown' in data and not '#dtoverlay=gpio-shutdown' in data: self.add_logger_data({'green':'','black':_('enabled'),'red':''})
-			else: self.add_logger_data({'green':'','black':_('disabled'),'red':''})
-
-			forceVNC = self.conf.get('GENERAL', 'forceVNC')
-			if forceVNC == '1': 
-				subprocess.Popen(['sudo', 'raspi-config', 'nonint', 'do_vnc', '0'])
-				self.conf.set('GENERAL', 'forceVNC', '0')
-
-		self.add_logger_data(_('Checking OpenPlotter autostart...'))
-		if not os.path.exists(self.conf.home+'/.config/autostart/openplotter-startup.desktop'):
-			self.add_logger_data({'green':'','black':'','red':_('Autostart is not enabled and most features will not work. Please select "Autostart" in "OpenPlotter Settings"')})
-		else:
-			self.add_logger_data({'green':'','black':_('enabled'),'red':''})
-
-		self.add_logger_data(_('Checking rescue mode...'))
-		rescue = self.conf.get('GENERAL', 'rescue')
-		if rescue == 'yes': 
-			self.add_logger_data({'green':'','black':'','red':_('enabled')})
-		else:
-			self.add_logger_data({'green':'','black':_('disabled'),'red':''})
-
-		self.add_logger_data(_('Checking debugging mode...'))
-		if self.debug == 'yes': 
-			self.add_logger_data({'green':'','black':'','red':_('enabled')})
-		else:
-			self.add_logger_data({'green':'','black':_('disabled'),'red':''})
-
-		logMaxSize = self.conf.get('GENERAL', 'logMaxSize')
-		if logMaxSize:
-			self.add_logger_data(_('Checking system log file size...'))
-			try:
-				mb = os.path.getsize("/var/log/syslog")/1e+6
-				if mb >= int(logMaxSize): self.add_logger_data({'green':'','black':'','red':_('System log file size: ')+str(round(mb,2))+' MB'})
-				else: self.add_logger_data({'green':'','black':_('System log file size: ')+str(round(mb,2))+' MB','red':''})
-			except Exception as e: self.add_logger_data({'green':'','black':'','red':str(e)})
-		
-		self.add_logger_data(_('Checking OpenPlotter packages source...'))
-		sources = subprocess.check_output(['apt-cache', 'policy']).decode(sys.stdin.encoding)
-		if 'https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian' in sources:
-			self.add_logger_data({'green':'','black':_('added'),'red':''})
-		else: self.add_logger_data({'green':'','black':'','red':_('There are missing packages sources. Please add sources in "OpenPlotter Settings".')})
-
+		#check apps
 		for i in appsDict:
 			name = i['module']
 			if name:
@@ -336,7 +247,8 @@ class MyFrame(wx.Frame):
 					if startup: self.checkApp(startup)
 				except Exception as e: 
 					if self.debug == 'yes': print(str(e))
-					
+
+
 		try:
 			self.add_logger_data(_('Checking serial connections conflicts...'))
 			allSerialPorts = SerialPorts()
@@ -349,6 +261,7 @@ class MyFrame(wx.Frame):
 			else: self.add_logger_data({'green':'','black':_('no conflicts'),'red':''})
 		except Exception as e: self.add_logger_data({'green':'','black':'','red':str(e)})
 
+
 		try:
 			self.add_logger_data(_('Checking network connections conflicts...'))
 			self.ports = Ports()
@@ -360,6 +273,7 @@ class MyFrame(wx.Frame):
 				self.add_logger_data({'green':'','black':'','red':red})
 			else: self.add_logger_data({'green':'','black':_('no conflicts'),'red':''})
 		except Exception as e: self.add_logger_data({'green':'','black':'','red':str(e)})
+
 
 		if self.isRPI:
 			try:
@@ -380,6 +294,63 @@ class MyFrame(wx.Frame):
 				else: self.add_logger_data({'green':'','black':_('no conflicts'),'red':''})
 			except Exception as e: self.add_logger_data({'green':'','black':'','red':str(e)})
 
+
+			'''
+			self.add_logger_data(_('Checking backlight...'))
+			try:
+				if os.path.exists('/usr/share/applications/openplotter-brightness.desktop'):
+					value = subprocess.check_output(['rpi-backlight','--get-brightness']).decode(sys.stdin.encoding)
+					value = value.replace('\n','')
+					value = value.strip()
+					self.add_logger_data({'green':'','black':_('enabled')+' | '+_('Value (0-100):')+' '+value,'red':''})
+				else: 
+					self.add_logger_data({'green':'','black':_('disabled'),'red':''})
+			except Exception as e: self.add_logger_data({'green':'','black':'','red':str(e)})
+			'''
+
+
+			try:
+				try: config = open('/boot/config.txt', 'r')
+				except: config = open('/boot/firmware/config.txt', 'r')
+				data = config.read()
+				config.close()
+				self.add_logger_data(_('Checking Power off management...'))
+				if 'dtoverlay=gpio-poweroff' in data and not '#dtoverlay=gpio-poweroff' in data: self.add_logger_data({'green':'','black':_('enabled'),'red':''})
+				else: self.add_logger_data({'green':'','black':_('disabled'),'red':''})
+				self.add_logger_data(_('Checking Shutdown management...'))
+				if 'dtoverlay=gpio-shutdown' in data and not '#dtoverlay=gpio-shutdown' in data:
+					self.add_logger_data({'green':'','black':_('enabled'),'red':''})
+					if self.mode == 'start':
+						rescue = self.conf.get('GENERAL', 'rescue')
+						if rescue != 'yes': subprocess.Popen(['openplotter-shutdown'])
+				else: self.add_logger_data({'green':'','black':_('disabled'),'red':''})
+			except Exception as e: self.add_logger_data({'green':'','black':'','red':str(e)})
+			
+
+		self.add_logger_data(_('Checking touchscreen optimization...'))
+		try:
+			if self.conf.get('GENERAL', 'touchscreen') == '1': 
+				self.add_logger_data({'green':'','black':_('enabled'),'red':''})
+			else:
+				self.add_logger_data({'green':'','black':_('disabled'),'red':''})
+		except Exception as e: self.add_logger_data({'green':'','black':'','red':str(e)})
+
+
+		self.add_logger_data(_('Checking rescue mode...'))
+		rescue = self.conf.get('GENERAL', 'rescue')
+		if rescue == 'yes': 
+			self.add_logger_data({'green':'','black':'','red':_('enabled')})
+		else:
+			self.add_logger_data({'green':'','black':_('disabled'),'red':''})
+
+
+		self.add_logger_data(_('Checking debugging mode...'))
+		if self.debug == 'yes': 
+			self.add_logger_data({'green':'','black':'','red':_('enabled')})
+		else:
+			self.add_logger_data({'green':'','black':_('disabled'),'red':''})
+
+
 		try:
 			play = self.conf.get('GENERAL', 'play')
 			if play: subprocess.Popen(['cvlc', '--play-and-exit', play])
@@ -387,6 +358,7 @@ class MyFrame(wx.Frame):
 
 		if self.mode == 'start': self.add_logger_data(_('STARTUP FINISHED'))
 		else: self.add_logger_data(_('CHECK SYSTEM FINISHED'))
+
 
 		c = 60
 		while True:
