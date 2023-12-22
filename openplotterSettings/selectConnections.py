@@ -20,25 +20,26 @@ import wx, pyudev, sys, subprocess
 class Serial(wx.Dialog):
 	def __init__(self):
 		context = pyudev.Context()
+		try:
+			subprocess.check_output(['systemctl', 'is-active', 'bluetooth']).decode(sys.stdin.encoding)
+			btStatus = True
+		except: btStatus = False
+		try:
+			out = subprocess.check_output('raspi-config nonint get_pi_type', shell=True).decode(sys.stdin.encoding)
+			out = out.replace("\n","")
+			out = out.strip()
+		except: out = ''
 		self.devices = []
 		for i in context.list_devices(subsystem='tty'):
 			DEVNAME = i.get('DEVNAME')
 			DEVPATH = i.get('DEVPATH')
-			try:
-				subprocess.check_output(['systemctl', 'is-active', 'bluetooth']).decode(sys.stdin.encoding)
-				btStatus = True
-			except: btStatus = False
 			if not '/virtual/' in DEVPATH or 'moitessier' in DEVNAME:
 				if not '/devices/platform/serial' in DEVPATH:
-					if 'ttyAMA0' in DEVPATH and btStatus: pass
-					else: self.devices.append(i)
-			'''
-			if not '/devices/virtual/tty/tty' in DEVPATH:
-				for tag in i:
-					print (tag+': '+i.get(tag))
-					print('-------------------------------------')
-				print('############################################')
-			'''
+					if out == '5': self.devices.append(i)
+					else:
+						if 'ttyAMA0' in DEVPATH and btStatus: pass
+						else: self.devices.append(i)
+
 
 class AddPort(wx.Dialog):
 	def __init__(self, deviceSent, deviceStatus, baudsSent, baudsStatus):
