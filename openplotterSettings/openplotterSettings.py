@@ -188,6 +188,9 @@ class MyFrame(wx.Frame):
 			except Exception as e: 
 				if self.debug: print('Error setting virtual keyboard layout: '+str(e))
 		self.toolbar10.AddSeparator()
+		toolDebug = self.toolbar10.AddCheckTool(1003, _('Debugging'), wx.Bitmap(self.currentdir+"/data/bug.png"))
+		self.Bind(wx.EVT_TOOL, self.OnToolDebug, toolDebug)
+
 		starupLabel = wx.StaticText(self.genSettings, label=_('Startup'))
 		self.toolbar4 = wx.ToolBar(self.genSettings, style=wx.TB_TEXT)
 		toolDelay = self.toolbar4.AddCheckTool(401, _('Delay (seconds)'), wx.Bitmap(self.currentdir+"/data/delay.png"))
@@ -221,6 +224,8 @@ class MyFrame(wx.Frame):
 		out = subprocess.check_output('echo $XDG_SESSION_TYPE', shell=True).decode(sys.stdin.encoding)
 		if 'wayland' in out: self.toolbar10.EnableTool(1001,False)
 
+		if self.conf.get('GENERAL', 'debug') == 'yes': self.toolbar10.ToggleTool(1003,True)
+
 		delay = self.conf.get('GENERAL', 'delay')
 		if delay:
 			self.delay.SetValue(delay)
@@ -232,6 +237,14 @@ class MyFrame(wx.Frame):
 			self.pathFile.SetValue(path)
 			self.toolbar4.ToggleTool(403,True)
 		else: self.pathFile.SetValue('/usr/share/sounds/openplotter/Store_Door_Chime.mp3')
+
+	def OnToolDebug(self,e):
+		if self.toolbar10.GetToolState(1003):
+			self.conf.set('GENERAL', 'debug', 'yes')
+			self.ShowStatusBarGREEN(_('Debugging mode enabled. Additional info about errors in OpenPlotter apps will be saved in the system log'))
+		else:
+			self.conf.set('GENERAL', 'debug', 'no')
+			self.ShowStatusBarGREEN(_('Debugging mode disabled'))
 
 	def OnToolFile(self,e):
 		dlg = wx.FileDialog(self, message=_('Choose a file'), defaultDir='/usr/share/sounds/openplotter', defaultFile='',
@@ -384,8 +397,10 @@ class MyFrame(wx.Frame):
 
 	def pageLog(self):
 		self.toolbar7 = wx.ToolBar(self.log, style=wx.TB_TEXT)
-		toolDebug = self.toolbar7.AddCheckTool(701, _('Debugging mode'), wx.Bitmap(self.currentdir+"/data/bug.png"))
-		self.Bind(wx.EVT_TOOL, self.OnToolDebug, toolDebug)
+
+
+
+
 		self.toolbar7.AddSeparator()
 		toolSeeAll= self.toolbar7.AddTool(702, _('See all'), wx.Bitmap(self.currentdir+"/data/logsee.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolSeeAll, toolSeeAll)
@@ -430,15 +445,6 @@ class MyFrame(wx.Frame):
 		sizer.Add(h1, 0, wx.ALL | wx.EXPAND, 10)
 		self.log.SetSizer(sizer)
 
-		if self.conf.get('GENERAL', 'debug') == 'yes': self.toolbar7.ToggleTool(701,True)
-
-	def OnToolDebug(self,e):
-		if self.toolbar7.GetToolState(701):
-			self.conf.set('GENERAL', 'debug', 'yes')
-			self.ShowStatusBarGREEN(_('Debugging mode enabled. Additional info about errors in OpenPlotter apps will be saved in the system log'))
-		else:
-			self.conf.set('GENERAL', 'debug', 'no')
-			self.ShowStatusBarGREEN(_('Debugging mode disabled'))
 
 	def OnToolSeeAll(self,e):
 		self.ShowStatusBarYELLOW(_('Reading log, please wait...'))
