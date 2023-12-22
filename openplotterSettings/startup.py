@@ -212,18 +212,6 @@ class MyFrame(wx.Frame):
 		else: self.add_logger_data({'green':'','black':'','red':_('There are missing packages sources. Please add sources in "OpenPlotter Settings".')})
 
 
-		'''
-		logMaxSize = self.conf.get('GENERAL', 'logMaxSize')
-		if logMaxSize:
-			self.add_logger_data(_('Checking system log file size...'))
-			try:
-				mb = os.path.getsize("/var/log/syslog")/1e+6
-				if mb >= int(logMaxSize): self.add_logger_data({'green':'','black':'','red':_('System log file size: ')+str(round(mb,2))+' MB'})
-				else: self.add_logger_data({'green':'','black':_('System log file size: ')+str(round(mb,2))+' MB','red':''})
-			except Exception as e: self.add_logger_data({'green':'','black':'','red':str(e)})
-		'''
-
-
 		#starts apps
 		if self.mode == 'start':
 			for i in appsDict:
