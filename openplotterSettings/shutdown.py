@@ -29,7 +29,7 @@ def main():
 					out = out.split('|')
 					out = out[1].split('//')
 					if 'lo' in out[0]: subprocess.call('poweroff', shell=True)
-					time.sleep(1)
+					time.sleep(5)
 
 if __name__ == '__main__':
 	main()
