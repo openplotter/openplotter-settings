@@ -167,22 +167,6 @@ class AppsList:
 		self.appsDict.append(app)
 
 		app = {
-		'name': _('Network'),
-		'platform': 'rpi',
-		'package': 'openplotter-network',
-		'preUninstall': platform2.admin+' networkPreUninstall',
-		'uninstall': 'openplotter-network',
-		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
-		'dev': 'no',
-		'entryPoint': 'openplotter-network',
-		'postInstall': platform2.admin+' networkPostInstall',
-		'reboot': 'no',
-		'module': 'openplotterNetwork',
-		'conf': 'network'
-		}
-		self.appsDict.append(app)
-
-		app = {
 		'name': _('CAN Bus'),
 		'platform': 'both',
 		'package': 'openplotter-can',

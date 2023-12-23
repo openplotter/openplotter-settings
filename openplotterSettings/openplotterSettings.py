@@ -24,6 +24,7 @@ from .platform import Platform
 from .version import version
 from .appsList import AppsList
 from .gpio import GpioMap, Gpio
+from .ports import Ports
 
 class MyFrame(wx.Frame):
 	def __init__(self):
@@ -59,7 +60,10 @@ class MyFrame(wx.Frame):
 		self.toolbar1.AddSeparator()	
 		toolCheck = self.toolbar1.AddTool(103, _('Check System'), wx.Bitmap(self.currentdir+"/data/check.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolCheck, toolCheck)
-		
+		self.toolbar1.AddSeparator()
+		toolAddresses = self.toolbar1.AddTool(103, _('Network'), wx.Bitmap(self.currentdir+"/data/ports.png"))
+		self.Bind(wx.EVT_TOOL, self.OnToolAddresses, toolAddresses)
+
 		self.notebook = wx.Notebook(self)
 		self.notebook.Bind(wx.EVT_NOTEBOOK_PAGE_CHANGED, self.onTabChange)
 		self.apps = wx.Panel(self.notebook)
@@ -136,6 +140,47 @@ class MyFrame(wx.Frame):
 
 	def OnToolCheck(self, e):
 		subprocess.call(['openplotter-startup', 'check'])
+
+
+	def OnToolAddresses(self, e):
+		allPorts = Ports()
+		usedPorts = allPorts.getUsedPorts()
+		ip_hostname = subprocess.check_output(['hostname']).decode(sys.stdin.encoding)[:-1]
+		ip_info = subprocess.check_output(['hostname', '-I']).decode(sys.stdin.encoding)
+		ips = ip_info.split()
+		self.logger.Clear()
+		self.notebook.ChangeSelection(3)
+		self.logger.BeginTextColour((55, 55, 55))
+		for i in usedPorts:
+			self.logger.BeginBold()
+			self.logger.WriteText(i['description']+' ('+i['mode']+')')
+			self.logger.EndBold()
+			self.logger.Newline()
+			if i['address'] == 'localhost' or i['address'] == '127.0.0.1':
+				self.logger.WriteText(i['type']+' '+str(ip_hostname)+'.local:'+str(i['port']))
+				self.logger.Newline()
+				for ip in ips:
+					if ip[0:7]=='169.254': pass
+					elif ':' in ip: pass
+					else: 
+						self.logger.WriteText(i['type']+' '+str(ip)+':'+str(i['port']))
+						self.logger.Newline()
+			else: 
+				self.logger.WriteText(i['type']+' '+i['address']+':'+str(i['port']))
+				self.logger.Newline()
+		self.logger.EndTextColour()
+		
+		conflicts = allPorts.conflicts()
+		if conflicts:
+			red = ''
+			self.logger.BeginTextColour((130, 0, 0))
+			for i in conflicts:
+				self.logger.Newline()
+				self.logger.WriteText(i['description']+' ('+i['mode']+'): '+i['type']+' '+i['address']+':'+i['port'])
+			self.logger.EndTextColour()
+			self.ShowStatusBarRED(_('There are conflicts between server connections'))
+		else: self.ShowStatusBarGREEN(_('No conflicts between server connections'))
+		self.logger.ShowPosition(self.logger.GetLastPosition())
 
 	###################################################################################
 
