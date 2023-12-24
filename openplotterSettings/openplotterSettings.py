@@ -61,7 +61,7 @@ class MyFrame(wx.Frame):
 		toolCheck = self.toolbar1.AddTool(103, _('Check System'), wx.Bitmap(self.currentdir+"/data/check.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolCheck, toolCheck)
 		self.toolbar1.AddSeparator()
-		toolAddresses = self.toolbar1.AddTool(103, _('Network'), wx.Bitmap(self.currentdir+"/data/ports.png"))
+		toolAddresses = self.toolbar1.AddTool(104, _('Network'), wx.Bitmap(self.currentdir+"/data/ports.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolAddresses, toolAddresses)
 
 		self.notebook = wx.Notebook(self)
@@ -440,11 +440,11 @@ class MyFrame(wx.Frame):
 		self.toolbar5 = wx.ToolBar(self.raspSettings, style=wx.TB_TEXT)
 		toolGpio = self.toolbar5.AddTool(503, _('GPIO Map'), wx.Bitmap(self.currentdir+"/data/chip.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolGpio, toolGpio)
-		#self.toolbar5.AddSeparator()
-		#toolbacklightInstall = self.toolbar5.AddCheckTool(504, _('Install backlight'), wx.Bitmap(self.currentdir+"/data/brightness-install.png"))
-		#self.Bind(wx.EVT_TOOL, self.OnToolbacklightInstall, toolbacklightInstall)
-		#toolbacklightSet = self.toolbar5.AddTool(505, _('Set backlight'), wx.Bitmap(self.currentdir+"/data/brightness.png"))
-		#self.Bind(wx.EVT_TOOL, self.OnToolbacklightSet, toolbacklightSet)
+		self.toolbar5.AddSeparator()
+		toolbacklightInstall = self.toolbar5.AddCheckTool(504, _('Install backlight'), wx.Bitmap(self.currentdir+"/data/brightness-install.png"))
+		self.Bind(wx.EVT_TOOL, self.OnToolbacklightInstall, toolbacklightInstall)
+		toolbacklightSet = self.toolbar5.AddTool(505, _('Set backlight'), wx.Bitmap(self.currentdir+"/data/brightness.png"))
+		self.Bind(wx.EVT_TOOL, self.OnToolbacklightSet, toolbacklightSet)
 		self.toolbar5.AddSeparator()
 		toolWayland = self.toolbar5.AddCheckTool(506, 'Wayland', wx.Bitmap(self.currentdir+"/data/wayland.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolWayland, toolWayland)
@@ -492,13 +492,19 @@ class MyFrame(wx.Frame):
 		sizer.Add(self.toolbar9, 0, wx.EXPAND, 0)
 		self.raspSettings.SetSizer(sizer)
 
-		if self.platform.isRPI: 
+		if self.platform.isRPI:
 
-			if os.path.exists('/usr/share/applications/openplotter-brightness.desktop'):
-				self.toolbar5.ToggleTool(504,True)
-				self.toolbar5.EnableTool(505,True)
+			backlightPath = "/sys/class/backlight"
+			backlightDevices = os.listdir(backlightPath)
+			if backlightDevices: 
+				if os.path.exists('/usr/share/applications/openplotter-brightness.desktop'):
+					self.toolbar5.ToggleTool(504,True)
+					self.toolbar5.EnableTool(505,True)
+				else:
+					self.toolbar5.ToggleTool(504,False)
+					self.toolbar5.EnableTool(505,False)
 			else:
-				self.toolbar5.ToggleTool(504,False)
+				self.toolbar5.EnableTool(504,False)
 				self.toolbar5.EnableTool(505,False)
 
 			out = subprocess.check_output('echo $XDG_SESSION_TYPE', shell=True).decode(sys.stdin.encoding)
@@ -681,8 +687,7 @@ class MyFrame(wx.Frame):
 		dlg.Destroy()
 
 	def OnToolbacklightSet(self,e):
-			subprocess.call(['pkill', '-f', 'rpi-backlight-gui'])
-			subprocess.Popen('rpi-backlight-gui')
+			subprocess.Popen('openplotter-backlight-gui')
 
 	def OnToolWayland(self,e):
 		if self.toolbar5.GetToolState(506):

@@ -282,19 +282,20 @@ class MyFrame(wx.Frame):
 				else: self.add_logger_data({'green':'','black':_('no conflicts'),'red':''})
 			except Exception as e: self.add_logger_data({'green':'','black':'','red':str(e)})
 
-
-			'''
-			self.add_logger_data(_('Checking backlight...'))
-			try:
-				if os.path.exists('/usr/share/applications/openplotter-brightness.desktop'):
-					value = subprocess.check_output(['rpi-backlight','--get-brightness']).decode(sys.stdin.encoding)
-					value = value.replace('\n','')
-					value = value.strip()
-					self.add_logger_data({'green':'','black':_('enabled')+' | '+_('Value (0-100):')+' '+value,'red':''})
-				else: 
-					self.add_logger_data({'green':'','black':_('disabled'),'red':''})
-			except Exception as e: self.add_logger_data({'green':'','black':'','red':str(e)})
-			'''
+			backlightPath = "/sys/class/backlight"
+			backlightDevices = os.listdir(backlightPath)
+			if backlightDevices: 
+				backlightDevice = backlightPath+'/'+backlightDevices[0]
+				self.add_logger_data(_('Checking backlight...'))
+				try:
+					if os.path.exists('/usr/share/applications/openplotter-brightness.desktop'):
+						value = subprocess.check_output(['rpi-backlight', backlightDevice, '--get-brightness']).decode(sys.stdin.encoding)
+						value = value.replace('\n','')
+						value = value.strip()
+						self.add_logger_data({'green':'','black':_('enabled')+' | '+_('Value (0-100):')+' '+value,'red':''})
+					else: 
+						self.add_logger_data({'green':'','black':_('disabled'),'red':''})
+				except Exception as e: self.add_logger_data({'green':'','black':'','red':str(e)})
 
 
 			try:
