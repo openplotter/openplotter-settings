@@ -299,8 +299,8 @@ class MyFrame(wx.Frame):
 
 
 			try:
-				try: config = open('/boot/config.txt', 'r')
-				except: config = open('/boot/firmware/config.txt', 'r')
+				try: config = open('/boot/firmware/config.txt', 'r')
+				except: config = open('/boot/config.txt', 'r')
 				data = config.read()
 				config.close()
 				self.add_logger_data(_('Checking Power off management...'))

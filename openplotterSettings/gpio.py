@@ -106,12 +106,12 @@ class Gpio:
 			rpimodel = modelfile.read()[:-1]
 		except: rpimodel = ''
 		self.used = []
-		config = '/boot/config.txt'
-		boot = '/boot'
+		config = '/boot/firmware/config.txt'
+		boot = '/boot/firmware'
 		try: file = open(config, 'r')
 		except:
-			config = '/boot/firmware/config.txt'
-			boot = '/boot/firmware'
+			config = '/boot/config.txt'
+			boot = '/boot'
 			file = open(config, 'r')
 		while True:
 			line = file.readline()

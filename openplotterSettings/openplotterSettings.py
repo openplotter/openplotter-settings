@@ -523,8 +523,8 @@ class MyFrame(wx.Frame):
 				self.gpioPoweroff.SetValue(poweroff['gpio'])
 				self.transitionPoweroff.SetSelection(poweroff['transition'])
 
-			try: config = open('/boot/config.txt', 'r')
-			except: config = open('/boot/firmware/config.txt', 'r')
+			try: config = open('/boot/firmware/config.txt', 'r')
+			except: config = open('/boot/config.txt', 'r')
 			data = config.read()
 			config.close()
 			if 'dtoverlay=gpio-poweroff' in data and not '#dtoverlay=gpio-poweroff' in data: self.toolbar9.ToggleTool(901,True)

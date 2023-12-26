@@ -87,12 +87,12 @@ def touch(state):
 
 def shutdown(overlay):
 	try:
-		config = '/boot/config.txt'
+		config = '/boot/firmware/config.txt'
 		os.system('cp -f '+config+' '+config+'_back')
 		file = open(config, 'r')
 	except:
 		try:
-			config = '/boot/firmware/config.txt'
+			config = '/boot/config.txt'
 			os.system('cp -f '+config+' '+config+'_back')
 			file = open(config, 'r')
 		except Exception as e:
@@ -121,12 +121,12 @@ def shutdown(overlay):
 
 def poweroff(overlay):
 	try:
-		config = '/boot/config.txt'
+		config = '/boot/firmware/config.txt'
 		os.system('cp -f '+config+' '+config+'_back')
 		file = open(config, 'r')
 	except:
 		try:
-			config = '/boot/firmware/config.txt'
+			config = '/boot/config.txt'
 			os.system('cp -f '+config+' '+config+'_back')
 			file = open(config, 'r')
 		except Exception as e:
