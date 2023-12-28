@@ -152,6 +152,23 @@ class MyFrame(wx.Frame):
 		appsList = AppsList()
 		appsDict = appsList.appsDict
 
+		try:
+			if self.mode == 'start':
+				if self.isRPI:
+					forceHotspot = self.conf.get('GENERAL', 'forceHotspot')
+					if forceHotspot == '1':
+						self.add_logger_data(_('Creating Hotspot...'))
+						subprocess.Popen(['nmcli', 'd', 'wifi', 'hotspot', 'ifname', 'wlan0', 'ssid', 'OpenPlotter', 'password', '12345678'])
+						self.conf.set('GENERAL', 'forceHotspot', '0')
+						self.add_logger_data({'green':'','black':_('done'),'red':''})
+
+					forceVNC = self.conf.get('GENERAL', 'forceVNC')
+					if forceVNC == '1': 
+						subprocess.Popen(['sudo', 'raspi-config', 'nonint', 'do_vnc', '0'])
+						self.conf.set('GENERAL', 'forceVNC', '0')
+		except Exception as e: 
+			self.add_logger_data({'green':'','black':'','red':str(e)})
+
 
 		delay = self.conf.get('GENERAL', 'delay')
 		if self.mode == 'start':
@@ -176,12 +193,6 @@ class MyFrame(wx.Frame):
 			out = out.replace("\n","")
 			out = out.strip()
 			self.add_logger_data({'green':'','black':out,'red':''})
-			if self.mode == 'start':
-				if self.isRPI:
-					forceVNC = self.conf.get('GENERAL', 'forceVNC')
-					if forceVNC == '1': 
-						subprocess.Popen(['sudo', 'raspi-config', 'nonint', 'do_vnc', '0'])
-						self.conf.set('GENERAL', 'forceVNC', '0')
 			if not 'wayland' in out:
 				self.add_logger_data(_('Checking virtual keyboard...'))
 				currentKeyboard = self.conf.get('GENERAL', 'keyboard')
@@ -338,6 +349,16 @@ class MyFrame(wx.Frame):
 			self.add_logger_data({'green':'','black':'','red':_('enabled')})
 		else:
 			self.add_logger_data({'green':'','black':_('disabled'),'red':''})
+
+			
+		try:
+			self.add_logger_data(_('Checking WiFi password...'))
+			out = subprocess.check_output('nmcli dev wifi show-password', shell=True).decode(sys.stdin.encoding)
+			if 'Password: 12345678' in out:
+				msg = _('The WiFi connection is using a default password. This is a security risk - please set a new password in "Network Manager > Advanced Options > Edit Connections" ')
+				self.add_logger_data({'green':'','black':'','red':msg})
+			else: self.add_logger_data({'green':'','black':_('done'),'red':''})
+		except Exception as e: self.add_logger_data({'green':'','black':'','red':str(e)})
 
 
 		try:
