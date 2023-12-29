@@ -158,7 +158,8 @@ class MyFrame(wx.Frame):
 					forceHotspot = self.conf.get('GENERAL', 'forcehotspot')
 					if forceHotspot == '1':
 						self.add_logger_data(_('Creating Hotspot...'))
-						subprocess.Popen('nmcli d wifi hotspot ifname wlan0 ssid OpenPlotter password 12345678', shell=True)
+						subprocess.call('nmcli d wifi hotspot ifname wlan0 con-name OpenPlotter-Hotspot ssid OpenPlotter password 12345678', shell=True)
+						subprocess.call('nmcli connection modify OpenPlotter-Hotspot connection.autoconnect yes', shell=True)
 						self.conf.set('GENERAL', 'forcehotspot', '0')
 						self.add_logger_data({'green':'','black':_('done'),'red':''})
 
