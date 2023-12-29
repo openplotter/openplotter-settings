@@ -155,11 +155,11 @@ class MyFrame(wx.Frame):
 		try:
 			if self.mode == 'start':
 				if self.isRPI:
-					forceHotspot = self.conf.get('GENERAL', 'forceHotspot')
+					forceHotspot = self.conf.get('GENERAL', 'forcehotspot')
 					if forceHotspot == '1':
 						self.add_logger_data(_('Creating Hotspot...'))
-						subprocess.Popen(['nmcli', 'd', 'wifi', 'hotspot', 'ifname', 'wlan0', 'ssid', 'OpenPlotter', 'password', '12345678'])
-						self.conf.set('GENERAL', 'forceHotspot', '0')
+						subprocess.Popen('nmcli d wifi hotspot ifname wlan0 ssid OpenPlotter password 12345678', shell=True)
+						self.conf.set('GENERAL', 'forcehotspot', '0')
 						self.add_logger_data({'green':'','black':_('done'),'red':''})
 
 					forceVNC = self.conf.get('GENERAL', 'forceVNC')
@@ -358,7 +358,7 @@ class MyFrame(wx.Frame):
 				msg = _('The WiFi connection is using a default password. This is a security risk - please set a new password in "Network Manager > Advanced Options > Edit Connections" ')
 				self.add_logger_data({'green':'','black':'','red':msg})
 			else: self.add_logger_data({'green':'','black':_('done'),'red':''})
-		except Exception as e: self.add_logger_data({'green':'','black':'','red':str(e)})
+		except Exception as e: self.add_logger_data({'green':'','black':_('not found'),'red':''})
 
 
 		try:
