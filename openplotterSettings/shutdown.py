@@ -15,12 +15,14 @@
 # You should have received a copy of the GNU General Public License
 # along with Openplotter. If not, see <http://www.gnu.org/licenses/>.
 
-import time, subprocess, sys
-from .conf import Conf
+import time, subprocess, sys, configparser
+
 
 def main():
-	conf2 = Conf()
-	try: shutdown = eval(conf2.get('GENERAL', 'shutdown'))
+	data_conf = configparser.ConfigParser()
+	conf_file = '.openplotter/openplotter.conf'
+	data_conf.read(conf_file)
+	try: shutdown = eval(data_conf.get('GENERAL', 'shutdown'))
 	except: shutdown = {}
 	if shutdown:
 		if shutdown['gpio']:
@@ -28,7 +30,7 @@ def main():
 					out = subprocess.check_output('pinctrl get '+shutdown['gpio'], shell=True).decode(sys.stdin.encoding)
 					out = out.split('|')
 					out = out[1].split('//')
-					if 'lo' in out[0]: subprocess.call('poweroff', shell=True)
+					if 'lo' in out[0]: subprocess.call('halt', shell=True)
 					time.sleep(5)
 
 if __name__ == '__main__':

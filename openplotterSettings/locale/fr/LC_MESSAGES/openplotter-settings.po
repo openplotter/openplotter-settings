@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openplotter\n"
 "POT-Creation-Date: 2023-07-27 19:48+0200\n"
-"PO-Revision-Date: 2023-07-28 20:04+0200\n"
+"PO-Revision-Date: 2023-11-08 11:19\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -13,12 +13,12 @@ msgstr ""
 "X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
 "X-Crowdin-Project: openplotter\n"
 "X-Crowdin-Project-ID: 289888\n"
 "X-Crowdin-Language: fr\n"
 "X-Crowdin-File: openplotter-settings.po\n"
 "X-Crowdin-File-ID: 4\n"
-"X-Poedit-SearchPath-0: .\n"
 
 #: appsList.py:58
 msgid "AvNav Installer"
@@ -380,13 +380,9 @@ msgid "Error reading log"
 msgstr "Erreur lors de la lecture du journal"
 
 #: openplotterSettings.py:521
-msgid ""
-"Current and archived system log files will be deleted. A new system log file will be created after reboot.\n"
-"\n"
+msgid "Current and archived system log files will be deleted. A new system log file will be created after reboot.\n\n"
 " Are you sure?"
-msgstr ""
-"Les journaux système actuels et archivés seront supprimés. Un nouveau fichier journal système sera créé après le redémarrage.\n"
-"\n"
+msgstr "Les journaux système actuels et archivés seront supprimés. Un nouveau fichier journal système sera créé après le redémarrage.\n\n"
 " Êtes-vous sûr?"
 
 #: openplotterSettings.py:522 openplotterSettings.py:762
@@ -799,7 +795,7 @@ msgstr "désactivé"
 
 #: startup.py:237
 msgid "Checking virtual keyboard..."
-msgstr ""
+msgstr "Vérification du clavier virtuel..."
 
 #: startup.py:251
 msgid "Checking backlight..."
@@ -827,7 +823,7 @@ msgstr "Le démarrage automatique n'est pas activé et la plupart des fonctionna
 
 #: startup.py:279
 msgid "Checking rescue mode..."
-msgstr "Vérification du mode de sauvetage..."
+msgstr "Vérification du mode de récupération..."
 
 #: startup.py:286
 msgid "Checking debugging mode..."
@@ -888,3 +884,4 @@ msgstr "DÉMARRAGE TERMINÉ"
 #: startup.py:366
 msgid "CHECK SYSTEM FINISHED"
 msgstr "VÉRIFICATION DU SYSTÈME TERMINÉ"
+

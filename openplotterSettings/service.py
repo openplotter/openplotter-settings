@@ -85,7 +85,7 @@ def touch(state):
 		except Exception as e: print('Error setting gtk css: '+str(e))
 
 
-def shutdown(overlay):
+def shutdown(overlay,user):
 	try:
 		config = '/boot/firmware/config.txt'
 		os.system('cp -f '+config+' '+config+'_back')
@@ -118,6 +118,16 @@ def shutdown(overlay):
 		os.system('cp -f '+config+'_back '+config)
 		print(str(e))
 		return
+	if overlay:
+		fo = open('/etc/systemd/system/openplotter-shutdown.service', "w")
+		fo.write( '[Service]\nExecStart=openplotter-shutdown\nStandardOutput=journal\nStandardError=journal\nWorkingDirectory=/home/'+user+'\nUser=root\nRestart=always\nRestartSec=3\n\n[Install]\nWantedBy=multi-user.target')
+		fo.close()
+		subprocess.call(['systemctl', 'daemon-reload'])
+		subprocess.call(['systemctl', 'enable', 'openplotter-shutdown.service'])
+	else:
+		subprocess.call(['systemctl', 'disable', 'openplotter-shutdown.service'])
+		os.system('rm -f /etc/systemd/system/openplotter-shutdown')
+		subprocess.call(['systemctl', 'daemon-reload'])
 
 def poweroff(overlay):
 	try:
@@ -153,6 +163,6 @@ def poweroff(overlay):
 		print(str(e))
 		return
 
-if sys.argv[1] == 'shutdown': shutdown(sys.argv[2])
+if sys.argv[1] == 'shutdown': shutdown(sys.argv[2],sys.argv[3])
 if sys.argv[1] == 'poweroff': poweroff(sys.argv[2])
 if sys.argv[1] == 'touch': touch(sys.argv[2])

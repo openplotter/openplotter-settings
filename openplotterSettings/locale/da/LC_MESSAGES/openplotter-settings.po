@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openplotter\n"
 "POT-Creation-Date: 2023-07-27 19:48+0200\n"
-"PO-Revision-Date: 2023-07-28 20:04+0200\n"
+"PO-Revision-Date: 2023-11-08 11:19\n"
 "Last-Translator: \n"
 "Language-Team: Danish\n"
 "Language: da\n"
@@ -13,12 +13,12 @@ msgstr ""
 "X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
 "X-Crowdin-Project: openplotter\n"
 "X-Crowdin-Project-ID: 289888\n"
 "X-Crowdin-Language: da\n"
 "X-Crowdin-File: openplotter-settings.po\n"
 "X-Crowdin-File-ID: 4\n"
-"X-Poedit-SearchPath-0: .\n"
 
 #: appsList.py:58
 msgid "AvNav Installer"
@@ -30,7 +30,7 @@ msgstr "Notifikationer"
 
 #: appsList.py:90
 msgid "MAIANA AIS transponder"
-msgstr ""
+msgstr "MAIANA AIS transponder"
 
 #: appsList.py:138
 msgid "I2C Sensors"
@@ -71,7 +71,7 @@ msgstr "Indstillinger"
 
 #: data/openplotter-brightness.desktop:3
 msgid "rpi-backlight"
-msgstr ""
+msgstr "rpi-baggrundslys"
 
 #: data/openplotter-brightness.desktop:5
 msgid "brightness-48"
@@ -241,11 +241,11 @@ msgstr "Oversæt"
 
 #: openplotterSettings.py:157
 msgid "Touchscreen"
-msgstr ""
+msgstr "Touchscreen"
 
 #: openplotterSettings.py:159
 msgid "Maximize apps"
-msgstr ""
+msgstr "Maksimer apps"
 
 #: openplotterSettings.py:162 startup.py:67
 msgid "Rescue"
@@ -253,11 +253,11 @@ msgstr ""
 
 #: openplotterSettings.py:174
 msgid "Keyboard layout"
-msgstr ""
+msgstr "Tastaturlayout"
 
 #: openplotterSettings.py:177
 msgid "Virtual keyboard"
-msgstr ""
+msgstr "Virtuelt tastatur"
 
 #: openplotterSettings.py:191
 msgid "Startup"
@@ -310,11 +310,11 @@ msgstr "Opstartsforsinkelse fjernet"
 
 #: openplotterSettings.py:358
 msgid "Touchscreen optimization enabled"
-msgstr ""
+msgstr "Optimering af Touchscreen aktiveret"
 
 #: openplotterSettings.py:365
 msgid "Touchscreen optimization disabled"
-msgstr ""
+msgstr "Optimering af Touchscreen deaktiveret"
 
 #: openplotterSettings.py:370
 msgid "OpenPlotter apps will open maximized"
@@ -380,13 +380,9 @@ msgid "Error reading log"
 msgstr "Fejl ved læsning af log"
 
 #: openplotterSettings.py:521
-msgid ""
-"Current and archived system log files will be deleted. A new system log file will be created after reboot.\n"
-"\n"
+msgid "Current and archived system log files will be deleted. A new system log file will be created after reboot.\n\n"
 " Are you sure?"
-msgstr ""
-"Aktuelle og arkiverede systemlogfiler vil blive slettet. En ny systemlogfil vil blive oprettet efter genstart.\n"
-"\n"
+msgstr "Aktuelle og arkiverede systemlogfiler vil blive slettet. En ny systemlogfil vil blive oprettet efter genstart.\n\n"
 " Er du sikker?"
 
 #: openplotterSettings.py:522 openplotterSettings.py:762
@@ -401,11 +397,11 @@ msgstr "Aktuelle og arkiverede systemlogfiler er blevet slettet"
 
 #: openplotterSettings.py:550
 msgid "Install backlight"
-msgstr ""
+msgstr "Installér baggrundslys"
 
 #: openplotterSettings.py:552
 msgid "Set backlight"
-msgstr ""
+msgstr "Sæt baggrundslys"
 
 #: openplotterSettings.py:555
 msgid "Shutdown Management"
@@ -413,35 +409,35 @@ msgstr ""
 
 #: openplotterSettings.py:558
 msgid "Shutdown"
-msgstr ""
+msgstr "Luk ned"
 
 #: openplotterSettings.py:564 openplotterSettings.py:583
 msgid "GPIO"
-msgstr ""
+msgstr "GPIO"
 
 #: openplotterSettings.py:566 openplotterSettings.py:585
 msgid "Transition"
-msgstr ""
+msgstr "Overgang"
 
 #: openplotterSettings.py:566 openplotterSettings.py:585
 msgid "low->high"
-msgstr ""
+msgstr "lav->høj"
 
 #: openplotterSettings.py:566 openplotterSettings.py:585
 msgid "high->low"
-msgstr ""
+msgstr "høj >lav"
 
 #: openplotterSettings.py:570
 msgid "off"
-msgstr ""
+msgstr "fra"
 
 #: openplotterSettings.py:573 openplotterSettings.py:588
 msgid "Apply"
-msgstr ""
+msgstr "Anvend"
 
 #: openplotterSettings.py:577
 msgid "Power off"
-msgstr ""
+msgstr "Sluk"
 
 #: openplotterSettings.py:694 openplotterSettings.py:741
 msgid "Failed, you need to set a GPIO"
@@ -469,7 +465,7 @@ msgstr ""
 
 #: openplotterSettings.py:761 openplotterSettings.py:774
 msgid "Are you sure?"
-msgstr ""
+msgstr "Er du sikker?"
 
 #: openplotterSettings.py:766
 msgid "rpi-backlight installed"
@@ -477,7 +473,7 @@ msgstr ""
 
 #: openplotterSettings.py:770
 msgid "Installation canceled"
-msgstr ""
+msgstr "Installationen blev annulleret"
 
 #: openplotterSettings.py:772
 msgid "Uninstalling rpi-backlight, please wait..."
@@ -493,7 +489,7 @@ msgstr ""
 
 #: openplotterSettings.py:783
 msgid "Uninstallation canceled"
-msgstr ""
+msgstr "Afinstallationen blev annulleret"
 
 #: openplotterSettings.py:799
 msgid "Name"
@@ -725,7 +721,7 @@ msgstr "enhed: "
 
 #: settingsPreUninstall.py:28
 msgid "Removing installed packages..."
-msgstr ""
+msgstr "Fjerner installerede pakker..."
 
 #: settingsPreUninstall.py:31 settingsPreUninstall.py:37
 msgid "DONE"
@@ -741,11 +737,11 @@ msgstr "Starter OpenPlotter"
 
 #: startup.py:44
 msgid "Checking OpenPlotter"
-msgstr ""
+msgstr "Kontrollerer OpenPlotter"
 
 #: startup.py:54
 msgid "Please DO NOT CLOSE THIS WINDOW until all services have been started"
-msgstr ""
+msgstr "LUK IKKE DETTE VINDUE før alle tjenester er startet"
 
 #: startup.py:55
 msgid "Please wait for all services to be checked"
@@ -807,7 +803,7 @@ msgstr ""
 
 #: startup.py:257
 msgid "Value (0-100):"
-msgstr ""
+msgstr "Værdi (0-100):"
 
 #: startup.py:266
 msgid "Checking Power off management..."
@@ -888,3 +884,4 @@ msgstr "OPSTART Afsluttet"
 #: startup.py:366
 msgid "CHECK SYSTEM FINISHED"
 msgstr "System tjek afsluttet"
+

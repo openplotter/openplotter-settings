@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openplotter\n"
 "POT-Creation-Date: 2023-07-27 19:48+0200\n"
-"PO-Revision-Date: 2023-07-28 20:04+0200\n"
+"PO-Revision-Date: 2023-07-28 18:01\n"
 "Last-Translator: \n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -13,12 +13,12 @@ msgstr ""
 "X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
 "X-Crowdin-Project: openplotter\n"
 "X-Crowdin-Project-ID: 289888\n"
 "X-Crowdin-Language: de\n"
 "X-Crowdin-File: openplotter-settings.po\n"
 "X-Crowdin-File-ID: 4\n"
-"X-Poedit-SearchPath-0: .\n"
 
 #: appsList.py:58
 msgid "AvNav Installer"
@@ -380,13 +380,9 @@ msgid "Error reading log"
 msgstr "Fehler beim Lesen des Logs"
 
 #: openplotterSettings.py:521
-msgid ""
-"Current and archived system log files will be deleted. A new system log file will be created after reboot.\n"
-"\n"
+msgid "Current and archived system log files will be deleted. A new system log file will be created after reboot.\n\n"
 " Are you sure?"
-msgstr ""
-"Aktuelle und archivierte Systemprotokolldateien werden gelöscht. Nach dem Neustart wird eine neue Systemprotokolldatei erstellt.\n"
-"\n"
+msgstr "Aktuelle und archivierte Systemprotokolldateien werden gelöscht. Nach dem Neustart wird eine neue Systemprotokolldatei erstellt.\n\n"
 " Sind Sie sicher?"
 
 #: openplotterSettings.py:522 openplotterSettings.py:762
@@ -888,3 +884,4 @@ msgstr "AUTOSTART BEENDET"
 #: startup.py:366
 msgid "CHECK SYSTEM FINISHED"
 msgstr "SYSTEM-TEST BEENDET"
+

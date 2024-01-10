@@ -614,7 +614,7 @@ class MyFrame(wx.Frame):
 		else: 
 			self.conf.set('GENERAL', 'shutdown', '')
 			overlay = ''
-		subprocess.call([self.platform.admin, 'python3', self.currentdir+'/service.py', 'shutdown', overlay])
+		subprocess.call([self.platform.admin, 'python3', self.currentdir+'/service.py', 'shutdown', overlay, self.conf.user])
 		self.ShowStatusBarGREEN(_('Done. Changes will be applied after the next reboot'))
 
 	def onToolPoweroff(self,e):

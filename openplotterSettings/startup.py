@@ -320,11 +320,17 @@ class MyFrame(wx.Frame):
 				else: self.add_logger_data({'green':'','black':_('disabled'),'red':''})
 				self.add_logger_data(_('Checking Shutdown management...'))
 				if 'dtoverlay=gpio-shutdown' in data and not '#dtoverlay=gpio-shutdown' in data:
-					self.add_logger_data({'green':'','black':_('enabled'),'red':''})
-					if self.mode == 'start':
-						rescue = self.conf.get('GENERAL', 'rescue')
-						if rescue != 'yes': subprocess.Popen(['openplotter-shutdown'])
-				else: self.add_logger_data({'green':'','black':_('disabled'),'red':''})
+					try:
+						subprocess.check_output(['systemctl', 'is-active', 'openplotter-shutdown.service']).decode(sys.stdin.encoding)
+						self.add_logger_data({'green':_('service running'),'black':'','red':''})
+					except:
+						self.add_logger_data({'green':'','black':'','red':_('service not running')})
+				else:
+					try:
+						subprocess.check_output(['systemctl', 'is-active', 'openplotter-shutdown.service']).decode(sys.stdin.encoding)
+						self.add_logger_data({'green':'','black':'','red':_('service running')})
+					except:
+						self.add_logger_data({'green':'','black':_('service not running'),'red':''})
 			except Exception as e: self.add_logger_data({'green':'','black':'','red':str(e)})
 			
 
