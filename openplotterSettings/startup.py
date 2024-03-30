@@ -155,17 +155,9 @@ class MyFrame(wx.Frame):
 		try:
 			if self.mode == 'start':
 				if self.isRPI:
-					forceHotspot = self.conf.get('GENERAL', 'forcehotspot')
-					if forceHotspot == '1':
-						self.add_logger_data(_('Creating Hotspot...'))
-						subprocess.call('nmcli d wifi hotspot ifname wlan0 con-name OpenPlotter-Hotspot ssid OpenPlotter password 12345678', shell=True)
-						subprocess.call('nmcli connection modify OpenPlotter-Hotspot connection.autoconnect yes', shell=True)
-						self.conf.set('GENERAL', 'forcehotspot', '0')
-						self.add_logger_data({'green':'','black':_('done'),'red':''})
-
 					forceVNC = self.conf.get('GENERAL', 'forceVNC')
 					if forceVNC == '1': 
-						subprocess.Popen(['sudo', 'raspi-config', 'nonint', 'do_vnc', '0'])
+						subprocess.call(['sudo', 'raspi-config', 'nonint', 'do_vnc', '0'])
 						self.conf.set('GENERAL', 'forceVNC', '0')
 		except Exception as e: 
 			self.add_logger_data({'green':'','black':'','red':str(e)})

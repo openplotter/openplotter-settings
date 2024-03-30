@@ -448,6 +448,9 @@ class MyFrame(wx.Frame):
 		self.toolbar5.AddSeparator()
 		toolWayland = self.toolbar5.AddCheckTool(506, 'Wayland', wx.Bitmap(self.currentdir+"/data/wayland.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolWayland, toolWayland)
+		self.toolbar5.AddSeparator()
+		toolHotspot = self.toolbar5.AddCheckTool(507, _('Hotspot/Client'), wx.Bitmap(self.currentdir+"/data/ap.png"))
+		self.Bind(wx.EVT_TOOL, self.OnToolHotspot, toolHotspot)
 
 		powerLabel = wx.StaticText(self.raspSettings, label=_('Shutdown Management'))
 
@@ -509,7 +512,12 @@ class MyFrame(wx.Frame):
 
 			out = subprocess.check_output('echo $XDG_SESSION_TYPE', shell=True).decode(sys.stdin.encoding)
 			if 'wayland' in out: self.toolbar5.ToggleTool(506,True)
-				
+
+			try:
+				subprocess.check_output(['systemctl', 'is-enabled', 'create_ap_interface.service']).decode(sys.stdin.encoding)
+				self.toolbar5.ToggleTool(507,True)
+			except: pass
+
 			try: shutdown = eval(self.conf.get('GENERAL', 'shutdown'))
 			except: shutdown = {}
 			if shutdown:
@@ -718,6 +726,33 @@ class MyFrame(wx.Frame):
 				self.ShowStatusBarRED(_('Canceled'))
 		dlg.Destroy()
 
+	def OnToolHotspot(self,e):
+		if self.toolbar5.GetToolState(507):
+			msg = _('A dual Hotspot/Client connection will be created. Do not forget to change the default Hotspot password "12345678" if you have not already.')
+			msg += _('\n')
+			msg += _('OpenPlotter will reboot. Are you sure?')
+			dlg = wx.MessageDialog(None, msg, _('Question'), wx.YES_NO | wx.NO_DEFAULT | wx.ICON_EXCLAMATION)
+			if dlg.ShowModal() == wx.ID_YES:
+				pass
+				subprocess.call([self.platform.admin, 'openplotter-ap', 'enable'])
+				os.system('shutdown -r now')
+			else:
+				self.toolbar5.ToggleTool(507,False)
+				self.ShowStatusBarRED(_('Canceled'))
+		else:
+			msg = _('The dual Hotspot/Client connection will be disabled and only the Client connection will be able to be established.')
+			msg += _('\n')
+			msg += _('OpenPlotter will reboot. Are you sure?')
+			dlg = wx.MessageDialog(None, msg, _('Question'), wx.YES_NO | wx.NO_DEFAULT | wx.ICON_EXCLAMATION)
+			if dlg.ShowModal() == wx.ID_YES:
+				pass
+				subprocess.call([self.platform.admin, 'openplotter-ap', 'disable'])
+				os.system('shutdown -r now')
+			else:
+				self.toolbar5.ToggleTool(507,True)
+				self.ShowStatusBarRED(_('Canceled'))
+		dlg.Destroy()
+
 	def OnToolGpio(self,e):
 		dlg = GpioMap()
 		res = dlg.ShowModal()
@@ -730,7 +765,7 @@ class MyFrame(wx.Frame):
 		self.listApps.InsertColumn(0, _('Name'), width=220)
 		self.listApps.InsertColumn(1, _('Installed'), width=120)
 		self.listApps.InsertColumn(2, _('Candidate'), width=120)
-		self.listApps.InsertColumn(3, _('Pending tasks'), width=190)
+		self.listApps.InsertColumn(3, _('Pending tasks'), width=180)
 		self.listApps.Bind(wx.EVT_LIST_ITEM_SELECTED, self.onListAppsSelected)
 		self.listApps.Bind(wx.EVT_LIST_ITEM_DESELECTED, self.onListAppsDeselected)
 		self.listApps.SetImageList(self.il, wx.IMAGE_LIST_SMALL)

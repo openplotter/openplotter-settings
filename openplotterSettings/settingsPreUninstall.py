@@ -39,6 +39,15 @@ def main():
 		print(_('DONE'))
 	except Exception as e: print(_('FAILED: ')+str(e))
 
+	print(_('Removing Hotspot service...'))
+	try:
+		subprocess.call(['systemctl', 'stop', 'create_ap_interface.service'])
+		subprocess.call(['systemctl', 'disable', 'create_ap_interface.service'])
+		subprocess.call(['rm', '-f', '/etc/systemd/system/create_ap_interface.service'])
+		subprocess.call(['systemctl', 'daemon-reload'])
+		print(_('DONE'))
+	except Exception as e: print(_('FAILED: ')+str(e))
+
 	print(_('Removing packages sources...'))
 	try:
 		subprocess.call(['rm', '-f', '/etc/apt/sources.list.d/openplotter.list'])

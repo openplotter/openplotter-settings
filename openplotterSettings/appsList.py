@@ -16,27 +16,14 @@
 # along with Openplotter. If not, see <http://www.gnu.org/licenses/>.
 
 import os
-from .conf import Conf
 from .platform import Platform
 
 class AppsList:
 	def __init__(self):
-		conf2 = Conf()
 		platform2 = Platform()
 		currentdir = os.path.dirname(os.path.abspath(__file__))
-		if conf2.get('GENERAL', 'debug') == 'yes': self.debug = True
-		else: self.debug = False
 
 		self.appsDict = []
-
-		try: externalApps = eval(conf2.get('APPS', 'external_apps'))
-		except Exception as e:
-			if self.debug: print("wrong external apps format: "+str(e))
-			externalApps = []
-		for app in externalApps:
-			try: self.appsDict.append(app)
-			except Exception as e: 
-				if self.debug: print("wrong external app format: "+str(e))
 
 		app = {
 		'name': 'SDR VHF',
