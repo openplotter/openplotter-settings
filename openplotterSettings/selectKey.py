@@ -20,7 +20,7 @@ from .platform import Platform
 
 class SelectKey(wx.Dialog):
 	def __init__(self, oldkey, selectvessels):
-		wx.Dialog.__init__(self, None, title=_('Select Signal K key'), size=(710, 444))
+		wx.Dialog.__init__(self, None, title=_('Select Signal K key'), size=(800, 444))
 		self.SetFont(wx.Font(10, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
 		panel = wx.Panel(self)
 
@@ -42,17 +42,17 @@ class SelectKey(wx.Dialog):
 		self.skvessels.SetSelection(0)
 
 		self.list_groups = wx.ListCtrl(panel, style=wx.LC_REPORT, size=(140,-1))
-		self.list_groups.InsertColumn(0, _('Groups'), width=140)
+		self.list_groups.InsertColumn(0, _('Groups'), width=170)
 		self.list_groups.Bind(wx.EVT_LIST_ITEM_SELECTED, self.OnSelectGroup)
 		self.list_groups.SetTextColour(wx.BLACK)
 
 		self.list_skpaths = wx.ListCtrl(panel, style=wx.LC_REPORT)
-		self.list_skpaths.InsertColumn(0, _('Keys'), width=350)
+		self.list_skpaths.InsertColumn(0, _('Keys'), width=400)
 		self.list_skpaths.Bind(wx.EVT_LIST_ITEM_SELECTED, self.OnSelectPath)
 		self.list_skpaths.SetTextColour(wx.BLACK)
 
 		self.list_skproperties = wx.ListCtrl(panel, style=wx.LC_REPORT, size=(130,-1))
-		self.list_skproperties.InsertColumn(0, _('Properties'), width=120)
+		self.list_skproperties.InsertColumn(0, _('Properties'), width=125)
 		self.list_skproperties.Bind(wx.EVT_LIST_ITEM_SELECTED, self.OnSelectProperty)
 		self.list_skproperties.SetTextColour(wx.BLACK)
 		
@@ -60,12 +60,12 @@ class SelectKey(wx.Dialog):
 		self.key_description.SetBackgroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_INACTIVECAPTION))
 
 		wildcard_label = wx.StaticText(panel, label=_('Replace * (allowed characters: 0-9, a-z, A-Z)'))
-		self.wildcard = wx.TextCtrl(panel)
+		self.wildcard = wx.TextCtrl(panel,size=(-1, 25))
 		addBtn = wx.Button(panel, label=_('Replace'))
 		addBtn.Bind(wx.EVT_BUTTON, self.OnAdd)
 
 		selected_key_label = wx.StaticText(panel, label=_('Selected key'))
-		self.SKkey = wx.TextCtrl(panel, style=wx.CB_READONLY)
+		self.SKkey = wx.TextCtrl(panel, style=wx.CB_READONLY,size=(-1, 25))
 
 		cancelBtn = wx.Button(panel, wx.ID_CANCEL)
 		okBtn = wx.Button(panel, wx.ID_OK)
@@ -78,8 +78,8 @@ class SelectKey(wx.Dialog):
 		vessels.Add(self.refreshBtn, 0, wx.LEFT, 10)
 
 		lists = wx.BoxSizer(wx.HORIZONTAL)
-		lists.Add(self.list_groups, 0, wx.EXPAND, 0)
-		lists.Add(self.list_skpaths, 1, wx.EXPAND, 0)
+		lists.Add(self.list_groups, 1, wx.EXPAND, 0)
+		lists.Add(self.list_skpaths, 2, wx.EXPAND, 0)
 		lists.Add(self.list_skproperties, 0, wx.EXPAND, 0)
 
 		wildcard = wx.BoxSizer(wx.HORIZONTAL)
