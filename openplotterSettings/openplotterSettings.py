@@ -449,7 +449,7 @@ class MyFrame(wx.Frame):
 		toolWayland = self.toolbar5.AddCheckTool(506, 'Wayland', wx.Bitmap(self.currentdir+"/data/wayland.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolWayland, toolWayland)
 		self.toolbar5.AddSeparator()
-		toolHotspot = self.toolbar5.AddCheckTool(507, _('Hotspot/Client'), wx.Bitmap(self.currentdir+"/data/ap.png"))
+		toolHotspot = self.toolbar5.AddCheckTool(507, _('Hotspot+Client'), wx.Bitmap(self.currentdir+"/data/ap.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolHotspot, toolHotspot)
 
 		powerLabel = wx.StaticText(self.raspSettings, label=_('Shutdown Management'))
@@ -622,7 +622,7 @@ class MyFrame(wx.Frame):
 		else: 
 			self.conf.set('GENERAL', 'shutdown', '')
 			overlay = ''
-		subprocess.call([self.platform.admin, 'python3', self.currentdir+'/service.py', 'shutdown', overlay, self.conf.user])
+		subprocess.call([self.platform.admin, 'python3', self.currentdir+'/service.py', 'shutdown', overlay])
 		self.ShowStatusBarGREEN(_('Done. Changes will be applied after the next reboot'))
 
 	def onToolPoweroff(self,e):
