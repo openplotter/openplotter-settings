@@ -64,9 +64,6 @@ class MyFrame(wx.Frame):
 		self.Bind(wx.EVT_TOOL, self.OnCloseButton, toolClose)
 		self.toolbar1.EnableTool(102,False)
 		self.toolbar1.AddSeparator()
-		toolRescue = self.toolbar1.AddCheckTool(101, _('Rescue'), wx.Bitmap(self.currentdir+"/data/rescue.png"))
-		self.Bind(wx.EVT_TOOL, self.onToolRescue, toolRescue)
-		if self.conf.get('GENERAL', 'rescue') == 'yes': self.toolbar1.ToggleTool(101,True)
 		
 		vbox = wx.BoxSizer(wx.HORIZONTAL)
 		vbox.Add(self.logger, 1, wx.ALL | wx.EXPAND, 5)
@@ -336,8 +333,24 @@ class MyFrame(wx.Frame):
 
 
 		self.add_logger_data(_('Checking rescue mode...'))
-		rescue = self.conf.get('GENERAL', 'rescue')
-		if rescue == 'yes': 
+		try:
+			config = '/boot/firmware/config.txt'
+			file = open(config, 'r')
+		except:
+			try:
+				config = '/boot/config.txt'
+				file = open(config, 'r')
+			except Exception as e: self.add_logger_data({'green':'','black':'','red':str(e)})
+		rescue = ''
+		while True:
+			line = file.readline()
+			if not line: break
+			if 'OPrescue' in line and not '#' in line:
+				items = line.split('=')
+				rescue = items[1]
+				rescue = rescue.strip()
+		file.close()
+		if rescue == '1': 
 			self.add_logger_data({'green':'','black':'','red':_('enabled')})
 		else:
 			self.add_logger_data({'green':'','black':_('disabled'),'red':''})
@@ -379,10 +392,6 @@ class MyFrame(wx.Frame):
 	def OnCloseButton(self,e=0):
 		self.timer.Stop()
 		self.Destroy()
-
-	def onToolRescue(self,e=0):
-		if self.toolbar1.GetToolState(101): self.conf.set('GENERAL', 'rescue', 'yes')
-		else: self.conf.set('GENERAL', 'rescue', 'no')
 
 def print_help():
 	print('This is part of OpenPlotter software')

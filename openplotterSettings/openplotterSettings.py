@@ -199,10 +199,6 @@ class MyFrame(wx.Frame):
 		self.Bind(wx.EVT_TOOL, self.OnToolTouch, toolTouch)
 		toolMaxi = self.toolbar3.AddCheckTool(303, _('Maximize apps'), wx.Bitmap(self.currentdir+"/data/resize.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolMaxi, toolMaxi)
-		self.toolbar3.AddSeparator()
-		toolRescue = self.toolbar3.AddCheckTool(304, _('Rescue'), wx.Bitmap(self.currentdir+"/data/rescue.png"))
-		self.Bind(wx.EVT_TOOL, self.onToolRescue, toolRescue)
-		if self.conf.get('GENERAL', 'rescue') == 'yes': self.toolbar3.ToggleTool(304,True)
 
 		self.toolbar10 = wx.ToolBar(self.genSettings, style=wx.TB_TEXT)
 		keyboardList = []
@@ -429,10 +425,6 @@ class MyFrame(wx.Frame):
 			self.conf.set('GENERAL', 'maximize', '0')
 			self.ShowStatusBarGREEN(_('Disabled maximized OpenPlotter apps'))
 			self.Maximize(False)
-
-	def onToolRescue(self,e=0):
-		if self.toolbar3.GetToolState(304): self.conf.set('GENERAL', 'rescue', 'yes')
-		else: self.conf.set('GENERAL', 'rescue', 'no')
 
 	###################################################################################
 

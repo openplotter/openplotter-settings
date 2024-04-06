@@ -18,35 +18,36 @@
 import time, subprocess, sys
 
 def main():
-	try:
-		config = '/boot/firmware/config.txt'
-		file = open(config, 'r')
-	except:
+	if sys.argv[1] != '1':
 		try:
-			config = '/boot/config.txt'
+			config = '/boot/firmware/config.txt'
 			file = open(config, 'r')
-		except Exception as e:
-			print(str(e))
-			return
-	gpio = ''
-	while True:
-		line = file.readline()
-		if not line: break
-		if 'gpio-shutdown' in line and not '#' in line:
-			items = line.split(',')
-			for i in items:
-				if 'gpio_pin' in i:
-					items2 = i.split('=')
-					gpio = items2[1]
-					gpio = gpio.strip()
-	file.close()
-	if gpio:
+		except:
+			try:
+				config = '/boot/config.txt'
+				file = open(config, 'r')
+			except Exception as e:
+				print(str(e))
+				return
+		gpio = ''
 		while True:
-			out = subprocess.check_output('pinctrl get '+gpio, shell=True).decode(sys.stdin.encoding)
-			out = out.split('|')
-			out = out[1].split('//')
-			if 'lo' in out[0]: subprocess.call('halt', shell=True)
-			time.sleep(5)
+			line = file.readline()
+			if not line: break
+			if 'gpio-shutdown' in line and not '#' in line:
+				items = line.split(',')
+				for i in items:
+					if 'gpio_pin' in i:
+						items2 = i.split('=')
+						gpio = items2[1]
+						gpio = gpio.strip()
+		file.close()
+		if gpio:
+			while True:
+				out = subprocess.check_output('pinctrl get '+gpio, shell=True).decode(sys.stdin.encoding)
+				out = out.split('|')
+				out = out[1].split('//')
+				if 'lo' in out[0]: subprocess.call('halt', shell=True)
+				time.sleep(5)
 
 
 if __name__ == '__main__':

@@ -120,7 +120,7 @@ def shutdown(overlay):
 		return
 	if overlay:
 		fo = open('/etc/systemd/system/openplotter-shutdown.service', "w")
-		fo.write( '[Service]\nExecStart=openplotter-shutdown\nStandardOutput=journal\nStandardError=journal\nUser=root\nRestart=always\nRestartSec=3\n\n[Install]\nWantedBy=multi-user.target')
+		fo.write( '[Service]\nEnvironment=OPrescue=0\nEnvironmentFile=/boot/firmware/config.txt\nExecStart=openplotter-shutdown $OPrescue\nUser=root\nRestart=always\nRestartSec=3\n\n[Install]\nWantedBy=local-fs.target')
 		fo.close()
 		subprocess.call(['systemctl', 'daemon-reload'])
 		subprocess.call(['systemctl', 'enable', 'openplotter-shutdown.service'])
