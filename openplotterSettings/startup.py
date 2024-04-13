@@ -153,9 +153,11 @@ class MyFrame(wx.Frame):
 			if self.mode == 'start':
 				if self.isRPI:
 					forceVNC = self.conf.get('GENERAL', 'forceVNC')
-					if forceVNC == '1': 
+					if forceVNC == '1':
+						self.add_logger_data(_('Setting remote desktop...'))
 						subprocess.call(['sudo', 'raspi-config', 'nonint', 'do_vnc', '0'])
 						self.conf.set('GENERAL', 'forceVNC', '0')
+						self.add_logger_data({'green':'','black':_('done'),'red':''})
 		except Exception as e: 
 			self.add_logger_data({'green':'','black':'','red':str(e)})
 

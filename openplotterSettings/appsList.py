@@ -56,23 +56,23 @@ class AppsList:
 		'conf': 'avnav'
 		}
 		self.appsDict.append(app)
-		
+
 		app = {
-		'name': _('Notifications'),
+		'name': 'XyGrib',
 		'platform': 'both',
-		'package': 'openplotter-notifications',
-		'preUninstall': 'notificationsPreUninstall',
-		'uninstall': 'openplotter-notifications',
-		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
+		'package': 'xygrib',
+		'preUninstall': '',
+		'uninstall': 'xygrib',
+		'sources': ['https://www.free-x.de/deb4op'],
 		'dev': 'no',
-		'entryPoint': 'openplotter-notifications',
-		'postInstall': platform2.admin+' notificationsPostInstall',
+		'entryPoint': 'XyGrib',
+		'postInstall': platform2.admin+' python3 '+currentdir+'/xygribPostInstall.py',
 		'reboot': 'no',
-		'module': 'openplotterNotifications',
-		'conf': 'notifications'
+		'module': '',
+		'conf': ''
 		}
 		self.appsDict.append(app)
-
+		
 		app = {
 		'name': _('MAIANA AIS transponder'),
 		'platform': 'both',
@@ -86,22 +86,6 @@ class AppsList:
 		'reboot': 'no',
 		'module': 'openplotterMaiana',
 		'conf': ''
-		}
-		self.appsDict.append(app)
-
-		app = {
-		'name': 'IoB',
-		'platform': 'both',
-		'package': 'openplotter-iob',
-		'preUninstall': platform2.admin+' iobPreUninstall',
-		'uninstall': 'openplotter-iob',
-		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
-		'dev': 'no',
-		'entryPoint': 'openplotter-iob',
-		'postInstall': platform2.admin+' iobPostInstall',
-		'reboot': 'no',
-		'module': 'openplotterIob',
-		'conf': 'iob'
 		}
 		self.appsDict.append(app)
 
@@ -154,6 +138,54 @@ class AppsList:
 		self.appsDict.append(app)
 
 		app = {
+		'name': 'IoB',
+		'platform': 'both',
+		'package': 'openplotter-iob',
+		'preUninstall': platform2.admin+' iobPreUninstall',
+		'uninstall': 'openplotter-iob',
+		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
+		'dev': 'no',
+		'entryPoint': 'openplotter-iob',
+		'postInstall': platform2.admin+' iobPostInstall',
+		'reboot': 'no',
+		'module': 'openplotterIob',
+		'conf': 'iob'
+		}
+		self.appsDict.append(app)
+
+		app = {
+		'name': _('Notifications'),
+		'platform': 'both',
+		'package': 'openplotter-notifications',
+		'preUninstall': 'notificationsPreUninstall',
+		'uninstall': 'openplotter-notifications',
+		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
+		'dev': 'no',
+		'entryPoint': 'openplotter-notifications',
+		'postInstall': 'notificationsPostInstall',
+		'reboot': 'no',
+		'module': 'openplotterNotifications',
+		'conf': 'notifications'
+		}
+		self.appsDict.append(app)
+
+		app = {
+		'name': _('Dashboards'),
+		'platform': 'both',
+		'package': 'openplotter-dashboards',
+		'preUninstall': '',
+		'uninstall': 'openplotter-dashboards',
+		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
+		'dev': 'no',
+		'entryPoint': 'openplotter-dashboards',
+		'postInstall': '',
+		'reboot': 'no',
+		'module': 'openplotterDashboards',
+		'conf': ''
+		}
+		self.appsDict.append(app)
+
+		app = {
 		'name': _('CAN Bus'),
 		'platform': 'both',
 		'package': 'openplotter-can',
@@ -185,38 +217,6 @@ class AppsList:
 		}
 		self.appsDict.append(app)
 
-		app = {
-		'name': _('Dashboards'),
-		'platform': 'both',
-		'package': 'openplotter-dashboards',
-		'preUninstall': '',
-		'uninstall': 'openplotter-dashboards',
-		'sources': ['https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian'],
-		'dev': 'no',
-		'entryPoint': 'openplotter-dashboards',
-		'postInstall': '',
-		'reboot': 'no',
-		'module': 'openplotterDashboards',
-		'conf': ''
-		}
-		self.appsDict.append(app)
-
-		app = {
-		'name': 'XyGrib',
-		'platform': 'both',
-		'package': 'xygrib',
-		'preUninstall': '',
-		'uninstall': 'xygrib',
-		'sources': ['https://www.free-x.de/deb4op'],
-		'dev': 'no',
-		'entryPoint': 'XyGrib',
-		'postInstall': platform2.admin+' python3 '+currentdir+'/xygribPostInstall.py',
-		'reboot': 'no',
-		'module': '',
-		'conf': ''
-		}
-		self.appsDict.append(app)
-		
 		app = {
 		'name': _('OpenCPN Installer'),
 		'platform': 'both',
