@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fragment>
+
+<!--
+
+ Italian keyboard layout by Aniaclug
+
+-->
+    <row>
+        <key>
+            <default display="1" />
+            <shifted    display="!" />
+            <mod2    display="F1" action="f1" />
+        </key>
+        <key>
+            <default display="2" />
+            <shifted    display='"' />
+            <mod2    display="F2" action="f2" />
+        </key>
+        <key>
+            <default display="3" />
+            <shifted    display="€" />
+            <mod2    display="F3" action="f3" />
+        </key>
+        <key>
+            <default display="4" />
+            <shifted    display="$" />
+            <mod2    display="F4" action="f4" />
+        </key>
+        <key>
+            <default display="5" />
+            <shifted    display="%" />
+            <mod2    display="F5" action="f5" />
+        </key>
+        <key>
+            <default display="6" />
+            <shifted    display="&amp;" />
+            <mod2    display="F6" action="f6" />
+        </key>
+        <key>
+            <default display="7" />
+            <shifted    display="/" />
+            <mod2    display="F7" action="f7" />
+        </key>
+        <key>
+            <default display="8" />
+            <shifted    display="(" />
+            <mod2    display="F8" action="f8" />
+        </key>
+        <key>
+            <default display="9" />
+            <shifted    display=")" />
+            <mod2    display="F9" action="f9" />
+        </key>
+        <key>
+            <default display="0" />
+            <shifted    display="=" />
+            <mod2    display="F10" action="f10" />
+        </key>
+        <key>
+            <default display="'" />
+            <shifted display="?" />
+            <mod2    display="F11" action="f12" />
+        </key>
+        <key>
+            <default display="ì" />
+            <shifted    display="^" />
+            <mod2    display="F12" action="f12" />
+        </key>
+        <key width="1500">
+            <default display="image:/usr/share/matchbox-keyboard/arrow.png" action="backspace" />
+        </key>
+    </row>
+    
+    <row>
+        <key width="1500">
+            <default display="image:/usr/share/matchbox-keyboard/arrows.png" action="tab" />
+        </key>
+        <key obey-caps="true">
+            <default display="q" />
+            <shifted display="Q" />
+            <mod2 display="" />
+        </key>
+        <key obey-caps="true">
+            <default display="w" />
+            <shifted display="W" />
+            <mod2 display="" />
+        </key>
+        <key obey-caps="true">
+            <default display="e" />
+            <shifted display="E" />
+            <mod2    display="£" />
+        </key>
+        <key obey-caps="true">
+            <default display="r" />
+            <shifted display="R" />
+            <mod2 display="" />
+        </key>
+        <key obey-caps="true">
+            <default display="t" />
+            <shifted display="T" />
+            <mod2 display="" />
+        </key>
+        <key obey-caps="true">
+            <default display="y" />
+            <shifted display="Y" />
+            <mod2 display="" />
+        </key>
+        <key obey-caps="true">
+            <default display="u" />
+            <shifted display="U" />
+            <mod2    display="{" />
+        </key>
+        <key obey-caps="true">
+            <default display="i" />
+            <shifted display="I" />
+            <mod2    display="[" />
+        </key>
+        <key obey-caps="true">
+            <default display="o" />
+            <shifted display="O" />
+            <mod2    display="]" />
+        </key>
+        <key obey-caps="true">
+            <default display="p" />
+            <shifted display="P" />
+            <mod2    display="}" />
+        </key>
+        <key>
+            <default display="è" />
+            <shifted display="é" />
+            <mod2 display="" />
+        </key>
+        <key>
+            <default display="+" />
+            <shifted display="*" />
+            <mod2 display="" />
+        </key>
+    </row>
+
+    <row>
+        <key obey-caps="true">
+            <default display="a" />
+            <shifted display="A" />
+            <mod2 display="" />
+        </key>
+        <key obey-caps="true">
+            <default display="s" />
+            <shifted display="S" />
+            <mod2 display="" />
+        </key>
+        <key obey-caps="true">
+            <default display="d" />
+            <shifted display="D" />
+            <mod2 display="" />
+        </key>
+        <key obey-caps="true">
+            <default display="f" />
+            <shifted display="F" />
+            <mod2 display="" />
+        </key>
+        <key obey-caps="true">
+            <default display="g" />
+            <shifted display="G" />
+            <mod2 display="" />
+        </key>
+        <key obey-caps="true">
+            <default display="h" />
+            <shifted display="H" />
+            <mod2 display="" />
+        </key>
+        <key obey-caps="true">
+            <default display="j" />
+            <shifted display="J" />
+            <mod2 display="" />
+        </key>
+        <key obey-caps="true">
+            <default display="k" />
+            <shifted display="K" />
+            <mod2 display="" />
+        </key>
+        <key obey-caps="true">
+            <default display="l" />
+            <shifted display="L" />
+            <mod2 display="" />
+        </key>
+        <key>
+            <default display="ò" />
+            <shifted display="@" />
+            <mod2    display="ç" />
+        </key>
+        <key>
+            <default display="à" />
+            <shifted display="#" />
+            <mod2    display="°" />
+        </key>
+        <key>
+            <default display="ù" />
+            <shifted display="§" />
+            <mod2 display="" />
+        </key>
+         <key width="1500">
+            <default display="image:/usr/share/matchbox-keyboard/return.png" action="return" />
+         </key>
+    </row>
+
+    <row>
+        <key width="1500">
+            <default display="image:/usr/share/matchbox-keyboard/shift.png" action="modifier:shift" />
+            <caps display="image:/usr/share/matchbox-keyboard/shift_caps2.png" action="modifier:shift" />
+       </key>
+        <key>
+            <default display="&lt;" />
+            <shifted display="&gt;" />
+            <mod2 display="" />-  
+        </key>
+        <key obey-caps="true">
+            <default display="z" />
+            <shifted display="Z" />
+            <mod2 display="" />
+        </key>
+        <key obey-caps="true">
+            <default display="x" />
+            <shifted display="X" />
+            <mod2 display="" />
+        </key>
+        <key obey-caps="true">
+            <default display="c" />
+            <shifted display="C" />
+            <mod2 display="" />
+        </key>
+        <key obey-caps="true">
+            <default display="v" />
+            <shifted display="V" />
+            <mod2 display="" />
+        </key>
+        <key obey-caps="true">
+            <default display="b" />
+            <shifted display="B" />
+            <mod2 display="" />
+        </key>
+        <key obey-caps="true">
+            <default display="n" />
+            <shifted display="N" />
+            <mod2 display="" />
+        </key>
+        <key obey-caps="true">
+            <default display="m" />
+            <shifted display="M" />
+            <mod2 display="" />
+        </key>
+        <key>
+            <default display="," />
+            <shifted display=";" />
+            <mod2 display="" />
+        </key>
+        <key>
+            <default display="." />
+            <shifted display=":" />
+            <mod2 display="" />
+        </key>
+        <key>
+            <default display="-" />
+            <shifted display="_" />
+            <mod2 display="" />
+        </key>
+        <key>
+            <default display="Fn" action="modifier:mod2"/>
+        </key>
+    </row>
+    <row>
+        <key>
+            <default display="Ctrl" action="modifier:ctrl" />
+        </key>
+        <key>
+            <default display="Alt" action="modifier:alt" />
+        </key>        
+        <key width="5800">
+            <default display=" " action="space"/>
+        </key>
+        <key>
+            <default display="Alt" action="modifier:alt" />
+        </key>
+        <key>
+            <default display="Ctrl" action="modifier:ctrl" />
+        </key>
+    </row>
+</fragment>

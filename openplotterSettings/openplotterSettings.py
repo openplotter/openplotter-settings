@@ -297,7 +297,7 @@ class MyFrame(wx.Frame):
 		subprocess.call(['pkill', '-f', 'matchbox-keyboard'])
 		out = subprocess.check_output('echo $XDG_SESSION_TYPE', shell=True).decode(sys.stdin.encoding)
 		if 'wayland' in out: subprocess.Popen('toggle-wvkbd')
-		else: subprocess.Popen('matchbox-keyboard')
+		else: subprocess.Popen('toggle-matchbox')
 
 	def OnToolKeyboards(self,e=0):
 		if self.keyboardsList.GetSelection() == -1: return

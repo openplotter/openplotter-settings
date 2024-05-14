@@ -20,7 +20,7 @@ import subprocess, os, sys
 subprocess.call(['raspi-config', 'nonint', 'do_wayland', sys.argv[1]])
 
 if sys.argv[1] == 'W2': command = 'toggle-wvkbd'
-if sys.argv[1] == 'W1': command = 'matchbox-keyboard'
+if sys.argv[1] == 'W1': command = 'toggle-matchbox'
 
 shortcut = '/usr/share/applications/inputmethods/matchbox-keyboard.desktop'
 if os.path.exists(shortcut):
