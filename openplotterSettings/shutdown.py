@@ -46,8 +46,11 @@ def main():
 				out = subprocess.check_output('pinctrl get '+gpio, shell=True).decode(sys.stdin.encoding)
 				out = out.split('|')
 				out = out[1].split('//')
-				if 'lo' in out[0]: subprocess.call('halt', shell=True)
-				time.sleep(5)
+				if 'lo' in out[0]:
+					subprocess.call('pkill -15 opencpn', shell=True)
+					time.sleep(2)
+					subprocess.call('halt', shell=True)
+				time.sleep(3)
 
 
 if __name__ == '__main__':
