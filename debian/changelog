@@ -1,3 +1,15 @@
+openplotter-settings (4.2.0-stable) bookworm; urgency=medium
+
+  * stable
+
+ -- Sailoog <info@sailoog.com>  Thu, 13 Jun 2024 09:49:40 +0200
+
+openplotter-settings (4.1.18-beta) bookworm; urgency=medium
+
+  * beta
+
+ -- Sailoog <info@sailoog.com>  Sat, 14 Oct 2023 13:24:20 +0200
+
 openplotter-settings (3.6.6-stable) bullseye; urgency=medium
 
   * Add English virtual keyboard
