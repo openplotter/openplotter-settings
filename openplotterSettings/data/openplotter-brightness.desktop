@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=rpi-backlight
-Exec=rpi-backlight-gui
+Exec=openplotter-backlight-gui
 Icon=brightness-48
 StartupNotify=true
 Terminal=false

@@ -32,7 +32,8 @@ setup (
 	'Operating System :: POSIX :: Linux',
 	'Programming Language :: Python :: 3'],
 	include_package_data=True,
-	entry_points={'console_scripts': ['openplotter-settings=openplotterSettings.openplotterSettings:main','openplotter-startup=openplotterSettings.startup:main','openplotterPostInstall=openplotterSettings.postInstall:main','settingsPreUninstall=openplotterSettings.settingsPreUninstall:main','settingsSourcesInstall=openplotterSettings.installSources:main']},
+	entry_points={'console_scripts': ['openplotter-settings=openplotterSettings.openplotterSettings:main','openplotter-startup=openplotterSettings.startup:main','openplotterPostInstall=openplotterSettings.postInstall:main','settingsPreUninstall=openplotterSettings.settingsPreUninstall:main','settingsSourcesInstall=openplotterSettings.installSources:main','openplotter-shutdown=openplotterSettings.shutdown:main','openplotter-backlight-gui=openplotterSettings.backlightGui:main','openplotter-ap=openplotterSettings.ap:main']},
+	scripts=['bin/toggle-wvkbd','bin/toggle-matchbox','bin/create_ap_interface'],
 	data_files=[('share/applications', ['openplotterSettings/data/openplotter-settings.desktop','openplotterSettings/data/openplotter-check.desktop']),('share/pixmaps', ['openplotterSettings/data/openplotter-settings.png', 'openplotterSettings/data/openplotter-48.png', 'openplotterSettings/data/openplotter-check.png', 'openplotterSettings/data/brightness-48.png']),
 	('share/sounds/openplotter', ['openplotterSettings/data/sounds/Bleep.mp3',
 									'openplotterSettings/data/sounds/House_Fire_Alarm.mp3',
@@ -46,6 +47,15 @@ setup (
 									'openplotterSettings/data/keyboards/arrow2.png',
 									'openplotterSettings/data/keyboards/return2.png',
 									'openplotterSettings/data/keyboards/shift2.png',
-									'openplotterSettings/data/keyboards/shift_caps2.png'])
+									'openplotterSettings/data/keyboards/shift_caps2.png',
+									'openplotterSettings/data/keyboards/keyboard-IT-normal.xml',
+									'openplotterSettings/data/keyboards/keyboard-IT-full.xml',
+									'openplotterSettings/data/keyboards/full-fragment-it_IT.xml',
+									'openplotterSettings/data/keyboards/normal-fragment-it_IT.xml',
+									'openplotterSettings/data/keyboards/key-up.png',
+									'openplotterSettings/data/keyboards/key-down.png',
+									'openplotterSettings/data/keyboards/key-right.png',
+									'openplotterSettings/data/keyboards/key-left.png',
+									'openplotterSettings/data/keyboards/control.png'])
 	]
 	)

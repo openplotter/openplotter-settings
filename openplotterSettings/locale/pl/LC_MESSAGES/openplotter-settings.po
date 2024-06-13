@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: openplotter\n"
-"POT-Creation-Date: 2023-07-27 19:48+0200\n"
-"PO-Revision-Date: 2023-07-28 20:04+0200\n"
+"POT-Creation-Date: 2024-05-20 11:34+0200\n"
+"PO-Revision-Date: 2024-06-13 09:53+0200\n"
 "Last-Translator: \n"
 "Language-Team: Polish\n"
 "Language: pl\n"
@@ -20,52 +20,48 @@ msgstr ""
 "X-Crowdin-File-ID: 4\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: appsList.py:58
+#: appsList.py:45
 msgid "AvNav Installer"
 msgstr "Instalator AvNav"
 
-#: appsList.py:74
-msgid "Notifications"
-msgstr "Powiadomienia"
-
-#: appsList.py:90
+#: appsList.py:77
 msgid "MAIANA AIS transponder"
 msgstr "transponder AIS MAIANA"
 
-#: appsList.py:138
+#: appsList.py:109
 msgid "I2C Sensors"
 msgstr "Czujniki I2C"
 
-#: appsList.py:170
-msgid "Network"
-msgstr "Ustawienia i konfiguracja sieci"
+#: appsList.py:157
+msgid "Notifications"
+msgstr "Powiadomienia"
 
-#: appsList.py:186
-msgid "CAN Bus"
-msgstr "Magistrala CAN"
-
-#: appsList.py:202
-msgid "Serial"
-msgstr "Port szeregowy"
-
-#: appsList.py:218
+#: appsList.py:173
 msgid "Dashboards"
 msgstr "Tablice wskaźników"
 
-#: appsList.py:250
+#: appsList.py:189
+msgid "CAN Bus"
+msgstr "Magistrala CAN"
+
+#: appsList.py:205
+msgid "Serial"
+msgstr "Port szeregowy"
+
+#: appsList.py:221
 msgid "OpenCPN Installer"
 msgstr "Instalator OpenCPN"
 
-#: appsList.py:266
+#: appsList.py:237
 msgid "Signal K Installer"
 msgstr "Instalator Signal K"
 
-#: appsList.py:282
+#: appsList.py:253
 msgid "Documentation"
 msgstr "Dokumentacja"
 
-#: appsList.py:298 data/openplotter-settings.desktop:3
-#: openplotterSettings.py:41
+#: appsList.py:269 data/openplotter-settings.desktop:3
+#: openplotterSettings.py:42
 msgid "Settings"
 msgstr "Ustawienia"
 
@@ -115,113 +111,134 @@ msgstr "Zasilanie"
 msgid "Ground"
 msgstr "Uziemienie"
 
-#: gpio.py:217
+#: gpio.py:242
 msgid "Select GPIO"
 msgstr "Wybierz GPIO"
 
-#: gpio.py:218 openplotterSettings.py:547
+#: gpio.py:243 openplotterSettings.py:433
 msgid "GPIO Map"
 msgstr "Mapa GPIO"
 
-#: gpio.py:274 openplotterSettings.py:813 selectKey.py:40
+#: gpio.py:299 openplotterSettings.py:771 selectKey.py:40
 msgid "Refresh"
 msgstr "Odśwież"
 
-#: gpio.py:408
+#: gpio.py:433
 msgid "Host"
 msgstr "Host"
 
-#: gpio.py:414
+#: gpio.py:439
 msgid "Physical pin"
 msgstr "Pin fizyczny"
 
-#: gpio.py:419
+#: gpio.py:444
 msgid "BCM name"
 msgstr "Nazwa BCM"
 
-#: gpio.py:424
+#: gpio.py:449
 msgid "Interface"
 msgstr "Interfejs"
 
-#: gpio.py:429
+#: gpio.py:454
 msgid "Shared"
 msgstr "Współdzielony"
 
-#: gpio.py:432
+#: gpio.py:457
 msgid "Yes"
 msgstr "Tak"
 
-#: gpio.py:434
+#: gpio.py:459
 msgid "No"
 msgstr "Nie"
 
-#: gpio.py:438
+#: gpio.py:463
 msgid "Used by"
 msgstr "Używany przez"
 
-#: gpio.py:450
+#: gpio.py:475
 msgid "There is a conflict with this GPIO."
 msgstr "Istnieje konflikt z tym GPIO."
 
-#: gpio.py:460 gpio.py:471
+#: gpio.py:485 gpio.py:496
 msgid "You can not select this GPIO to do this job."
 msgstr "Nie możesz wybrać tego GPIO do wykonania tego zadania."
 
-#: installSources.py:65
+#: installSources.py:47
+msgid "FAILED. Unknown system:"
+msgstr ""
+
+#: installSources.py:50
+msgid "Current Debian version:"
+msgstr ""
+
+#: installSources.py:51
+msgid "FAILED. This version of OpenPlotter only works on this version of Debian:"
+msgstr ""
+
+#: installSources.py:54
+msgid "Current Ubuntu version:"
+msgstr ""
+
+#: installSources.py:55
+msgid "FAILED. This version of OpenPlotter only works on these versions of Ubuntu:"
+msgstr ""
+
+#: installSources.py:74
 msgid "Added OpenPlotter packages source"
 msgstr "Dodano repozytoria źródłowe dla pakietów komponentu OpenPlotter"
 
-#: installSources.py:67
+#: installSources.py:76
 msgid "OpenPlotter packages source already exists"
 msgstr "OpenPlotter: repozytorium źródłowe dla pakietów komponentu już istnieje"
 
-#: installSources.py:73
+#: installSources.py:82
 msgid "Added OpenPlotter beta packages source"
 msgstr "Dodano repozytoria źródłowe dla pakietów beta komponentu OpenPlotter"
 
-#: installSources.py:75
+#: installSources.py:84
 msgid "OpenPlotter beta packages source already exists"
 msgstr "OpenPlotter: repozytorium źródłowe dla pakietów beta komponentu już istnieje"
 
-#: installSources.py:80
+#: installSources.py:89
 msgid "Added free-x packages source"
 msgstr "Dodano repozytoria źródłowe dla pakietów free-x"
 
-#: installSources.py:82
+#: installSources.py:91
 msgid "free-x packages source already exists"
 msgstr "repozytorium źródłowe dla pakietów free-x już istnieje"
 
-#: installSources.py:103 settingsPreUninstall.py:32 settingsPreUninstall.py:38
+#: installSources.py:112 settingsPreUninstall.py:32 settingsPreUninstall.py:40
+#: settingsPreUninstall.py:49 settingsPreUninstall.py:55
 msgid "FAILED: "
 msgstr "NIEPOWODZENIE: "
 
-#: openplotterSettings.py:51
+#: openplotterSettings.py:52
 msgid "Help"
 msgstr "Pomoc"
 
-#: openplotterSettings.py:56
+#: openplotterSettings.py:57
 msgid "Autostart"
 msgstr "Autostart"
 
-#: openplotterSettings.py:60
+#: openplotterSettings.py:61
 msgid "Check System"
 msgstr "Sprawdź system"
 
-#: openplotterSettings.py:70
+#: openplotterSettings.py:64
+msgid "Network"
+msgstr "Ustawienia i konfiguracja sieci"
+
+#: openplotterSettings.py:74
 msgid "OpenPlotter Apps"
 msgstr "Komponenty OpenPlotter"
 
-#: openplotterSettings.py:71
+#: openplotterSettings.py:75
 msgid "General Settings"
 msgstr "Ustawienia ogólne"
 
-#: openplotterSettings.py:72
+#: openplotterSettings.py:76
 msgid "Raspberry Settings"
 msgstr "Ustawienia Raspberry Pi"
-
-#: openplotterSettings.py:73
-msgid "System log"
-msgstr "Dziennik systemu"
 
 #: openplotterSettings.py:136
 msgid "Autostart enabled"
@@ -231,405 +248,396 @@ msgstr "Autostart włączony"
 msgid "Autostart disabled. Most features will not work!"
 msgstr "Autostart wyłączony. Większość funkcji nie zadziała!"
 
-#: openplotterSettings.py:151
+#: openplotterSettings.py:181
+msgid "There are conflicts between server connections"
+msgstr ""
+
+#: openplotterSettings.py:182
+msgid "No conflicts between server connections"
+msgstr ""
+
+#: openplotterSettings.py:192
 msgid "Language"
 msgstr "Język"
 
-#: openplotterSettings.py:154
+#: openplotterSettings.py:195
 msgid "Translate"
 msgstr "Przetłumacz"
 
-#: openplotterSettings.py:157
+#: openplotterSettings.py:198
 msgid "Touchscreen"
 msgstr ""
 
-#: openplotterSettings.py:159
+#: openplotterSettings.py:200
 msgid "Maximize apps"
 msgstr "Maksymalizuj aplikacje"
 
-#: openplotterSettings.py:162 startup.py:67
-msgid "Rescue"
-msgstr "Ratunek"
-
-#: openplotterSettings.py:174
+#: openplotterSettings.py:211
 msgid "Keyboard layout"
 msgstr "Układ klawiatury"
 
-#: openplotterSettings.py:177
+#: openplotterSettings.py:214
 msgid "Virtual keyboard"
 msgstr "Klawiatura wirtualna"
 
-#: openplotterSettings.py:191
+#: openplotterSettings.py:228
+msgid "Debugging"
+msgstr ""
+
+#: openplotterSettings.py:231
 msgid "Startup"
 msgstr "Uruchamianie"
 
-#: openplotterSettings.py:193
+#: openplotterSettings.py:233
 msgid "Delay (seconds)"
 msgstr "Opóźnienie (w sekundach)"
 
-#: openplotterSettings.py:198
+#: openplotterSettings.py:238
 msgid "Play"
 msgstr "Odtwórz"
 
-#: openplotterSettings.py:234
-msgid "Choose a file"
-msgstr "Wybierz plik"
-
-#: openplotterSettings.py:235
-msgid "Audio files"
-msgstr "Pliki audio"
-
-#: openplotterSettings.py:235
-msgid "All files"
-msgstr "Wszystkie pliki"
-
-#: openplotterSettings.py:269
-msgid "Close and open again the window to see changes."
-msgstr "Zamknij i ponownie otwórz okno, aby zobaczyć zmiany."
-
-#: openplotterSettings.py:269 openplotterSettings.py:913
-#: openplotterSettings.py:926
-msgid "Info"
-msgstr "Informacje"
-
-#: openplotterSettings.py:276
-msgid "Sound to play at startup set to: "
-msgstr "Dźwięk do odtworzenia przy starcie ustawiony na: "
-
-#: openplotterSettings.py:280
-msgid "Removed sound to play at startup"
-msgstr "Usunięto dźwięk do odtwarzania przy starcie"
-
-#: openplotterSettings.py:287
-msgid "Delay at startup set to: "
-msgstr "Opóźnienie startu ustawiono na: "
-
-#: openplotterSettings.py:292
-msgid "Removed delay at startup"
-msgstr "Usunięto opóźnienie startu"
-
-#: openplotterSettings.py:358
-msgid "Touchscreen optimization enabled"
-msgstr ""
-
-#: openplotterSettings.py:365
-msgid "Touchscreen optimization disabled"
-msgstr ""
-
-#: openplotterSettings.py:370
-msgid "OpenPlotter apps will open maximized"
-msgstr "Komponenty OpenPlotter otworzą się zmaksymalizowane"
-
-#: openplotterSettings.py:374
-msgid "Disabled maximized OpenPlotter apps"
-msgstr "Komponenty OpenPlotter nie otworzą się zmaksymalizowane"
-
-#: openplotterSettings.py:385
-msgid "Debugging mode"
-msgstr "Tryb debugowania"
-
-#: openplotterSettings.py:388
-msgid "See all"
-msgstr "Pokaż wszystko"
-
-#: openplotterSettings.py:390
-msgid "See category"
-msgstr "Pokaż kategorię"
-
-#: openplotterSettings.py:392
-msgid "Search"
-msgstr "Wyszukaj"
-
-#: openplotterSettings.py:395
-msgid "Delete all logs"
-msgstr "Usuń wszystkie dzienniki systemowe"
-
-#: openplotterSettings.py:398
-msgid "Notify if the system log file is larger than: "
-msgstr "Powiadom jeśli plik dziennika systemu jest większy niż: "
-
-#: openplotterSettings.py:414
-msgid "Save"
-msgstr "Zapisz"
-
-#: openplotterSettings.py:436
+#: openplotterSettings.py:281
 msgid "Debugging mode enabled. Additional info about errors in OpenPlotter apps will be saved in the system log"
 msgstr "Tryb debugowania włączony. Dodatkowe informacje o błędach w aplikacjach OpenPlotter zostaną zapisane w dzienniku systemowym"
 
-#: openplotterSettings.py:439
+#: openplotterSettings.py:284
 msgid "Debugging mode disabled"
 msgstr "Tryb debugowania wyłączony"
 
-#: openplotterSettings.py:442 openplotterSettings.py:458
-#: openplotterSettings.py:502
-msgid "Reading log, please wait..."
-msgstr "Czytanie dziennika systemowego, proszę czekać..."
+#: openplotterSettings.py:287
+msgid "Choose a file"
+msgstr "Wybierz plik"
 
-#: openplotterSettings.py:450 openplotterSettings.py:487
-#: openplotterSettings.py:513 openplotterSettings.py:538
-#: openplotterSettings.py:976 openplotterSettings.py:1046
-msgid "Done"
-msgstr "Gotowe"
+#: openplotterSettings.py:288
+msgid "Audio files"
+msgstr "Pliki audio"
 
-#: openplotterSettings.py:454
-msgid "Error reading  log"
-msgstr "Błąd odczytu dziennika"
+#: openplotterSettings.py:288
+msgid "All files"
+msgstr "Wszystkie pliki"
 
-#: openplotterSettings.py:490 openplotterSettings.py:516
-msgid "Error reading log"
-msgstr "Błąd odczytu dziennika"
+#: openplotterSettings.py:324
+msgid "Close and open again the window to see changes."
+msgstr "Zamknij i ponownie otwórz okno, aby zobaczyć zmiany."
 
-#: openplotterSettings.py:521
-msgid ""
-"Current and archived system log files will be deleted. A new system log file will be created after reboot.\n"
-"\n"
-" Are you sure?"
+#: openplotterSettings.py:324 openplotterSettings.py:874
+#: openplotterSettings.py:887
+msgid "Info"
+msgstr "Informacje"
+
+#: openplotterSettings.py:331
+msgid "Sound to play at startup set to: "
+msgstr "Dźwięk do odtworzenia przy starcie ustawiony na: "
+
+#: openplotterSettings.py:335
+msgid "Removed sound to play at startup"
+msgstr "Usunięto dźwięk do odtwarzania przy starcie"
+
+#: openplotterSettings.py:342
+msgid "Delay at startup set to: "
+msgstr "Opóźnienie startu ustawiono na: "
+
+#: openplotterSettings.py:347
+msgid "Removed delay at startup"
+msgstr "Usunięto opóźnienie startu"
+
+#: openplotterSettings.py:410
+msgid "Enabled. Changes will be applied after the next reboot"
 msgstr ""
-"Aktualne i zarchiwizowane pliki dziennika systemu zostaną usunięte. Nowy plik dziennika systemu zostanie utworzony po ponownym uruchomieniu.\n"
-"\n"
-" Jesteś pewien?"
 
-#: openplotterSettings.py:522 openplotterSettings.py:762
-#: openplotterSettings.py:775 openplotterSettings.py:893
-#: openplotterSettings.py:929
-msgid "Question"
-msgstr "Pytanie"
+#: openplotterSettings.py:417
+msgid "Disabled. Changes will be applied after the next reboot"
+msgstr ""
 
-#: openplotterSettings.py:525
-msgid "Current and archived system log files have been deleted"
-msgstr "Aktualne i zarchiwizowane pliki dziennika systemowego zostały usunięte"
+#: openplotterSettings.py:422
+msgid "OpenPlotter apps will open maximized"
+msgstr "Komponenty OpenPlotter otworzą się zmaksymalizowane"
 
-#: openplotterSettings.py:550
+#: openplotterSettings.py:426
+msgid "Disabled maximized OpenPlotter apps"
+msgstr "Komponenty OpenPlotter nie otworzą się zmaksymalizowane"
+
+#: openplotterSettings.py:436
 msgid "Install backlight"
 msgstr ""
 
-#: openplotterSettings.py:552
+#: openplotterSettings.py:438
 msgid "Set backlight"
 msgstr ""
 
-#: openplotterSettings.py:555
+#: openplotterSettings.py:444
+msgid "Hotspot+Client"
+msgstr ""
+
+#: openplotterSettings.py:447
 msgid "Shutdown Management"
 msgstr "Zarządzanie zamykaniem systemu"
 
-#: openplotterSettings.py:558
+#: openplotterSettings.py:450
 msgid "Shutdown"
 msgstr "Zamknij sys."
 
-#: openplotterSettings.py:564 openplotterSettings.py:583
+#: openplotterSettings.py:456 openplotterSettings.py:475
 msgid "GPIO"
 msgstr "GPIO"
 
-#: openplotterSettings.py:566 openplotterSettings.py:585
+#: openplotterSettings.py:458 openplotterSettings.py:477
 msgid "Transition"
 msgstr "Zmiana"
 
-#: openplotterSettings.py:566 openplotterSettings.py:585
+#: openplotterSettings.py:458 openplotterSettings.py:477
 msgid "low->high"
 msgstr "niski >wysoki"
 
-#: openplotterSettings.py:566 openplotterSettings.py:585
+#: openplotterSettings.py:458 openplotterSettings.py:477
 msgid "high->low"
 msgstr "wysoki >niski"
 
-#: openplotterSettings.py:570
+#: openplotterSettings.py:462
 msgid "off"
 msgstr "wyłączony"
 
-#: openplotterSettings.py:573 openplotterSettings.py:588
+#: openplotterSettings.py:465 openplotterSettings.py:480
 msgid "Apply"
 msgstr "Zastosuj"
 
-#: openplotterSettings.py:577
+#: openplotterSettings.py:469
 msgid "Power off"
 msgstr "Wyłącz"
 
-#: openplotterSettings.py:694 openplotterSettings.py:741
+#: openplotterSettings.py:597 openplotterSettings.py:644
 msgid "Failed, you need to set a GPIO"
 msgstr "Niepowodzenie, musisz ustawić GPIO"
 
-#: openplotterSettings.py:698 openplotterSettings.py:745
+#: openplotterSettings.py:601 openplotterSettings.py:648
 msgid "Failed, you need to set a transition mode"
 msgstr "Niepowodzenie, musisz ustawić tryb przejścia"
 
-#: openplotterSettings.py:702
+#: openplotterSettings.py:605
 msgid "Failed, you need to set a GPIO pull mode"
 msgstr "Niepowodzenie, musisz ustawić tryb GPIO pull"
 
-#: openplotterSettings.py:715 openplotterSettings.py:755
+#: openplotterSettings.py:618 openplotterSettings.py:658
 msgid "Done. Changes will be applied after the next reboot"
 msgstr "Gotowe. Zmiany zostaną zastosowane po ponownym uruchomieniu"
 
-#: openplotterSettings.py:759
+#: openplotterSettings.py:662
 msgid "Installing rpi-backlight, please wait..."
 msgstr ""
 
-#: openplotterSettings.py:760
+#: openplotterSettings.py:663
 msgid "rpi-backlight will be installed.\n"
 msgstr ""
 
-#: openplotterSettings.py:761 openplotterSettings.py:774
+#: openplotterSettings.py:664 openplotterSettings.py:677
 msgid "Are you sure?"
 msgstr ""
 
-#: openplotterSettings.py:766
+#: openplotterSettings.py:665 openplotterSettings.py:678
+#: openplotterSettings.py:697 openplotterSettings.py:710
+#: openplotterSettings.py:726 openplotterSettings.py:738
+#: openplotterSettings.py:852 openplotterSettings.py:890
+msgid "Question"
+msgstr "Pytanie"
+
+#: openplotterSettings.py:669
 msgid "rpi-backlight installed"
 msgstr ""
 
-#: openplotterSettings.py:770
+#: openplotterSettings.py:673
 msgid "Installation canceled"
 msgstr ""
 
-#: openplotterSettings.py:772
+#: openplotterSettings.py:675
 msgid "Uninstalling rpi-backlight, please wait..."
 msgstr ""
 
-#: openplotterSettings.py:773
+#: openplotterSettings.py:676
 msgid "rpi-backlight will be uninstalled.\n"
 msgstr ""
 
-#: openplotterSettings.py:779
+#: openplotterSettings.py:682
 msgid "rpi-backlight uninstalled"
 msgstr ""
 
-#: openplotterSettings.py:783
+#: openplotterSettings.py:686
 msgid "Uninstallation canceled"
 msgstr ""
 
-#: openplotterSettings.py:799
+#: openplotterSettings.py:694
+msgid "Wayland will be enabled and X11 disabled. Some programs may not yet work correctly for Wayland."
+msgstr ""
+
+#: openplotterSettings.py:695 openplotterSettings.py:708
+#: openplotterSettings.py:724 openplotterSettings.py:736
+msgid "\n"
+msgstr ""
+
+#: openplotterSettings.py:696 openplotterSettings.py:709
+#: openplotterSettings.py:725 openplotterSettings.py:737
+msgid "OpenPlotter will reboot. Are you sure?"
+msgstr ""
+
+#: openplotterSettings.py:705 openplotterSettings.py:718
+#: openplotterSettings.py:733 openplotterSettings.py:745
+msgid "Canceled"
+msgstr ""
+
+#: openplotterSettings.py:707
+msgid "Wayland will be disabled and X11 enabled."
+msgstr ""
+
+#: openplotterSettings.py:723
+msgid "A dual Hotspot/Client connection will be created. Do not forget to change the default Hotspot password \"12345678\" if you have not already."
+msgstr ""
+
+#: openplotterSettings.py:735
+msgid "The dual Hotspot/Client connection will be disabled and only the Client connection will be able to be established."
+msgstr ""
+
+#: openplotterSettings.py:757
 msgid "Name"
 msgstr "Nazwa"
 
-#: openplotterSettings.py:800
+#: openplotterSettings.py:758
 msgid "Installed"
 msgstr "Zainstalowane"
 
-#: openplotterSettings.py:801
+#: openplotterSettings.py:759
 msgid "Candidate"
 msgstr "Dostępne"
 
-#: openplotterSettings.py:802
+#: openplotterSettings.py:760
 msgid "Pending tasks"
 msgstr "Oczekujce zadania"
 
-#: openplotterSettings.py:809
+#: openplotterSettings.py:767
 msgid "Add Sources"
 msgstr "Dodaj repozytoria źródłowe"
 
-#: openplotterSettings.py:811
+#: openplotterSettings.py:769
 msgid "Get Candidates"
 msgstr "Pobierz kandydatów"
 
-#: openplotterSettings.py:817 openplotterSettings.py:1031
+#: openplotterSettings.py:775 openplotterSettings.py:996
 msgid "Install"
 msgstr "Zainstaluj"
 
-#: openplotterSettings.py:819
+#: openplotterSettings.py:777
 msgid "Uninstall"
 msgstr "Odinstaluj"
 
-#: openplotterSettings.py:822
+#: openplotterSettings.py:780
 msgid "Open"
 msgstr "Otwórz"
 
-#: openplotterSettings.py:824
+#: openplotterSettings.py:782
 msgid "Change Log"
 msgstr "Dziennik zmian"
 
-#: openplotterSettings.py:847 openplotterSettings.py:1009
+#: openplotterSettings.py:805 openplotterSettings.py:974
 msgid "missing source: "
 msgstr "brak repozytorium źródłowego: "
 
-#: openplotterSettings.py:849 openplotterSettings.py:1013
+#: openplotterSettings.py:807 openplotterSettings.py:978
 msgid "coming soon"
 msgstr "dostępne wkrótce"
 
-#: openplotterSettings.py:852 openplotterSettings.py:1019
+#: openplotterSettings.py:810 openplotterSettings.py:984
 msgid "app only for non Raspberry machines"
 msgstr "komponent tylko dla urządzeń innych niż Raspberry"
 
-#: openplotterSettings.py:855 openplotterSettings.py:1023
+#: openplotterSettings.py:813 openplotterSettings.py:988
 msgid "app only for Raspberry machines"
 msgstr "komponent tylko dla urządzeń Raspberry"
 
-#: openplotterSettings.py:859
+#: openplotterSettings.py:817
 msgid "Press Refresh"
 msgstr "Naciśnij Odśwież"
 
-#: openplotterSettings.py:870
+#: openplotterSettings.py:823
 msgid "Updating packages data, please wait... "
 msgstr "Aktualizowanie informacji o pakietach, proszę czekać... "
 
-#: openplotterSettings.py:875 openplotterSettings.py:883
+#: openplotterSettings.py:836
 msgid "Adding packages sources, please wait... "
 msgstr "Dodawanie repozytoriów źródłowych, proszę czekać... "
 
-#: openplotterSettings.py:885
+#: openplotterSettings.py:844
 msgid "Sources updated. Get candidates to see changes"
 msgstr "Źródła zaktualizowane. Pobierz kandydatów, aby zobaczyć zmiany"
 
-#: openplotterSettings.py:892
+#: openplotterSettings.py:851
 msgid "Are you sure you want to install "
 msgstr "Jesteś pewien ze chcesz zainstalować "
 
-#: openplotterSettings.py:892 openplotterSettings.py:928
+#: openplotterSettings.py:851 openplotterSettings.py:889
 msgid " and its dependencies?"
 msgstr " wraz z zależnościami?"
 
-#: openplotterSettings.py:902
+#: openplotterSettings.py:856
 msgid "Installing package, please wait... "
 msgstr "Instalowanie pakietu, proszę czekać... "
 
-#: openplotterSettings.py:910
+#: openplotterSettings.py:866
 msgid "Running post-installation scripts, please wait... "
 msgstr "Uruchamianie skryptów post-instalacyjnych, proszę czekać... "
 
-#: openplotterSettings.py:913
+#: openplotterSettings.py:874
 msgid "This app will close to apply the changes."
 msgstr "Ta aplikacja zostanie zamknięta aby zastosować zmiany."
 
-#: openplotterSettings.py:916 openplotterSettings.py:948
+#: openplotterSettings.py:877 openplotterSettings.py:911
 msgid "Done. Restart to apply changes"
 msgstr "Gotowe. Zrestartuj aby zastosować zmiany"
 
-#: openplotterSettings.py:917 openplotterSettings.py:949
+#: openplotterSettings.py:878 openplotterSettings.py:912
 msgid "Done. Press Refresh"
 msgstr "Gotowe. Naciśnij Odśwież"
 
-#: openplotterSettings.py:926
+#: openplotterSettings.py:887
 msgid "You have to uninstall the rest of the apps before uninstalling openplotter-settings."
 msgstr "Musisz odinstalować pozostałe aplikacje przed odinstalowaniem openplotter-settings."
 
-#: openplotterSettings.py:928
+#: openplotterSettings.py:889
 msgid "Are you sure you want to uninstall "
 msgstr "Czy na pewno chcesz odinstalować "
 
-#: openplotterSettings.py:939
+#: openplotterSettings.py:896
 msgid "Running pre-uninstall scripts, please wait... "
 msgstr "Uruchamianie skryptów pre-instalacyjnych, proszę czekać... "
 
-#: openplotterSettings.py:946
+#: openplotterSettings.py:903
 msgid "Uninstalling packages, please wait... "
 msgstr "Odinstalowywanie pakietów, proszę czekać... "
 
-#: openplotterSettings.py:975
+#: openplotterSettings.py:933
 msgid "Reading changelog, please wait... "
 msgstr "Czytanie dziennika zmian, proszę czekać... "
 
-#: openplotterSettings.py:981
+#: openplotterSettings.py:940 openplotterSettings.py:1013
+msgid "Done"
+msgstr "Gotowe"
+
+#: openplotterSettings.py:945 openplotterSettings.py:1008
 msgid "Checking apps list, please wait... "
 msgstr "Sprawdzanie listy komponentów, proszę czekać... "
 
-#: openplotterSettings.py:1037
+#: openplotterSettings.py:1002
 msgid "Open to apply and refresh"
 msgstr "Otwórz aby zastosować i odświeżyć"
 
-#: openplotterSettings.py:1088
+#: openplotterSettings.py:1055
 msgid "Select system log category"
 msgstr "Wybierz kategorię dziennika systemowego"
 
-#: openplotterSettings.py:1117
+#: openplotterSettings.py:1084
 msgid "Search in system log file"
 msgstr "Szukaj w pliku dziennika systemowego"
+
+#: ports.py:39
+msgid "VNC Remote Desktop"
+msgstr ""
 
 #: postInstall.py:31
 msgid "Post-installation actions"
@@ -655,7 +663,7 @@ msgstr "Ta aplikacja została ostatnio zaktualizowana i musi skonfigurować syst
 msgid "Press Start."
 msgstr "Naciśnij start."
 
-#: postInstall.py:82 postInstall.py:88
+#: postInstall.py:83
 msgid "Performing pending actions, please wait... "
 msgstr "Przetwarzanie zadań, proszę czekać... "
 
@@ -663,15 +671,15 @@ msgstr "Przetwarzanie zadań, proszę czekać... "
 msgid "Done. Close this window and open the app again."
 msgstr "Gotowe. Zamknij to okno i otwórz aplikację ponownie."
 
-#: selectConnections.py:45
+#: selectConnections.py:46
 msgid "Add serial device"
 msgstr "Dodaj urządzenie szeregowe"
 
-#: selectConnections.py:68
+#: selectConnections.py:69
 msgid "Show only Openplotter-Serial managed ports"
 msgstr "Pokaż tylko porty zarządzane przez komponent Openplotter-Serial"
 
-#: selectConnections.py:75
+#: selectConnections.py:76
 msgid "Baud Rate: "
 msgstr "Prędkość transmisji szeregowej (boud): "
 
@@ -727,11 +735,20 @@ msgstr "urządzenie: "
 msgid "Removing installed packages..."
 msgstr ""
 
-#: settingsPreUninstall.py:31 settingsPreUninstall.py:37
+#: settingsPreUninstall.py:31 settingsPreUninstall.py:39
+#: settingsPreUninstall.py:48 settingsPreUninstall.py:54
 msgid "DONE"
 msgstr "GOTOWE"
 
 #: settingsPreUninstall.py:34
+msgid "Removing settings..."
+msgstr ""
+
+#: settingsPreUninstall.py:42
+msgid "Removing Hotspot service..."
+msgstr ""
+
+#: settingsPreUninstall.py:51
 msgid "Removing packages sources..."
 msgstr "Usuwanie repozytoriów źródłowych..."
 
@@ -751,140 +768,159 @@ msgstr ""
 msgid "Please wait for all services to be checked"
 msgstr ""
 
-#: startup.py:96
+#: startup.py:93
 msgid "There are some warnings. Check your system. Closing in "
 msgstr "Wystąpiły jakieś ostrzeżenia. Sprawdź swój system. Zamykam w ciągu "
 
-#: startup.py:96 startup.py:101 startup.py:164
+#: startup.py:93 startup.py:98 startup.py:178
 msgid " seconds"
 msgstr " sekund"
 
-#: startup.py:101
+#: startup.py:98
 msgid "There are no warnings. Closing in "
 msgstr "Brak ostrzeżeń. Zamykanie w ciągu "
 
-#: startup.py:155
-msgid "Applying delay of "
-msgstr "Aktywacja opóźnienia "
-
-#: startup.py:155
-msgid " seconds..."
-msgstr " sekund..."
-
 #: startup.py:157
+msgid "Setting remote desktop..."
+msgstr ""
+
+#: startup.py:160 startup.py:171 startup.py:374
 msgid "done"
 msgstr "gotowe"
 
-#: startup.py:158 startup.py:165
+#: startup.py:169
+msgid "Applying delay of "
+msgstr "Aktywacja opóźnienia "
+
+#: startup.py:169
+msgid " seconds..."
+msgstr " sekund..."
+
+#: startup.py:172 startup.py:179
 msgid "Delay failed. Is it a number?"
 msgstr "Opóźnienie nieprawidłowe. Czy wprowadzono liczbę?"
 
-#: startup.py:162
+#: startup.py:176
 msgid "A startup delay will apply"
 msgstr "Zostanie zastosowane opóźnienie uruchomienia"
 
-#: startup.py:180
-msgid "Checking touchscreen optimization..."
+#: startup.py:182
+msgid "Checking display server..."
 msgstr ""
 
-#: startup.py:207 startup.py:257 startup.py:267 startup.py:270 startup.py:277
-#: startup.py:282 startup.py:288
-msgid "enabled"
-msgstr "włączone"
-
-#: startup.py:234 startup.py:259 startup.py:268 startup.py:271 startup.py:284
-#: startup.py:290
-msgid "disabled"
-msgstr "wyłączone"
-
-#: startup.py:237
+#: startup.py:189
 msgid "Checking virtual keyboard..."
-msgstr ""
+msgstr "Sprawdzanie klawiatury wirtualnej..."
 
-#: startup.py:251
-msgid "Checking backlight..."
-msgstr ""
-
-#: startup.py:257
-msgid "Value (0-100):"
-msgstr ""
-
-#: startup.py:266
-msgid "Checking Power off management..."
-msgstr "Sprawdzanie zarządzania wyłączaniem..."
-
-#: startup.py:269
-msgid "Checking Shutdown management..."
-msgstr "Sprawdzanie zarządzania zamknięciem..."
-
-#: startup.py:273
+#: startup.py:204
 msgid "Checking OpenPlotter autostart..."
 msgstr "Sprawdzanie autostartu OpenPlotter..."
 
-#: startup.py:275
+#: startup.py:206
 msgid "Autostart is not enabled and most features will not work. Please select \"Autostart\" in \"OpenPlotter Settings\""
 msgstr "Autostart nie jest włączony i większość funkcji nie zadziała. Wybierz \"Autostart\" w \"Ustawienia OpenPlottera\""
 
-#: startup.py:279
-msgid "Checking rescue mode..."
-msgstr "Sprawdzanie trybu ratunkowego..."
+#: startup.py:208 startup.py:298 startup.py:310 startup.py:331 startup.py:356
+#: startup.py:363
+msgid "enabled"
+msgstr "włączone"
 
-#: startup.py:286
-msgid "Checking debugging mode..."
-msgstr "Sprawdzanie trybu debugowania..."
-
-#: startup.py:294
-msgid "Checking system log file size..."
-msgstr "Sprawdzanie rozmiaru pliku dziennika systemowego..."
-
-#: startup.py:297 startup.py:298
-msgid "System log file size: "
-msgstr "Rozmiar pliku dziennika systemu: "
-
-#: startup.py:301
+#: startup.py:211
 msgid "Checking OpenPlotter packages source..."
 msgstr "Sprawdzanie repozytoriów źródłowych OpenPlotter..."
 
-#: startup.py:304
+#: startup.py:214
 msgid "added"
 msgstr "dodano"
 
-#: startup.py:305
+#: startup.py:215
 msgid "There are missing packages sources. Please add sources in \"OpenPlotter Settings\"."
 msgstr "Brak niektórych repozytoriów źródłowych dla pakietów. Proszę dodać repozytoria źródłowe w \"Ustawienia OpenPlotter\"."
 
-#: startup.py:318
+#: startup.py:244
 msgid "Checking serial connections conflicts..."
 msgstr "Sprawdzanie konfliktów połączeń szeregowych..."
 
-#: startup.py:322
+#: startup.py:248
 msgid "There are conflicts between the following serial connections:"
 msgstr "Występują konflikty między następującymi połączeniami szeregowymi:"
 
-#: startup.py:326 startup.py:338 startup.py:357
+#: startup.py:252 startup.py:265 startup.py:285
 msgid "no conflicts"
 msgstr "brak konfliktów"
 
-#: startup.py:330
+#: startup.py:257
 msgid "Checking network connections conflicts..."
 msgstr "Sprawdzanie konfliktów połączeń sieciowych..."
 
-#: startup.py:334
+#: startup.py:261
 msgid "There are conflicts between the following server connections:"
 msgstr "Istnieją konflikty między następującymi połączeniami:"
 
-#: startup.py:343
+#: startup.py:271
 msgid "Checking GPIO conflicts..."
 msgstr "Sprawdzanie konfliktów GPIO..."
 
-#: startup.py:350
+#: startup.py:278
 msgid "There are GPIO conflicts between the following apps:"
 msgstr "Istnieją konflikty GPIO między następującymi aplikacjami:"
 
-#: startup.py:365
+#: startup.py:292
+msgid "Checking backlight..."
+msgstr ""
+
+#: startup.py:298
+msgid "Value (0-100):"
+msgstr ""
+
+#: startup.py:300 startup.py:311 startup.py:333 startup.py:358 startup.py:365
+msgid "disabled"
+msgstr "wyłączone"
+
+#: startup.py:309
+msgid "Checking Power off management..."
+msgstr "Sprawdzanie zarządzania wyłączaniem..."
+
+#: startup.py:312
+msgid "Checking Shutdown management..."
+msgstr "Sprawdzanie zarządzania zamknięciem..."
+
+#: startup.py:316 startup.py:322
+msgid "service running"
+msgstr ""
+
+#: startup.py:318 startup.py:324
+msgid "service not running"
+msgstr ""
+
+#: startup.py:328
+msgid "Checking touchscreen optimization..."
+msgstr ""
+
+#: startup.py:337
+msgid "Checking rescue mode..."
+msgstr "Sprawdzanie trybu ratunkowego..."
+
+#: startup.py:361
+msgid "Checking debugging mode..."
+msgstr "Sprawdzanie trybu debugowania..."
+
+#: startup.py:369
+msgid "Checking WiFi password..."
+msgstr ""
+
+#: startup.py:372
+msgid "The WiFi connection is using a default password. This is a security risk - please set a new password in \"Network Manager > Advanced Options > Edit Connections\" "
+msgstr ""
+
+#: startup.py:375
+msgid "not found"
+msgstr ""
+
+#: startup.py:383
 msgid "STARTUP FINISHED"
 msgstr "ROZRUCH ZAKOŃCZONY"
 
-#: startup.py:366
+#: startup.py:384
 msgid "CHECK SYSTEM FINISHED"
 msgstr "SPRAWDZENIE SYSTEMU ZAKOŃCZONE"

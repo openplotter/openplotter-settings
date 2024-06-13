@@ -24,6 +24,7 @@ from .platform import Platform
 from .version import version
 from .appsList import AppsList
 from .gpio import GpioMap, Gpio
+from .ports import Ports
 
 class MyFrame(wx.Frame):
 	def __init__(self):
@@ -59,7 +60,10 @@ class MyFrame(wx.Frame):
 		self.toolbar1.AddSeparator()	
 		toolCheck = self.toolbar1.AddTool(103, _('Check System'), wx.Bitmap(self.currentdir+"/data/check.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolCheck, toolCheck)
-		
+		self.toolbar1.AddSeparator()
+		toolAddresses = self.toolbar1.AddTool(104, _('Network'), wx.Bitmap(self.currentdir+"/data/ports.png"))
+		self.Bind(wx.EVT_TOOL, self.OnToolAddresses, toolAddresses)
+
 		self.notebook = wx.Notebook(self)
 		self.notebook.Bind(wx.EVT_NOTEBOOK_PAGE_CHANGED, self.onTabChange)
 		self.apps = wx.Panel(self.notebook)
@@ -70,21 +74,18 @@ class MyFrame(wx.Frame):
 		self.notebook.AddPage(self.apps, _('OpenPlotter Apps'))
 		self.notebook.AddPage(self.genSettings, _('General Settings'))
 		self.notebook.AddPage(self.raspSettings, _('Raspberry Settings'))
-		self.notebook.AddPage(self.log, _('System log'))
 		self.notebook.AddPage(self.output, '')
 
 		self.il = wx.ImageList(24, 24)
 		img0 = self.il.Add(wx.Bitmap(self.currentdir+"/data/openplotter-24.png", wx.BITMAP_TYPE_PNG))
 		img1 = self.il.Add(wx.Bitmap(self.currentdir+"/data/debian.png", wx.BITMAP_TYPE_PNG))
 		img2 = self.il.Add(wx.Bitmap(self.currentdir+"/data/rpi.png", wx.BITMAP_TYPE_PNG))
-		img3 = self.il.Add(wx.Bitmap(self.currentdir+"/data/log.png", wx.BITMAP_TYPE_PNG))
-		img4 = self.il.Add(wx.Bitmap(self.currentdir+"/data/output.png", wx.BITMAP_TYPE_PNG))
+		img3 = self.il.Add(wx.Bitmap(self.currentdir+"/data/output.png", wx.BITMAP_TYPE_PNG))
 		self.notebook.AssignImageList(self.il)
 		self.notebook.SetPageImage(0, img0)
 		self.notebook.SetPageImage(1, img1)
 		self.notebook.SetPageImage(2, img2)
 		self.notebook.SetPageImage(3, img3)
-		self.notebook.SetPageImage(4, img4)
 
 		vbox = wx.BoxSizer(wx.VERTICAL)
 		vbox.Add(self.toolbar1, 0, wx.EXPAND)
@@ -94,7 +95,6 @@ class MyFrame(wx.Frame):
 		self.pageGeneral()
 		self.pageRpi()
 		self.pageOutput()
-		self.pageLog()
 		self.pageApps()
 		self.onListAppsDeselected()
 
@@ -141,6 +141,47 @@ class MyFrame(wx.Frame):
 	def OnToolCheck(self, e):
 		subprocess.call(['openplotter-startup', 'check'])
 
+
+	def OnToolAddresses(self, e):
+		allPorts = Ports()
+		usedPorts = allPorts.getUsedPorts()
+		ip_hostname = subprocess.check_output(['hostname']).decode(sys.stdin.encoding)[:-1]
+		ip_info = subprocess.check_output(['hostname', '-I']).decode(sys.stdin.encoding)
+		ips = ip_info.split()
+		self.logger.Clear()
+		self.notebook.ChangeSelection(3)
+		self.logger.BeginTextColour((55, 55, 55))
+		for i in usedPorts:
+			self.logger.BeginBold()
+			self.logger.WriteText(i['description']+' ('+i['mode']+')')
+			self.logger.EndBold()
+			self.logger.Newline()
+			if i['address'] == 'localhost' or i['address'] == '127.0.0.1':
+				self.logger.WriteText(i['type']+' '+str(ip_hostname)+'.local:'+str(i['port']))
+				self.logger.Newline()
+				for ip in ips:
+					if ip[0:7]=='169.254': pass
+					elif ':' in ip: pass
+					else: 
+						self.logger.WriteText(i['type']+' '+str(ip)+':'+str(i['port']))
+						self.logger.Newline()
+			else: 
+				self.logger.WriteText(i['type']+' '+i['address']+':'+str(i['port']))
+				self.logger.Newline()
+		self.logger.EndTextColour()
+		
+		conflicts = allPorts.conflicts()
+		if conflicts:
+			red = ''
+			self.logger.BeginTextColour((130, 0, 0))
+			for i in conflicts:
+				self.logger.Newline()
+				self.logger.WriteText(i['description']+' ('+i['mode']+'): '+i['type']+' '+i['address']+':'+i['port'])
+			self.logger.EndTextColour()
+			self.ShowStatusBarRED(_('There are conflicts between server connections'))
+		else: self.ShowStatusBarGREEN(_('No conflicts between server connections'))
+		self.logger.ShowPosition(self.logger.GetLastPosition())
+
 	###################################################################################
 
 	def pageGeneral(self):
@@ -158,10 +199,6 @@ class MyFrame(wx.Frame):
 		self.Bind(wx.EVT_TOOL, self.OnToolTouch, toolTouch)
 		toolMaxi = self.toolbar3.AddCheckTool(303, _('Maximize apps'), wx.Bitmap(self.currentdir+"/data/resize.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolMaxi, toolMaxi)
-		self.toolbar3.AddSeparator()
-		toolRescue = self.toolbar3.AddCheckTool(304, _('Rescue'), wx.Bitmap(self.currentdir+"/data/rescue.png"))
-		self.Bind(wx.EVT_TOOL, self.onToolRescue, toolRescue)
-		if self.conf.get('GENERAL', 'rescue') == 'yes': self.toolbar3.ToggleTool(304,True)
 
 		self.toolbar10 = wx.ToolBar(self.genSettings, style=wx.TB_TEXT)
 		keyboardList = []
@@ -188,6 +225,9 @@ class MyFrame(wx.Frame):
 			except Exception as e: 
 				if self.debug: print('Error setting virtual keyboard layout: '+str(e))
 		self.toolbar10.AddSeparator()
+		toolDebug = self.toolbar10.AddCheckTool(1003, _('Debugging'), wx.Bitmap(self.currentdir+"/data/bug.png"))
+		self.Bind(wx.EVT_TOOL, self.OnToolDebug, toolDebug)
+
 		starupLabel = wx.StaticText(self.genSettings, label=_('Startup'))
 		self.toolbar4 = wx.ToolBar(self.genSettings, style=wx.TB_TEXT)
 		toolDelay = self.toolbar4.AddCheckTool(401, _('Delay (seconds)'), wx.Bitmap(self.currentdir+"/data/delay.png"))
@@ -218,6 +258,11 @@ class MyFrame(wx.Frame):
 			self.toolbar3.ToggleTool(303,True)
 			self.Maximize()
 
+		out = subprocess.check_output('echo $XDG_SESSION_TYPE', shell=True).decode(sys.stdin.encoding)
+		if 'wayland' in out: self.toolbar10.EnableTool(1001,False)
+
+		if self.conf.get('GENERAL', 'debug') == 'yes': self.toolbar10.ToggleTool(1003,True)
+
 		delay = self.conf.get('GENERAL', 'delay')
 		if delay:
 			self.delay.SetValue(delay)
@@ -229,6 +274,14 @@ class MyFrame(wx.Frame):
 			self.pathFile.SetValue(path)
 			self.toolbar4.ToggleTool(403,True)
 		else: self.pathFile.SetValue('/usr/share/sounds/openplotter/Store_Door_Chime.mp3')
+
+	def OnToolDebug(self,e):
+		if self.toolbar10.GetToolState(1003):
+			self.conf.set('GENERAL', 'debug', 'yes')
+			self.ShowStatusBarGREEN(_('Debugging mode enabled. Additional info about errors in OpenPlotter apps will be saved in the system log'))
+		else:
+			self.conf.set('GENERAL', 'debug', 'no')
+			self.ShowStatusBarGREEN(_('Debugging mode disabled'))
 
 	def OnToolFile(self,e):
 		dlg = wx.FileDialog(self, message=_('Choose a file'), defaultDir='/usr/share/sounds/openplotter', defaultFile='',
@@ -242,7 +295,9 @@ class MyFrame(wx.Frame):
 
 	def OnToolMatchbox(self,e=0):
 		subprocess.call(['pkill', '-f', 'matchbox-keyboard'])
-		subprocess.Popen('matchbox-keyboard')
+		out = subprocess.check_output('echo $XDG_SESSION_TYPE', shell=True).decode(sys.stdin.encoding)
+		if 'wayland' in out: subprocess.Popen('toggle-wvkbd')
+		else: subprocess.Popen('toggle-matchbox')
 
 	def OnToolKeyboards(self,e=0):
 		if self.keyboardsList.GetSelection() == -1: return
@@ -295,39 +350,26 @@ class MyFrame(wx.Frame):
 
 	def setTouchSystem(self,path,enabled):
 		if os.path.exists(path):
+			css = path+'/gtk-3.0/gtk.css'
 			if not os.path.exists(path+'/gtk-3.0'): os.mkdir(path+'/gtk-3.0')
-			if not os.path.exists(path+'/gtk-3.0/settings.ini'):
-				file = open(path+'/gtk-3.0/settings.ini', 'w')
-				file.write('[Settings]\ngtk-overlay-scrolling = true')
-				file.close()
-			if not os.path.exists(path+'/gtk-3.0/gtk.css'):
+			if not os.path.exists(css):
 				file = open(path+'/gtk-3.0/gtk.css', 'w')
 				file.write('')
 				file.close()
 
-			data_conf = configparser.ConfigParser()
-			conf_file = path+'/gtk-3.0/settings.ini'
-			data_conf.read(conf_file)
-			if enabled: data_conf.set('Settings','gtk-overlay-scrolling','false')
-			else: data_conf.set('Settings','gtk-overlay-scrolling','true')
-			with open(conf_file, 'w') as file:
-				data_conf.write(file)
-
-			css = path+'/gtk-3.0/gtk.css'
 			os.system('cp -f '+css+' '+css+'_back')
 			file = open(css, 'r')
-			rule = '/*openplotter settings*/scrollbar slider { min-width: 20px;min-height: 20px;border-radius: 22px;border: 5px solid transparent; }'
 			exists = False
 			out = ''
 			while True:
 				line = file.readline()
 				if not line: break
-				if '/*openplotter settings*/' in line:
+				if '@import url("openplotter.css");' in line:
 					exists = True
 					if enabled: out += line
 					else: pass
 				else: out += line
-			if enabled and not exists: out += rule+'\n'
+			if enabled and not exists: out += '@import url("openplotter.css");\n'
 			file.close()
 			try: 
 				file = open(css, 'w')
@@ -336,6 +378,15 @@ class MyFrame(wx.Frame):
 			except Exception as e:
 				os.system('cp -f '+css+'_back '+css)
 				if self.debug: print('Error setting gtk css: '+str(e))
+
+			try:
+				opcss = path+'/gtk-3.0/openplotter.css'
+				file = open(opcss, 'w')
+				file.write('scrollbar slider { min-width: 20px;min-height: 20px;border-radius: 22px;border: 5px solid transparent; }')
+				file.close()
+			except Exception as e:
+				if self.debug: print('Error setting gtk css: '+str(e))
+
 
 	def setTouchOpencpn(self,path,enabled):
 		if os.path.exists(path):
@@ -348,21 +399,22 @@ class MyFrame(wx.Frame):
 
 	def OnToolTouch(self,e):
 		subprocess.call(['pkill', '-15', 'opencpn'])
-		subprocess.call(['flatpak', 'kill', 'org.opencpn.OpenCPN'])
+		try: subprocess.call(['flatpak', 'kill', 'org.opencpn.OpenCPN'])
+		except: pass
 		if self.toolbar3.GetToolState(305):
 			self.conf.set('GENERAL', 'touchscreen', '1')
-			self.setTouchSystem(self.home+'/.config',True)
-			self.setTouchSystem(self.home+'/.var/app/org.opencpn.OpenCPN/config',True)
+			subprocess.call([self.platform.admin, 'python3', self.currentdir+'/service.py', 'touch', '1'])
+			self.setTouchSystem(self.home+'/.var/app/org.opencpn.OpenCPN/config','1')
 			self.setTouchOpencpn(self.home+'/.opencpn/opencpn.conf',True)
 			self.setTouchOpencpn(self.home+'/.var/app/org.opencpn.OpenCPN/config/opencpn/opencpn.conf',True)
-			self.ShowStatusBarGREEN(_('Touchscreen optimization enabled'))
+			self.ShowStatusBarGREEN(_('Enabled. Changes will be applied after the next reboot'))
 		else:
 			self.conf.set('GENERAL', 'touchscreen', '0')
-			self.setTouchSystem(self.home+'/.config',False)
-			self.setTouchSystem(self.home+'/.var/app/org.opencpn.OpenCPN/config',False)
+			subprocess.call([self.platform.admin, 'python3', self.currentdir+'/service.py', 'touch', ''])
+			self.setTouchSystem(self.home+'/.var/app/org.opencpn.OpenCPN/config','')
 			self.setTouchOpencpn(self.home+'/.opencpn/opencpn.conf',False)
 			self.setTouchOpencpn(self.home+'/.var/app/org.opencpn.OpenCPN/config/opencpn/opencpn.conf',False)
-			self.ShowStatusBarGREEN(_('Touchscreen optimization disabled'))
+			self.ShowStatusBarGREEN(_('Disabled. Changes will be applied after the next reboot'))
 
 	def OnToolMaxi(self,e=0):
 		if self.toolbar3.GetToolState(303):
@@ -373,172 +425,6 @@ class MyFrame(wx.Frame):
 			self.conf.set('GENERAL', 'maximize', '0')
 			self.ShowStatusBarGREEN(_('Disabled maximized OpenPlotter apps'))
 			self.Maximize(False)
-
-	def onToolRescue(self,e=0):
-		if self.toolbar3.GetToolState(304): self.conf.set('GENERAL', 'rescue', 'yes')
-		else: self.conf.set('GENERAL', 'rescue', 'no')
-
-	###################################################################################
-
-	def pageLog(self):
-		self.toolbar7 = wx.ToolBar(self.log, style=wx.TB_TEXT)
-		toolDebug = self.toolbar7.AddCheckTool(701, _('Debugging mode'), wx.Bitmap(self.currentdir+"/data/bug.png"))
-		self.Bind(wx.EVT_TOOL, self.OnToolDebug, toolDebug)
-		self.toolbar7.AddSeparator()
-		toolSeeAll= self.toolbar7.AddTool(702, _('See all'), wx.Bitmap(self.currentdir+"/data/logsee.png"))
-		self.Bind(wx.EVT_TOOL, self.OnToolSeeAll, toolSeeAll)
-		toolSeeCat = self.toolbar7.AddTool(703, _('See category'), wx.Bitmap(self.currentdir+"/data/logcategory.png"))
-		self.Bind(wx.EVT_TOOL, self.OnToolSeeCat, toolSeeCat)
-		toolLogSearch = self.toolbar7.AddTool(705, _('Search'), wx.Bitmap(self.currentdir+"/data/logsearch.png"))
-		self.Bind(wx.EVT_TOOL, self.OnToolLogSearch, toolLogSearch)
-		self.toolbar7.AddSeparator()
-		toolDeleteLogs = self.toolbar7.AddTool(704, _('Delete all logs'), wx.Bitmap(self.currentdir+"/data/logremove.png"))
-		self.Bind(wx.EVT_TOOL, self.OnToolDeleteLogs, toolDeleteLogs)
-
-		logMaxSizeLabel = wx.StaticText(self.log, label=_('Notify if the system log file is larger than: '))
-
-		self.logMaxSize = wx.SpinCtrl(self.log, min=1, max=1000)
-		logMaxSize = self.conf.get('GENERAL', 'logMaxSize')
-		if not logMaxSize: 
-			logMaxSize2 = 100
-			self.conf.set('GENERAL', 'logMaxSize', str(logMaxSize2))
-		else:
-			try: logMaxSize2 = int(logMaxSize)
-			except: 
-				logMaxSize2 = 100
-				self.conf.set('GENERAL', 'logMaxSize', str(logMaxSize2))
-		self.logMaxSize.SetValue(logMaxSize2)
-
-		logMaxSizeLabel2 = wx.StaticText(self.log, label='MB')
-
-		saveLogMaxSize = wx.Button(self.log, label=_('Save'))
-		saveLogMaxSize.Bind(wx.EVT_BUTTON, self.onSaveLogMaxSize)
-
-		h1 = wx.BoxSizer(wx.HORIZONTAL)
-		h1.AddSpacer(5)
-		h1.Add(logMaxSizeLabel, 0, wx.UP| wx.EXPAND, 10)
-		h1.Add(self.logMaxSize, 0, wx.ALL | wx.EXPAND, 5)
-		h1.AddSpacer(5)
-		h1.Add(logMaxSizeLabel2, 0, wx.UP | wx.EXPAND, 10)
-		h1.AddSpacer(5)
-		h1.Add(saveLogMaxSize, 0, wx.ALL | wx.EXPAND, 5)
-
-		sizer = wx.BoxSizer(wx.VERTICAL)
-		sizer.Add(self.toolbar7, 0, wx.EXPAND, 0)
-		sizer.Add(h1, 0, wx.ALL | wx.EXPAND, 10)
-		self.log.SetSizer(sizer)
-
-		if self.conf.get('GENERAL', 'debug') == 'yes': self.toolbar7.ToggleTool(701,True)
-
-	def OnToolDebug(self,e):
-		if self.toolbar7.GetToolState(701):
-			self.conf.set('GENERAL', 'debug', 'yes')
-			self.ShowStatusBarGREEN(_('Debugging mode enabled. Additional info about errors in OpenPlotter apps will be saved in the system log'))
-		else:
-			self.conf.set('GENERAL', 'debug', 'no')
-			self.ShowStatusBarGREEN(_('Debugging mode disabled'))
-
-	def OnToolSeeAll(self,e):
-		self.ShowStatusBarYELLOW(_('Reading log, please wait...'))
-		self.logger.Clear()
-		self.notebook.ChangeSelection(4)
-		try:
-			path = '/var/log/syslog'
-			data = open(path,'r')
-			syslog = data.read()
-			self.logger.WriteText(syslog)
-			self.ShowStatusBarGREEN(_('Done'))
-			data.close()
-		except Exception as e: 
-			self.logger.WriteText('Error reading /var/log/syslog: '+str(e))
-			self.ShowStatusBarRED(_('Error reading  log'))
-		self.logger.ShowPosition(self.logger.GetLastPosition())
-
-	def OnToolSeeCat(self,e):
-		self.ShowStatusBarYELLOW(_('Reading log, please wait...'))
-		self.logger.Clear()
-		self.notebook.ChangeSelection(4)
-		categories = []
-		try:
-			path = '/var/log/syslog'
-			data = open(path,'r')
-			while True:
-				line = data.readline()
-				if not line: break
-				items = line.split(' ')
-				if not items[5] in categories: categories.append(items[5])
-			data.close()
-			categories.sort()
-			selected = ''
-			out = ''
-			dlg = selectCategory(categories)
-			res = dlg.ShowModal()
-			if res == wx.ID_OK: selected = dlg.categories.GetValue()
-			dlg.Destroy()
-			if selected:
-				data = open(path,'r')
-				while True:
-					line = data.readline()
-					if not line: break
-					items = line.split(' ')
-					if items[5] == selected: out += line
-				data.close()
-			self.logger.WriteText(out)
-			self.ShowStatusBarGREEN(_('Done'))
-		except Exception as e: 
-			self.logger.WriteText('Error reading /var/log/syslog: '+str(e))
-			self.ShowStatusBarRED(_('Error reading log'))
-		self.logger.ShowPosition(self.logger.GetLastPosition())
-
-	def OnToolLogSearch(self,e):
-		try:
-			search = ''
-			out = ''
-			dlg = logSearch()
-			res = dlg.ShowModal()
-			if res == wx.ID_OK: search = dlg.search.GetValue()
-			dlg.Destroy()
-			if search:
-				self.ShowStatusBarYELLOW(_('Reading log, please wait...'))
-				self.logger.Clear()
-				self.notebook.ChangeSelection(4)
-				path = '/var/log/syslog'
-				data = open(path,'r')
-				while True:
-					line = data.readline()
-					if not line: break
-					if search in line: out += line
-				data.close()
-				self.logger.WriteText(out)
-				self.ShowStatusBarGREEN(_('Done'))
-		except Exception as e: 
-			self.logger.WriteText('Error reading /var/log/syslog: '+str(e))
-			self.ShowStatusBarRED(_('Error reading log'))
-		self.logger.ShowPosition(self.logger.GetLastPosition())
-
-	def OnToolDeleteLogs(self,e):
-		try:
-			msg = _('Current and archived system log files will be deleted. A new system log file will be created after reboot.\n\n Are you sure?')
-			dlg = wx.MessageDialog(None, msg, _('Question'), wx.YES_NO | wx.NO_DEFAULT | wx.ICON_EXCLAMATION)
-			if dlg.ShowModal() == wx.ID_YES: 
-				os.system(self.platform.admin+' rm -f /var/log/syslog*')
-				self.ShowStatusBarGREEN(_('Current and archived system log files have been deleted'))
-			dlg.Destroy()
-		except Exception as e: self.ShowStatusBarRED('Error deleting log files: '+str(e))
-
-	def onSaveLogMaxSize(self,e):
-		logMaxSize = self.logMaxSize.GetValue()
-		if not logMaxSize: 
-			logMaxSize2 = 100
-			self.conf.set('GENERAL', 'logMaxSize', str(logMaxSize2))
-		else:
-			try: 
-				logMaxSize2 = int(logMaxSize)
-				self.conf.set('GENERAL', 'logMaxSize', str(logMaxSize2))
-				self.ShowStatusBarGREEN(_('Done'))
-			except: 
-				logMaxSize2 = 100
-				self.conf.set('GENERAL', 'logMaxSize', str(logMaxSize2))
 
 	###################################################################################
 
@@ -551,6 +437,12 @@ class MyFrame(wx.Frame):
 		self.Bind(wx.EVT_TOOL, self.OnToolbacklightInstall, toolbacklightInstall)
 		toolbacklightSet = self.toolbar5.AddTool(505, _('Set backlight'), wx.Bitmap(self.currentdir+"/data/brightness.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolbacklightSet, toolbacklightSet)
+		self.toolbar5.AddSeparator()
+		toolWayland = self.toolbar5.AddCheckTool(506, 'Wayland', wx.Bitmap(self.currentdir+"/data/wayland.png"))
+		self.Bind(wx.EVT_TOOL, self.OnToolWayland, toolWayland)
+		self.toolbar5.AddSeparator()
+		toolHotspot = self.toolbar5.AddCheckTool(507, _('Hotspot+Client'), wx.Bitmap(self.currentdir+"/data/ap.png"))
+		self.Bind(wx.EVT_TOOL, self.OnToolHotspot, toolHotspot)
 
 		powerLabel = wx.StaticText(self.raspSettings, label=_('Shutdown Management'))
 
@@ -595,18 +487,28 @@ class MyFrame(wx.Frame):
 		sizer.Add(self.toolbar9, 0, wx.EXPAND, 0)
 		self.raspSettings.SetSizer(sizer)
 
-		if self.platform.isRPI: 
-			self.toolbar5.ToggleTool(503,True)
-			self.toolbar5.EnableTool(504,True)
-			self.toolbar8.EnableTool(806,True)
-			self.toolbar9.EnableTool(905,True)
+		if self.platform.isRPI:
 
-			if os.path.exists('/usr/share/applications/openplotter-brightness.desktop'):
-				self.toolbar5.ToggleTool(504,True)
-				self.toolbar5.EnableTool(505,True)
+			backlightPath = "/sys/class/backlight"
+			backlightDevices = os.listdir(backlightPath)
+			if backlightDevices: 
+				if os.path.exists('/usr/share/applications/openplotter-brightness.desktop'):
+					self.toolbar5.ToggleTool(504,True)
+					self.toolbar5.EnableTool(505,True)
+				else:
+					self.toolbar5.ToggleTool(504,False)
+					self.toolbar5.EnableTool(505,False)
 			else:
-				self.toolbar5.ToggleTool(504,False)
+				self.toolbar5.EnableTool(504,False)
 				self.toolbar5.EnableTool(505,False)
+
+			out = subprocess.check_output('echo $XDG_SESSION_TYPE', shell=True).decode(sys.stdin.encoding)
+			if 'wayland' in out: self.toolbar5.ToggleTool(506,True)
+
+			try:
+				subprocess.check_output(['systemctl', 'is-enabled', 'create_ap_interface.service']).decode(sys.stdin.encoding)
+				self.toolbar5.ToggleTool(507,True)
+			except: pass
 
 			try: shutdown = eval(self.conf.get('GENERAL', 'shutdown'))
 			except: shutdown = {}
@@ -621,8 +523,8 @@ class MyFrame(wx.Frame):
 				self.gpioPoweroff.SetValue(poweroff['gpio'])
 				self.transitionPoweroff.SetSelection(poweroff['transition'])
 
-			try: config = open('/boot/config.txt', 'r')
-			except: config = open('/boot/firmware/config.txt', 'r')
+			try: config = open('/boot/firmware/config.txt', 'r')
+			except: config = open('/boot/config.txt', 'r')
 			data = config.read()
 			config.close()
 			if 'dtoverlay=gpio-poweroff' in data and not '#dtoverlay=gpio-poweroff' in data: self.toolbar9.ToggleTool(901,True)
@@ -638,6 +540,7 @@ class MyFrame(wx.Frame):
 			self.toolbar5.EnableTool(503,False)
 			self.toolbar5.EnableTool(504,False)
 			self.toolbar5.EnableTool(505,False)
+			self.toolbar5.EnableTool(506,False)
 			self.toolbar8.EnableTool(801,False)
 			self.toolbar8.EnableTool(806,False)
 			self.toolbar9.EnableTool(901,False)
@@ -784,8 +687,63 @@ class MyFrame(wx.Frame):
 		dlg.Destroy()
 
 	def OnToolbacklightSet(self,e):
-			subprocess.call(['pkill', '-f', 'rpi-backlight-gui'])
-			subprocess.Popen('rpi-backlight-gui')
+			subprocess.Popen('openplotter-backlight-gui')
+
+	def OnToolWayland(self,e):
+		if self.toolbar5.GetToolState(506):
+			msg = _('Wayland will be enabled and X11 disabled. Some programs may not yet work correctly for Wayland.')
+			msg += _('\n')
+			msg += _('OpenPlotter will reboot. Are you sure?')
+			dlg = wx.MessageDialog(None, msg, _('Question'), wx.YES_NO | wx.NO_DEFAULT | wx.ICON_EXCLAMATION)
+			if dlg.ShowModal() == wx.ID_YES: 
+				subprocess.call([self.platform.admin, 'python3', self.currentdir+'/wayland.py', 'W2'])
+				out = subprocess.check_output('raspi-config nonint get_vnc', shell=True).decode(sys.stdin.encoding)
+				if '0' in out: self.conf.set('GENERAL', 'forceVNC', '1')
+				os.system('shutdown -r now')
+			else:
+				self.toolbar5.ToggleTool(506,False)
+				self.ShowStatusBarRED(_('Canceled'))
+		else:
+			msg = _('Wayland will be disabled and X11 enabled.')
+			msg += _('\n')
+			msg += _('OpenPlotter will reboot. Are you sure?')
+			dlg = wx.MessageDialog(None, msg, _('Question'), wx.YES_NO | wx.NO_DEFAULT | wx.ICON_EXCLAMATION)
+			if dlg.ShowModal() == wx.ID_YES: 
+				subprocess.call([self.platform.admin, 'python3', self.currentdir+'/wayland.py', 'W1'])
+				out = subprocess.check_output('raspi-config nonint get_vnc', shell=True).decode(sys.stdin.encoding)
+				if '0' in out: self.conf.set('GENERAL', 'forceVNC', '1')
+				os.system('shutdown -r now')
+			else:
+				self.toolbar5.ToggleTool(506,True)
+				self.ShowStatusBarRED(_('Canceled'))
+		dlg.Destroy()
+
+	def OnToolHotspot(self,e):
+		if self.toolbar5.GetToolState(507):
+			msg = _('A dual Hotspot/Client connection will be created. Do not forget to change the default Hotspot password "12345678" if you have not already.')
+			msg += _('\n')
+			msg += _('OpenPlotter will reboot. Are you sure?')
+			dlg = wx.MessageDialog(None, msg, _('Question'), wx.YES_NO | wx.NO_DEFAULT | wx.ICON_EXCLAMATION)
+			if dlg.ShowModal() == wx.ID_YES:
+				pass
+				subprocess.call([self.platform.admin, 'openplotter-ap', 'enable'])
+				os.system('shutdown -r now')
+			else:
+				self.toolbar5.ToggleTool(507,False)
+				self.ShowStatusBarRED(_('Canceled'))
+		else:
+			msg = _('The dual Hotspot/Client connection will be disabled and only the Client connection will be able to be established.')
+			msg += _('\n')
+			msg += _('OpenPlotter will reboot. Are you sure?')
+			dlg = wx.MessageDialog(None, msg, _('Question'), wx.YES_NO | wx.NO_DEFAULT | wx.ICON_EXCLAMATION)
+			if dlg.ShowModal() == wx.ID_YES:
+				pass
+				subprocess.call([self.platform.admin, 'openplotter-ap', 'disable'])
+				os.system('shutdown -r now')
+			else:
+				self.toolbar5.ToggleTool(507,True)
+				self.ShowStatusBarRED(_('Canceled'))
+		dlg.Destroy()
 
 	def OnToolGpio(self,e):
 		dlg = GpioMap()
@@ -799,7 +757,7 @@ class MyFrame(wx.Frame):
 		self.listApps.InsertColumn(0, _('Name'), width=220)
 		self.listApps.InsertColumn(1, _('Installed'), width=120)
 		self.listApps.InsertColumn(2, _('Candidate'), width=120)
-		self.listApps.InsertColumn(3, _('Pending tasks'), width=190)
+		self.listApps.InsertColumn(3, _('Pending tasks'), width=180)
 		self.listApps.Bind(wx.EVT_LIST_ITEM_SELECTED, self.onListAppsSelected)
 		self.listApps.Bind(wx.EVT_LIST_ITEM_DESELECTED, self.onListAppsDeselected)
 		self.listApps.SetImageList(self.il, wx.IMAGE_LIST_SMALL)
@@ -861,27 +819,28 @@ class MyFrame(wx.Frame):
 
 	def OnToolUpdate(self, event=0):
 		self.logger.Clear()
-		self.notebook.ChangeSelection(4)
+		self.notebook.ChangeSelection(3)
+		self.ShowStatusBarYELLOW(_('Updating packages data, please wait... '))
 		command = self.platform.admin+' apt update'
 		popen = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
 		for line in popen.stdout:
 			if not 'Warning' in line and not 'WARNING' in line:
 				self.logger.WriteText(line)
-				self.ShowStatusBarYELLOW(_('Updating packages data, please wait... ')+line)
 				self.logger.ShowPosition(self.logger.GetLastPosition())
+				wx.GetApp().Yield()
 		self.OnRefreshButton()
 
 	def OnToolSources(self, e):
-		self.ShowStatusBarYELLOW(_('Adding packages sources, please wait... '))
 		self.logger.Clear()
-		self.notebook.ChangeSelection(4)
+		self.notebook.ChangeSelection(3)
+		self.ShowStatusBarYELLOW(_('Adding packages sources, please wait... '))
 		command = self.platform.admin+' settingsSourcesInstall'
 		popen = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
 		for line in popen.stdout:
 			if not 'Warning' in line and not 'WARNING' in line:
 				self.logger.WriteText(line)
-				self.ShowStatusBarYELLOW(_('Adding packages sources, please wait... ')+line)
 				self.logger.ShowPosition(self.logger.GetLastPosition())
+				wx.GetApp().Yield()
 		self.ShowStatusBarGREEN(_('Sources updated. Get candidates to see changes'))
 
 	def OnInstallButton(self,e):
@@ -893,22 +852,24 @@ class MyFrame(wx.Frame):
 		dlg = wx.MessageDialog(None, msg, _('Question'), wx.YES_NO | wx.NO_DEFAULT | wx.ICON_EXCLAMATION)
 		if dlg.ShowModal() == wx.ID_YES:
 			self.logger.Clear()
-			self.notebook.ChangeSelection(4)
+			self.notebook.ChangeSelection(3)
+			self.ShowStatusBarYELLOW(_('Installing package, please wait... '))
 			command = self.platform.admin+' apt install -y '+package
 			popen = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
 			for line in popen.stdout:
 				if not 'Warning' in line and not 'WARNING' in line:
 					self.logger.WriteText(line)
-					self.ShowStatusBarYELLOW(_('Installing package, please wait... ')+line)
 					self.logger.ShowPosition(self.logger.GetLastPosition())
+					wx.GetApp().Yield()
 			postInstall = apps[index]['postInstall']
 			if postInstall:
+				self.ShowStatusBarYELLOW(_('Running post-installation scripts, please wait... '))
 				popen = subprocess.Popen(postInstall, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
 				for line in popen.stdout:
 					if not 'Warning' in line and not 'WARNING' in line:
 						self.logger.WriteText(line)
-						self.ShowStatusBarYELLOW(_('Running post-installation scripts, please wait... ')+line)
 						self.logger.ShowPosition(self.logger.GetLastPosition())
+						wx.GetApp().Yield()
 			if package == 'openplotter-settings':
 				wx.MessageBox(_('This app will close to apply the changes.'), _('Info'), wx.OK | wx.ICON_INFORMATION)
 				self.Close()
@@ -929,22 +890,24 @@ class MyFrame(wx.Frame):
 		dlg = wx.MessageDialog(None, msg, _('Question'), wx.YES_NO | wx.NO_DEFAULT | wx.ICON_EXCLAMATION)
 		if dlg.ShowModal() == wx.ID_YES:
 			self.logger.Clear()
-			self.notebook.ChangeSelection(4)
+			self.notebook.ChangeSelection(3)
 			preUninstall = apps[index]['preUninstall']
 			if preUninstall:
+				self.ShowStatusBarYELLOW(_('Running pre-uninstall scripts, please wait... '))
 				popen = subprocess.Popen(preUninstall, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
 				for line in popen.stdout:
 					if not 'Warning' in line and not 'WARNING' in line:
 						self.logger.WriteText(line)
-						self.ShowStatusBarYELLOW(_('Running pre-uninstall scripts, please wait... ')+line)
-						self.logger.ShowPosition(self.logger.GetLastPosition())	
+						self.logger.ShowPosition(self.logger.GetLastPosition())
+						wx.GetApp().Yield()
+			self.ShowStatusBarYELLOW(_('Uninstalling packages, please wait... '))
 			command = self.platform.admin+' apt autoremove -y '+package
 			popen = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
 			for line in popen.stdout:
 				if not 'Warning' in line and not 'WARNING' in line:
 					self.logger.WriteText(line)
-					self.ShowStatusBarYELLOW(_('Uninstalling packages, please wait... ')+line)
 					self.logger.ShowPosition(self.logger.GetLastPosition())
+					wx.GetApp().Yield()
 			if apps[index]['reboot'] == 'yes': self.ShowStatusBarRED(_('Done. Restart to apply changes'))
 			else: self.ShowStatusBarGREEN(_('Done. Press Refresh'))
 		dlg.Destroy()
@@ -966,19 +929,21 @@ class MyFrame(wx.Frame):
 		if index == -1: return
 		apps = list(reversed(self.appsDict))
 		self.logger.Clear()
-		self.notebook.ChangeSelection(4)
+		self.notebook.ChangeSelection(3)
+		self.ShowStatusBarYELLOW(_('Reading changelog, please wait... '))
 		command = 'apt changelog '+apps[index]['package']
 		popen = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
 		for line in popen.stdout:
 			if not 'Warning' in line and not 'WARNING' in line:
 				self.logger.WriteText(line)
-				self.ShowStatusBarYELLOW(_('Reading changelog, please wait... ')+line)
+				wx.GetApp().Yield()
 		self.ShowStatusBarGREEN(_('Done'))
 
 	def readApps(self):
 		self.notebook.ChangeSelection(0)
 		self.listApps.DeleteAllItems()
 		self.ShowStatusBarYELLOW(_('Checking apps list, please wait... '))
+		wx.GetApp().Yield()
 		self.installedFlag = False
 		sources = subprocess.check_output(['apt-cache', 'policy']).decode(sys.stdin.encoding)
 		for i in self.appsDict:
@@ -1040,6 +1005,8 @@ class MyFrame(wx.Frame):
 			self.listApps.SetItem(item, 2, candidate)
 			self.listApps.SetItem(item, 3, pending)
 			if installed and i['package'] != 'openplotter-settings': self.installedFlag = True
+			self.ShowStatusBarYELLOW(_('Checking apps list, please wait... '))
+			wx.GetApp().Yield()
 
 		if not self.platform.isInstalled('openplotter-doc'): self.toolbar1.EnableTool(101,False)
 		else:self.toolbar1.EnableTool(101,True)

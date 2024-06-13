@@ -72,13 +72,6 @@ class Gpio:
 			{'physical':'39', 'BCM': _('Ground'), 'feature': _('Power'), 'shared': True, 'usedBy': []},
 			{'physical':'40', 'BCM': 'GPIO 21', 'feature': 'GPIO', 'shared': False, 'usedBy': []}
 		]
-
-		try: subprocess.check_output(['systemctl', 'is-active', 'hciuart']).decode(sys.stdin.encoding)	
-		except: 
-			self.gpioMap[7]['feature'] = 'UART'
-			self.gpioMap[7]['shared'] = False
-			self.gpioMap[9]['feature'] = 'UART'
-			self.gpioMap[9]['shared'] = False
 		try:
 			out = subprocess.check_output('ls /dev/i2c*', shell=True).decode(sys.stdin.encoding)
 			if '/dev/i2c-0' in out or '/dev/i2c-1' in out:
@@ -106,41 +99,73 @@ class Gpio:
 			rpimodel = modelfile.read()[:-1]
 		except: rpimodel = ''
 		self.used = []
-		config = '/boot/config.txt'
-		boot = '/boot'
+		config = '/boot/firmware/config.txt'
+		boot = '/boot/firmware'
 		try: file = open(config, 'r')
 		except:
-			config = '/boot/firmware/config.txt'
-			boot = '/boot/firmware'
+			config = '/boot/config.txt'
+			boot = '/boot'
 			file = open(config, 'r')
 		while True:
 			line = file.readline()
 			if not line: break
-			if 'enable_uart=1' in line and not '#' in line:
-				self.gpioMap[7]['feature'] = 'UART'
-				self.gpioMap[7]['shared'] = False
-				self.gpioMap[9]['feature'] = 'UART'
-				self.gpioMap[9]['shared'] = False
-			if 'Raspberry Pi 4' in rpimodel:
+			if 'Raspberry Pi 3' in rpimodel:
+				if 'dtoverlay=disable-bt' in line and not '#' in line:
+					self.gpioMap[7]['feature'] = 'UART0'
+					self.gpioMap[7]['shared'] = False
+					self.gpioMap[9]['feature'] = 'UART0'
+					self.gpioMap[9]['shared'] = False
+			elif 'Raspberry Pi 4' in rpimodel:
+				if 'dtoverlay=disable-bt' in line and not '#' in line:
+					self.gpioMap[7]['feature'] = 'UART0'
+					self.gpioMap[7]['shared'] = False
+					self.gpioMap[9]['feature'] = 'UART0'
+					self.gpioMap[9]['shared'] = False
 				if 'dtoverlay=uart2' in line and not '#' in line:
-					self.gpioMap[26]['feature'] = 'UART'
+					self.gpioMap[26]['feature'] = 'UART2'
 					self.gpioMap[26]['shared'] = False
-					self.gpioMap[27]['feature'] = 'UART'
+					self.gpioMap[27]['feature'] = 'UART2'
 					self.gpioMap[27]['shared'] = False
 				if 'dtoverlay=uart3' in line and not '#' in line:
-					self.gpioMap[6]['feature'] = 'UART'
+					self.gpioMap[6]['feature'] = 'UART3'
 					self.gpioMap[6]['shared'] = False
-					self.gpioMap[28]['feature'] = 'UART'
+					self.gpioMap[28]['feature'] = 'UART3'
 					self.gpioMap[28]['shared'] = False
 				if 'dtoverlay=uart4' in line and not '#' in line:
-					self.gpioMap[20]['feature'] = 'UART'
+					self.gpioMap[20]['feature'] = 'UART4'
 					self.gpioMap[20]['shared'] = False
-					self.gpioMap[23]['feature'] = 'UART'
+					self.gpioMap[23]['feature'] = 'UART4'
 					self.gpioMap[23]['shared'] = False
 				if 'dtoverlay=uart5' in line and not '#' in line:
-					self.gpioMap[32]['feature'] = 'UART'
+					self.gpioMap[32]['feature'] = 'UART5'
 					self.gpioMap[32]['shared'] = False
-					self.gpioMap[31]['feature'] = 'UART'
+					self.gpioMap[31]['feature'] = 'UART5'
+					self.gpioMap[31]['shared'] = False
+			elif 'Raspberry Pi 5' in rpimodel:
+				if 'dtparam=uart0=on' in line and not '#' in line:
+					self.gpioMap[7]['feature'] = 'UART0'
+					self.gpioMap[7]['shared'] = False
+					self.gpioMap[9]['feature'] = 'UART0'
+					self.gpioMap[9]['shared'] = False
+				if 'dtoverlay=uart1-pi5' in line and not '#' in line:
+					self.gpioMap[26]['feature'] = 'UART1'
+					self.gpioMap[26]['shared'] = False
+					self.gpioMap[27]['feature'] = 'UART1'
+					self.gpioMap[27]['shared'] = False
+				if 'dtoverlay=uart2-pi5' in line and not '#' in line:
+					self.gpioMap[6]['feature'] = 'UART2'
+					self.gpioMap[6]['shared'] = False
+					self.gpioMap[28]['feature'] = 'UART2'
+					self.gpioMap[28]['shared'] = False
+				if 'dtoverlay=uart3-pi5' in line and not '#' in line:
+					self.gpioMap[20]['feature'] = 'UART3'
+					self.gpioMap[20]['shared'] = False
+					self.gpioMap[23]['feature'] = 'UART3'
+					self.gpioMap[23]['shared'] = False
+				if 'dtoverlay=uart4-pi5' in line and not '#' in line:
+					self.gpioMap[32]['feature'] = 'UART4'
+					self.gpioMap[32]['shared'] = False
+					self.gpioMap[31]['feature'] = 'UART4'
 					self.gpioMap[31]['shared'] = False
 			if 'dtoverlay=gpio-poweroff' in line and not '#' in line:
 				try: poweroff = eval(self.conf.get('GENERAL', 'poweroff'))
@@ -217,7 +242,7 @@ class GpioMap(wx.Dialog):
 		if self.allowed != '0': title = _('Select GPIO')
 		else: title = _('GPIO Map')
 
-		wx.Dialog.__init__(self, None, title=title, size=(700,415))
+		wx.Dialog.__init__(self, None, title=title, size=(700,440))
 		self.SetFont(wx.Font(8, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
 		panel = wx.Panel(self)
 

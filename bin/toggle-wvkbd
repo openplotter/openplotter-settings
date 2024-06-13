@@ -1,0 +1,18 @@
+#!/bin/bash
+#This script toggle the virtual keyboard
+
+PID="$(pidof wvkbd-mobintl)"
+if [  "$PID" != ""  ]; then
+  killall wvkbd-mobintl
+else
+ wvkbd-mobintl
+# use wvkbd-mobintl --help for options
+#
+# -L 300 = landscape, 300 pixels tall
+# -fg ffffff = foreground color white
+# -fg-sp ffffff = special keys foreground white
+# -text 000000 = text color black
+# -text-sp 000000 = special keys text color black
+# -fn 40 = font size 40
+
+fi

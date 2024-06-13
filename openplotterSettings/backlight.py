@@ -18,7 +18,7 @@
 import os, sys
 
 if sys.argv[1] == 'install':
-	os.system('pip3 install rpi_backlight -U')
+	os.system('pip3 install rpi_backlight -U --break-system-packages')
 
 	udevFile = '/etc/udev/rules.d/backlight-permissions.rules'
 	if not os.path.exists(udevFile):
@@ -32,8 +32,12 @@ if sys.argv[1] == 'install':
 	os.system('cp -f '+source+' /usr/share/applications')
 
 if sys.argv[1] == 'uninstall':
-	os.system('rpi-backlight -b 100')
-	os.system('pip3 uninstall -y rpi_backlight')
+	backlightPath = "/sys/class/backlight"
+	backlightDevices = os.listdir(backlightPath)
+	if backlightDevices: 
+		backlightDevice = backlightPath+'/'+backlightDevices[0]
+		os.system('rpi-backlight '+backlightDevice+' -b 100')
+	os.system('pip3 uninstall -y rpi_backlight --break-system-packages')
 	os.system('rm -f /etc/udev/rules.d/backlight-permissions.rules')
 	os.system('udevadm control --reload-rules && udevadm trigger')
 	os.system('rm -f /usr/share/applications/openplotter-brightness.desktop')

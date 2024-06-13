@@ -79,14 +79,14 @@ class MyFrame(wx.Frame):
 		self.ShowStatusBar(w_msg, (0,130,0))
 
 	def OnOkButton(self,e):
-		self.ShowStatusBarYELLOW(_('Performing pending actions, please wait... '))
 		self.logger.Clear()
+		self.ShowStatusBarYELLOW(_('Performing pending actions, please wait... '))
 		popen = subprocess.Popen(self.command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
 		for line in popen.stdout:
 			if not 'Warning' in line and not 'WARNING' in line:
 				self.logger.WriteText(line)
-				self.ShowStatusBarYELLOW(_('Performing pending actions, please wait... ')+line)
 				self.logger.ShowPosition(self.logger.GetLastPosition())
+				wx.GetApp().Yield()
 
 		self.ShowStatusBarGREEN(_('Done. Close this window and open the app again.'))
 		self.okButton.Disable()
