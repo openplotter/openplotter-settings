@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openplotter\n"
 "POT-Creation-Date: 2024-05-20 11:34+0200\n"
-"PO-Revision-Date: 2024-06-13 09:53+0200\n"
+"PO-Revision-Date: 2024-07-04 22:11+0200\n"
 "Last-Translator: \n"
 "Language-Team: Swedish\n"
 "Language: sv\n"
@@ -165,23 +165,23 @@ msgstr "Denna GPIO kan inte användas för denna funktion."
 
 #: installSources.py:47
 msgid "FAILED. Unknown system:"
-msgstr ""
+msgstr "MISSLYCKADES. Okänt system:"
 
 #: installSources.py:50
 msgid "Current Debian version:"
-msgstr ""
+msgstr "Nuvarande Debian-version:"
 
 #: installSources.py:51
 msgid "FAILED. This version of OpenPlotter only works on this version of Debian:"
-msgstr ""
+msgstr "MISSLYCKADES. Denna version av OpenPlotter fungerar endast på denna version av Debian:"
 
 #: installSources.py:54
 msgid "Current Ubuntu version:"
-msgstr ""
+msgstr "Nuvarande Ubuntu-version:"
 
 #: installSources.py:55
 msgid "FAILED. This version of OpenPlotter only works on these versions of Ubuntu:"
-msgstr ""
+msgstr "MISSLYCKADES. Denna version av OpenPlotter fungerar endast på denna version av Ubuntu:"
 
 #: installSources.py:74
 msgid "Added OpenPlotter packages source"
@@ -250,11 +250,11 @@ msgstr "Automatisk uppstart avaktiverad. Flera funktioner kommer ej att fungera!
 
 #: openplotterSettings.py:181
 msgid "There are conflicts between server connections"
-msgstr ""
+msgstr "Det finns konflikter mellan serveranslutningar"
 
 #: openplotterSettings.py:182
 msgid "No conflicts between server connections"
-msgstr ""
+msgstr "Inga konflikter mellan serveranslutningar"
 
 #: openplotterSettings.py:192
 msgid "Language"
@@ -282,7 +282,7 @@ msgstr "Virtuellt tangentbord"
 
 #: openplotterSettings.py:228
 msgid "Debugging"
-msgstr ""
+msgstr "Felsökning"
 
 #: openplotterSettings.py:231
 msgid "Startup"
@@ -343,11 +343,11 @@ msgstr "Avaktiverade fördröjd uppstart"
 
 #: openplotterSettings.py:410
 msgid "Enabled. Changes will be applied after the next reboot"
-msgstr ""
+msgstr "Aktiverad. Ändringar kommer att tillämpas efter nästa omstart"
 
 #: openplotterSettings.py:417
 msgid "Disabled. Changes will be applied after the next reboot"
-msgstr ""
+msgstr "Inaktiverad. Ändringar kommer att tillämpas efter nästa omstart"
 
 #: openplotterSettings.py:422
 msgid "OpenPlotter apps will open maximized"
@@ -367,7 +367,7 @@ msgstr "Ställ in bakgrundsbelysning"
 
 #: openplotterSettings.py:444
 msgid "Hotspot+Client"
-msgstr ""
+msgstr "Hotspot+Klient"
 
 #: openplotterSettings.py:447
 msgid "Shutdown Management"
@@ -466,7 +466,7 @@ msgstr "Avinstallationen avbröts"
 
 #: openplotterSettings.py:694
 msgid "Wayland will be enabled and X11 disabled. Some programs may not yet work correctly for Wayland."
-msgstr ""
+msgstr "Wayland kommer att aktiveras och X11 inaktiveras. Vissa program kanske inte fungerar korrekt med Wayland ännu."
 
 #: openplotterSettings.py:695 openplotterSettings.py:708
 #: openplotterSettings.py:724 openplotterSettings.py:736
@@ -476,24 +476,24 @@ msgstr ""
 #: openplotterSettings.py:696 openplotterSettings.py:709
 #: openplotterSettings.py:725 openplotterSettings.py:737
 msgid "OpenPlotter will reboot. Are you sure?"
-msgstr ""
+msgstr "OpenPlotter kommer startas om. Är du säker?"
 
 #: openplotterSettings.py:705 openplotterSettings.py:718
 #: openplotterSettings.py:733 openplotterSettings.py:745
 msgid "Canceled"
-msgstr ""
+msgstr "Avbruten"
 
 #: openplotterSettings.py:707
 msgid "Wayland will be disabled and X11 enabled."
-msgstr ""
+msgstr "Wayland kommer att inaktiveras och X11 aktiveras."
 
 #: openplotterSettings.py:723
 msgid "A dual Hotspot/Client connection will be created. Do not forget to change the default Hotspot password \"12345678\" if you have not already."
-msgstr ""
+msgstr "En dubbel Hotspot/Klient anslutning kommer att skapas. Glöm inte att ändra standard Hotspot-lösenordet \"12345678\" om du inte redan har det."
 
 #: openplotterSettings.py:735
 msgid "The dual Hotspot/Client connection will be disabled and only the Client connection will be able to be established."
-msgstr ""
+msgstr "Den dubbla Hotspot/klientanslutningen kommer att inaktiveras och endast klientanslutningen kommer att kunna upprättas."
 
 #: openplotterSettings.py:757
 msgid "Name"
@@ -637,7 +637,7 @@ msgstr "Sök i systemloggfilen"
 
 #: ports.py:39
 msgid "VNC Remote Desktop"
-msgstr ""
+msgstr "VNC fjärrskrivbord"
 
 #: postInstall.py:31
 msgid "Post-installation actions"
@@ -742,11 +742,11 @@ msgstr "KLAR"
 
 #: settingsPreUninstall.py:34
 msgid "Removing settings..."
-msgstr ""
+msgstr "Tar bort inställningar..."
 
 #: settingsPreUninstall.py:42
 msgid "Removing Hotspot service..."
-msgstr ""
+msgstr "Tar bort Hotspot-tjänsten..."
 
 #: settingsPreUninstall.py:51
 msgid "Removing packages sources..."
@@ -782,7 +782,7 @@ msgstr "Det finns inga varningar. Stänger om "
 
 #: startup.py:157
 msgid "Setting remote desktop..."
-msgstr ""
+msgstr "Ställer in fjärrskrivbordet..."
 
 #: startup.py:160 startup.py:171 startup.py:374
 msgid "done"
@@ -806,7 +806,7 @@ msgstr "En uppstartsfördröjning kommer att tillämpas"
 
 #: startup.py:182
 msgid "Checking display server..."
-msgstr ""
+msgstr "Kontrollerar visningsserver..."
 
 #: startup.py:189
 msgid "Checking virtual keyboard..."
@@ -887,11 +887,11 @@ msgstr "Kontrollerar avstängningshantering..."
 
 #: startup.py:316 startup.py:322
 msgid "service running"
-msgstr ""
+msgstr "tjänsten startad"
 
 #: startup.py:318 startup.py:324
 msgid "service not running"
-msgstr ""
+msgstr "tjänsten stoppad"
 
 #: startup.py:328
 msgid "Checking touchscreen optimization..."
@@ -907,15 +907,15 @@ msgstr "Kontrollerar felsökningsläget..."
 
 #: startup.py:369
 msgid "Checking WiFi password..."
-msgstr ""
+msgstr "Kontrollerar Wi-Fi-lösenord..."
 
 #: startup.py:372
 msgid "The WiFi connection is using a default password. This is a security risk - please set a new password in \"Network Manager > Advanced Options > Edit Connections\" "
-msgstr ""
+msgstr "Wi-Fi-anslutningen använder ett standardlösenord. Detta är en säkerhetsrisk - ange ett nytt lösenord i \"Nätverk > Avancerade alternativ > Redigera anslutningar\" "
 
 #: startup.py:375
 msgid "not found"
-msgstr ""
+msgstr "hittades inte"
 
 #: startup.py:383
 msgid "STARTUP FINISHED"
