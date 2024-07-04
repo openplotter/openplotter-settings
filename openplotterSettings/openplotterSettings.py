@@ -259,7 +259,9 @@ class MyFrame(wx.Frame):
 			self.Maximize()
 
 		out = subprocess.check_output('echo $XDG_SESSION_TYPE', shell=True).decode(sys.stdin.encoding)
-		if 'wayland' in out: self.toolbar10.EnableTool(1001,False)
+		if 'wayland' in out: 
+			self.toolbar10.EnableTool(1001,False)
+			if not self.platform.isRPI: self.toolbar10.EnableTool(1002,False)
 
 		if self.conf.get('GENERAL', 'debug') == 'yes': self.toolbar10.ToggleTool(1003,True)
 
@@ -541,6 +543,7 @@ class MyFrame(wx.Frame):
 			self.toolbar5.EnableTool(504,False)
 			self.toolbar5.EnableTool(505,False)
 			self.toolbar5.EnableTool(506,False)
+			self.toolbar5.EnableTool(507,False)
 			self.toolbar8.EnableTool(801,False)
 			self.toolbar8.EnableTool(806,False)
 			self.toolbar9.EnableTool(901,False)
