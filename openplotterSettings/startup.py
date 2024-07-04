@@ -323,7 +323,41 @@ class MyFrame(wx.Frame):
 					except:
 						self.add_logger_data({'green':'','black':_('service not running'),'red':''})
 			except Exception as e: self.add_logger_data({'green':'','black':'','red':str(e)})
-			
+
+
+			self.add_logger_data(_('Checking rescue mode...'))
+			try:
+				config = '/boot/firmware/config.txt'
+				file = open(config, 'r')
+			except:
+				try:
+					config = '/boot/config.txt'
+					file = open(config, 'r')
+				except Exception as e: self.add_logger_data({'green':'','black':'','red':str(e)})
+			rescue = ''
+			while True:
+				line = file.readline()
+				if not line: break
+				if 'OPrescue' in line and not '#' in line:
+					items = line.split('=')
+					rescue = items[1]
+					rescue = rescue.strip()
+			file.close()
+			if rescue == '1': 
+				self.add_logger_data({'green':'','black':'','red':_('enabled')})
+			else:
+				self.add_logger_data({'green':'','black':_('disabled'),'red':''})
+
+
+			try:
+				self.add_logger_data(_('Checking WiFi password...'))
+				out = subprocess.check_output('nmcli dev wifi show-password', shell=True).decode(sys.stdin.encoding)
+				if 'Password: 12345678' in out:
+					msg = _('The WiFi connection is using a default password. This is a security risk - please set a new password in "Network Manager > Advanced Options > Edit Connections" ')
+					self.add_logger_data({'green':'','black':'','red':msg})
+				else: self.add_logger_data({'green':'','black':_('done'),'red':''})
+			except Exception as e: self.add_logger_data({'green':'','black':_('not found'),'red':''})
+		
 
 		self.add_logger_data(_('Checking touchscreen optimization...'))
 		try:
@@ -334,45 +368,11 @@ class MyFrame(wx.Frame):
 		except Exception as e: self.add_logger_data({'green':'','black':'','red':str(e)})
 
 
-		self.add_logger_data(_('Checking rescue mode...'))
-		try:
-			config = '/boot/firmware/config.txt'
-			file = open(config, 'r')
-		except:
-			try:
-				config = '/boot/config.txt'
-				file = open(config, 'r')
-			except Exception as e: self.add_logger_data({'green':'','black':'','red':str(e)})
-		rescue = ''
-		while True:
-			line = file.readline()
-			if not line: break
-			if 'OPrescue' in line and not '#' in line:
-				items = line.split('=')
-				rescue = items[1]
-				rescue = rescue.strip()
-		file.close()
-		if rescue == '1': 
-			self.add_logger_data({'green':'','black':'','red':_('enabled')})
-		else:
-			self.add_logger_data({'green':'','black':_('disabled'),'red':''})
-
-
 		self.add_logger_data(_('Checking debugging mode...'))
 		if self.debug == 'yes': 
 			self.add_logger_data({'green':'','black':'','red':_('enabled')})
 		else:
 			self.add_logger_data({'green':'','black':_('disabled'),'red':''})
-
-			
-		try:
-			self.add_logger_data(_('Checking WiFi password...'))
-			out = subprocess.check_output('nmcli dev wifi show-password', shell=True).decode(sys.stdin.encoding)
-			if 'Password: 12345678' in out:
-				msg = _('The WiFi connection is using a default password. This is a security risk - please set a new password in "Network Manager > Advanced Options > Edit Connections" ')
-				self.add_logger_data({'green':'','black':'','red':msg})
-			else: self.add_logger_data({'green':'','black':_('done'),'red':''})
-		except Exception as e: self.add_logger_data({'green':'','black':_('not found'),'red':''})
 
 
 		try:
