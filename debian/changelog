@@ -1,3 +1,12 @@
+openplotter-settings (4.2.3-stable) bookworm; urgency=medium
+
+  * remove wvkbd dependence
+  * fix error in desktop at startup
+  * disable virtual keyboard in desktop under wayland
+  * update translations
+
+ -- Sailoog <info@sailoog.com>  Thu, 04 Jul 2024 21:35:22 +0200
+
 openplotter-settings (4.2.0-stable) bookworm; urgency=medium
 
   * stable
