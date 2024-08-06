@@ -20,6 +20,7 @@ from .conf import Conf
 from .language import Language
 from .appsList import AppsList
 import wx.richtext as rt
+import wx.lib.scrolledpanel
 
 class Gpio:
 	def __init__(self):
@@ -242,9 +243,10 @@ class GpioMap(wx.Dialog):
 		if self.allowed != '0': title = _('Select GPIO')
 		else: title = _('GPIO Map')
 
-		wx.Dialog.__init__(self, None, title=title, size=(700,440))
+		wx.Dialog.__init__(self, None, title=title, size=(700,420))
 		self.SetFont(wx.Font(8, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
-		panel = wx.Panel(self)
+		panel = wx.lib.scrolledpanel.ScrolledPanel(self)
+		panel.SetupScrolling()
 
 		self.pin1 = wx.CheckBox(panel, 1, style=wx.ALIGN_RIGHT)
 		self.pin3 = wx.CheckBox(panel, 3, style=wx.ALIGN_RIGHT)
