@@ -1,3 +1,9 @@
+openplotter-settings (4.2.6-stable) bookworm; urgency=medium
+
+  * x
+
+ -- Sailoog <info@sailoog.com>  Tue, 06 Aug 2024 10:45:31 +0200
+
 openplotter-settings (4.2.3-stable) bookworm; urgency=medium
 
   * remove wvkbd dependence
