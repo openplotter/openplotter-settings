@@ -1,6 +1,14 @@
+openplotter-settings (4.2.7-stable) bookworm; urgency=medium
+
+  * Take control of system shutdown
+  * update translations
+
+ -- Sailoog <info@sailoog.com>  Sat, 11 Jan 2025 12:53:12 +0100
+
 openplotter-settings (4.2.6-stable) bookworm; urgency=medium
 
-  * x
+  * Minor fixes
+  * update translations
 
  -- Sailoog <info@sailoog.com>  Tue, 06 Aug 2024 10:45:31 +0200
 
