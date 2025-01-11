@@ -50,7 +50,7 @@ def main():
 					subprocess.call('pkill -15 opencpn', shell=True)
 					time.sleep(2)
 					subprocess.call('halt', shell=True)
-				time.sleep(3)
+				time.sleep(2)
 
 
 if __name__ == '__main__':
