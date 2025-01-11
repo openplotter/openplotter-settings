@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openplotter\n"
 "POT-Creation-Date: 2024-05-20 11:34+0200\n"
-"PO-Revision-Date: 2024-08-06 11:22+0200\n"
+"PO-Revision-Date: 2025-01-11 12:51+0100\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -173,7 +173,7 @@ msgstr "Version actuelle de Debian :"
 
 #: installSources.py:51
 msgid "FAILED. This version of OpenPlotter only works on this version of Debian:"
-msgstr ""
+msgstr "ÉCHEC. Cette version d'OpenPlotter ne fonctionne que sur cette version de Debian :"
 
 #: installSources.py:54
 msgid "Current Ubuntu version:"
@@ -181,7 +181,7 @@ msgstr "Version actuelle d'Ubuntu:"
 
 #: installSources.py:55
 msgid "FAILED. This version of OpenPlotter only works on these versions of Ubuntu:"
-msgstr ""
+msgstr "ÉCHEC. Cette version d'OpenPlotter ne fonctionne que sur ces versions d'Ubuntu:"
 
 #: installSources.py:74
 msgid "Added OpenPlotter packages source"
@@ -250,7 +250,7 @@ msgstr "Démarrage automatique désactivé. La plupart des fonctionnalités sero
 
 #: openplotterSettings.py:181
 msgid "There are conflicts between server connections"
-msgstr ""
+msgstr "Il y a des conflits entre les connexions au serveur"
 
 #: openplotterSettings.py:182
 msgid "No conflicts between server connections"
@@ -343,11 +343,11 @@ msgstr "Décalage au démarrage supprimé"
 
 #: openplotterSettings.py:410
 msgid "Enabled. Changes will be applied after the next reboot"
-msgstr ""
+msgstr "Activé. Les modifications seront effectives au prochain redémarrage"
 
 #: openplotterSettings.py:417
 msgid "Disabled. Changes will be applied after the next reboot"
-msgstr ""
+msgstr "Désactivé. Les modifications seront effectives au prochain redémarrage"
 
 #: openplotterSettings.py:422
 msgid "OpenPlotter apps will open maximized"
@@ -367,7 +367,7 @@ msgstr "Régler rétroéclairage"
 
 #: openplotterSettings.py:444
 msgid "Hotspot+Client"
-msgstr ""
+msgstr "Hotspot+Client"
 
 #: openplotterSettings.py:447
 msgid "Shutdown Management"
@@ -466,7 +466,7 @@ msgstr "Désinstallation annulée"
 
 #: openplotterSettings.py:694
 msgid "Wayland will be enabled and X11 disabled. Some programs may not yet work correctly for Wayland."
-msgstr ""
+msgstr "Wayland sera activé et X11 sera désactivé. Certains programmes peuvent ne pas fonctionner correctement sous Wayland."
 
 #: openplotterSettings.py:695 openplotterSettings.py:708
 #: openplotterSettings.py:724 openplotterSettings.py:736
@@ -485,15 +485,15 @@ msgstr "Annulé"
 
 #: openplotterSettings.py:707
 msgid "Wayland will be disabled and X11 enabled."
-msgstr ""
+msgstr "Wayland sera désactivé et X11 sera activé."
 
 #: openplotterSettings.py:723
 msgid "A dual Hotspot/Client connection will be created. Do not forget to change the default Hotspot password \"12345678\" if you have not already."
-msgstr ""
+msgstr "Une double connexion Hotspot/Client sera créée. N'oubliez pas de changer le mot de passe par défaut du Hotspot \"12345678\" si vous ne l'avez pas déjà fait."
 
 #: openplotterSettings.py:735
 msgid "The dual Hotspot/Client connection will be disabled and only the Client connection will be able to be established."
-msgstr ""
+msgstr "La double connexion Hotspot/Client sera désactivée et seule la connexion Client pourra être établie."
 
 #: openplotterSettings.py:757
 msgid "Name"
@@ -746,7 +746,7 @@ msgstr "Suppression des paramètres..."
 
 #: settingsPreUninstall.py:42
 msgid "Removing Hotspot service..."
-msgstr ""
+msgstr "Suppression du service Hotspot..."
 
 #: settingsPreUninstall.py:51
 msgid "Removing packages sources..."
@@ -782,7 +782,7 @@ msgstr "Il n'y a pas d'avertissement. Fermeture dans "
 
 #: startup.py:157
 msgid "Setting remote desktop..."
-msgstr ""
+msgstr "Paramétrage du bureau distant..."
 
 #: startup.py:160 startup.py:171 startup.py:374
 msgid "done"
@@ -891,7 +891,7 @@ msgstr "service en cours d'exécution"
 
 #: startup.py:318 startup.py:324
 msgid "service not running"
-msgstr "service pas en cours d'exécution"
+msgstr "service arrêté"
 
 #: startup.py:328
 msgid "Checking touchscreen optimization..."
@@ -911,11 +911,11 @@ msgstr "Vérification du mot de passe WiFi..."
 
 #: startup.py:372
 msgid "The WiFi connection is using a default password. This is a security risk - please set a new password in \"Network Manager > Advanced Options > Edit Connections\" "
-msgstr ""
+msgstr "La connexion WiFi utilise un mot de passe par défaut. Ceci est un risque de sécurité - veuillez définir un nouveau mot de passe dans \"Gestionnaire de réseau > Options avancées > Modifier les connexions\" "
 
 #: startup.py:375
 msgid "not found"
-msgstr "non trouvé"
+msgstr "introuvable"
 
 #: startup.py:383
 msgid "STARTUP FINISHED"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openplotter\n"
 "POT-Creation-Date: 2024-05-20 11:34+0200\n"
-"PO-Revision-Date: 2024-08-06 11:22+0200\n"
+"PO-Revision-Date: 2025-01-11 12:51+0100\n"
 "Last-Translator: \n"
 "Language-Team: Danish\n"
 "Language: da\n"
@@ -71,7 +71,7 @@ msgstr "rpi-baggrundslys"
 
 #: data/openplotter-brightness.desktop:5
 msgid "brightness-48"
-msgstr ""
+msgstr "lysstyrke-48"
 
 #: data/openplotter-check.desktop:3
 msgid "Check system"
@@ -95,7 +95,7 @@ msgstr "GRIB filfremviser"
 
 #: data/xygrib.desktop:6
 msgid "Meteorological file viewer"
-msgstr ""
+msgstr "Meteorologisk filfremviser"
 
 #: data/xygrib.desktop:8
 msgid "xygrib.png"
@@ -165,23 +165,23 @@ msgstr "Du kan ikke vælge denne GPIO til dette job."
 
 #: installSources.py:47
 msgid "FAILED. Unknown system:"
-msgstr ""
+msgstr "Fejlede. Ukendt system:"
 
 #: installSources.py:50
 msgid "Current Debian version:"
-msgstr ""
+msgstr "Nuværende Debian kerneversion:"
 
 #: installSources.py:51
 msgid "FAILED. This version of OpenPlotter only works on this version of Debian:"
-msgstr ""
+msgstr "FEJL. Denne version af OpenPlotter virker kun på denne version af Debian:"
 
 #: installSources.py:54
 msgid "Current Ubuntu version:"
-msgstr ""
+msgstr "Nuværende Debian kerneversion:"
 
 #: installSources.py:55
 msgid "FAILED. This version of OpenPlotter only works on these versions of Ubuntu:"
-msgstr ""
+msgstr "FEJL. Denne version af OpenPlotter virker kun på disse versioner af Ubuntu:"
 
 #: installSources.py:74
 msgid "Added OpenPlotter packages source"
@@ -201,11 +201,11 @@ msgstr "Kilder til OpenPlotter beta-pakker findes allerede"
 
 #: installSources.py:89
 msgid "Added free-x packages source"
-msgstr ""
+msgstr "Tilføjet kilde til Free-x pakke"
 
 #: installSources.py:91
 msgid "free-x packages source already exists"
-msgstr ""
+msgstr "free-x pakkekilde findes allerede"
 
 #: installSources.py:112 settingsPreUninstall.py:32 settingsPreUninstall.py:40
 #: settingsPreUninstall.py:49 settingsPreUninstall.py:55
@@ -250,11 +250,11 @@ msgstr "Autostart deaktiveret. De fleste funktioner virker ikke!"
 
 #: openplotterSettings.py:181
 msgid "There are conflicts between server connections"
-msgstr ""
+msgstr "Der er konflikter mellem serverforbindelserne"
 
 #: openplotterSettings.py:182
 msgid "No conflicts between server connections"
-msgstr ""
+msgstr "Ingen konflikter mellem serverforbindelser"
 
 #: openplotterSettings.py:192
 msgid "Language"
@@ -282,7 +282,7 @@ msgstr "Virtuelt tastatur"
 
 #: openplotterSettings.py:228
 msgid "Debugging"
-msgstr ""
+msgstr "Debugging/Fejlfinding"
 
 #: openplotterSettings.py:231
 msgid "Startup"
@@ -343,11 +343,11 @@ msgstr "Opstartsforsinkelse fjernet"
 
 #: openplotterSettings.py:410
 msgid "Enabled. Changes will be applied after the next reboot"
-msgstr ""
+msgstr "Aktiveret. Ændringer vil blive anvendt efter næste genstart"
 
 #: openplotterSettings.py:417
 msgid "Disabled. Changes will be applied after the next reboot"
-msgstr ""
+msgstr "Aktiveret. Ændringer vil blive anvendt efter næste genstart"
 
 #: openplotterSettings.py:422
 msgid "OpenPlotter apps will open maximized"
@@ -367,11 +367,11 @@ msgstr "Sæt baggrundslys"
 
 #: openplotterSettings.py:444
 msgid "Hotspot+Client"
-msgstr ""
+msgstr "Hotspot+klient"
 
 #: openplotterSettings.py:447
 msgid "Shutdown Management"
-msgstr ""
+msgstr "Nedluknings-håndtering"
 
 #: openplotterSettings.py:450
 msgid "Shutdown"
@@ -407,27 +407,27 @@ msgstr "Sluk"
 
 #: openplotterSettings.py:597 openplotterSettings.py:644
 msgid "Failed, you need to set a GPIO"
-msgstr ""
+msgstr "Mislykkedes, du skal indstille en GPIO"
 
 #: openplotterSettings.py:601 openplotterSettings.py:648
 msgid "Failed, you need to set a transition mode"
-msgstr ""
+msgstr "Mislykkedes, du skal indstille en overgangstilstand"
 
 #: openplotterSettings.py:605
 msgid "Failed, you need to set a GPIO pull mode"
-msgstr ""
+msgstr "Mislykkedes, du skal indstille en GPIO pull mode"
 
 #: openplotterSettings.py:618 openplotterSettings.py:658
 msgid "Done. Changes will be applied after the next reboot"
-msgstr ""
+msgstr "Udført. Ændringer vil blive anvendt efter næste genstart"
 
 #: openplotterSettings.py:662
 msgid "Installing rpi-backlight, please wait..."
-msgstr ""
+msgstr "Installerer rpi-baggrundslys, vent venligst..."
 
 #: openplotterSettings.py:663
 msgid "rpi-backlight will be installed.\n"
-msgstr ""
+msgstr "rpi-baggrundslys vil blive installeret.\n"
 
 #: openplotterSettings.py:664 openplotterSettings.py:677
 msgid "Are you sure?"
@@ -442,7 +442,7 @@ msgstr "Spørgsmål"
 
 #: openplotterSettings.py:669
 msgid "rpi-backlight installed"
-msgstr ""
+msgstr "rpi-baggrundslys installeret"
 
 #: openplotterSettings.py:673
 msgid "Installation canceled"
@@ -450,15 +450,15 @@ msgstr "Installationen blev annulleret"
 
 #: openplotterSettings.py:675
 msgid "Uninstalling rpi-backlight, please wait..."
-msgstr ""
+msgstr "Afinstallerer rpi-baggrundslys, vent venligst..."
 
 #: openplotterSettings.py:676
 msgid "rpi-backlight will be uninstalled.\n"
-msgstr ""
+msgstr "rpi-baggrundslys vil blive afinstalleret.\n"
 
 #: openplotterSettings.py:682
 msgid "rpi-backlight uninstalled"
-msgstr ""
+msgstr "rpi-baggrundslys afinstalleret"
 
 #: openplotterSettings.py:686
 msgid "Uninstallation canceled"
@@ -466,7 +466,7 @@ msgstr "Afinstallationen blev annulleret"
 
 #: openplotterSettings.py:694
 msgid "Wayland will be enabled and X11 disabled. Some programs may not yet work correctly for Wayland."
-msgstr ""
+msgstr "."
 
 #: openplotterSettings.py:695 openplotterSettings.py:708
 #: openplotterSettings.py:724 openplotterSettings.py:736
