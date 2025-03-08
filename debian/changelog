@@ -1,3 +1,10 @@
+openplotter-settings (4.2.9-stable) bookworm; urgency=medium
+
+  * change to Labwc window manager under wayland instead of wayfire
+  * update translations
+
+ -- Sailoog <info@sailoog.com>  Fri, 07 Mar 2025 21:00:41 +0100
+
 openplotter-settings (4.2.7-stable) bookworm; urgency=medium
 
   * Take control of system shutdown
