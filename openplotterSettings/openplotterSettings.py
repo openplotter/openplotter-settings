@@ -699,7 +699,7 @@ class MyFrame(wx.Frame):
 			msg += _('OpenPlotter will reboot. Are you sure?')
 			dlg = wx.MessageDialog(None, msg, _('Question'), wx.YES_NO | wx.NO_DEFAULT | wx.ICON_EXCLAMATION)
 			if dlg.ShowModal() == wx.ID_YES: 
-				subprocess.call([self.platform.admin, 'python3', self.currentdir+'/wayland.py', 'W2'])
+				subprocess.call([self.platform.admin, 'python3', self.currentdir+'/wayland.py', 'W3'])
 				out = subprocess.check_output('raspi-config nonint get_vnc', shell=True).decode(sys.stdin.encoding)
 				if '0' in out: self.conf.set('GENERAL', 'forceVNC', '1')
 				os.system('shutdown -r now')

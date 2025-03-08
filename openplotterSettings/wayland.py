@@ -19,7 +19,7 @@ import subprocess, os, sys
 
 subprocess.call(['raspi-config', 'nonint', 'do_wayland', sys.argv[1]])
 
-if sys.argv[1] == 'W2': 
+if sys.argv[1] == 'W3': 
 	command = 'toggle-wvkbd'
 	try: subprocess.call(['apt', 'install', '-y', 'wvkbd'])
 	except: pass
