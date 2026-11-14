@@ -29,7 +29,7 @@ class Conf:
 				self.user = pwd.getpwuid(int(os.environ["PKEXEC_UID"])).pw_name
 		self.home = '/home/'+self.user
 
-		self.data_conf = configparser.ConfigParser()
+		self.data_conf = configparser.ConfigParser(interpolation=None)
 
 
 		self.conf_folder = self.home+'/.openplotter'
