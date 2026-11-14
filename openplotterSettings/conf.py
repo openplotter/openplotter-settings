@@ -46,6 +46,7 @@ class Conf:
 		self.read()
 
 	def read(self):
+		self.data_conf.clear()
 		self.data_conf.read(self.conf_file)
 
 	def write(self):
