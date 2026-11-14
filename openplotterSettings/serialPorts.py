@@ -49,31 +49,18 @@ class SerialPorts:
 	def conflicts(self):
 		usedSerialPorts = self.getSerialUsedPorts()
 		data = self.conf.get('UDEV', 'Serialinst')
-		try:serialinst = eval(data)
-		except:serialinst = {}
+		try: serialinst = eval(data)
+		except: serialinst = {}
+		def physicalDevice(device):
+			alias = device.replace('/dev/', '', 1)
+			if alias in serialinst:
+				return '/dev/' + serialinst[alias]['device']
+			return device
 		conflict = []
-		if usedSerialPorts:
-			c = 0
-			for i in usedSerialPorts:
-				alias = ''
-				device = ''
-				if 'ttyOP_' in i['device']: alias = i['device']
-				else: device = i['device']
-				if alias:
-					alias2 = alias.replace('/dev/','')
-					if alias2 in serialinst:
-						device = '/dev/'+serialinst[alias2]['device']
-				if device:
-					device2 = device.replace('/dev/','')
-					for ii in serialinst:
-						if serialinst[ii]['device'] == device2: alias = '/dev/'+ii
-				c2 = 0
-				for iii in usedSerialPorts:
-					if alias == iii['device'] or device == iii['device']:
-						if c != c2:
-							result = i['app']+' -> '+_('connection ID: ')+i['id']+' | '+_('device: ')+i['device']
-							if not result in conflict: conflict.append(result)
-					c2 = c2 + 1
-				c = c + 1
-		if conflict: return conflict
-		else: return False
+		for index, connection in enumerate(usedSerialPorts):
+			device = physicalDevice(connection['device'])
+			if any(index != otherIndex and device == physicalDevice(other['device'])
+			       for otherIndex, other in enumerate(usedSerialPorts)):
+				result = connection['app']+' -> '+_('connection ID: ')+connection['id']+' | '+_('device: ')+connection['device']
+				if result not in conflict: conflict.append(result)
+		return conflict if conflict else False
